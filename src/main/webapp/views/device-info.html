@@ -1,0 +1,59 @@
+<div class="resource-container">
+
+  <div class="resource-header">
+    <h3>{{deviceInfo.getSelectedDevice().deviceId}}</h3>
+
+    <div class="close-info" title="Close window" ng-click="deviceInfo.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="info-container">
+
+    <div class="sensor-window">
+      <div class="resource-header">
+        <h3>Sensor Data</h3>
+        <div class="sensor-last-update">
+          <h3>Last Update: {{deviceInfo.lastUpdate}}</h3>
+        </div>
+      </div>
+      <div class="sensor-info-container">
+
+        <sensor-info-dropdown ng-repeat="simpleValue in deviceInfo.getSimpleValues()"
+                              title="{{simpleValue.title}}"
+                              value="{{simpleValue.value}}"
+                              update="{{simpleValue.update}}">
+        </sensor-info-dropdown>
+
+      </div>
+    </div>
+
+    <div class="measurements-window">
+      <div class="resource-header">
+        <h3>Measurements</h3>
+      </div>
+      <div class="sensor-info-container">
+
+        <sensor-info-dropdown ng-repeat="ontologyValue in deviceInfo.getOntologyValues()"
+                              title="{{ontologyValue.title}}"
+                              value="{{deviceInfo.stringify(ontologyValue.value)}}"
+                              update="{{ontologyValue.update}}">
+        </sensor-info-dropdown>
+
+      </div>
+    </div>
+
+    <span class="subscription-message" ng-show="deviceInfo.isDeviceSubscribed()">
+      You are subscribed!
+    </span>
+
+    <div class="subscription-button"
+         ng-click="deviceInfo.subscription.setSubscription(deviceInfo.getSelectedDevice())"
+         ng-class="{ 'subscription-button-active' : deviceInfo.isDeviceSubscribed() }">
+      <span ng-show="!deviceInfo.isDeviceSubscribed()">Subscribe</span>
+      <span ng-show="deviceInfo.isDeviceSubscribed()">Unsubscribe</span>
+    </div>
+
+  </div>
+
+</div>

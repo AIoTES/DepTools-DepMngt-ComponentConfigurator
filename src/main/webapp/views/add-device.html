@@ -1,0 +1,63 @@
+<div class="resource-container">
+
+  <div class="resource-header">
+    <h3>Add Device</h3>
+
+    <div class="close-info" title="Close window" ng-click="addDevice.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="info-container">
+
+    <form class="add-form" name="add-device">
+
+      <select ng-model="addDevice.deviceTypes">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Type:</label>
+
+      <input type="text" placeholder="Id" ng-model="addDevice.deviceId">
+      <label class="form-label">Id:</label>
+
+      <input type="text" placeholder="Host" ng-model="addDevice.hostedBy">
+      <label class="form-label">Hosted By:</label>
+
+      <input type="text" placeholder="Location" ng-model="addDevice.location">
+      <label class="form-label">Location:</label>
+
+      <input type="text" placeholder="Name" ng-model="addDevice.name">
+      <label class="form-label">Name:</label>
+
+      <input type="text" placeholder="Hosts" ng-model="addDevice.hosts">
+      <label class="form-label">Hosts:</label>
+
+      <input type="text" placeholder="For Property" ng-model="addDevice.forProperty">
+      <label class="form-label">For Property:</label>
+
+      <input type="text" placeholder="Made Actuation" ng-model="addDevice.madeActuation">
+      <label class="form-label">Made Actuation:</label>
+
+      <input type="text" placeholder="Implements Procedure" ng-model="addDevice.implementsProcedure">
+      <label class="form-label">Implements Procedure:</label>
+
+      <input type="text" placeholder="Observes" ng-model="addDevice.observes">
+      <label class="form-label">Observes:</label>
+
+      <input type="text" placeholder="Detects" ng-model="addDevice.detects">
+      <label class="form-label">Detects:</label>
+
+      <input type="text" placeholder="Made Observation" ng-model="addDevice.madeObservation">
+      <label class="form-label">Made Observation:</label>
+
+      <button type="submit" class="create-button" ng-click="addDevice.createDevice()">
+        <span>Create</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

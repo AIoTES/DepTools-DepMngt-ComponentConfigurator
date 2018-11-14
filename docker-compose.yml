@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  activage-demo-app:
+    image: activage-demo-app:develop
+    environment:
+      - CLIENT_ID=Oscar
+      - SIL_URL=http://activage-test-intermw.inter-iot.eu
+      - DOCKER=True
+    ports:
+      - "5678:8080"
