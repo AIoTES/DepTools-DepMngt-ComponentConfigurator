@@ -53,7 +53,24 @@ app.service('deviceServiceApi',
             "Content-Type": "application/json",
             "Client-ID": CLIENT_ID
           },
-          data: '{"devices": [{"deviceTypes": ["' + deviceTypes + '"],"deviceId": "' + deviceId +'","hostedBy": "' + hostedBy + '","location": "' + location + '","name": "' + name + '","hosts": ["'+hosts+'"],"forProperty": "'+forProperty+'","madeActuation": "'+madeActuation+'","implementsProcedure": "'+implementsProcedure+'","observes": "'+observes+'","detects": "'+detects+'","madeObservation": "'+madeObservation+'"}]}'
+          data: {
+            "devices": [
+              {
+                "deviceTypes": [deviceTypes],
+                "deviceId": deviceId,
+                "hostedBy": hostedBy,
+                "location": location,
+                "name": name,
+                "hosts": [hosts],
+                "forProperty": forProperty,
+                "madeActuation": madeActuation,
+                "implementsProcedure": implementsProcedure,
+                "observes": observes,
+                "detects": detects,
+                "madeObservation": madeObservation
+              }
+            ]
+          }
         });
       };
       return service;

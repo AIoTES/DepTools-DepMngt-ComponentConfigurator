@@ -35,12 +35,20 @@ app.controller('deviceCtrl', ['$location', 'LIST_OF_DEVICES', 'subscriptionServi
       //deviceService.retrieveSimpleDeviceValues(device.deviceId);
       //deviceService.retrieveOntologicDeviceValues(device.deviceId);
       vm.subscription.getSubscriptions(device.deviceId);
-      $location.path('/main/device_manager/device_view');
+      $location.path('/main/device_manager/modify_device');
     };
 
     vm.isDeviceSubscribed = function (deviceId){
       return subscriptionServiceData.listSubscription[deviceId];
     }
+
+    vm.getSelectedDevice = function() {
+      return deviceServiceData.currentDevice;
+    }
+
+    vm.closeDeviceInfo = function () {
+      $location.path('/main/device_manager/');
+    };
 
     vm.filter = function () {
       platformService.filterPlatform();

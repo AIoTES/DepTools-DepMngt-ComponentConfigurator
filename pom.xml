@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eu.hopu</groupId>
-  <artifactId>activage-demo-app</artifactId>
+  <artifactId>activage-component-configurator</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <packaging>war</packaging>
@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.directory>target/</project.build.directory>
     <java.version>1.8</java.version>
-    <image-name>activage-demo-app</image-name>
+    <image-name>activage-component-configurator</image-name>
   </properties>
 
 

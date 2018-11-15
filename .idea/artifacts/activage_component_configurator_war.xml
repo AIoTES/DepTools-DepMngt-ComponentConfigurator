@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="activage-component-configurator:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="activage-demo-app.war">
+    <root id="archive" name="activage-component-configurator.war">
       <element id="artifact" artifact-name="activage-component-configurator:war exploded" />
     </root>
   </artifact>

@@ -36,6 +36,8 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
     .when('/main/device_manager/device_view', 'main.device_manager.device_id')
     .when('/main/device_manager/add_platform', 'main.device_manager.add_platform')
     .when('/main/device_manager/add_device', 'main.device_manager.add_device')
+    .when('/main/device_manager/info_platform', 'main.device_manager.info_platform')
+    .when('/main/device_manager/modify_device', 'main.device_manager.modify_device')
 
     .segment('main', {
       templateUrl: 'views/main.html',
@@ -69,6 +71,18 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
       templateUrl: 'views/add-device.html',
       controller: 'addDeviceCtrl',
       controllerAs: 'addDevice'
+    })
+
+    .segment('info_platform', {
+      templateUrl: 'views/platform-info.html',
+      controller: 'mainCtrl',
+      controllerAs: 'main'
+    })
+
+    .segment('modify_device', {
+      templateUrl: 'views/modify-device.html',
+      controller: 'deviceCtrl',
+      controllerAs: 'devCtrl'
     });
 
 }]);

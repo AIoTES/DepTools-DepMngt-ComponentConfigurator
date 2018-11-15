@@ -23,6 +23,7 @@ app.controller('mainCtrl', ['platformService', 'deviceValueWs', 'deviceService',
   vm.selectPlatform = function (platform) {
     platformServiceData.currentPlatform = platform;
     deviceService.retrieveDevices(platform.platformId);
+    $location.path('/main/device_manager/info_platform');
   };
 
   vm.getSelectedPlatform = function () {
@@ -35,6 +36,14 @@ app.controller('mainCtrl', ['platformService', 'deviceValueWs', 'deviceService',
 
   vm.goToAddDevice = function () {
     $location.path('/main/device_manager/add_device');
+  };
+
+  vm.getCurrentPlatform = function() {
+    return platformServiceData.currentPlatform;
+  }
+
+  vm.closeDeviceInfo = function () {
+    $location.path('/main/device_manager/');
   };
 
 }]);

@@ -1,0 +1,47 @@
+<div class="resource-container">
+
+  <div class="resource-header">
+    <h3>Platform: {{main.getCurrentPlatform().name}}</h3>
+
+    <div class="close-info" title="Close window" ng-click="main.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="info-container">
+
+    <form class="add-form" name="add-platform">
+
+      <input type="text" placeholder="Id" ng-model="main.getCurrentPlatform().platformId">
+      <label class="form-label">Id:</label>
+
+      <input type="text" placeholder="Type" ng-model="main.getCurrentPlatform().type">
+      <label class="form-label">Type:</label>
+
+      <input type="text" placeholder="Endpoint" ng-model="main.getCurrentPlatform().baseEndpoint">
+      <label class="form-label">Endpoint:</label>
+
+      <input type="text" placeholder="Location" ng-model="main.getCurrentPlatform().location">
+      <label class="form-label">Location:</label>
+
+      <input type="text" placeholder="Name" ng-model="main.getCurrentPlatform().name">
+      <label class="form-label">Name:</label>
+
+      <input type="text" placeholder="Username" ng-model="main.getCurrentPlatform().username">
+      <label class="form-label">Username:</label>
+
+      <input type="password" placeholder="Password" ng-model="main.getCurrentPlatform().encryptedPassword">
+      <label class="form-label">Password:</label>
+
+      <input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
+      <label class="form-label">Algorithm:</label>
+
+      <button type="submit" class="create-button" ng-click="main.getCurrentPlatform().createPlatform()">
+        <span>Create</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

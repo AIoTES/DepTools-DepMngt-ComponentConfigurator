@@ -16,10 +16,10 @@ $ npm install
 $ bower install
 ```
 
-The application uses Maven as build tool. Currently it could be build using maven>activage-demo-app>Lifecycle>install and then runned locally using
-Maven Apache Tomcat plugin: maven>activage-demo-app>Plugins>tomcat7>tomcat7:run-war-only.
+The application uses Maven as build tool. Currently it could be build using maven>activage-component-configurator>Lifecycle>install and then runned locally using
+Maven Apache Tomcat plugin: maven>activage-component-configurator>Plugins>tomcat7>tomcat7:run-war-only.
 
 A Docker image can be build using the maven profile created for this purpose. Once selected, you need to build the project
-using maven: maven>activage-demo-app>Lifecycle>install. After that, you will have a new docker image named activage-demo-app:develop.
+using maven: maven>activage-component-configurator>Lifecycle>install. After that, you will have a new docker image named activage-component-configurator:develop.
 
 
