@@ -1,58 +1,62 @@
 <div class="resource-container">
 
   <div class="resource-header">
-    <h3>{{deviceInfo.getSelectedDevice().deviceId}}</h3>
+    <h3>Device: {{devCtrl.getSelectedDevice().deviceId}}</h3>
 
-    <div class="close-info" title="Close window" ng-click="deviceInfo.closeDeviceInfo()">
+    <div class="close-info" title="Close window" ng-click="devCtrl.closeDeviceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
     </div>
   </div>
 
   <div class="info-container">
 
-    <div class="sensor-window">
-      <div class="resource-header">
-        <h3>Sensor Data</h3>
-        <div class="sensor-last-update">
-          <h3>Last Update: {{deviceInfo.lastUpdate}}</h3>
-        </div>
-      </div>
-      <div class="sensor-info-container">
+    <form class="add-form" name="add-device">
 
-        <sensor-info-dropdown ng-repeat="simpleValue in deviceInfo.getSimpleValues()"
-                              title="{{simpleValue.title}}"
-                              value="{{simpleValue.value}}"
-                              update="{{simpleValue.update}}">
-        </sensor-info-dropdown>
+      <select ng-model="devCtrl.getSelectedDevice().deviceTypes[0]">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Type:</label>
 
-      </div>
-    </div>
+      <input type="text" placeholder="Id" ng-model="devCtrl.getSelectedDevice().deviceId">
+      <label class="form-label">Id:</label>
 
-    <div class="measurements-window">
-      <div class="resource-header">
-        <h3>Measurements</h3>
-      </div>
-      <div class="sensor-info-container">
+      <input type="text" placeholder="Host" ng-model="devCtrl.getSelectedDevice().hostedBy">
+      <label class="form-label">Hosted By:</label>
 
-        <sensor-info-dropdown ng-repeat="ontologyValue in deviceInfo.getOntologyValues()"
-                              title="{{ontologyValue.title}}"
-                              value="{{deviceInfo.stringify(ontologyValue.value)}}"
-                              update="{{ontologyValue.update}}">
-        </sensor-info-dropdown>
+      <input type="text" placeholder="Location" ng-model="devCtrl.getSelectedDevice().location">
+      <label class="form-label">Location:</label>
 
-      </div>
-    </div>
+      <input type="text" placeholder="Name" ng-model="devCtrl.getSelectedDevice().name">
+      <label class="form-label">Name:</label>
 
-    <span class="subscription-message" ng-show="deviceInfo.isDeviceSubscribed()">
-      You are subscribed!
-    </span>
+      <input type="text" placeholder="Hosts" ng-model="devCtrl.getSelectedDevice().hosts">
+      <label class="form-label">Hosts:</label>
 
-    <div class="subscription-button"
-         ng-click="deviceInfo.subscription.setSubscription(deviceInfo.getSelectedDevice())"
-         ng-class="{ 'subscription-button-active' : deviceInfo.isDeviceSubscribed() }">
-      <span ng-show="!deviceInfo.isDeviceSubscribed()">Subscribe</span>
-      <span ng-show="deviceInfo.isDeviceSubscribed()">Unsubscribe</span>
-    </div>
+      <input type="text" placeholder="For Property" ng-model="devCtrl.getSelectedDevice().forProperty">
+      <label class="form-label">For Property:</label>
+
+      <input type="text" placeholder="Made Actuation" ng-model="devCtrl.getSelectedDevice().madeActuation">
+      <label class="form-label">Made Actuation:</label>
+
+      <input type="text" placeholder="Implements Procedure" ng-model="devCtrl.getSelectedDevice().implementsProcedure">
+      <label class="form-label">Implements Procedure:</label>
+
+      <input type="text" placeholder="Observes" ng-model="devCtrl.getSelectedDevice().observes">
+      <label class="form-label">Observes:</label>
+
+      <input type="text" placeholder="Detects" ng-model="devCtrl.getSelectedDevice().detects">
+      <label class="form-label">Detects:</label>
+
+      <input type="text" placeholder="Made Observation" ng-model="devCtrl.getSelectedDevice().madeObservation">
+      <label class="form-label">Made Observation:</label>
+
+      <button type="submit" class="create-button" ng-click="devCtrl.updateDevice()">
+        <span>Update</span>
+      </button>
+
+    </form>
 
   </div>
 

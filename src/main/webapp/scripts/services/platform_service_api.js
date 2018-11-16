@@ -31,5 +31,26 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', 'CLIENT_ID', function
       // data: '{"platformId": "'+platformId+'","type": "'+type+'","baseEndpoint": "'+baseEndpoint+'","location": "'+location+'","name": "'+name+'","username": "'+username+'","encryptedPassword": "'+encryptedPassword+'","encryptionAlgorithm": "'+encryptionAlgorithm+'"}'
     });
   };
+
+  this.updatePlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm) {
+    return $http({
+      method: 'PUT',
+      url: BACKEND_URL+ '/api/v1/platforms/' + platformId,
+      headers: {
+        "Content-Type": "application/json",
+        "Client-ID": CLIENT_ID
+      },
+      data: {
+        "platformId": platformId,
+        "type": type,
+        "baseEndpoint": baseEndpoint,
+        "location": location,
+        "name": name,
+        "username": username,
+        "encryptedPassword": encryptedPassword,
+        "encryptionAlgorithm": encryptionAlgorithm
+      }
+    });
+  };
 }]);
 

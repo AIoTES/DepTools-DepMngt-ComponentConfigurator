@@ -1,26 +1,12 @@
 'use strict';
 
-app.controller('deviceCtrl', ['$location', 'LIST_OF_DEVICES', 'subscriptionService', 'platformService', 'dataService', 'deviceService', 'platformServiceData', 'deviceServiceData', 'subscriptionServiceData',
-  function ($location, LIST_OF_DEVICES, subscriptionService, platformService, dataService, deviceService, platformServiceData, deviceServiceData, subscriptionServiceData) {
-
-
+app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', 'platformServiceData', 'deviceServiceData',
+  function ($location, platformService, deviceService, platformServiceData, deviceServiceData) {
 
     var vm = this;
 
-    //vm.devices = LIST_OF_DEVICES;
-    vm.subscription = subscriptionService;
     vm.platform = platformService;
-    vm.data = dataService;
     vm.devicesService = deviceService;
-
-    //vm.devices = deviceService.readDevices(vm.platform.platformChoise);
-
-    vm.goToDevice = function (device_id, id) {
-      console.log(id);
-
-      $location.path('/main/device_manager/' + id);
-      vm.subscription.getSubscriptions(device_id);
-    };
 
     vm.getDevices = function () {
       return deviceServiceData.devices[platformServiceData.currentPlatform.platformId];
@@ -32,15 +18,8 @@ app.controller('deviceCtrl', ['$location', 'LIST_OF_DEVICES', 'subscriptionServi
 
     vm.selectDevice = function (device) {
       deviceServiceData.currentDevice = device;
-      //deviceService.retrieveSimpleDeviceValues(device.deviceId);
-      //deviceService.retrieveOntologicDeviceValues(device.deviceId);
-      vm.subscription.getSubscriptions(device.deviceId);
-      $location.path('/main/device_manager/modify_device');
+      $location.path('/main/device_manager/device-info');
     };
-
-    vm.isDeviceSubscribed = function (deviceId){
-      return subscriptionServiceData.listSubscription[deviceId];
-    }
 
     vm.getSelectedDevice = function() {
       return deviceServiceData.currentDevice;
@@ -53,5 +32,18 @@ app.controller('deviceCtrl', ['$location', 'LIST_OF_DEVICES', 'subscriptionServi
     vm.filter = function () {
       platformService.filterPlatform();
     }
+
+    vm.updateDevice = function() {
+      if (deviceServiceData.currentDevice.deviceTypes[0] === '')
+        alert("Debes seleccionar un tipo de dispositivo.");
+      else if (deviceServiceData.currentDevice.deviceId.substr(0,7) !== 'http://')
+        alert("El ID del dispositivo debe tener formato URI.");
+      else if (deviceServiceData.currentDevice.hostedBy.substr(0,7) !== 'http://')
+        alert("Hosted By debe tener formato URI.");
+      else if (deviceServiceData.currentDevice.location.substr(0,7) !== 'http://')
+        alert("Location debe tener formato URI.");
+      else
+        vm.devicesService.updateDevice(deviceServiceData.currentDevice.deviceTypes[0], deviceServiceData.currentDevice.deviceId, deviceServiceData.currentDevice.hostedBy, deviceServiceData.currentDevice.location, deviceServiceData.currentDevice.name, deviceServiceData.currentDevice.hosts, deviceServiceData.currentDevice.forProperty, deviceServiceData.currentDevice.madeActuation, deviceServiceData.currentDevice.implementsProcedure, deviceServiceData.currentDevice.observes, deviceServiceData.currentDevice.detects, deviceServiceData.currentDevice.madeObservation);
+    };
 
   }]);

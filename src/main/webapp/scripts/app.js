@@ -33,11 +33,10 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
   $routeSegmentProvider
     .when('/main', 'main')
     .when('/main/device_manager', 'main.device_manager')
-    .when('/main/device_manager/device_view', 'main.device_manager.device_id')
     .when('/main/device_manager/add_platform', 'main.device_manager.add_platform')
     .when('/main/device_manager/add_device', 'main.device_manager.add_device')
-    .when('/main/device_manager/info_platform', 'main.device_manager.info_platform')
-    .when('/main/device_manager/modify_device', 'main.device_manager.modify_device')
+    .when('/main/device_manager/platform-info', 'main.device_manager.platform-info')
+    .when('/main/device_manager/device-info', 'main.device_manager.device-info')
 
     .segment('main', {
       templateUrl: 'views/main.html',
@@ -55,12 +54,6 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
 
     .within()
 
-    .segment('device_id', {
-      templateUrl: 'views/device-info.html',
-      controller: 'deviceInfoCtrl',
-      controllerAs: 'deviceInfo'
-    })
-
     .segment('add_platform', {
       templateUrl: 'views/add-platform.html',
       controller: 'addPlatformCtrl',
@@ -73,14 +66,14 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
       controllerAs: 'addDevice'
     })
 
-    .segment('info_platform', {
+    .segment('platform-info', {
       templateUrl: 'views/platform-info.html',
       controller: 'mainCtrl',
       controllerAs: 'main'
     })
 
-    .segment('modify_device', {
-      templateUrl: 'views/modify-device.html',
+    .segment('device-info', {
+      templateUrl: 'views/device-info.html',
       controller: 'deviceCtrl',
       controllerAs: 'devCtrl'
     });

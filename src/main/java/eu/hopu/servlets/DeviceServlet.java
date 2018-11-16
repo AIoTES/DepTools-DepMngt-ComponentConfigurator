@@ -12,18 +12,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Path("/devices")
 public class DeviceServlet {
 
   private final String SERVER_ADDR = GetEnvOrProperty.getInstance().get("SIL_URL");
-  private final String CLIENTID = GetEnvOrProperty.getInstance().get("CLIENT_ID");
+  private final String CLIENT_ID = GetEnvOrProperty.getInstance().get("CLIENT_ID");
 
   OkHttpClient client = new OkHttpClient();
 
@@ -40,65 +43,6 @@ public class DeviceServlet {
       num++;
     }
     return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
-//        return Response.ok().build();
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path("linked/{deviceId}")
-  public Response getDeviceDataLinkedRepresentation(@Context HttpServletRequest request,
-                                                    @PathParam("deviceId") String deviceId) {
-    return Response.ok().build();
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path("linked/last/{deviceId}")
-  public Response getDeviceDataLinkedRepresentationLastValue(@Context HttpServletRequest request,
-                                                             @PathParam("deviceId") String deviceId) {
-    DataLinkedRepresentation dlr = MeasuresStorage.getInstance().getLastOntologyById(deviceId);
-    JsonObject json = dlr.getJsonComplete();
-
-    return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
-    //return Response.ok().build();
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path("simple/{deviceId}")
-  public Response getDeviceDataSimpleRepresentation(@Context HttpServletRequest request,
-                                                    @PathParam("deviceId") String deviceId) {
-    return Response.ok().build();
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Path("simple/last/")
-  public Response getDeviceDataSimpleRepresentationLastValue(@Context HttpServletRequest request,
-                                                             @QueryParam("deviceId") String deviceId) {
-    DataSimpleRepresentation dsr = MeasuresStorage.getInstance().getLastValueById(deviceId);
-    if (dsr != null) {
-      JsonObject json = new JsonObject();
-
-      json.addProperty("deviceId", deviceId);
-      json.addProperty("name", deviceId);
-      json.addProperty("hostedBy", dsr.getIdPlatform());
-      JsonArray jarray = new JsonArray();
-      for (String id : dsr.getNamesValues()) {
-        JsonObject js = new JsonObject();
-        js.addProperty("title", id);
-        js.addProperty("value", dsr.getValue(id));
-        js.addProperty("update", dsr.getDate().toString());
-        jarray.add(js);
-      }
-      json.add("sensors", jarray);
-
-
-      return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
-    }
-    else {
-      return Response.ok().build();
-    }
   }
 
   @GET
@@ -109,7 +53,7 @@ public class DeviceServlet {
     urlBuilder.addQueryParameter("platformId", platformId);
     String url = urlBuilder.build().toString();
 
-    Request req = new Request.Builder().url(url).header("Client-ID", CLIENTID).get().build();
+    Request req = new Request.Builder().url(url).header("Client-ID", CLIENT_ID).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
@@ -123,21 +67,74 @@ public class DeviceServlet {
   @POST
   @Consumes("application/json")
   @Path("/new")
-  public Response newPlatform(@Context HttpServletRequest request) throws IOException {
-    String bod = NotificationServlet.getJsonBodyString(request.getInputStream());
-    System.out.println(bod);
+  public Response newDevice(@Context HttpServletRequest request) throws IOException {
+    String bod = getJsonBodyString(request.getInputStream());
+//    System.out.println(bod);
     RequestBody body = RequestBody.create(JSON, bod);
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/devices").header("Client-ID", CLIENTID).post(body).build();
-
+    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/devices").header("Client-ID", CLIENT_ID).post(body).build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
-      System.out.println(bodyStr);
+//      System.out.println(bodyStr);
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
     }
     catch (IOException ex) {
 
     }
     return Response.ok().build();
+  }
+
+  @PUT
+  @Consumes("application/json")
+  public Response updateDevice(@Context HttpServletRequest request,
+                               @QueryParam("deviceId") String deviceId) throws IOException {
+    String bod = getJsonBodyString(request.getInputStream());
+//    System.out.println(bod);
+    RequestBody body = RequestBody.create(JSON, bod);
+
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(SERVER_ADDR + "/api/mw2mw/devices").newBuilder();
+    urlBuilder.addQueryParameter("deviceId", deviceId);
+    String url = urlBuilder.build().toString();
+
+    Request req = new Request.Builder().url(url).header("Client-ID", CLIENT_ID).put(body).build();
+
+    try (okhttp3.Response resp = client.newCall(req).execute()) {
+      String bodyStr = resp.body().string();
+//      System.out.println(bodyStr);
+      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
+    }
+    catch (IOException ex) {
+
+    }
+    return Response.ok().build();
+  }
+
+
+  public static String getJsonBodyString (ServletInputStream inputStream) throws IOException {
+    StringBuilder stringBuilder = new StringBuilder();
+    BufferedReader bufferedReader = null;
+    try {
+      if (inputStream != null) {
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        char[] charBuffer = new char[128];
+        int bytesRead = -1;
+        while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+          stringBuilder.append(charBuffer, 0, bytesRead);
+        }
+      } else {
+        stringBuilder.append("");
+      }
+    } catch (IOException ex) {
+      throw ex;
+    } finally {
+      if (bufferedReader != null) {
+        try {
+          bufferedReader.close();
+        } catch (IOException ex) {
+          throw ex;
+        }
+      }
+    }
+    return stringBuilder.toString();
   }
 }

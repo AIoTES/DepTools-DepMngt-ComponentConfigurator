@@ -43,11 +43,10 @@
 
 <div class="left-div" app-view-segment="0"></div>
 <div class="center-div" app-view-segment="1"></div>
-<div ng-show="('main.device_manager.device_id' | routeSegmentStartsWith) ||
-              ('main.device_manager.add_platform' | routeSegmentStartsWith) ||
+<div ng-show="('main.device_manager.add_platform' | routeSegmentStartsWith) ||
               ('main.device_manager.add_device' | routeSegmentStartsWith) ||
-              ('main.device_manager.info_platform' | routeSegmentStartsWith) ||
-              ('main.device_manager.modify_device' | routeSegmentStartsWith)"
+              ('main.device_manager.platform-info' | routeSegmentStartsWith) ||
+              ('main.device_manager.device-info' | routeSegmentStartsWith)"
      class="right-div"
      app-view-segment="2"></div>
 
@@ -83,35 +82,19 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/device_controller.js"></script>
-<script src="scripts/controllers/device_info_controller.js"></script>
 <script src="scripts/controllers/main_controller.js"></script>
 <script src="scripts/controllers/add_platform_controller.js"></script>
 <script src="scripts/controllers/add_device_controller.js"></script>
 
-<script src="scripts/services/subscription_service.js"></script>
 <script src="scripts/services/platform_service.js"></script>
-<script src="scripts/services/data_service.js"></script>
 <script src="scripts/services/device_service.js"></script>
 
 <script src="scripts/services/platform_service_api.js"></script>
 <script src="scripts/services/device_service_api.js"></script>
-<script src="scripts/services/subscription_service_api.js"></script>
 
 <script src="scripts/services/platform_service_data.js"></script>
 <script src="scripts/services/device_service_data.js"></script>
-<script src="scripts/services/subscription_service_data.js"></script>
 
-<script src="scripts/services/device_value_ws.js"></script>
-<script src="scripts/services/websocket_service.js"></script>
-
-<script src="scripts/core/subscription.js"></script>
-<script src="scripts/core/subscription_container.js"></script>
-<script src="scripts/core/sensor.js"></script>
-<script src="scripts/core/sensor_container.js"></script>
-
-<script src="scripts/components/sensor-info-dropdown/sensor_info_dropdown_directive.js"></script>
-
-<script src="scripts/constants/device_constants.js"></script>
 <script src="scripts/constants/backend_constants.js"></script>
 <script src="scripts/constants/client_constant.js"></script>
 

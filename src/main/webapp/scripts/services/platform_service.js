@@ -1,4 +1,4 @@
-/**
+/**platformServiceData
  * Created by JaviHop on 21/08/2018.
  */
 
@@ -30,6 +30,10 @@ app.service('platformService',
 
       service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm) {
         platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm);
+      };
+
+      service.updatePlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm) {
+        platformServiceApi.updatePlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm);
       };
 
       return service;

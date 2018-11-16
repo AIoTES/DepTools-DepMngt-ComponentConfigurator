@@ -20,10 +20,6 @@
         </div>
 
         <div class="option-buttons-container">
-          <div class="option-subscription-container"
-               ng-show="devCtrl.isDeviceSubscribed(device.deviceId)">
-            <span class="glyphicon glyphicon-ok-circle" title="You are subscribed!"></span>
-          </div>
           <div class="option-device-button"
                ng-class="{ 'option-device-button-active' : ('id' | routeSegmentParam) == device.deviceId }">
             <span>+ Info</span>

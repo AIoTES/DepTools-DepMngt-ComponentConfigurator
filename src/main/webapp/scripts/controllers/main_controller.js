@@ -7,7 +7,7 @@
  * # AboutCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('mainCtrl', ['platformService', 'deviceValueWs', 'deviceService', '$location', 'platformServiceData', function (platformService, deviceValueWs, deviceService, $location, platformServiceData) {
+app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'platformServiceData', function (platformService, deviceService, $location, platformServiceData) {
 
   platformService.retrievePlatforms();
 
@@ -22,8 +22,8 @@ app.controller('mainCtrl', ['platformService', 'deviceValueWs', 'deviceService',
 
   vm.selectPlatform = function (platform) {
     platformServiceData.currentPlatform = platform;
+    $location.path('/main/device_manager/platform-info');
     deviceService.retrieveDevices(platform.platformId);
-    $location.path('/main/device_manager/info_platform');
   };
 
   vm.getSelectedPlatform = function () {
@@ -44,6 +44,19 @@ app.controller('mainCtrl', ['platformService', 'deviceValueWs', 'deviceService',
 
   vm.closeDeviceInfo = function () {
     $location.path('/main/device_manager/');
+  };
+
+  vm.updatePlatform = function() {
+    if (platformServiceData.currentPlatform.platformId.substr(0,7) !== 'http://')
+      alert("El ID de la plataforma debe tener formato URI.");
+    else if (platformServiceData.currentPlatform.type.substr(0,7) !== 'http://')
+      alert("El tipo de la plataforma debe tener formato URI.");
+    else if (platformServiceData.currentPlatform.baseEndpoint.substr(0,7) !== 'http://')
+      alert("El callbackURL (baseEndpoint) debe tener formato URI.");
+    else if (platformServiceData.currentPlatform.location.substr(0,7) !== 'http://')
+      alert("El location de la plataforma debe tener formato URI.");
+    else
+      vm.platform.updatePlatform(platformServiceData.currentPlatform.platformId, platformServiceData.currentPlatform.type, platformServiceData.currentPlatform.baseEndpoint, platformServiceData.currentPlatform.location, platformServiceData.currentPlatform.name, platformServiceData.currentPlatform.username, platformServiceData.currentPlatform.encryptedPassword, platformServiceData.currentPlatform.encryptedAlgorithm);
   };
 
 }]);

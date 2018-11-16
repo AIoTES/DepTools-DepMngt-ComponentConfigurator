@@ -1,6 +1,7 @@
 package eu.hopu.servlets;
 
 import eu.hopu.utils.GetEnvOrProperty;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -41,12 +42,14 @@ public class PlatformServlet {
   @Consumes("application/json")
   @Path("/new")
   public Response newPlatform(@Context HttpServletRequest request) throws IOException {
-    String bString = NotificationServlet.getJsonBodyString(request.getInputStream());
+    String bString = DeviceServlet.getJsonBodyString(request.getInputStream());
+//    System.out.println(bString);
     RequestBody body = RequestBody.create(JSON, bString);
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms").header("Client-ID", CLIENT_ID).post(body).build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
+//      System.out.println(bodyStr);
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
     }
     catch (IOException ex) {
@@ -55,4 +58,27 @@ public class PlatformServlet {
 
     return Response.ok().build();
   }
+
+  @PUT
+  @Consumes("application/json")
+  @Path("/{platformId}")
+  public Response updateDevice(@Context HttpServletRequest request,
+                               @PathParam("platformId") String platformId) throws IOException {
+    String bod = DeviceServlet.getJsonBodyString(request.getInputStream());
+//    System.out.println(bod);
+    RequestBody body = RequestBody.create(JSON, bod);
+
+    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms/" + platformId).header("Client-ID", CLIENT_ID).put(body).build();
+
+    try (okhttp3.Response resp = client.newCall(req).execute()) {
+      String bodyStr = resp.body().string();
+//      System.out.println(bodyStr);
+      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
+    }
+    catch (IOException ex) {
+
+    }
+    return Response.ok().build();
+  }
+
 }

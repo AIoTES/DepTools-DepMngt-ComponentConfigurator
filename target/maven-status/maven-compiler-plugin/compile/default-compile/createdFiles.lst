@@ -1,5 +1,3 @@
-eu/hopu/servlets/NotificationServlet.class
-eu/hopu/serializer/OntologySerializer2.class
 eu/hopu/dto/DataSimpleRepresentation.class
 eu/hopu/servlets/filters/CorsProvider.class
 eu/hopu/servlets/DeviceServlet.class
@@ -15,5 +13,4 @@ eu/hopu/dto/DataLinkedRepresentation.class
 eu/hopu/Initializer.class
 eu/hopu/event/EventManager.class
 eu/hopu/serializer/OntologySerializer.class
-eu/hopu/servlets/SubscriptionServlet.class
 eu/hopu/service/DeviceServiceImpl.class
