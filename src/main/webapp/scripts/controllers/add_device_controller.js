@@ -8,43 +8,42 @@
  * Controller of the activageDashboardApp
  */
 app.controller('addDeviceCtrl', ['$location', 'deviceService',
-    function ($location, deviceService) {
+  function ($location, deviceService) {
 
-      var vm = this;
+    var vm = this;
 
-      vm.devicesService = deviceService;
+    vm.devicesService = deviceService;
 
-      vm.deviceType = "";
-      vm.deviceId = "";
-      vm.hostedBy = "";
-      vm.location = "";
-      vm.name = "";
-      vm.hosts = "";
-      vm.forProperty = "";
-      vm.madeActuation = "";
-      vm.implementsProcedure = "";
-      vm.observes = "";
-      vm.detects = "";
-      vm.madeObservation = "";
+    vm.deviceType = "";
+    vm.deviceId = "";
+    vm.hostedBy = "";
+    vm.location = "";
+    vm.name = "";
+    vm.hosts = "";
+    vm.forProperty = "";
+    vm.madeActuation = "";
+    vm.implementsProcedure = "";
+    vm.observes = "";
+    vm.detects = "";
+    vm.madeObservation = "";
 
 
-      vm.closeDeviceInfo = function () {
-        $location.path('/main/device_manager/');
-      };
+    vm.closeDeviceInfo = function () {
+      $location.path('/main/device_manager/');
+    };
 
-      vm.createDevice = function() {
-        if (vm.deviceType === '')
-          alert("Debes seleccionar un tipo de dispositivo.");
-        else if (vm.deviceId.substr(0,7) !== 'http://')
-          alert("El ID del dispositivo debe tener formato URI.");
-        else if (vm.hostedBy.substr(0,7) !== 'http://')
-          alert("Hosted By debe tener formato URI.");
-        else if (vm.location.substr(0,7) !== 'http://')
-          alert("Location debe tener formato URI.");
-        else
-          vm.devicesService.createDevice(vm.deviceType, vm.deviceId, vm.hostedBy, vm.location, vm.name, vm.hosts, vm.forProperty, vm.madeActuation, vm.implementsProcedure, vm.observes, vm.detects, vm.madeObservation);
-      };
+    vm.createDevice = function () {
+      if (vm.deviceType === '')
+        alert("Debes seleccionar un tipo de dispositivo.");
+      else if (vm.deviceId.substr(0, 7) !== 'http://')
+        alert("El ID del dispositivo debe tener formato URI.");
+      else if (vm.hostedBy.substr(0, 7) !== 'http://')
+        alert("Hosted By debe tener formato URI.");
+      else if (vm.location.substr(0, 7) !== 'http://')
+        alert("Location debe tener formato URI.");
+      else
+        vm.devicesService.createDevice(vm.deviceType, vm.deviceId, vm.hostedBy, vm.location, vm.name, vm.hosts, vm.forProperty, vm.madeActuation, vm.implementsProcedure, vm.observes, vm.detects, vm.madeObservation);
+    };
 
-    }
-  ]
-);
+  }
+]);

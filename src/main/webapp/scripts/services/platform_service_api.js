@@ -28,7 +28,6 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', 'CLIENT_ID', function
         "encryptedPassword": encryptedPassword,
         "encryptionAlgorithm": encryptionAlgorithm
       }
-      // data: '{"platformId": "'+platformId+'","type": "'+type+'","baseEndpoint": "'+baseEndpoint+'","location": "'+location+'","name": "'+name+'","username": "'+username+'","encryptedPassword": "'+encryptedPassword+'","encryptionAlgorithm": "'+encryptionAlgorithm+'"}'
     });
   };
 

@@ -8,7 +8,7 @@ app.service('deviceService',
         deviceServiceApi.getDevices(idPlatform)
           .then(
             function (response) {
-              deviceServiceData.devices[idPlatform] = response.data;
+              deviceServiceData.devices = response.data;
             }
           )
           .catch(
