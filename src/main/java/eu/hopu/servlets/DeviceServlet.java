@@ -24,9 +24,7 @@ import java.io.InputStreamReader;
 
 @Path("/devices")
 public class DeviceServlet {
-
   private final String SERVER_ADDR = GetEnvOrProperty.getInstance().get("SIL_URL");
-  private final String CLIENT_ID = GetEnvOrProperty.getInstance().get("CLIENT_ID");
 
   OkHttpClient client = new OkHttpClient();
 
@@ -52,8 +50,9 @@ public class DeviceServlet {
     HttpUrl.Builder urlBuilder = HttpUrl.parse(SERVER_ADDR + "/api/mw2mw/devices").newBuilder();
     urlBuilder.addQueryParameter("platformId", platformId);
     String url = urlBuilder.build().toString();
+    String clientId = request.getHeader("Client-ID");
 
-    Request req = new Request.Builder().url(url).header("Client-ID", CLIENT_ID).get().build();
+    Request req = new Request.Builder().url(url).header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
@@ -69,13 +68,12 @@ public class DeviceServlet {
   @Path("/new")
   public Response newDevice(@Context HttpServletRequest request) throws IOException {
     String bod = getJsonBodyString(request.getInputStream());
-//    System.out.println(bod);
+    String clientId = request.getHeader("Client-ID");
     RequestBody body = RequestBody.create(JSON, bod);
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/devices").header("Client-ID", CLIENT_ID).post(body).build();
+    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/devices").header("Client-ID", clientId).post(body).build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
-//      System.out.println(bodyStr);
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
     }
     catch (IOException ex) {
@@ -89,18 +87,17 @@ public class DeviceServlet {
   public Response updateDevice(@Context HttpServletRequest request,
                                @QueryParam("deviceId") String deviceId) throws IOException {
     String bod = getJsonBodyString(request.getInputStream());
-//    System.out.println(bod);
+    String clientId = request.getHeader("Client-ID");
     RequestBody body = RequestBody.create(JSON, bod);
 
     HttpUrl.Builder urlBuilder = HttpUrl.parse(SERVER_ADDR + "/api/mw2mw/devices").newBuilder();
     urlBuilder.addQueryParameter("deviceId", deviceId);
     String url = urlBuilder.build().toString();
 
-    Request req = new Request.Builder().url(url).header("Client-ID", CLIENT_ID).put(body).build();
+    Request req = new Request.Builder().url(url).header("Client-ID", clientId).put(body).build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
-//      System.out.println(bodyStr);
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
     }
     catch (IOException ex) {

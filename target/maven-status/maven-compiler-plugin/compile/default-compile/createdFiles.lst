@@ -12,5 +12,6 @@ eu/hopu/servlets/filters/CORSFilter.class
 eu/hopu/dto/DataLinkedRepresentation.class
 eu/hopu/Initializer.class
 eu/hopu/event/EventManager.class
+eu/hopu/servlets/ClientServlet.class
 eu/hopu/serializer/OntologySerializer.class
 eu/hopu/service/DeviceServiceImpl.class

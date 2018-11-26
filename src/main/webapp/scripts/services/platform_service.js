@@ -8,8 +8,8 @@ app.service('platformService',
 
       var service = this;
 
-      service.retrievePlatforms = function () {
-        platformServiceApi.getPlatforms()
+      service.retrievePlatforms = function (clientId) {
+        platformServiceApi.getPlatforms(clientId)
           .then(
             function (response) {
               platformServiceData.platforms = [];
@@ -28,13 +28,25 @@ app.service('platformService',
           );
       };
 
-      service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm) {
-        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm);
+      service.getPlatforms = function() {
+        return platformServiceData.platforms;
       };
 
-      service.updatePlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm) {
-        platformServiceApi.updatePlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm);
+      service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
+        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId);
       };
+
+      service.updatePlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
+        platformServiceApi.updatePlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId);
+      };
+
+      service.getCurrentPlatform = function() {
+        return platformServiceData.currentPlatform;
+      }
+
+      service.setCurrentPlatform = function(platform) {
+        platformServiceData.currentPlatform = platform;
+      }
 
       return service;
 

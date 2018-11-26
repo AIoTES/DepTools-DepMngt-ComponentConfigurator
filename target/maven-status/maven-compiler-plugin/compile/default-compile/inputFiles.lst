@@ -7,6 +7,7 @@
 /home/hopu/activage-component-configurator/src/main/java/eu/hopu/servlets/DeviceServlet.java
 /home/hopu/activage-component-configurator/src/main/java/eu/hopu/event/EventManager.java
 /home/hopu/activage-component-configurator/src/main/java/eu/hopu/dto/OntologyEvent.java
+/home/hopu/activage-component-configurator/src/main/java/eu/hopu/servlets/ClientServlet.java
 /home/hopu/activage-component-configurator/src/main/java/eu/hopu/servlets/filters/CORSFilter.java
 /home/hopu/activage-component-configurator/src/main/java/eu/hopu/servlets/PlatformServlet.java
 /home/hopu/activage-component-configurator/src/main/java/eu/hopu/Initializer.java

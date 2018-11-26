@@ -38,6 +38,11 @@
          ng-click="main.goToAddDevice()">
       <span>+ Add Device</span>
     </div>
+    <div class="button-header"
+         ng-class="{ 'button-header-active' : ('main.device_manager.add_device' | routeSegmentStartsWith) }"
+         ng-click="">
+      <span>+ Add Service</span>
+    </div>
   </div>
 </header>
 
@@ -88,12 +93,15 @@
 
 <script src="scripts/services/platform_service.js"></script>
 <script src="scripts/services/device_service.js"></script>
+<script src="scripts/services/client_service.js"></script>
 
 <script src="scripts/services/platform_service_api.js"></script>
 <script src="scripts/services/device_service_api.js"></script>
+<script src="scripts/services/client_service_api.js"></script>
 
 <script src="scripts/services/platform_service_data.js"></script>
 <script src="scripts/services/device_service_data.js"></script>
+<script src="scripts/services/client_service_data.js"></script>
 
 <script src="scripts/constants/backend_constants.js"></script>
 <script src="scripts/constants/client_constant.js"></script>

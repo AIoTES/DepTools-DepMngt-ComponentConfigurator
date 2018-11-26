@@ -1,28 +1,29 @@
 'use strict';
 
-app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', 'platformServiceData', 'deviceServiceData',
-  function ($location, platformService, deviceService, platformServiceData, deviceServiceData) {
+app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', 'clientService',
+  function ($location, platformService, deviceService, clientService) {
 
     var vm = this;
 
     vm.platform = platformService;
-    vm.devicesService = deviceService;
+    vm.deviceService = deviceService;
+    vm.clientService = clientService;
 
     vm.getDevices = function () {
-      return deviceServiceData.devices;//[platformServiceData.currentPlatform.platformId];
+      return vm.deviceService.getDevices();
     };
 
     vm.isDeviceSelected = function (deviceId) {
-      return deviceId === deviceServiceData.currentDevice.id;
+      return deviceId === deviceService.getCurrentDevice().id;
     };
 
     vm.selectDevice = function (device) {
-      deviceServiceData.currentDevice = device;
+      deviceService.setCurrentDevice(device)
       $location.path('/main/device_manager/device-info');
     };
 
     vm.getSelectedDevice = function () {
-      return deviceServiceData.currentDevice;
+      return deviceService.getCurrentDevice();
     }
 
     vm.closeDeviceInfo = function () {
@@ -30,16 +31,17 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
     };
 
     vm.updateDevice = function () {
-      if (deviceServiceData.currentDevice.deviceTypes[0] === '')
+      var device = deviceService.getCurrentDevice();
+      if (device.deviceTypes[0] === '')
         alert("Debes seleccionar un tipo de dispositivo.");
-      else if (deviceServiceData.currentDevice.deviceId.substr(0, 7) !== 'http://')
+      else if (device.deviceId.substr(0, 7) !== 'http://')
         alert("El ID del dispositivo debe tener formato URI.");
-      else if (deviceServiceData.currentDevice.hostedBy.substr(0, 7) !== 'http://')
+      else if (device.hostedBy.substr(0, 7) !== 'http://')
         alert("Hosted By debe tener formato URI.");
-      else if (deviceServiceData.currentDevice.location.substr(0, 7) !== 'http://')
+      else if (device.location.substr(0, 7) !== 'http://')
         alert("Location debe tener formato URI.");
       else
-        vm.devicesService.updateDevice(deviceServiceData.currentDevice.deviceTypes[0], deviceServiceData.currentDevice.deviceId, deviceServiceData.currentDevice.hostedBy, deviceServiceData.currentDevice.location, deviceServiceData.currentDevice.name, deviceServiceData.currentDevice.hosts, deviceServiceData.currentDevice.forProperty, deviceServiceData.currentDevice.madeActuation, deviceServiceData.currentDevice.implementsProcedure, deviceServiceData.currentDevice.observes, deviceServiceData.currentDevice.detects, deviceServiceData.currentDevice.madeObservation);
+        vm.deviceService.updateDevice(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation ,vm.clientService.getCurrentClientId());
     };
 
   }

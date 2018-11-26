@@ -7,28 +7,43 @@
  * # AboutCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'platformServiceData',
-  function (platformService, deviceService, $location, platformServiceData) {
+app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'clientService',
+  function (platformService, deviceService, $location, clientService) {
 
     platformService.retrievePlatforms();
+    clientService.getCurrentClientId();
+    clientService.retrieveClients(clientService.getCurrentClientId());
 
     var vm = this;
 
     vm.platform = platformService;
     vm.deviceServ = deviceService;
+    vm.clientService = clientService;
 
     vm.getPlatforms = function () {
-      return platformServiceData.platforms;
+      return vm.platform.getPlatforms();
+    };
+
+    vm.getClients = function () {
+      return vm.clientService.getClients();
     };
 
     vm.selectPlatform = function (platform) {
-      platformServiceData.currentPlatform = platform;
-      deviceService.retrieveDevices(platform.platformId);
+      vm.platform.setCurrentPlatform(platform);
+      vm.deviceServ.retrieveDevices(platform.platformId, vm.clientService.getCurrentClientId());
       $location.path('/main/device_manager/platform-info');
     };
 
+    vm.selectClient = function (client) {
+      vm.clientService.setCurrentClientId(client);
+    };
+
     vm.getSelectedPlatform = function () {
-      return platformServiceData.currentPlatform.name || "Filter by Platform";
+      return vm.platform.getCurrentPlatform().name || "Filter by Platform";
+    };
+
+    vm.getSelectedClient = function () {
+      return vm.clientService.getCurrentClientId() || "Select Client";
     };
 
     vm.goToAddPlatform = function () {
@@ -40,7 +55,7 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'pl
     };
 
     vm.getCurrentPlatform = function () {
-      return platformServiceData.currentPlatform;
+      return vm.platform.getCurrentPlatform();
     }
 
     vm.closeDeviceInfo = function () {
@@ -48,16 +63,17 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'pl
     };
 
     vm.updatePlatform = function () {
-      if (platformServiceData.currentPlatform.platformId.substr(0, 7) !== 'http://')
+      let platform = vm.platform.getCurrentPlatform();
+      if (platform.platformId.substr(0, 7) !== 'http://')
         alert("El ID de la plataforma debe tener formato URI.");
-      else if (platformServiceData.currentPlatform.type.substr(0, 7) !== 'http://')
+      else if (platform.type.substr(0, 7) !== 'http://')
         alert("El tipo de la plataforma debe tener formato URI.");
-      else if (platformServiceData.currentPlatform.baseEndpoint.substr(0, 7) !== 'http://')
+      else if (platform.baseEndpoint.substr(0, 7) !== 'http://')
         alert("El callbackURL (baseEndpoint) debe tener formato URI.");
-      else if (platformServiceData.currentPlatform.location.substr(0, 7) !== 'http://')
+      else if (platform.location.substr(0, 7) !== 'http://')
         alert("El location de la plataforma debe tener formato URI.");
       else
-        vm.platform.updatePlatform(platformServiceData.currentPlatform.platformId, platformServiceData.currentPlatform.type, platformServiceData.currentPlatform.baseEndpoint, platformServiceData.currentPlatform.location, platformServiceData.currentPlatform.name, platformServiceData.currentPlatform.username, platformServiceData.currentPlatform.encryptedPassword, platformServiceData.currentPlatform.encryptedAlgorithm);
+        vm.platform.updatePlatform(platform.platformId, platform.type, platform.baseEndpoint, platform.location, platform.name, platform.username, platform.encryptedPassword, platform.encryptedAlgorithm, vm.clientService.getCurrentClientId());
     };
 
   }

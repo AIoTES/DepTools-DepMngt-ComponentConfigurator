@@ -7,12 +7,13 @@
  * # MainCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('addDeviceCtrl', ['$location', 'deviceService',
-  function ($location, deviceService) {
+app.controller('addDeviceCtrl', ['$location', 'deviceService', 'clientService',
+  function ($location, deviceService, clientService) {
 
     var vm = this;
 
-    vm.devicesService = deviceService;
+    vm.deviceService = deviceService;
+    vm.clientService = clientService;
 
     vm.deviceType = "";
     vm.deviceId = "";
@@ -42,7 +43,7 @@ app.controller('addDeviceCtrl', ['$location', 'deviceService',
       else if (vm.location.substr(0, 7) !== 'http://')
         alert("Location debe tener formato URI.");
       else
-        vm.devicesService.createDevice(vm.deviceType, vm.deviceId, vm.hostedBy, vm.location, vm.name, vm.hosts, vm.forProperty, vm.madeActuation, vm.implementsProcedure, vm.observes, vm.detects, vm.madeObservation);
+        vm.devicesService.createDevice(vm.deviceType, vm.deviceId, vm.hostedBy, vm.location, vm.name, vm.hosts, vm.forProperty, vm.madeActuation, vm.implementsProcedure, vm.observes, vm.detects, vm.madeObservation, vm.clientService.getCurrentClientId());
     };
 
   }

@@ -4,8 +4,8 @@ app.service('deviceService',
 
       var service = {};
 
-      service.retrieveDevices = function (idPlatform) {
-        deviceServiceApi.getDevices(idPlatform)
+      service.retrieveDevices = function (idPlatform, clientId) {
+        deviceServiceApi.getDevices(idPlatform, clientId)
           .then(
             function (response) {
               deviceServiceData.devices = response.data;
@@ -17,6 +17,18 @@ app.service('deviceService',
             }
           );
       };
+
+      service.getCurrentDevice = function() {
+        return deviceServiceData.currentDevice;
+      }
+
+      service.setCurrentDevice = function(device) {
+        deviceServiceData.currentDevice = device
+      }
+
+      service.getDevices = function() {
+        return deviceServiceData.devices;
+      }
 
       service.createDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation) {
         deviceServiceApi.createDevice(deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation);

@@ -1,57 +1,27 @@
 app.service('deviceServiceApi',
-  ['$http', 'BACKEND_URL', 'CLIENT_ID',
-    function ($http, BACKEND_URL, CLIENT_ID) {
+  ['$http', 'BACKEND_URL',
+    function ($http, BACKEND_URL) {
 
       var service = {};
 
-      service.getDevices = function (idPlatform) {
+      service.getDevices = function (idPlatform, clientId) {
         return $http({
           method: 'GET',
           url: BACKEND_URL + '/api/v1/devices?platformId=' + idPlatform,
           headers: {
             "Content-Type": "application/json",
-            "Client-ID": CLIENT_ID
+            "Client-ID": clientId
           }
         });
       };
 
-      service.getDeviceValue = function (idDevice) {
-        return $http({
-          method: 'GET',
-          url: BACKEND_URL + '/api/v1/devices/simple/last/?deviceId=' + idDevice,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-      };
-
-      service.getDeviceOntology = function (idDevice) {
-        return $http({
-          method: 'GET',
-          url: BACKEND_URL + '/api/v1/devices/simple/last/?deviceId=' + idDevice,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-      };
-
-      service.getDeviceValue = function (idDevice) {
-        return $http({
-          method: 'GET',
-          url: BACKEND_URL + '/api/v1/devices/simple/last/?deviceId=' + idDevice,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-      };
-
-      service.createDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation) {
+      service.createDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId) {
         return $http({
           method: 'POST',
           url: BACKEND_URL + '/api/v1/devices/new',
           headers: {
             "Content-Type": "application/json",
-            "Client-ID": CLIENT_ID
+            "Client-ID": clientId
           },
           data: {
             "devices": [
@@ -74,13 +44,13 @@ app.service('deviceServiceApi',
         });
       };
 
-      service.updateDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation) {
+      service.updateDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId) {
         return $http({
           method: 'PUT',
           url: BACKEND_URL + '/api/v1/devices?deviceId=' + deviceId,
           headers: {
             "Content-Type": "application/json",
-            "Client-ID": CLIENT_ID
+            "Client-ID": clientId
           },
           data: {
             "deviceTypes": [deviceTypes],

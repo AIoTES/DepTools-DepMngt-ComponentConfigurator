@@ -7,12 +7,13 @@
  * # MainCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('addPlatformCtrl', ['$location', 'platformService',
-  function ($location, platformService) {
+app.controller('addPlatformCtrl', ['$location', 'platformService', 'clientService',
+  function ($location, platformService, clientService) {
 
     var vm = this;
 
     vm.platformService = platformService;
+    vm.clientService = clientService;
 
     vm.platformId = "";
     vm.type = "";
@@ -37,7 +38,7 @@ app.controller('addPlatformCtrl', ['$location', 'platformService',
       else if (vm.location.substr(0, 7) !== 'http://')
         alert("El location de la plataforma debe tener formato URI.");
       else
-        vm.platformService.createPlatform(vm.platformId, vm.type, vm.baseEndpoint, vm.location, vm.name, vm.username, vm.encryptedPassword, vm.encryptedAlgorithm);
+        vm.platformService.createPlatform(vm.platformId, vm.type, vm.baseEndpoint, vm.location, vm.name, vm.username, vm.encryptedPassword, vm.encryptedAlgorithm, vm.clientService.getCurrentClientId());
     };
 
   }
