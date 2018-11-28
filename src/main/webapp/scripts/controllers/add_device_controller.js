@@ -43,7 +43,7 @@ app.controller('addDeviceCtrl', ['$location', 'deviceService', 'clientService',
       else if (vm.location.substr(0, 7) !== 'http://')
         alert("Location debe tener formato URI.");
       else
-        vm.devicesService.createDevice(vm.deviceType, vm.deviceId, vm.hostedBy, vm.location, vm.name, vm.hosts, vm.forProperty, vm.madeActuation, vm.implementsProcedure, vm.observes, vm.detects, vm.madeObservation, vm.clientService.getCurrentClientId());
+        vm.deviceService.createDevice(vm.deviceType, vm.deviceId, vm.hostedBy, vm.location, vm.name, vm.hosts, vm.forProperty, vm.madeActuation, vm.implementsProcedure, vm.observes, vm.detects, vm.madeObservation, vm.clientService.getCurrentClientId());
     };
 
   }

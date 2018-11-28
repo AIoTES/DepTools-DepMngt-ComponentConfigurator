@@ -20,6 +20,10 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
     vm.deviceServ = deviceService;
     vm.clientService = clientService;
 
+    vm.retrievePlatforms = function() {
+      platformService.retrievePlatforms();
+    };
+
     vm.getPlatforms = function () {
       return vm.platform.getPlatforms();
     };
@@ -74,6 +78,12 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
         alert("El location de la plataforma debe tener formato URI.");
       else
         vm.platform.updatePlatform(platform.platformId, platform.type, platform.baseEndpoint, platform.location, platform.name, platform.username, platform.encryptedPassword, platform.encryptedAlgorithm, vm.clientService.getCurrentClientId());
+    };
+
+    vm.deletePlatform = function () {
+      let platformId = vm.platform.getCurrentPlatform().platformId;
+
+      vm.platform.deletePlatform(platformId, vm.clientService.getCurrentClientId());
     };
 
   }

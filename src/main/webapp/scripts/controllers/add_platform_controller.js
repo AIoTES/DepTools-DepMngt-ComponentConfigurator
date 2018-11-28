@@ -31,8 +31,8 @@ app.controller('addPlatformCtrl', ['$location', 'platformService', 'clientServic
     vm.createPlatform = function () {
       if (vm.platformId.substr(0, 7) !== 'http://')
         alert("El ID de la plataforma debe tener formato URI.");
-      else if (vm.type.substr(0, 7) !== 'http://')
-        alert("El tipo de la plataforma debe tener formato URI.");
+      else if (vm.type !== 'http://inter-iot.eu/UniversAAL' && vm.type !== 'http://inter-iot.eu/sofia2')
+        alert("El tipo de la plataforma sólo puede ser http://inter-iot.eu/UniversAAL o http://inter-iot.eu/sofia2.");
       else if (vm.baseEndpoint.substr(0, 7) !== 'http://')
         alert("El callbackURL (baseEndpoint) debe tener formato URI.");
       else if (vm.location.substr(0, 7) !== 'http://')

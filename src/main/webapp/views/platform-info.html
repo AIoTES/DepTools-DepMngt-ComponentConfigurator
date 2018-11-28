@@ -36,12 +36,76 @@
       <input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
       <label class="form-label">Algorithm:</label>
 
-      <button type="submit" class="create-button" ng-click="main.updatePlatform()">
-        <span>Update</span>
+      <button type="submit" class="create-button" ng-click="main.deletePlatform()">
+        <span>Delete</span>
       </button>
 
     </form>
 
   </div>
+
+</div>
+
+<div class="resource-container">
+
+  <div class="resource-header">
+    <h3>Alignment: {{main.getCurrentPlatform().platformId}}</h3>
+
+    <div class="close-info" title="Close window" ng-click="main.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <!-- <div class="info-container">
+
+     <form class="add-form" name="add-device">
+
+       <select ng-model="devCtrl.getSelectedDevice().deviceTypes[0]">
+         <option value="DEVICE">Device</option>
+         <option value="SENSOR">Sensor</option>
+         <option value="ACTUATOR">Actuator</option>
+       </select>
+       <label class="form-label">Type:</label>
+
+       <input type="text" placeholder="Id" ng-model="devCtrl.getSelectedDevice().deviceId">
+       <label class="form-label">Id:</label>
+
+       <input type="text" placeholder="Host" ng-model="devCtrl.getSelectedDevice().hostedBy">
+       <label class="form-label">Hosted By:</label>
+
+       <input type="text" placeholder="Location" ng-model="devCtrl.getSelectedDevice().location">
+       <label class="form-label">Location:</label>
+
+       <input type="text" placeholder="Name" ng-model="devCtrl.getSelectedDevice().name">
+       <label class="form-label">Name:</label>
+
+       <input type="text" placeholder="Hosts" ng-model="devCtrl.getSelectedDevice().hosts">
+       <label class="form-label">Hosts:</label>
+
+       <input type="text" placeholder="For Property" ng-model="devCtrl.getSelectedDevice().forProperty">
+       <label class="form-label">For Property:</label>
+
+       <input type="text" placeholder="Made Actuation" ng-model="devCtrl.getSelectedDevice().madeActuation">
+       <label class="form-label">Made Actuation:</label>
+
+       <input type="text" placeholder="Implements Procedure" ng-model="devCtrl.getSelectedDevice().implementsProcedure">
+       <label class="form-label">Implements Procedure:</label>
+
+       <input type="text" placeholder="Observes" ng-model="devCtrl.getSelectedDevice().observes">
+       <label class="form-label">Observes:</label>
+
+       <input type="text" placeholder="Detects" ng-model="devCtrl.getSelectedDevice().detects">
+       <label class="form-label">Detects:</label>
+
+       <input type="text" placeholder="Made Observation" ng-model="devCtrl.getSelectedDevice().madeObservation">
+       <label class="form-label">Made Observation:</label>
+
+       <button type="submit" class="create-button" ng-click="devCtrl.updateDevice()">
+         <span>Update</span>
+       </button>
+
+     </form>
+
+   </div>-->
 
 </div>

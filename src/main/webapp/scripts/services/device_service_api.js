@@ -68,6 +68,18 @@ app.service('deviceServiceApi',
           }
         });
       };
+
+      service.deleteDevice = function (deviceId, clientId) {
+        return $http({
+          method: 'DELETE',
+          url: BACKEND_URL + '/api/v1/devices?deviceId=' + deviceId,
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Client-ID": clientId
+          }
+        });
+      };
+
       return service;
     }
   ]

@@ -1,7 +1,6 @@
 package eu.hopu.servlets;
 
 import eu.hopu.utils.GetEnvOrProperty;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,6 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Path("/platforms")
 public class PlatformServlet {
@@ -63,13 +63,33 @@ public class PlatformServlet {
   @PUT
   @Consumes("application/json")
   @Path("/{platformId}")
-  public Response updateDevice(@Context HttpServletRequest request,
+  public Response updatePlatform(@Context HttpServletRequest request,
                                @PathParam("platformId") String platformId) throws IOException {
     String bod = DeviceServlet.getJsonBodyString(request.getInputStream());
     String clientId = request.getHeader("Client-ID");
     RequestBody body = RequestBody.create(JSON, bod);
 
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms/" + platformId).header("Client-ID", clientId).put(body).build();
+
+    try (okhttp3.Response resp = client.newCall(req).execute()) {
+      String bodyStr = resp.body().string();
+      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
+    }
+    catch (IOException ex) {
+
+    }
+    return Response.ok().build();
+  }
+
+  @DELETE
+  @Path("")
+  public Response deletePlatform(@Context HttpServletRequest request,
+                               @QueryParam("platformId") String platformId) throws IOException {
+    String clientId = request.getHeader("Client-ID");
+
+    String platform = URLEncoder.encode(platformId, "UTF-8");
+
+    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms/" + platform).header("Client-ID", clientId).delete().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();

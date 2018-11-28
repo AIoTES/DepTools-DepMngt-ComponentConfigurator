@@ -41,7 +41,13 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
       else if (device.location.substr(0, 7) !== 'http://')
         alert("Location debe tener formato URI.");
       else
-        vm.deviceService.updateDevice(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation ,vm.clientService.getCurrentClientId());
+        vm.deviceService.updateDevice(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation, vm.clientService.getCurrentClientId());
+    };
+
+    vm.deleteDevice = function () {
+      var deviceId = deviceService.getCurrentDevice().deviceId;
+
+      vm.deviceService.deleteDevice(deviceId, vm.clientService.getCurrentClientId());
     };
 
   }

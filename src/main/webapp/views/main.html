@@ -1,6 +1,6 @@
 <div class="menu-container">
 
-  <div class="menu-bar" ng-click="openMenu = !openMenu">
+  <div class="menu-bar" ng-click="openMenu = !openMenu; main.retrievePlatforms()">
     <span>{{main.getSelectedPlatform()}}</span>
     <div class="menu-square" ng-class="{'menu-square-active' : openMenu}">
       <span class="glyphicon glyphicon-chevron-down"></span>

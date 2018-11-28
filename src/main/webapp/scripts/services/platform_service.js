@@ -40,6 +40,10 @@ app.service('platformService',
         platformServiceApi.updatePlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId);
       };
 
+      service.deletePlatform = function(platformId, clientId) {
+        platformServiceApi.deletePlatform(platformId, clientId);
+      };
+
       service.getCurrentPlatform = function() {
         return platformServiceData.currentPlatform;
       }

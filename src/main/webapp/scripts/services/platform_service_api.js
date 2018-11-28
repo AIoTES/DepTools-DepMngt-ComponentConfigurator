@@ -51,5 +51,15 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', function ($http, BACK
       }
     });
   };
+
+  this.deletePlatform = function (platformId, clientId) {
+    return $http({
+      method: 'DELETE',
+      url: BACKEND_URL+ '/api/v1/platforms/?platformId=' + platformId,
+      headers: {
+        "Client-ID": clientId
+      }
+    });
+  };
 }]);
 

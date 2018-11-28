@@ -1,10 +1,7 @@
 package eu.hopu.servlets;
 
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import eu.hopu.dto.DataLinkedRepresentation;
-import eu.hopu.dto.DataSimpleRepresentation;
 import eu.hopu.storage.MeasuresStorage;
 import eu.hopu.utils.GetEnvOrProperty;
 import okhttp3.HttpUrl;
@@ -21,6 +18,7 @@ import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 
 @Path("/devices")
 public class DeviceServlet {
@@ -95,6 +93,28 @@ public class DeviceServlet {
     String url = urlBuilder.build().toString();
 
     Request req = new Request.Builder().url(url).header("Client-ID", clientId).put(body).build();
+
+    try (okhttp3.Response resp = client.newCall(req).execute()) {
+      String bodyStr = resp.body().string();
+      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
+    }
+    catch (IOException ex) {
+
+    }
+    return Response.ok().build();
+  }
+
+  @DELETE
+  public Response deleteDevice(@Context HttpServletRequest request,
+                               @QueryParam("deviceId") String deviceId) throws IOException {
+    String clientId = request.getHeader("Client-ID");
+
+    String device = URLEncoder.encode(deviceId, "UTF-8");
+
+    HttpUrl.Builder urlBuilder = HttpUrl.parse(SERVER_ADDR + "/api/mw2mw/devices/" + device).newBuilder();
+    String url = urlBuilder.build().toString();
+
+    Request req = new Request.Builder().url(url).header("Client-ID", clientId).delete().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
