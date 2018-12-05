@@ -60,12 +60,7 @@ app.service('clientService',
 
       service.setCurrentClientId = function (client) {
         clientServiceData.currentClientId = client.clientId;
-        clientServiceApi.setCurrentClientId(client.clientId)
-          .catch(
-            function (error) {
-              console.log(error);
-            }
-          );
+        // clientServiceApi.setCurrentClientId(client.clientId);
       };
 
       return service;

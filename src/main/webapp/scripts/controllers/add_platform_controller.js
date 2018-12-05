@@ -23,6 +23,14 @@ app.controller('addPlatformCtrl', ['$location', 'platformService', 'clientServic
     vm.username = "";
     vm.encryptedPassword = "";
     vm.encryptedAlgorithm = "";
+    vm.downInputAligName = "";
+    vm.downInputAligVers = "";
+    vm.downOutputAligName = "";
+    vm.downOutputAligVers = "";
+    vm.upInputAligName = "";
+    vm.upInputAligVers = "";
+    vm.upOutputAligName = "";
+    vm.upOutputAligVers = "";
 
     vm.closeDeviceInfo = function () {
       $location.path('/main/device_manager/');
@@ -38,8 +46,7 @@ app.controller('addPlatformCtrl', ['$location', 'platformService', 'clientServic
       else if (vm.location.substr(0, 7) !== 'http://')
         alert("El location de la plataforma debe tener formato URI.");
       else
-        vm.platformService.createPlatform(vm.platformId, vm.type, vm.baseEndpoint, vm.location, vm.name, vm.username, vm.encryptedPassword, vm.encryptedAlgorithm, vm.clientService.getCurrentClientId());
+        vm.platformService.createPlatform(vm.platformId, vm.type, vm.baseEndpoint, vm.location, vm.name, vm.username, vm.encryptedPassword, vm.encryptedAlgorithm, vm.clientService.getCurrentClientId(), vm.downInputAligName, vm.downInputAligVers, vm.downOutputAligName, vm.downOutputAligVers, vm.upInputAligName, vm.upInputAligVers, vm.upOutputAligName, vm.upOutputAligVers);
     };
-
   }
 ]);

@@ -10,7 +10,7 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', function ($http, BACK
     });
   };
 
-  this.createPlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
+  this.createPlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers) {
     return $http({
       method: 'POST',
       url: BACKEND_URL+ '/api/v1/platforms/new',
@@ -26,7 +26,15 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', function ($http, BACK
         "name": name,
         "username": username,
         "encryptedPassword": encryptedPassword,
-        "encryptionAlgorithm": encryptionAlgorithm
+        "encryptionAlgorithm": encryptionAlgorithm,
+        "downstreamInputAlignmentName": downInputAligName,
+        "downstreamInputAlignmentVersion": downInputAligVers,
+        "downstreamOutputAlignmentName": downOutputAligName,
+        "downstreamOutputAlignmentVersion": downOutputAligVers,
+        "upstreamInputAlignmentName": upInputAligName,
+        "upstreamInputAlignmentVersion": upInputAligVers,
+        "upstreamOutputAlignmentName": upOutputAligName,
+        "upstreamOutputAlignmentVersion": upOutputAligVers
       }
     });
   };
@@ -57,6 +65,17 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', function ($http, BACK
       method: 'DELETE',
       url: BACKEND_URL+ '/api/v1/platforms/?platformId=' + platformId,
       headers: {
+        "Client-ID": clientId
+      }
+    });
+  };
+
+  this.getPlatformTypes = function (clientId) {
+    return $http({
+      method: 'GET',
+      url: BACKEND_URL+ '/api/v1/platforms/types',
+      headers: {
+        "Content-Type": "application/json",
         "Client-ID": clientId
       }
     });

@@ -32,8 +32,8 @@ app.service('platformService',
         return platformServiceData.platforms;
       };
 
-      service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
-        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId);
+      service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers) {
+        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers);
       };
 
       service.updatePlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
@@ -46,11 +46,15 @@ app.service('platformService',
 
       service.getCurrentPlatform = function() {
         return platformServiceData.currentPlatform;
-      }
+      };
 
       service.setCurrentPlatform = function(platform) {
         platformServiceData.currentPlatform = platform;
-      }
+      };
+
+      service.getPlatformTypes = function(clientId) {
+        platformServiceApi.getPlatformTypes(clientId);
+      };
 
       return service;
 

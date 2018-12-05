@@ -41,7 +41,7 @@ public class ClientServlet {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/actual")
-  public Response getActualClientId(@Context HttpServletRequest request){
+  public Response getCurrentClientId(@Context HttpServletRequest request){
     JsonObject json = new JsonObject();
     json.addProperty("Client-Id", CLIENT_ID);
     return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
@@ -50,7 +50,7 @@ public class ClientServlet {
   @POST
   @Consumes("application/json")
   @Path("/actual")
-  public Response setActualClientId(@Context HttpServletRequest request) throws IOException {
+  public Response setCurrentClientId(@Context HttpServletRequest request) throws IOException {
 
     String bString = DeviceServlet.getJsonBodyString(request.getInputStream());
     JsonObject json = (JsonObject) new JsonParser().parse(bString);

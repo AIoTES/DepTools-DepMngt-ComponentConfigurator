@@ -33,10 +33,38 @@
       <input type="password" placeholder="Password" ng-model="main.getCurrentPlatform().encryptedPassword">
       <label class="form-label">Password:</label>
 
-      <input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
+      <!--<input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
       <label class="form-label">Algorithm:</label>
 
-      <button type="submit" class="create-button" ng-click="main.deletePlatform()">
+      <input type="text" placeholder="Downstream Input Alignment Name" ng-model="main.getCurrentPlatform().downInputAligName">
+      <label class="form-label">Downstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Version" ng-model="main.getCurrentPlatform().downInputAligVers">
+      <label class="form-label">Downstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Name" ng-model="main.getCurrentPlatform().downOutputAligName">
+      <label class="form-label">Downstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Version" ng-model="main.getCurrentPlatform().downOutputAligVers">
+      <label class="form-label">Downstream Output Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Name" ng-model="main.getCurrentPlatform().upInputAligName">
+      <label class="form-label">Upstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Version" ng-model="main.getCurrentPlatform().upInputAligVers">
+      <label class="form-label">Upstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Name" ng-model="main.getCurrentPlatform().upOutputAligName">
+      <label class="form-label">Upstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Version" ng-model="main.getCurrentPlatform().upOutputAligVers">
+      <label class="form-label">Upstream Output Alignment Version:</label>-->
+
+      <button style="float: left" type="submit" class="create-button" ng-click="">
+        <span>Update</span>
+      </button>
+
+      <button style="float: right; margin-top: -30px" type="submit" class="create-button" ng-click="main.deletePlatform()">
         <span>Delete</span>
       </button>
 
@@ -51,9 +79,9 @@
   <div class="resource-header">
     <h3>Alignment: {{main.getCurrentPlatform().platformId}}</h3>
 
-    <div class="close-info" title="Close window" ng-click="main.closeDeviceInfo()">
+    <!--<div class="close-info" title="Close window" ng-click="main.closeDeviceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
-    </div>
+    </div>-->
   </div>
 
   <!-- <div class="info-container">

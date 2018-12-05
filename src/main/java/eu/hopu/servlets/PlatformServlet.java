@@ -101,4 +101,24 @@ public class PlatformServlet {
     return Response.ok().build();
   }
 
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/types")
+  public Response getPlatformTypes(@Context HttpServletRequest request) {
+    String clientId = request.getHeader("Client-ID");
+    if (clientId == null)
+      clientId = "myclient";
+    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platform-types").header("Client-ID", clientId).get().build();
+
+    try (okhttp3.Response resp = client.newCall(req).execute()) {
+      String bodyStr = resp.body().string();
+      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
+    }
+    catch (IOException ex) {
+
+    }
+
+    return Response.ok().build();
+  }
+
 }

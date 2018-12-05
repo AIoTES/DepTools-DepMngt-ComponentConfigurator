@@ -4,7 +4,6 @@ app.service('platformServiceData', function() {
     currentPlatform: ''
   }
 
-
   return service;
   }
 );
