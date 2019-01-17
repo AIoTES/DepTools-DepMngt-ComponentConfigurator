@@ -22,7 +22,9 @@
       <input type="text" placeholder="Id" ng-model="devCtrl.getSelectedDevice().deviceId">
       <label class="form-label">Id:</label>
 
-      <input type="text" placeholder="Host" ng-model="devCtrl.getSelectedDevice().hostedBy">
+      <select ng-model="devCtrl.getSelectedDevice().hostedBy">
+        <option ng-repeat="option in devCtrl.getPlatformsId()" value="{{option.platformId}}">{{option.name}}</option>
+      </select>
       <label class="form-label">Hosted By:</label>
 
       <input type="text" placeholder="Location" ng-model="devCtrl.getSelectedDevice().location">

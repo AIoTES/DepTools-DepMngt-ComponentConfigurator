@@ -15,7 +15,10 @@
       <input type="text" placeholder="Id" ng-model="main.getCurrentPlatform().platformId">
       <label class="form-label">Id:</label>
 
-      <input type="text" placeholder="Type" ng-model="main.getCurrentPlatform().type">
+      <select ng-model="main.getCurrentPlatform().type">
+        <option value="http://inter-iot.eu/UniversAAL">http://inter-iot.eu/UniversAAL</option>
+        <option value="http://inter-iot.eu/sofia2">http://inter-iot.eu/sofia2</option>
+      </select>
       <label class="form-label">Type:</label>
 
       <input type="text" placeholder="Endpoint" ng-model="main.getCurrentPlatform().baseEndpoint">

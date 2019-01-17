@@ -5,9 +5,14 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
 
     var vm = this;
 
-    vm.platform = platformService;
+    vm.platformService = platformService;
     vm.deviceService = deviceService;
     vm.clientService = clientService;
+
+    vm.getPlatformsId = function() {
+      var x = vm.platformService.getPlatforms();
+      return x;
+    }
 
     vm.getDevices = function () {
       return vm.deviceService.getDevices();

@@ -7,8 +7,8 @@
  * # MainCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('addDeviceCtrl', ['$location', 'deviceService', 'clientService',
-  function ($location, deviceService, clientService) {
+app.controller('addDeviceCtrl', ['$location', 'deviceService', 'clientService', 'platformService',
+  function ($location, deviceService, clientService, platformService) {
 
     var vm = this;
 
@@ -28,6 +28,11 @@ app.controller('addDeviceCtrl', ['$location', 'deviceService', 'clientService',
     vm.detects = "";
     vm.madeObservation = "";
 
+
+    vm.getPlatformsId = function() {
+      var x = platformService.getPlatforms();
+      return x;
+    }
 
     vm.closeDeviceInfo = function () {
       $location.path('/main/device_manager/');
