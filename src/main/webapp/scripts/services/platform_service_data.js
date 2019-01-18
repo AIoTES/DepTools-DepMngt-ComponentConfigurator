@@ -1,7 +1,8 @@
 app.service('platformServiceData', function() {
   var service = {
     platforms: [],
-    currentPlatform: ''
+    currentPlatform: '',
+    platformsTypes: []
   }
 
   return service;

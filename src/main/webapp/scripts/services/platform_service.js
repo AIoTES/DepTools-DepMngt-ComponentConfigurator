@@ -52,9 +52,30 @@ app.service('platformService',
         platformServiceData.currentPlatform = platform;
       };
 
-      service.getPlatformTypes = function(clientId) {
-        platformServiceApi.getPlatformTypes(clientId);
+      service.loadPlatformTypes = function(clientId) {
+        platformServiceApi.loadPlatformTypes(clientId).then(
+          function (response) {
+            platformServiceData.platformsTypes = [];
+            var data = response.data;
+
+            for (var value in data)
+              platformServiceData.platformsTypes.push(data[value]);
+          }
+        )
+          .catch(
+            function (error) {
+              console.log(error);
+            }
+          );
       };
+
+      service.consultPlatformTypes = function(clientId) {
+        platformServiceApi.consultTypes(clientId);
+      };
+
+      service.getPlatformsTypes = function() {
+        return platformServiceData.platformsTypes;
+      }
 
       return service;
 

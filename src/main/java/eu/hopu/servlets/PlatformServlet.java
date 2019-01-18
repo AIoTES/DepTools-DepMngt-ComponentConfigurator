@@ -1,5 +1,7 @@
 package eu.hopu.servlets;
 
+import com.google.gson.JsonObject;
+import eu.hopu.storage.MeasuresStorage;
 import eu.hopu.utils.GetEnvOrProperty;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -12,9 +14,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 @Path("/platforms")
 public class PlatformServlet {
+  private MeasuresStorage measuresStorage = MeasuresStorage.getInstance();
   private final String SERVER_ADDR = GetEnvOrProperty.getInstance().get("SIL_URL");
   OkHttpClient client = new OkHttpClient();
 
@@ -26,7 +30,7 @@ public class PlatformServlet {
   public Response getPlatforms(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "myclient";
+      clientId = "Oscar";
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms").header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
@@ -107,7 +111,28 @@ public class PlatformServlet {
   public Response getPlatformTypes(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "myclient";
+      clientId = "Oscar";
+
+    List<String> tipos = measuresStorage.getTypesPlatform();
+
+    JsonObject json = new JsonObject();
+
+    for (int i = 0; i<tipos.size(); i++) {
+      json.addProperty("tipo"+i, tipos.get(i));
+    }
+
+    String p = tipos.toString();
+
+    return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/platform-types")
+  public Response consultTypes(@Context HttpServletRequest request) {
+    String clientId = request.getHeader("Client-ID");
+    if (clientId == null)
+      clientId = "Oscar";
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platform-types").header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {

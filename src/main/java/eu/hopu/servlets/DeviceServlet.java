@@ -30,19 +30,6 @@ public class DeviceServlet {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("")
-  public Response getDevices(@Context HttpServletRequest request) {
-    JsonObject json = new JsonObject();
-    int num = 1;
-    for (String id : MeasuresStorage.getInstance().getIdValues()) {
-      json.addProperty("id" + num, id);
-      num++;
-    }
-    return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Response getDevicesList(@Context HttpServletRequest request,
                                  @QueryParam("platformId") String platformId) {
     HttpUrl.Builder urlBuilder = HttpUrl.parse(SERVER_ADDR + "/api/mw2mw/devices").newBuilder();

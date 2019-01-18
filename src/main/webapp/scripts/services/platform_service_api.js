@@ -70,7 +70,18 @@ app.service('platformServiceApi', ['$http', 'BACKEND_URL', function ($http, BACK
     });
   };
 
-  this.getPlatformTypes = function (clientId) {
+  this.consultTypes = function(clientId) {
+    return $http({
+      method: 'GET',
+      url: BACKEND_URL+ '/api/v1/platforms/platform-types',
+      headers: {
+        "Content-Type": "application/json",
+        "Client-ID": clientId
+      }
+    });
+  }
+
+  this.loadPlatformTypes = function (clientId) {
     return $http({
       method: 'GET',
       url: BACKEND_URL+ '/api/v1/platforms/types',

@@ -20,6 +20,9 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
     vm.deviceServ = deviceService;
     vm.clientService = clientService;
 
+    vm.platform.consultPlatformTypes(clientService.getCurrentClientId());
+    vm.platform.loadPlatformTypes();
+
     vm.retrievePlatforms = function() {
       platformService.retrievePlatforms();
     };
@@ -70,8 +73,8 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
       let platform = vm.platform.getCurrentPlatform();
       if (platform.platformId.substr(0, 7) !== 'http://')
         alert("El ID de la plataforma debe tener formato URI.");
-      else if (platform.type.substr(0, 7) !== 'http://')
-        alert("El tipo de la plataforma debe tener formato URI.");
+   //   else if (platform.type.substr(0, 7) !== 'http://')
+     //   alert("El tipo de la plataforma debe tener formato URI.");
       else if (platform.baseEndpoint.substr(0, 7) !== 'http://')
         alert("El callbackURL (baseEndpoint) debe tener formato URI.");
       else if (platform.location.substr(0, 7) !== 'http://')
@@ -86,5 +89,8 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
       vm.platform.deletePlatform(platformId, vm.clientService.getCurrentClientId());
     };
 
+    vm.getPlatformsType = function () {
+      return vm.platform.getPlatformsTypes();
+    }
   }
 ]);

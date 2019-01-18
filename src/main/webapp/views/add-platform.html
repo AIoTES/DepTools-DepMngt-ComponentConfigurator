@@ -16,8 +16,7 @@
       <label class="form-label">Id:</label>
 
       <select ng-model="addPlatform.type">
-        <option value="http://inter-iot.eu/UniversAAL">http://inter-iot.eu/UniversAAL</option>
-        <option value="http://inter-iot.eu/sofia2">http://inter-iot.eu/sofia2</option>
+        <option ng-repeat="option in addPlatform.getPlatformsType()" value="{{option}}">{{option}}</option>
       </select>
       <label class="form-label">Type:</label>
 

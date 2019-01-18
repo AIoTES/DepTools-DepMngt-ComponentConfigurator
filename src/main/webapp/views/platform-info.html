@@ -16,8 +16,7 @@
       <label class="form-label">Id:</label>
 
       <select ng-model="main.getCurrentPlatform().type">
-        <option value="http://inter-iot.eu/UniversAAL">http://inter-iot.eu/UniversAAL</option>
-        <option value="http://inter-iot.eu/sofia2">http://inter-iot.eu/sofia2</option>
+        <option ng-repeat="option in main.getPlatformsType()" value="{{option}}">{{option}}</option>
       </select>
       <label class="form-label">Type:</label>
 
@@ -36,7 +35,7 @@
       <input type="password" placeholder="Password" ng-model="main.getCurrentPlatform().encryptedPassword">
       <label class="form-label">Password:</label>
 
-      <!--<input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
+      <input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
       <label class="form-label">Algorithm:</label>
 
       <input type="text" placeholder="Downstream Input Alignment Name" ng-model="main.getCurrentPlatform().downInputAligName">
@@ -61,7 +60,7 @@
       <label class="form-label">Upstream Output Alignment Name:</label>
 
       <input type="text" placeholder="Upstream Output Alignment Version" ng-model="main.getCurrentPlatform().upOutputAligVers">
-      <label class="form-label">Upstream Output Alignment Version:</label>-->
+      <label class="form-label">Upstream Output Alignment Version:</label>
 
       <button style="float: left" type="submit" class="create-button" ng-click="">
         <span>Update</span>
