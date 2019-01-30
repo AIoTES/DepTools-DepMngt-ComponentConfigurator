@@ -70,23 +70,30 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
     };
 
     vm.updatePlatform = function () {
-      let platform = vm.platform.getCurrentPlatform();
-      if (platform.platformId.substr(0, 7) !== 'http://')
-        alert("El ID de la plataforma debe tener formato URI.");
-   //   else if (platform.type.substr(0, 7) !== 'http://')
-     //   alert("El tipo de la plataforma debe tener formato URI.");
-      else if (platform.baseEndpoint.substr(0, 7) !== 'http://')
-        alert("El callbackURL (baseEndpoint) debe tener formato URI.");
-      else if (platform.location.substr(0, 7) !== 'http://')
-        alert("El location de la plataforma debe tener formato URI.");
-      else
-        vm.platform.updatePlatform(platform.platformId, platform.type, platform.baseEndpoint, platform.location, platform.name, platform.username, platform.encryptedPassword, platform.encryptedAlgorithm, vm.clientService.getCurrentClientId());
+      if (vm.platform.getCurrentPlatform().platformId === undefined) {
+        alert("No platform selected.");
+      }
+      else {
+        let platform = vm.platform.getCurrentPlatform();
+        if (platform.platformId.substr(0, 7) !== 'http://')
+          alert("El ID de la plataforma debe tener formato URI.");
+        else if (platform.baseEndpoint.substr(0, 7) !== 'http://')
+          alert("El callbackURL (baseEndpoint) debe tener formato URI.");
+        else if (platform.location.substr(0, 7) !== 'http://')
+          alert("El location de la plataforma debe tener formato URI.");
+        else
+          vm.platform.updatePlatform(platform.platformId, platform.type, platform.baseEndpoint, platform.location, platform.name, platform.username, platform.encryptedPassword, platform.encryptedAlgorithm, vm.clientService.getCurrentClientId());
+      }
     };
 
     vm.deletePlatform = function () {
       let platformId = vm.platform.getCurrentPlatform().platformId;
 
-      vm.platform.deletePlatform(platformId, vm.clientService.getCurrentClientId());
+      if (platformId === undefined)
+        alert("No platform selected.");
+      else
+        vm.platform.deletePlatform(platformId, vm.clientService.getCurrentClientId());
+
     };
 
     vm.getPlatformsType = function () {

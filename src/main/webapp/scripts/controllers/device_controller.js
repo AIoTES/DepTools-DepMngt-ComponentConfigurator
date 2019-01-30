@@ -37,22 +37,30 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
 
     vm.updateDevice = function () {
       var device = deviceService.getCurrentDevice();
-      if (device.deviceTypes[0] === '')
-        alert("Debes seleccionar un tipo de dispositivo.");
-      else if (device.deviceId.substr(0, 7) !== 'http://')
-        alert("El ID del dispositivo debe tener formato URI.");
-      else if (device.hostedBy.substr(0, 7) !== 'http://')
-        alert("Hosted By debe tener formato URI.");
-      else if (device.location.substr(0, 7) !== 'http://')
-        alert("Location debe tener formato URI.");
-      else
-        vm.deviceService.updateDevice(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation, vm.clientService.getCurrentClientId());
+
+      if (device.deviceId === undefined)
+        alert("No Device selected.");
+      else {
+        if (device.deviceTypes[0] === '')
+          alert("Debes seleccionar un tipo de dispositivo.");
+        else if (device.deviceId.substr(0, 7) !== 'http://')
+          alert("El ID del dispositivo debe tener formato URI.");
+        else if (device.hostedBy.substr(0, 7) !== 'http://')
+          alert("Hosted By debe tener formato URI.");
+        else if (device.location.substr(0, 7) !== 'http://')
+          alert("Location debe tener formato URI.");
+        else
+          vm.deviceService.updateDevice(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation, vm.clientService.getCurrentClientId())
+      }
     };
 
     vm.deleteDevice = function () {
       var deviceId = deviceService.getCurrentDevice().deviceId;
 
-      vm.deviceService.deleteDevice(deviceId, vm.clientService.getCurrentClientId());
+      if (deviceId === undefined)
+        alert("No Device selected.");
+      else
+        vm.deviceService.deleteDevice(deviceId, vm.clientService.getCurrentClientId());
     };
 
   }

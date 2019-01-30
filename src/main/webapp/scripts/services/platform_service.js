@@ -33,7 +33,15 @@ app.service('platformService',
       };
 
       service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers) {
-        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers);
+        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers)
+          .then(
+            function(response) {
+              if (response.status === 200) {
+                alert("Platform created");
+                $location.path('/main/device_manager');
+              }
+            }
+          )
       };
 
       service.updatePlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
@@ -41,7 +49,15 @@ app.service('platformService',
       };
 
       service.deletePlatform = function(platformId, clientId) {
-        platformServiceApi.deletePlatform(platformId, clientId);
+        platformServiceApi.deletePlatform(platformId, clientId)
+          .then(
+            function(response) {
+              if (response.status === 200) {
+                alert("Platform deleted");
+                $location.path('/main/device_manager');
+              }
+            }
+          )
       };
 
       service.getCurrentPlatform = function() {
