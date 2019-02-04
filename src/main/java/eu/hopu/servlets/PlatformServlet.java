@@ -30,7 +30,7 @@ public class PlatformServlet {
   public Response getPlatforms(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "Oscar";
+      clientId = "myclient";
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms").header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
@@ -111,7 +111,7 @@ public class PlatformServlet {
   public Response getPlatformTypes(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "Oscar";
+      clientId = "myclient";
 
     List<String> tipos = measuresStorage.getTypesPlatform();
 
@@ -132,7 +132,7 @@ public class PlatformServlet {
   public Response consultTypes(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "Oscar";
+      clientId = "myclient";
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platform-types").header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
