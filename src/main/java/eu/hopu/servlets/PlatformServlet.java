@@ -20,6 +20,7 @@ import java.util.List;
 public class PlatformServlet {
   private MeasuresStorage measuresStorage = MeasuresStorage.getInstance();
   private final String SERVER_ADDR = GetEnvOrProperty.getInstance().get("SIL_URL");
+  private final String CLIENT_ID = GetEnvOrProperty.getInstance().get("CLIENT_ID");
   OkHttpClient client = new OkHttpClient();
 
   public static final okhttp3.MediaType JSON = okhttp3.MediaType.parse("application/json; charset=utf-8");
@@ -30,7 +31,7 @@ public class PlatformServlet {
   public Response getPlatforms(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "myclient";
+      clientId = CLIENT_ID;
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms").header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
@@ -111,7 +112,7 @@ public class PlatformServlet {
   public Response getPlatformTypes(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "myclient";
+      clientId = CLIENT_ID;
 
     List<String> tipos = measuresStorage.getTypesPlatform();
 
@@ -132,7 +133,7 @@ public class PlatformServlet {
   public Response consultTypes(@Context HttpServletRequest request) {
     String clientId = request.getHeader("Client-ID");
     if (clientId == null)
-      clientId = "myclient";
+      clientId = CLIENT_ID;
     Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platform-types").header("Client-ID", clientId).get().build();
 
     try (okhttp3.Response resp = client.newCall(req).execute()) {
