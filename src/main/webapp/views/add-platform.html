@@ -1,6 +1,6 @@
-<div class="resource-container">
+<div class="resource-container2">
 
-  <div class="resource-header">
+  <div class="resource-header2">
     <h3>Add Platform</h3>
 
     <div class="close-info" title="Close window" ng-click="addPlatform.closeDeviceInfo()">
@@ -8,14 +8,16 @@
     </div>
   </div>
 
-  <div class="info-container">
+  <div class="info-container2">
 
     <form class="add-form" name="add-platform">
 
       <input type="text" placeholder="Id" ng-model="addPlatform.platformId">
       <label class="form-label">Id:</label>
 
-      <input type="text" placeholder="Type" ng-model="addPlatform.type">
+      <select ng-model="addPlatform.type">
+        <option ng-repeat="option in addPlatform.getPlatformsType()" value="{{option}}">{{option}}</option>
+      </select>
       <label class="form-label">Type:</label>
 
       <input type="text" placeholder="Endpoint" ng-model="addPlatform.baseEndpoint">
@@ -35,6 +37,30 @@
 
       <input type="text" placeholder="Algorithm" ng-model="addPlatform.encryptedAlgorithm">
       <label class="form-label">Algorithm:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Name" ng-model="addPlatform.downInputAligName">
+      <label class="form-label">Downstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Version" ng-model="addPlatform.downInputAligVers">
+      <label class="form-label">Downstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Name" ng-model="addPlatform.downOutputAligName">
+      <label class="form-label">Downstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Version" ng-model="addPlatform.downOutputAligVers">
+      <label class="form-label">Downstream Output Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Name" ng-model="addPlatform.upInputAligName">
+      <label class="form-label">Upstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Version" ng-model="addPlatform.upInputAligVers">
+      <label class="form-label">Upstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Name" ng-model="addPlatform.upOutputAligName">
+      <label class="form-label">Upstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Version" ng-model="addPlatform.upOutputAligVers">
+      <label class="form-label">Upstream Output Alignment Version:</label>
 
       <button type="submit" class="create-button" ng-click="addPlatform.createPlatform()">
         <span>Create</span>

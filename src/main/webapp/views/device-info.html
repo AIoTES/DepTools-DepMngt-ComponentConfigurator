@@ -1,6 +1,6 @@
-<div class="resource-container">
+<div class="resource-container2">
 
-  <div class="resource-header">
+  <div class="resource-header2">
     <h3>Device: {{devCtrl.getSelectedDevice().deviceId}}</h3>
 
     <div class="close-info" title="Close window" ng-click="devCtrl.closeDeviceInfo()">
@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="info-container">
+  <div class="info-container2">
 
     <form class="add-form" name="add-device">
 
@@ -22,7 +22,9 @@
       <input type="text" placeholder="Id" ng-model="devCtrl.getSelectedDevice().deviceId">
       <label class="form-label">Id:</label>
 
-      <input type="text" placeholder="Host" ng-model="devCtrl.getSelectedDevice().hostedBy">
+      <select ng-model="devCtrl.getSelectedDevice().hostedBy">
+        <option ng-repeat="option in devCtrl.getPlatformsId()" value="{{option.platformId}}">{{option.name}}</option>
+      </select>
       <label class="form-label">Hosted By:</label>
 
       <input type="text" placeholder="Location" ng-model="devCtrl.getSelectedDevice().location">
@@ -52,9 +54,14 @@
       <input type="text" placeholder="Made Observation" ng-model="devCtrl.getSelectedDevice().madeObservation">
       <label class="form-label">Made Observation:</label>
 
-      <button type="submit" class="create-button" ng-click="devCtrl.updateDevice()">
+      <button style="float: left" type="submit" class="create-button" ng-click="devCtrl.updateDevice()">
         <span>Update</span>
       </button>
+
+      <button style="float: right; margin-top: -30px" type="submit" class="create-button" ng-click="devCtrl.deleteDevice()">
+        <span>Delete</span>
+      </button>
+
 
     </form>
 

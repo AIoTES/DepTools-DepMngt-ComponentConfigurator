@@ -349,7 +349,7 @@ header {
 
 .option-container {
   width: calc(100% - 30px);
-  height: calc(100% - 40px);
+  height: calc(51% - 40px);
   margin: 20px 10px 20px 20px;
   background: #ededed;
 }
@@ -368,6 +368,31 @@ header {
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .option-container {
+    width: calc(100% - 40px);
+  }
+}
+
+.option-container2 {
+  width: calc(100% - 30px);
+  height: calc(100% - 40px);
+  margin: 20px 10px 20px 20px;
+  background: #ededed;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .option-container2 {
+    width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .option-container2 {
+    width: calc(100% - 40px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .option-container2 {
     width: calc(100% - 40px);
   }
 }
@@ -402,7 +427,7 @@ header {
 }
 
 .option-device-container {
-  width: calc(100% + 40px);
+  width: calc(100% + 35px);
   height: calc(100% - 40px);
   overflow: hidden;
   margin: auto;
@@ -678,7 +703,7 @@ header {
 
 .resource-container {
   width: calc(100% - 30px);
-  height: calc(100% - 40px);
+  height: calc(51% - 40px);
   margin: 20px 20px 20px 10px;
   background: #ededed;
 }
@@ -704,7 +729,48 @@ header {
   }
 }
 
+.resource-container2 {
+  width: calc(100% - 30px);
+  height: calc(100% - 40px);
+  margin: 20px 20px 20px 10px;
+  background: #ededed;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .resource-container2 {
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .resource-container2 {
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .resource-container2 {
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+}
+
 .info-container {
+  width: 100%;
+  height: 88%;
+  margin-bottom: -20px;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .info-container {
+    height: calc(100% - 50px);
+  }
+}
+
+.info-container2 {
   width: 100%;
   height: 100%;
   margin-bottom: -20px;
@@ -712,7 +778,7 @@ header {
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
-  .info-container {
+  .info-container2 {
     height: calc(100% - 50px);
   }
 }
@@ -724,6 +790,21 @@ header {
 }
 
 .resource-header h3 {
+  font-size: 16px;
+  line-height: 40px;
+  color: #fff;
+  margin: 0 0 0 10px;
+  padding: 0;
+  float: left;
+}
+
+.resource-header2 {
+  width: 100%;
+  height: 40px;
+  background: #2bbee8;
+}
+
+.resource-header2 h3 {
   font-size: 16px;
   line-height: 40px;
   color: #fff;
@@ -951,16 +1032,16 @@ pre {
 }
 
 .add-form label {
-  width: 25%;
+  width: 35%;
   float: left;
   line-height: 30px;
-  /*margin-bottom: 10px;*/
+  margin-bottom: 10px;
   font-weight: normal;
   clear: left;
 }
 
 .add-form input {
-  width: 75%;
+  width: 65%;
   float: right;
   height: 30px;
   padding-left: 5px;
@@ -969,7 +1050,7 @@ pre {
 }
 
 .add-form select {
-  width: 75%;
+  width: 65%;
   float: right;
   height: 30px;
   padding-left: 5px;

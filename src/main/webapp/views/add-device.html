@@ -1,6 +1,6 @@
-<div class="resource-container">
+<div class="resource-container2">
 
-  <div class="resource-header">
+  <div class="resource-header2">
     <h3>Add Device</h3>
 
     <div class="close-info" title="Close window" ng-click="addDevice.closeDeviceInfo()">
@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="info-container">
+  <div class="info-container2">
 
     <form class="add-form" name="add-device">
 
@@ -22,7 +22,9 @@
       <input type="text" placeholder="Id" ng-model="addDevice.deviceId">
       <label class="form-label">Id:</label>
 
-      <input type="text" placeholder="Host" ng-model="addDevice.hostedBy">
+      <select ng-model="addDevice.hostedBy">
+        <option ng-repeat="option in addDevice.getPlatformsId()" value="{{option.platformId}}">{{option.name}}</option>
+      </select>
       <label class="form-label">Hosted By:</label>
 
       <input type="text" placeholder="Location" ng-model="addDevice.location">
