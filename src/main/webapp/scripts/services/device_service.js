@@ -36,7 +36,7 @@ app.service('deviceService',
             function(response) {
               if (response.status === 200) {
                 alert("Device created");
-                $location.path('/main/device_manager');
+                $location.path('/main/component_configuration/component_view');
               }
             }
           )
@@ -52,7 +52,7 @@ app.service('deviceService',
             function(response) {
               if (response.status === 200) {
                 alert("Device deleted");
-                $location.path('/main/device_manager');
+                $location.path('/main/component_configuration/component_view');
               }
             }
           )

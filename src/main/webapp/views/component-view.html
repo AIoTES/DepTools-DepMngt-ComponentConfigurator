@@ -1,0 +1,97 @@
+<div class="option-container">
+
+  <div class="option-header">
+    <h3>Device Manager</h3>
+
+    <div class="option-header-right">
+      <div class="square-header-button" title="Add Platform" ng-click="componentView.goToAddPlatform()">
+        <span class="glyphicon glyphicon-tasks"></span>
+      </div>
+      <div class="square-header-button" title="Add Device" ng-click="componentView.goToAddDevice()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="option-device-container">
+
+    <!--<div ng-repeat="device in componentView.getDevices()"-->
+         <!--class="option-device"-->
+         <!--ng-class="{ 'option-device-active' : componentView.isDeviceSelected(device.id) }"-->
+         <!--ng-click="componentView.selectDevice(device)">-->
+
+      <!--<div class="option-name-container">-->
+        <!--<span class="option-name">{{device.deviceId}}</span>-->
+        <!--<br class="jump-line">-->
+        <!--<span class="option-platform">{{device.hostedBy}}</span>-->
+      <!--</div>-->
+
+      <!--<div class="option-buttons-container">-->
+        <!--<div class="option-device-button"-->
+             <!--ng-class="{ 'option-device-button-active' : ('id' | routeSegmentParam) == componentView.deviceId }">-->
+          <!--<span>+ Info</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="option-device"
+         ng-click="componentView.goToDeviceInfo()">
+
+      <div class="option-name-container">
+        <span class="option-name">Device Id</span>
+        <br class="jump-line">
+        <span class="option-platform">Host</span>
+      </div>
+
+      <div class="option-buttons-container">
+        <div class="square-option-device-button">
+          <span class="glyphicon glyphicon-info-sign"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="option-container">
+
+  <div class="option-header">
+    <h3>Service Manager</h3>
+
+    <div class="option-header-right">
+      <div class="square-header-button" title="Add Service" ng-click="componentView.goToAddService()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="option-device-container">
+
+      <!--
+      <div ng-repeat="device in devCtrl.getDevices()"
+           class="option-device"
+           ng-class="{ 'option-device-active' : devCtrl.isDeviceSelected(device.id) }"
+           ng-click="devCtrl.selectDevice(device)">
+
+        <div class="option-name-container">
+          <span class="option-name">{{device.deviceId}}</span>
+          <br class="jump-line">
+          <span class="option-platform">{{device.hostedBy}}</span>
+        </div>
+
+        <div class="option-buttons-container">
+          <div class="option-device-button"
+               ng-class="{ 'option-device-button-active' : ('id' | routeSegmentParam) == device.deviceId }">
+            <span>+ Info</span>
+          </div>
+        </div>
+      </div>
+    -->
+
+  </div>
+
+</div>

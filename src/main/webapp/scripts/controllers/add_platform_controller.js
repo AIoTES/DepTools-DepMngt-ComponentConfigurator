@@ -33,7 +33,7 @@ app.controller('addPlatformCtrl', ['$location', 'platformService', 'clientServic
     vm.upOutputAligVers = "";
 
     vm.closeDeviceInfo = function () {
-      $location.path('/main/device_manager/');
+      $location.path('/main/component_configurator/component_view');
     };
 
     vm.createPlatform = function () {

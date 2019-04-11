@@ -20,40 +20,116 @@
 
 <!-- Add your site or application content here -->
 <header>
-  <div class="logo-container">
-    <img src="images/activage-logo.png" title="activage project" alt="activage project">
-    <div class="header-title">
-      <h2>Interoperability Demo Application</h2>
+    <div class="logo-container">
+      <a href="#/main">
+        <img src="images/activage-logo.png" title="activage project" alt="activage project">
+      </a>
+      <div class="header-title">
+        <h2>Interoperability Demo Application</h2>
+      </div>
     </div>
-  </div>
 
-  <div class="button-container" ng-controller="mainCtrl as main">
-    <div class="button-header"
-         ng-class="{ 'button-header-active' : ('main.device_manager.add_platform' | routeSegmentStartsWith) }"
-         ng-click="main.goToAddPlatform()">
-      <span>+ Add Platform</span>
-    </div>
-    <div class="button-header"
-         ng-class="{ 'button-header-active' : ('main.device_manager.add_device' | routeSegmentStartsWith) }"
-         ng-click="main.goToAddDevice()">
-      <span>+ Add Device</span>
-    </div>
-    <div class="button-header"
-         ng-class=""
-         ng-click="">
-      <span>+ Add Service</span>
-    </div>
-  </div>
+  <!--<div class="button-container" ng-controller="componentCtrl as component">-->
+
+  <!--</div>-->
 </header>
 
-<div class="left-div" app-view-segment="0"></div>
-<div class="center-div" app-view-segment="1"></div>
-<div ng-show="('main.device_manager.add_platform' | routeSegmentStartsWith) ||
-              ('main.device_manager.add_device' | routeSegmentStartsWith) ||
-              ('main.device_manager.platform-info' | routeSegmentStartsWith) ||
-              ('main.device_manager.device-info' | routeSegmentStartsWith)"
-     class="right-div"
-     app-view-segment="2"></div>
+<div class="lateral-nav" ng-controller="rootCtrl as root">
+  <div class="button-menu"
+       ng-class="{'button-menu-active': ('main.deployment_manager' | routeSegmentStartsWith)}"
+       ng-click="root.goToDeployManager()">
+    <div class="icon-container">
+      <img src="images/deploy-icon.svg">
+    </div>
+    <div class="button-text">
+      Deployment Manager
+    </div>
+  </div>
+  <div class="button-menu"
+       ng-class="{'button-menu-active': ('main.component_configurator' | routeSegmentStartsWith)}"
+       ng-click="root.goToComponentConfigurator()">
+    <div class="icon-container">
+      <img src="images/configurator-icon.svg">
+    </div>
+    <div class="button-text">
+      Component Configurator
+    </div>
+  </div>
+  <div class="button-menu"
+       ng-class="{'button-menu-active': ('main.maintenance_panel' | routeSegmentStartsWith)}"
+       ng-click="root.goToMaintenancePanel()">
+    <div class="icon-container">
+      <img src="images/maintenance-icon.svg">
+    </div>
+    <div class="button-text">
+      Maintenance Panel
+    </div>
+  </div>
+  <div class="button-menu"
+       ng-class="{'button-menu-active': ('main.about' | routeSegmentStartsWith)}"
+       ng-click="root.goToAbout()">
+    <div class="icon-container">
+      <img src="images/about-icon.svg">
+    </div>
+    <div class="button-text">
+      About
+    </div>
+  </div>
+
+</div>
+
+<div class="main-container" app-view-segment="0" ng-show="('main' | routeSegmentEqualsTo)">
+
+</div>
+
+<div class="main-container">
+  <div class="left-div"
+       app-view-segment="1"
+       ng-hide="('main' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager' | routeSegmentStartsWith) ||
+                ('main.maintenance_panel' | routeSegmentStartsWith) ||
+                ('main.about' | routeSegmentStartsWith)">
+  </div>
+
+  <div class="center-div"
+       app-view-segment="2"
+       ng-hide="('main' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager' | routeSegmentStartsWith) ||
+                ('main.maintenance_panel' | routeSegmentStartsWith) ||
+                ('main.about' | routeSegmentStartsWith)">
+  </div>
+
+  <div class="right-div"
+       app-view-segment="3"
+       ng-hide="('main' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager' | routeSegmentStartsWith) ||
+                ('main.maintenance_panel' | routeSegmentStartsWith) ||
+                ('main.about' | routeSegmentStartsWith)">
+  </div>
+
+  <div class="left-div-50"
+       app-view-segment="1"
+       ng-hide="('main' | routeSegmentEqualsTo) ||
+                ('main.component_configurator' | routeSegmentStartsWith) ||
+                ('main.about' | routeSegmentStartsWith)">
+  </div>
+  <div class="right-div-50"
+       app-view-segment="2"
+       ng-hide="('main' | routeSegmentEqualsTo) ||
+                ('main.component_configurator' | routeSegmentStartsWith) ||
+                ('main.about' | routeSegmentStartsWith)">
+  </div>
+
+
+  <div class="center-container"
+       app-view-segment="1"
+       ng-hide="('main' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager' | routeSegmentStartsWith) ||
+                ('main.maintenance_panel' | routeSegmentStartsWith) ||
+                ('main.component_configurator' | routeSegmentStartsWith)">
+  </div>
+
+</div>
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -86,22 +162,38 @@
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
-<script src="scripts/controllers/device_controller.js"></script>
-<script src="scripts/controllers/main_controller.js"></script>
+<script src="scripts/controllers/root_controller.js"></script>
+<script src="scripts/controllers/about_controller.js"></script>
+<script src="scripts/controllers/component_view_controller.js"></script>
+<script src="scripts/controllers/component_controller.js"></script>
+<script src="scripts/controllers/component_device_controller.js"></script>
+<script src="scripts/controllers/component_update_controller.js"></script>
 <script src="scripts/controllers/add_platform_controller.js"></script>
 <script src="scripts/controllers/add_device_controller.js"></script>
+<script src="scripts/controllers/add_service_controller.js"></script>
+<script src="scripts/controllers/deployment_controller.js"></script>
+<script src="scripts/controllers/create_deployment_controller.js"></script>
+<script src="scripts/controllers/deployment_info_controller.js"></script>
+<script src="scripts/controllers/update_deployment_controller.js"></script>
+<script src="scripts/controllers/maintenance_controller.js"></script>
+<script src="scripts/controllers/add_maintenance_controller.js"></script>
+<script src="scripts/controllers/maintenance_info_controller.js"></script>
+<script src="scripts/controllers/update_maintenance_controller.js"></script>
 
 <script src="scripts/services/platform_service.js"></script>
 <script src="scripts/services/device_service.js"></script>
 <script src="scripts/services/client_service.js"></script>
+<script src="scripts/services/deployment_service.js"></script>
 
 <script src="scripts/services/platform_service_api.js"></script>
 <script src="scripts/services/device_service_api.js"></script>
 <script src="scripts/services/client_service_api.js"></script>
+<script src="scripts/services/deployment_service_api.js"></script>
 
 <script src="scripts/services/platform_service_data.js"></script>
 <script src="scripts/services/device_service_data.js"></script>
 <script src="scripts/services/client_service_data.js"></script>
+<script src="scripts/services/deployment_service_data.js"></script>
 
 <script src="scripts/constants/backend_constants.js"></script>
 

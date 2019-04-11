@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', 'clientService',
+app.controller('componentViewCtrl', ['$location', 'platformService', 'deviceService', 'clientService',
   function ($location, platformService, deviceService, clientService) {
 
     var vm = this;
@@ -24,7 +24,11 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
 
     vm.selectDevice = function (device) {
       deviceService.setCurrentDevice(device)
-      $location.path('/main/device_manager/device-info');
+      $location.path('/main/component_configurator/component_view/device_info');
+    };
+
+    vm.goToDeviceInfo = function () {
+      $location.path('/main/component_configurator/component_view/device_info');
     };
 
     vm.getSelectedDevice = function () {
@@ -32,7 +36,7 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
     }
 
     vm.closeDeviceInfo = function () {
-      $location.path('/main/device_manager/');
+      $location.path('/main/component_configurator/component_view/');
     };
 
     vm.updateDevice = function () {
@@ -61,6 +65,18 @@ app.controller('deviceCtrl', ['$location', 'platformService', 'deviceService', '
         alert("No Device selected.");
       else
         vm.deviceService.deleteDevice(deviceId, vm.clientService.getCurrentClientId());
+    };
+
+    vm.goToAddPlatform = function () {
+      $location.path('/main/component_configurator/component_view/add_platform');
+    };
+
+    vm.goToAddDevice = function () {
+      $location.path('/main/component_configurator/component_view/add_device');
+    };
+
+    vm.goToAddService = function () {
+      $location.path('/main/component_configurator/component_view/add_service');
     };
 
   }

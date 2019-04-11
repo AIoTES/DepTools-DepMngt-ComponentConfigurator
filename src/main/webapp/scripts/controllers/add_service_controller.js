@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('addDeviceCtrl', ['$location', 'deviceService', 'clientService', 'platformService',
+app.controller('addServiceCtrl', ['$location', 'deviceService', 'clientService', 'platformService',
   function ($location, deviceService, clientService, platformService) {
 
     var vm = this;

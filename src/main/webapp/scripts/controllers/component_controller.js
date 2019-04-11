@@ -7,7 +7,7 @@
  * # AboutCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'clientService',
+app.controller('componentCtrl', ['platformService', 'deviceService', '$location', 'clientService',
   function (platformService, deviceService, $location, clientService) {
 
     platformService.retrievePlatforms(clientService.getCurrentClientId());
@@ -37,7 +37,7 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
     vm.selectPlatform = function (platform) {
       vm.platform.setCurrentPlatform(platform);
       vm.deviceServ.retrieveDevices(platform.platformId, vm.clientService.getCurrentClientId());
-      $location.path('/main/device_manager/platform-info');
+      $location.path('/main/component_configurator/platform_info');
     };
 
     vm.selectClient = function (client) {
@@ -52,20 +52,12 @@ app.controller('mainCtrl', ['platformService', 'deviceService', '$location', 'cl
       return vm.clientService.getCurrentClientId() || "Select Client";
     };
 
-    vm.goToAddPlatform = function () {
-      $location.path('/main/device_manager/add_platform');
-    };
-
-    vm.goToAddDevice = function () {
-      $location.path('/main/device_manager/add_device');
-    };
-
     vm.getCurrentPlatform = function () {
       return vm.platform.getCurrentPlatform();
     }
 
     vm.closeDeviceInfo = function () {
-      $location.path('/main/device_manager/');
+      $location.path('/main/component_configurator/');
     };
 
     vm.updatePlatform = function () {

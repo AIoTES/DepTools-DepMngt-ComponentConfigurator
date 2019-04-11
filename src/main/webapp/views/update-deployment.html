@@ -1,0 +1,88 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Update Deployment Installation</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="updateCtrl.closeCreateDeployment()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-device">
+
+      <input type="text" placeholder="Id" ng-model="updateCtrl.deployId">
+      <label class="form-label">Id:</label>
+
+      <div class="info-left">
+        Date:
+      </div>
+      <div class="info-right">
+        {{updateCtrl.deployDate | date: 'dd-MM-yyyy HH:mm:ss'}}
+      </div>
+
+      <input type="text" placeholder="Location" ng-model="updateCtrl.location">
+      <label class="form-label">Location:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Organization Id" ng-model="updateCtrl.organizationId">
+      <label class="form-label">Organization Id:</label>
+
+      <input type="text" placeholder="Organization Label" ng-model="updateCtrl.organizationLabel">
+      <label class="form-label">Organization Label:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Platform Id" ng-model="updateCtrl.platformId">
+      <label class="form-label">Platform Id:</label>
+
+      <input type="text" placeholder="Platform Label" ng-model="updateCtrl.platformLabel">
+      <label class="form-label">Platform Label:</label>
+
+      <select ng-model="updateCtrl.devices">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Devices:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Device Id" ng-model="updateCtrl.deviceId">
+      <label class="form-label">Device Id:</label>
+
+      <input type="text" placeholder="Device Label" ng-model="updateCtrl.deviceLabel">
+      <label class="form-label">Device Label:</label>
+
+      <input type="text" placeholder="Device Type" ng-model="updateCtrl.deviceType">
+      <label class="form-label">Device Type:</label>
+
+      <select ng-model="updateCtrl.sensors">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Sensors:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Sensor Id" ng-model="updateCtrl.sensorId">
+      <label class="form-label">Sensor Id:</label>
+
+      <input type="text" placeholder="Sensor Type" ng-model="updateCtrl.sensorType">
+      <label class="form-label">Sensor Type:</label>
+
+      <hr class="line">
+
+      <button type="submit" class="info-button" ng-click="updateCtrl.createDeployment()">
+        <span>Update</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

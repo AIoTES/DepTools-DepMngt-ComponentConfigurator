@@ -1,0 +1,88 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Create Deployment Installation</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="createDeploy.closeCreateDeployment()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-device">
+
+      <input type="text" placeholder="Id" ng-model="createDeploy.deployId">
+      <label class="form-label">Id:</label>
+
+      <div class="info-left padding-0">
+        Date:
+      </div>
+      <div class="info-right padding-0">
+        {{createDeploy.deployDate | date: 'dd-MM-yyyy HH:mm:ss'}}
+      </div>
+
+      <input type="text" placeholder="Location" ng-model="createDeploy.location">
+      <label class="form-label">Location:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Organization Id" ng-model="createDeploy.organizationId">
+      <label class="form-label">Organization Id:</label>
+
+      <input type="text" placeholder="Organization Label" ng-model="createDeploy.organizationLabel">
+      <label class="form-label">Organization Label:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Platform Id" ng-model="createDeploy.platformId">
+      <label class="form-label">Platform Id:</label>
+
+      <input type="text" placeholder="Platform Label" ng-model="createDeploy.platformLabel">
+      <label class="form-label">Platform Label:</label>
+
+      <select ng-model="createDeploy.devices">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Devices:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Device Id" ng-model="createDeploy.deviceId">
+      <label class="form-label">Device Id:</label>
+
+      <input type="text" placeholder="Device Label" ng-model="createDeploy.deviceLabel">
+      <label class="form-label">Device Label:</label>
+
+      <input type="text" placeholder="Device Type" ng-model="createDeploy.deviceType">
+      <label class="form-label">Device Type:</label>
+
+      <select ng-model="createDeploy.sensors">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Sensors:</label>
+
+      <hr class="line">
+
+      <input type="text" placeholder="Sensor Id" ng-model="createDeploy.sensorId">
+      <label class="form-label">Sensor Id:</label>
+
+      <input type="text" placeholder="Sensor Type" ng-model="createDeploy.sensorType">
+      <label class="form-label">Sensor Type:</label>
+
+      <hr class="line">
+
+      <button type="submit" class="info-button" ng-click="createDeploy.createDeployment()">
+        <span>Create</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
