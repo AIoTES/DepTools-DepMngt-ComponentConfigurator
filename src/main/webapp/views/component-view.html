@@ -17,36 +17,20 @@
 
   <div class="option-device-container">
 
-    <!--<div ng-repeat="device in componentView.getDevices()"-->
-         <!--class="option-device"-->
-         <!--ng-class="{ 'option-device-active' : componentView.isDeviceSelected(device.id) }"-->
-         <!--ng-click="componentView.selectDevice(device)">-->
-
-      <!--<div class="option-name-container">-->
-        <!--<span class="option-name">{{device.deviceId}}</span>-->
-        <!--<br class="jump-line">-->
-        <!--<span class="option-platform">{{device.hostedBy}}</span>-->
-      <!--</div>-->
-
-      <!--<div class="option-buttons-container">-->
-        <!--<div class="option-device-button"-->
-             <!--ng-class="{ 'option-device-button-active' : ('id' | routeSegmentParam) == componentView.deviceId }">-->
-          <!--<span>+ Info</span>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
     <div class="option-device"
-         ng-click="componentView.goToDeviceInfo()">
+         ng-repeat="device in componentView.getDevices()"
+         ng-class="{ 'option-device-active' : componentView.isDeviceSelected(device.id) }"
+         ng-click="componentView.selectDevice(device)">
 
       <div class="option-name-container">
-        <span class="option-name">Device Id</span>
+        <span class="option-name">{{device.deviceId}}</span>
         <br class="jump-line">
-        <span class="option-platform">Host</span>
+        <span class="option-platform">{{device.hostedBy}}</span>
       </div>
 
       <div class="option-buttons-container">
-        <div class="square-option-device-button">
+        <div class="square-option-device-button"
+             ng-class="{ 'option-device-button-active' : ('id' | routeSegmentParam) == componentView.deviceId }">
           <span class="glyphicon glyphicon-info-sign"></span>
         </div>
       </div>
