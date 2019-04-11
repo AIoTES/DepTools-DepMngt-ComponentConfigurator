@@ -160,6 +160,20 @@ header {
   }
 }
 
+.burger-container {
+  width: 50px;
+  height: 50px;
+  float: right;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  color: #2bbee8;
+}
+
+.burger-container-active {
+  color: #0f2144;
+}
+
 /*-----MENU LATERAL-----*/
 
 .lateral-nav {
@@ -169,6 +183,12 @@ header {
   margin-right: -10px;
   overflow: hidden;
   transition: 0.5s ease all;
+}
+
+@media screen and (max-width: 1024px) {
+  .lateral-nav {
+    display: none;
+  }
 }
 
 .lateral-nav:hover {
@@ -185,6 +205,36 @@ header {
   justify-content: start;
   /*background: url("../images/bg.svg") center no-repeat;*/
   /*background-size: 100vw;*/
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .main-container {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    margin: 10px;
+    float: none;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .main-container {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    margin: 10px;
+    float: none;
+    display: block;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .main-container {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    margin: 10px;
+    float: none;
+    display: block;
+  }
 }
 
 .lateral-nav:hover~.main-container {
@@ -243,6 +293,62 @@ header {
 
 /*-----FIN DEL MENU LATERAL-----*/
 
+/*-----MENU DISPOSITIVO MOVIL-----*/
+.mobile-nav {
+  width: 100%;
+  height: auto;
+  /*float: left;*/
+  overflow: hidden;
+  position: absolute;
+  transition: 0.5s ease all;
+  z-index: 9999;
+}
+
+@media screen and (min-width: 1025px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.mobile-button-menu {
+  width: 100%;
+  height: 50px;
+  margin: 0 0 0 0;
+  background: #f5f5f5;
+  padding: 0 5px;
+  border-bottom: 1px solid #ccc;
+  transition: 0.5s ease all;
+  cursor: pointer;
+}
+
+.mobile-button-menu-active {
+  background: #f5f5f5;
+  border-left: 3px solid #2bbee8;
+  padding: 0 5px 0 2px;
+}
+
+.mobile-icon-container {
+  width: 30px;
+  height: 30px;
+  margin: 10px 5px;
+  float: left;
+}
+
+.mobile-button-text {
+  width: calc(100% - 50px);
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  margin-left: 40px;
+  overflow: hidden;
+  color: #2bbee8;
+  float: right;
+  transition: 0.5s ease all;
+  /*transition-delay: 0.5s;*/
+}
+
+/*-----FIN MENU DISPOSITIVO MOVIL-----*/
+
 .left-div {
   width: 20%;
   height: calc(100vh - 50px);
@@ -252,23 +358,30 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .left-div {
-    width: calc(100% - 20px);
-    height: auto;
+    width: 100%;
+    height: 100px;
+    margin: auto;
     z-index: 10;
-    position: absolute;
+    /*position: absolute;*/
     /*float: none;*/
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .left-div {
-    width: 30%;
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    /*display: inline-flex;*/
+    /*justify-content: space-between;*/
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .left-div {
-    width: 30%;
+    width: 100%;
+    height: 40px;
+    margin: 0;
   }
 }
 
@@ -281,24 +394,25 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .left-div-50 {
-    width: calc(100% - 20px);
-    height: auto;
-    z-index: 10;
-    position: absolute;
+    width: 100%;
+    height: calc(100vh - 70px);
     margin: 0;
-    /*float: none;*/
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .left-div-50 {
-    width: calc(50% - 10px);
+    width: 100%;
+    height: calc(100vh - 70px);
+    margin: 0;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .left-div-50 {
-    width: calc(50% - 10px);
+    width: 100%;
+    height: calc(100vh - 70px);
+    margin: 0;
   }
 }
 
@@ -313,23 +427,30 @@ header {
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .right-div-50 {
     width: calc(100% - 20px);
-    height: auto;
-    z-index: 10;
+    height: calc(100vh - 70px);
     position: absolute;
     margin: 0;
-    /*float: none;*/
+    top: 60px;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .right-div-50 {
-    width: calc(50% - 10px);
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    position: absolute;
+    margin: 0;
+    top: 60px;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .right-div-50 {
-    width: calc(50% - 10px);
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    position: absolute;
+    margin: 0;
+    top: 60px;
   }
 }
 
@@ -341,22 +462,22 @@ header {
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .center-div {
     width: 100%;
-    top: 110px;
-    left: 0;
-    position: absolute;
+    height: calc(100vh - 160px);
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .center-div {
-    width: 70%;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 110px);
     left: 30%;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .center-div {
-    width: 70%;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 110px);
     left: 30%;
   }
 }
@@ -371,7 +492,8 @@ header {
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .right-div {
     width: 100%;
-    top: 110px;
+    height: calc(100vh - 130px);
+    top: 160px;
     left: 0;
     position: absolute;
   }
@@ -379,15 +501,28 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .right-div {
-    width: 70%;
-    left: 30%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    top: 110px;
+    left: 0;
+    position: absolute;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .right-div {
-    width: 70%;
-    left: 30%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    top: 110px;
+    left: 0;
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .right-div {
+    /*width: 70%;*/
+    /*left: 30%;*/
   }
 }
 
@@ -397,11 +532,45 @@ header {
   margin: 20px 0 0 0;
 }
 
+@media screen and (max-width: 720px) and (orientation: portrait){
+  .menu-container {
+    margin: 10px auto;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape){
+  .menu-container {
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .menu-container {
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+}
+
 .menu-bar {
   width: 100%;
   height: 40px;
   background: #f5f5f5;
   cursor: pointer;
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape){
+  .menu-bar {
+    width: calc(50% - 5px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .menu-bar {
+    width: calc(50% - 5px);
+  }
 }
 
 .menu-bar span {
@@ -503,19 +672,33 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .option-container {
-    width: calc(100% - 40px);
+    width: 100%;
+    height: calc(50% - 10px);
+    margin: 0 0 10px 0;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .option-container {
-    width: calc(100% - 40px);
+    width: 100%;
+    height: calc(50% - 10px);
+    margin: 10px 0 10px 0;
   }
 }
 
-@media screen and (min-width: 721px) and (max-width: 1024px) {
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
   .option-container {
-    width: calc(100% - 40px);
+    width: 100%;
+    height: calc(50% - 10px);
+    margin: 10px 0 10px 0;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: landscape) {
+  .option-container {
+    width: 100%;
+    height: calc(50% - 10px);
+    margin: 10px 0 10px 0;
   }
 }
 
@@ -702,21 +885,21 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .option-device {
-    width: calc(100% - 18px);
+    width: 100%;
     font-size: 12px;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .option-device {
-    width: calc(100% - 18px);
+    width: 100%;
     font-size: 12px;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .option-device {
-    width: calc(100% - 18px);
+    width: 100%;
   }
 }
 
@@ -992,22 +1175,22 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .resource-container2 {
-    width: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 0 10px;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .resource-container2 {
-    width: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 0 10px;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .resource-container2 {
-    width: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 0 10px;
   }
 }
 
@@ -1312,6 +1495,7 @@ pre {
 
 .add-form textarea {
   width: calc(65% - 10px);
+  float: right;
   height: 200px;
   resize: none;
   margin: 0 10px 5px 0;
@@ -1351,11 +1535,16 @@ pre {
   }
 
   .add-form input {
-    width: 100%;
+    width: calc(100% - 20px);
   }
 
   .add-form select {
-    width: 100%;
+    width: calc(100% - 20px);
+  }
+
+  .add-form textarea {
+    width: calc(100% - 20px);
+    margin: 0 10px 10px 0;
   }
 }
 
@@ -1365,11 +1554,16 @@ pre {
   }
 
   .add-form input {
-    width: 100%;
+    width: calc(100% - 20px);
   }
 
   .add-form select {
-    width: 100%;
+    width: calc(100% - 20px);
+  }
+
+  .add-form textarea {
+    width: calc(100% - 20px);
+    margin: 0 10px 10px 0;
   }
 }
 
@@ -1441,6 +1635,18 @@ pre {
   justify-content: flex-end;
   user-select: none;
   transition: 0.3s ease all;
+}
+
+@media screen and (max-width: 720px){
+  .info-button {
+    margin: 0 10px 10px 10px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px){
+  .info-button {
+    margin: 0 10px 10px 10px;
+  }
 }
 
 .info-button span {
@@ -1534,6 +1740,24 @@ pre {
   margin: auto;
 }
 
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .center-container{
+    max-height: calc(100vh - 50px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
+  .center-container{
+    max-height: calc(100vh - 50px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: landscape) {
+  .center-container{
+    max-height: calc(100vh - 50px);
+  }
+}
+
 .about-menu {
   width: 100%;
   height: 50px;
@@ -1551,7 +1775,21 @@ pre {
   border-radius: 3px 3px 0 0;
   color: #fff;
   cursor: pointer;
+  text-align: center;
   transition: 0.3s ease all;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .about-button {
+    padding: 5px 20px;
+    line-height: 20px;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .about-button {
+    line-height: 50px;
+  }
 }
 
 .about-button:hover {

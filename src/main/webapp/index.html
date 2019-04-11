@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
   <!-- endbuild -->
 </head>
-<body ng-app="activageDashboardApp">
+<body ng-app="activageDashboardApp" ng-controller="rootCtrl as root">
 
 <!-- Add your site or application content here -->
 <header>
@@ -32,9 +32,59 @@
   <!--<div class="button-container" ng-controller="componentCtrl as component">-->
 
   <!--</div>-->
+
+  <div class="burger-container"
+       ng-class="{'burger-container-active' : root.openMenu}"
+       ng-click="root.toggleMenu()">
+    <span class="glyphicon glyphicon-menu-hamburger"></span>
+  </div>
 </header>
 
-<div class="lateral-nav" ng-controller="rootCtrl as root">
+<div class="mobile-nav"
+     ng-show="root.openMenu">
+  <div class="mobile-button-menu"
+       ng-class="{'mobile-button-menu-active': ('main.deployment_manager' | routeSegmentStartsWith)}"
+       ng-click="root.goToDeployManager(); root.toggleMenu()">
+    <div class="mobile-icon-container">
+      <img src="images/deploy-icon.svg">
+    </div>
+    <div class="mobile-button-text">
+      Deployment Manager
+    </div>
+  </div>
+  <div class="mobile-button-menu"
+       ng-class="{'mobile-button-menu-active': ('main.component_configurator' | routeSegmentStartsWith)}"
+       ng-click="root.goToComponentConfigurator(); root.toggleMenu()">
+    <div class="mobile-icon-container">
+      <img src="images/configurator-icon.svg">
+    </div>
+    <div class="mobile-button-text">
+      Component Configurator
+    </div>
+  </div>
+  <div class="mobile-button-menu"
+       ng-class="{'mobile-button-menu-active': ('main.maintenance_panel' | routeSegmentStartsWith)}"
+       ng-click="root.goToMaintenancePanel(); root.toggleMenu()">
+    <div class="mobile-icon-container">
+      <img src="images/maintenance-icon.svg">
+    </div>
+    <div class="mobile-button-text">
+      Maintenance Panel
+    </div>
+  </div>
+  <div class="mobile-button-menu"
+       ng-class="{'mobile-button-menu-active': ('main.about' | routeSegmentStartsWith)}"
+       ng-click="root.goToAbout(); root.toggleMenu()">
+    <div class="mobile-icon-container">
+      <img src="images/about-icon.svg">
+    </div>
+    <div class="mobile-button-text">
+      About
+    </div>
+  </div>
+</div>
+
+<div class="lateral-nav">
   <div class="button-menu"
        ng-class="{'button-menu-active': ('main.deployment_manager' | routeSegmentStartsWith)}"
        ng-click="root.goToDeployManager()">
@@ -75,7 +125,6 @@
       About
     </div>
   </div>
-
 </div>
 
 <div class="main-container" app-view-segment="0" ng-show="('main' | routeSegmentEqualsTo)">
@@ -101,10 +150,12 @@
 
   <div class="right-div"
        app-view-segment="3"
-       ng-hide="('main' | routeSegmentEqualsTo) ||
-                ('main.deployment_manager' | routeSegmentStartsWith) ||
-                ('main.maintenance_panel' | routeSegmentStartsWith) ||
-                ('main.about' | routeSegmentStartsWith)">
+       ng-show="('main.component_configurator.component_view.add_platform' | routeSegmentEqualsTo) ||
+                ('main.component_configurator.component_view.add_device' | routeSegmentEqualsTo) ||
+                ('main.component_configurator.component_view.add_service' | routeSegmentEqualsTo) ||
+                ('main.component_configurator.component_view.platform_info' | routeSegmentEqualsTo) ||
+                ('main.component_configurator.component_view.device_info' | routeSegmentEqualsTo) ||
+                ('main.component_configurator.component_view.update_device' | routeSegmentEqualsTo)">
   </div>
 
   <div class="left-div-50"
@@ -115,9 +166,14 @@
   </div>
   <div class="right-div-50"
        app-view-segment="2"
-       ng-hide="('main' | routeSegmentEqualsTo) ||
-                ('main.component_configurator' | routeSegmentStartsWith) ||
-                ('main.about' | routeSegmentStartsWith)">
+       ng-show="('main.deployment_manager.deployment_info' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager.create_deployment' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager.update_deployment' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager.delete_deployment' | routeSegmentEqualsTo) ||
+                ('main.maintenance_panel.maintenance_info' | routeSegmentEqualsTo) ||
+                ('main.maintenance_panel.add_maintenance' | routeSegmentEqualsTo) ||
+                ('main.maintenance_panel.update_maintenance' | routeSegmentEqualsTo) ||
+                ('main.maintenance_panel.delete_maintenance' | routeSegmentEqualsTo)">
   </div>
 
 

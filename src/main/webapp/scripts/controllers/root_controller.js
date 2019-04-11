@@ -6,6 +6,12 @@ app.controller('rootCtrl', ['$location', function ($location) {
 
   var vm = this;
 
+  vm.toggleMenu = function () {
+    // debugger;
+    // vm.openMenu = false;
+    vm.openMenu = !vm.openMenu;
+  };
+
   vm.goToDeployManager = function () {
     $location.path('/main/deployment_manager');
   };
