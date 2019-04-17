@@ -18,22 +18,22 @@ app.service('deviceService',
           );
       };
 
-      service.getCurrentDevice = function() {
+      service.getCurrentDevice = function () {
         return deviceServiceData.currentDevice;
       }
 
-      service.setCurrentDevice = function(device) {
+      service.setCurrentDevice = function (device) {
         deviceServiceData.currentDevice = device
       }
 
-      service.getDevices = function() {
+      service.getDevices = function () {
         return deviceServiceData.devices;
       }
 
       service.createDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId) {
         deviceServiceApi.createDevice(deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId)
           .then(
-            function(response) {
+            function (response) {
               if (response.status === 200) {
                 alert("Device created");
                 $location.path('/main/component_configuration/component_view');
@@ -49,7 +49,7 @@ app.service('deviceService',
       service.deleteDevice = function (deviceId, clientId) {
         deviceServiceApi.deleteDevice(deviceId, clientId)
           .then(
-            function(response) {
+            function (response) {
               if (response.status === 200) {
                 alert("Device deleted");
                 $location.path('/main/component_configuration/component_view');

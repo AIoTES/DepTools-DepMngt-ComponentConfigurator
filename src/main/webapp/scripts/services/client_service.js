@@ -42,7 +42,7 @@ app.service('clientService',
             clientServiceApi.getCurrentClientId()
               .then(
                 function (response) {
-                  clientServiceData.currentClientId = response.data["Client-Id"];
+                  clientServiceData.currentClientId = response.data["clientId"];
                   clientServiceData.clientStatus = clientServiceData.retrievalStatus.SUCCESS;
                 }
               )
@@ -53,8 +53,7 @@ app.service('clientService',
                 }
               );
           }
-        }
-        else
+        } else
           return clientServiceData.currentClientId;
       };
 

@@ -3,8 +3,8 @@
  */
 
 app.service('platformService',
-  ['platformServiceApi', 'platformServiceData',
-    function (platformServiceApi, platformServiceData) {
+  ['platformServiceApi', 'platformServiceData', '$location',
+    function (platformServiceApi, platformServiceData, $location) {
 
       var service = this;
 
@@ -28,30 +28,49 @@ app.service('platformService',
           );
       };
 
-      service.getPlatforms = function() {
+      service.getPlatforms = function () {
         return platformServiceData.platforms;
       };
 
-      service.createPlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers) {
+      service.createPlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers) {
         platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers)
           .then(
-            function(response) {
+            function (response) {
+              platformServiceData.platforms.push({
+                "platformId": platformId,
+                "type": type,
+                "baseEndpoint": baseEndpoint,
+                "location": location,
+                "name": name,
+                "username": username,
+                "encryptedPassword": encryptedPassword,
+                "encryptionAlgorithm": encryptionAlgorithm,
+                "downstreamInputAlignmentName": downInputAligName,
+                "downstreamInputAlignmentVersion": downInputAligVers,
+                "downstreamOutputAlignmentName": downOutputAligName,
+                "downstreamOutputAlignmentVersion": downOutputAligVers,
+                "upstreamInputAlignmentName": upInputAligName,
+                "upstreamInputAlignmentVersion": upInputAligVers,
+                "upstreamOutputAlignmentName": upOutputAligName,
+                "upstreamOutputAlignmentVersion": upOutputAligVers
+              });
               if (response.status === 200) {
                 alert("Platform created");
-                $location.path('/main/device_manager');
+                $location.path('/main/component_configurator');
               }
+
             }
           )
       };
 
-      service.updatePlatform = function(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
+      service.updatePlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
         platformServiceApi.updatePlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId);
       };
 
-      service.deletePlatform = function(platformId, clientId) {
+      service.deletePlatform = function (platformId, clientId) {
         platformServiceApi.deletePlatform(platformId, clientId)
           .then(
-            function(response) {
+            function (response) {
               if (response.status === 200) {
                 alert("Platform deleted");
                 $location.path('/main/device_manager');
@@ -60,24 +79,21 @@ app.service('platformService',
           )
       };
 
-      service.getCurrentPlatform = function() {
+      service.getCurrentPlatform = function () {
         return platformServiceData.currentPlatform;
       };
 
-      service.setCurrentPlatform = function(platform) {
+      service.setCurrentPlatform = function (platform) {
         platformServiceData.currentPlatform = platform;
       };
 
-      service.loadPlatformTypes = function(clientId) {
-        platformServiceApi.loadPlatformTypes(clientId).then(
-          function (response) {
-            platformServiceData.platformsTypes = [];
-            var data = response.data;
-
-            for (var value in data)
-              platformServiceData.platformsTypes.push(data[value]);
-          }
-        )
+      service.loadPlatformTypes = function (clientId) {
+        platformServiceApi.loadPlatformTypes(clientId)
+          .then(
+            function (response) {
+              platformServiceData.platformsTypes = response.data;
+            }
+          )
           .catch(
             function (error) {
               console.log(error);
@@ -85,13 +101,13 @@ app.service('platformService',
           );
       };
 
-      service.consultPlatformTypes = function(clientId) {
+      service.consultPlatformTypes = function (clientId) {
         platformServiceApi.consultTypes(clientId);
       };
 
-      service.getPlatformsTypes = function() {
+      service.getPlatformsTypes = function () {
         return platformServiceData.platformsTypes;
-      }
+      };
 
       return service;
 

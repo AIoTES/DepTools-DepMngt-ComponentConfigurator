@@ -13,17 +13,15 @@ public class OntologySerializer {
   private JsonObject jsonGeneral;
 
   private HashMap<String, String> labelsValue = new HashMap<>();
-  private MeasuresStorage measuresStorage;
 
   public OntologySerializer(String inputStream) {
     JsonParser parser = new JsonParser();
     jsonGeneral = parser.parse(inputStream).getAsJsonArray().get(0).getAsJsonObject();
     loadContext(jsonGeneral);
-    measuresStorage = MeasuresStorage.getInstance();
   }
 
   public List<String> buildTypesPlatforms() {
-    List<String> tipos = new LinkedList<String>();
+    List<String> types = new LinkedList<String>();
     JsonArray payload = getPayload();
     if (payload != null) {
       JsonArray ids = payload.get(0).getAsJsonObject().get("http://www.w3.org/1999/02/22-rdf-syntax-ns#type").getAsJsonArray();
@@ -31,9 +29,9 @@ public class OntologySerializer {
         String id = ids.get(i).getAsJsonObject().get("@id").getAsString();
         String[] separate = id.split(":");
         if (labelsValue.containsKey(separate[0]))
-          measuresStorage.addType(labelsValue.get(separate[0]) + separate[1]);
+          types.add(labelsValue.get(separate[0]) + separate[1]);
       }
-      return tipos;
+      return types;
     }
     return null;
   }
@@ -55,4 +53,5 @@ public class OntologySerializer {
     }
     return null;
   }
+
 }

@@ -8,7 +8,7 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -16,18 +16,18 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
   <!-- endbuild -->
 </head>
-<body ng-app="activageDashboardApp" ng-controller="rootCtrl as root">
+<body ng-app="activageDashboardAppDev" ng-controller="rootCtrl as root">
 
 <!-- Add your site or application content here -->
 <header>
-    <div class="logo-container">
-      <a href="#/main">
-        <img src="images/activage-logo.png" title="activage project" alt="activage project">
-      </a>
-      <div class="header-title">
-        <h2>Interoperability Demo Application</h2>
-      </div>
+  <div class="logo-container">
+    <a href="#/main">
+      <img src="images/activage-logo.png" title="activage project" alt="activage project">
+    </a>
+    <div class="header-title">
+      <h2>Interoperability Demo Application</h2>
     </div>
+  </div>
 
   <!--<div class="button-container" ng-controller="componentCtrl as component">-->
 
@@ -217,6 +217,14 @@
 <!-- endbower -->
 <!-- endbuild -->
 
+<script src="scripts/app_dev.js"></script>
+<script src="scripts/dev/config/net_delay_config.js"></script>
+<script src="scripts/dev/services/dev_utils.js"></script>
+<script src="scripts/dev/services/dev_record_service.js"></script>
+<script src="scripts/dev/services/dev_client_service.js"></script>
+<script src="scripts/dev/services/dev_platform_service.js"></script>
+<script src="scripts/dev/services/dev_device_service.js"></script>
+
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/root_controller.js"></script>
@@ -251,6 +259,10 @@
 <script src="scripts/services/device_service_data.js"></script>
 <script src="scripts/services/client_service_data.js"></script>
 <script src="scripts/services/deployment_service_data.js"></script>
+
+<script src="scripts/services/record_service_data.js"></script>
+<script src="scripts/services/record_service_api.js"></script>
+<script src="scripts/services/record_service.js"></script>
 
 <script src="scripts/constants/backend_constants.js"></script>
 

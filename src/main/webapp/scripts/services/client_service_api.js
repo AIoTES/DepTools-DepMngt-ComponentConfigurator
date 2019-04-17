@@ -2,7 +2,7 @@ app.service('clientServiceApi', ['$http', 'BACKEND_URL', function ($http, BACKEN
   this.getClients = function (clientId) {
     return $http({
       method: 'GET',
-      url: BACKEND_URL+ '/api/v1/clients',
+      url: BACKEND_URL + '/api/v1/clients',
       headers: {
         "Content-Type": "application/json",
         "Client-ID": clientId
@@ -13,7 +13,7 @@ app.service('clientServiceApi', ['$http', 'BACKEND_URL', function ($http, BACKEN
   this.getCurrentClientId = function () {
     return $http({
       method: 'GET',
-      url: BACKEND_URL+ '/api/v1/clients/actual',
+      url: BACKEND_URL + '/api/v1/clients/me',
       headers: {
         "Content-Type": "application/json"
       }
@@ -23,7 +23,7 @@ app.service('clientServiceApi', ['$http', 'BACKEND_URL', function ($http, BACKEN
   this.setCurrentClientId = function (clientId) {
     return $http({
       method: 'POST',
-      url: BACKEND_URL+ '/api/v1/clients/actual',
+      url: BACKEND_URL + '/api/v1/clients/me',
       headers: {
         "Content-Type": "application/json"
       },

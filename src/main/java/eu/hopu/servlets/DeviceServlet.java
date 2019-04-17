@@ -1,8 +1,6 @@
 package eu.hopu.servlets;
 
 
-import com.google.gson.JsonObject;
-import eu.hopu.storage.MeasuresStorage;
 import eu.hopu.utils.GetEnvOrProperty;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -20,13 +18,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 
+import static eu.hopu.utils.InputStreamToString.getJsonBodyString;
+
 @Path("/devices")
 public class DeviceServlet {
   private final String SERVER_ADDR = GetEnvOrProperty.getInstance().get("SIL_URL");
 
-  OkHttpClient client = new OkHttpClient();
+  private OkHttpClient client;
 
   public static final okhttp3.MediaType JSON = okhttp3.MediaType.parse("application/json; charset=utf-8");
+
+  public DeviceServlet() {
+    client = new OkHttpClient();
+  }
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -45,6 +49,7 @@ public class DeviceServlet {
     } catch (IOException ex) {
 
     }
+
     return Response.ok().build();
   }
 
@@ -60,8 +65,7 @@ public class DeviceServlet {
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
+    } catch (IOException ex) {
 
     }
     return Response.ok().build();
@@ -84,8 +88,7 @@ public class DeviceServlet {
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
+    } catch (IOException ex) {
 
     }
     return Response.ok().build();
@@ -106,39 +109,10 @@ public class DeviceServlet {
     try (okhttp3.Response resp = client.newCall(req).execute()) {
       String bodyStr = resp.body().string();
       return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
+    } catch (IOException ex) {
 
     }
     return Response.ok().build();
   }
 
-
-  public static String getJsonBodyString (ServletInputStream inputStream) throws IOException {
-    StringBuilder stringBuilder = new StringBuilder();
-    BufferedReader bufferedReader = null;
-    try {
-      if (inputStream != null) {
-        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        char[] charBuffer = new char[128];
-        int bytesRead = -1;
-        while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-          stringBuilder.append(charBuffer, 0, bytesRead);
-        }
-      } else {
-        stringBuilder.append("");
-      }
-    } catch (IOException ex) {
-      throw ex;
-    } finally {
-      if (bufferedReader != null) {
-        try {
-          bufferedReader.close();
-        } catch (IOException ex) {
-          throw ex;
-        }
-      }
-    }
-    return stringBuilder.toString();
-  }
 }
