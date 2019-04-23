@@ -26,7 +26,7 @@ appDev.service('devPlatforms',
         $httpBackend.whenGET('/api/v1/platforms/types').respond(
           function (method, url, data, headers) {
             console.log('retrieveTypes → Received: ', method, url, data, headers);
-            return [200, angular.fromJson(["type1", "type2", "type3"])]
+            return [200, angular.fromJson(["FIWARE", "UniversAAL", "MWTestPlatform"])]
           }
         );
       };
@@ -34,17 +34,46 @@ appDev.service('devPlatforms',
       service.createPlatform = function () {
         $httpBackend.whenPOST('/api/v1/platforms').respond(
           function (method, url, data, headers) {
+            var platform = JSON.parse(data);
             console.log('retrieveTypes → Received: ', method, url, data, headers);
-            return [200, angular.fromJson({"conversationId": "conv356c2d47-e44a-4d99-98b7-4757e50eb9cf"})]
+            return [200,
+              angular.fromJson({
+                  "platformId": platform.platformId,
+                  "type": platform.type,
+                  "baseEndpoint": platform.baseEndpoint,
+                  "location": platform.location,
+                  "name": platform.name,
+                  "clientId": platform.clientId,
+                  "username": platform.username,
+                  "downstreamInputAlignmentName": platform.downstreamInputAlignmentName,
+                  "downstreamInputAlignmentVersion": platform.downstreamInputAlignmentVersion,
+                  "downstreamOutputAlignmentName": platform.downstreamOutputAlignmentName,
+                  "downstreamOutputAlignmentVersion": platform.downstreamOutputAlignmentVersion,
+                  "upstreamInputAlignmentName": platform.upstreamInputAlignmentName,
+                  "upstreamInputAlignmentVersion": platform.upstreamInputAlignmentVersion,
+                  "upstreamOutputAlignmentName": platform.upstreamOutputAlignmentName,
+                  "upstreamOutputAlignmentVersion": platform.upstreamOutputAlignmentVersion
+                }
+              )
+            ]
+          }
+        );
+      };
+
+      service.deletePlatform = function () {
+        $httpBackend.whenDELETE(/\/api\/v1\/platforms\?platformId=.*/).respond(
+          function (method, url, data, headers) {
+            console.log('retrieveTypes → Received: ', method, url, data, headers);
+            return [204]
           }
         );
       };
 
       service.updatePlatform = function () {
-        $httpBackend.whenPOST('/api/v1/platforms').respond(
+        $httpBackend.whenPUT(/\/api\/v1\/platforms\?platformId=.*/).respond(
           function (method, url, data, headers) {
             console.log('retrieveTypes → Received: ', method, url, data, headers);
-            return [200, angular.fromJson({"conversationId": "conv356c2d47-e44a-4d99-98b7-4757e50eb9cf"})]
+            return [200, data]
           }
         );
       };

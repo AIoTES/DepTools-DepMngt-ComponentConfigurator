@@ -18,6 +18,8 @@ appDev.run(
       devPlatforms.retrievePlatformTypes();
       devPlatforms.retrieveTypes();
       devPlatforms.createPlatform();
+      devPlatforms.updatePlatform();
+      devPlatforms.deletePlatform();
 
       devDevices.retrieveDevices();
 
@@ -53,6 +55,7 @@ appDev.run(
       $httpBackend.whenGET('views/platform-info.html').passThrough();
       $httpBackend.whenGET('views/device-info.html').passThrough();
       $httpBackend.whenGET('views/update_device.html').passThrough();
+      $httpBackend.whenGET('views/update-platform-info.html').passThrough();
 
       $httpBackend.whenGET('views/maintenance-panel.html').passThrough();
       $httpBackend.whenGET('views/add-maintenance.html').passThrough();

@@ -44,7 +44,7 @@ public class PlatformServlet {
   @Consumes("application/json")
   @Produces("application/json")
   @Path("/{platformId}")
-  public Response updatePlatform(@Context HttpServletRequest request, @PathParam("platformId") String platformId, UpdateSilPlatform platform) {
+  public Response updatePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId, UpdateSilPlatform platform) {
     UpdateSilPlatform silPlatform = client.updatePlatform(platformId, platform, request.getHeader("Client-ID"));
     return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
@@ -53,7 +53,7 @@ public class PlatformServlet {
   public Response deletePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId) {
     boolean result = client.deletePlatform(platformId, request.getHeader("Client-ID"));
     if (result)
-      return Response.ok().build();
+      return Response.noContent().build();
     else
       return Response.status(400).build();
   }

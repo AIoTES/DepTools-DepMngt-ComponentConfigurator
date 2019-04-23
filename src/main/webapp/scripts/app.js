@@ -43,6 +43,7 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
     .when('/main/component_configurator/component_view/add_device', 'main.component_configurator.component_view.add_device')
     .when('/main/component_configurator/component_view/add_service', 'main.component_configurator.component_view.add_service')
     .when('/main/component_configurator/component_view/platform_info', 'main.component_configurator.component_view.platform_info')
+    .when('/main/component_configurator/component_view/update_platform', 'main.component_configurator.component_view.update_platform')
     .when('/main/component_configurator/component_view/device_info', 'main.component_configurator.component_view.device_info')
     .when('/main/component_configurator/component_view/update_device', 'main.component_configurator.component_view.update_device')
     .when('/main/maintenance_panel', 'main.maintenance_panel')
@@ -133,6 +134,12 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
 
     .segment('platform_info', {
       templateUrl: 'views/platform-info.html',
+      controller: 'platformInfoCtrl',
+      controllerAs: 'platformInfo'
+    })
+
+    .segment('update_platform', {
+      templateUrl: 'views/update-platform-info.html',
       controller: 'platformInfoCtrl',
       controllerAs: 'platformInfo'
     })
