@@ -1,10 +1,12 @@
-app.service('platformServiceData', function() {
-  var service = {
-    platforms: [],
-    currentPlatform: '',
-    platformsTypes: []
-  }
+app.service('platformServiceData', function () {
 
-  return service;
+    var service = {
+      platforms: [],
+      currentPlatformName: 'Filter by Platform',
+      currentPlatform: {},
+      platformsTypes: []
+    };
+
+    return service;
   }
 );

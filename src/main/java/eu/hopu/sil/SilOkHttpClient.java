@@ -2,15 +2,19 @@ package eu.hopu.sil;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import eu.hopu.servlets.dto.CreateSilPlatform;
 import eu.hopu.servlets.dto.SilPlatform;
+import eu.hopu.servlets.dto.UpdateSilPlatform;
 import eu.hopu.sil.dto.ClientSil;
 import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +34,7 @@ public class SilOkHttpClient implements SilClient {
     this.silUrl = silUrl;
     this.gson = new Gson();
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
-    builder.connectionPool(new ConnectionPool(10, 30L, TimeUnit.SECONDS));
+    builder.connectionPool(new ConnectionPool(10, 60L, TimeUnit.SECONDS));
     this.client = builder.build();
   }
 
@@ -105,7 +109,7 @@ public class SilOkHttpClient implements SilClient {
   }
 
   @Override
-  public SilPlatform createPlatform(SilPlatform platform, String clientId) {
+  public SilPlatform createPlatform(CreateSilPlatform platform, String clientId) {
     LOG.info("Creating platform in SIL");
 
     String stringUrl = silUrl + PLATFORMS_API;
@@ -126,7 +130,10 @@ public class SilOkHttpClient implements SilClient {
     try (Response response = client.newCall(request).execute()) {
       if (response.isSuccessful()) {
         LOG.debug("Platform created successfully → {}", platform);
-        return platform;
+        return new SilPlatform(platform.getPlatformId(), platform.getType(), platform.getBaseEndpoint(), platform.getLocation(),
+          platform.getName(), platform.getUsername(), platform.getDownstreamInputAlignmentName(), platform.getDownstreamInputAlignmentVersion(),
+          platform.getDownstreamOutputAlignmentName(), platform.getDownstreamOutputAlignmentVersion(), platform.getUpstreamInputAlignmentName(),
+          platform.getUpstreamInputAlignmentVersion(), platform.getUpstreamOutputAlignmentName(), platform.getUpstreamOutputAlignmentVersion());
       } else {
         LOG.warn("Cannot create platform in SIL");
         return null;
@@ -138,10 +145,17 @@ public class SilOkHttpClient implements SilClient {
   }
 
   @Override
-  public SilPlatform updatePlatform(SilPlatform platform, String clientId) {
+  public UpdateSilPlatform updatePlatform(String platformId, UpdateSilPlatform platform, String clientId) {
     LOG.info("Updating platform in SIL");
 
-    String stringUrl = silUrl + PLATFORMS_API;
+
+    String stringUrl = null;
+    try {
+      stringUrl = silUrl + PLATFORMS_API + "/" + URLEncoder.encode(platformId, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return null;
+    }
     URL url;
     try {
       url = new URL(stringUrl);
@@ -174,7 +188,13 @@ public class SilOkHttpClient implements SilClient {
   public boolean deletePlatform(String platformId, String clientId) {
     LOG.info("Deleting platform in SIL");
 
-    String stringUrl = silUrl + PLATFORMS_API + "/" + platformId;
+    String stringUrl = null;
+    try {
+      stringUrl = silUrl + PLATFORMS_API + "/" + URLEncoder.encode(platformId, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return false;
+    }
     URL url;
     try {
       url = new URL(stringUrl);
@@ -207,7 +227,7 @@ public class SilOkHttpClient implements SilClient {
   public boolean retrievePlatformTypes(String clientId) {
     LOG.info("Retrieving platform types clients in SIL");
 
-    String stringUrl = silUrl + PLATFORMS_API + "-types";
+    String stringUrl = silUrl + "/api/mw2mw/platform-types";
     URL url;
     try {
       url = new URL(stringUrl);

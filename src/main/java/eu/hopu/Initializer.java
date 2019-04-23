@@ -25,9 +25,6 @@ public class Initializer implements ServletContextListener {
     platformTypes = new LinkedList<>();
     String sil_url = GetEnvOrProperty.getInstance().get("SIL_URL");
     silClient = new SilOkHttpClient(sil_url);
-
-
-
   }
 
   @Override

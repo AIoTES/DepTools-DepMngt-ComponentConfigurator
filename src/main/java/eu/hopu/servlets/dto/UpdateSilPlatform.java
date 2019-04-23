@@ -1,13 +1,13 @@
 package eu.hopu.servlets.dto;
 
-public class SilPlatform {
+public class UpdateSilPlatform {
 
-  private String platformId;
-  private String type;
   private String baseEndpoint;
   private String location;
   private String name;
   private String username;
+  private String encryptedPassword;
+  private String encryptionAlgorithm;
   private String downstreamInputAlignmentName;
   private String downstreamInputAlignmentVersion;
   private String downstreamOutputAlignmentName;
@@ -17,16 +17,16 @@ public class SilPlatform {
   private String upstreamOutputAlignmentName;
   private String upstreamOutputAlignmentVersion;
 
-  public SilPlatform() {
+  public UpdateSilPlatform() {
   }
 
-  public SilPlatform(String platformId, String type, String baseEndpoint, String location, String name, String username, String downstreamInputAlignmentName, String downstreamInputAlignmentVersion, String downstreamOutputAlignmentName, String downstreamOutputAlignmentVersion, String upstreamInputAlignmentName, String upstreamInputAlignmentVersion, String upstreamOutputAlignmentName, String upstreamOutputAlignmentVersion) {
-    this.platformId = platformId;
-    this.type = type;
+  public UpdateSilPlatform(String baseEndpoint, String location, String name, String username, String encryptedPassword, String encryptionAlgorithm, String downstreamInputAlignmentName, String downstreamInputAlignmentVersion, String downstreamOutputAlignmentName, String downstreamOutputAlignmentVersion, String upstreamInputAlignmentName, String upstreamInputAlignmentVersion, String upstreamOutputAlignmentName, String upstreamOutputAlignmentVersion) {
     this.baseEndpoint = baseEndpoint;
     this.location = location;
     this.name = name;
     this.username = username;
+    this.encryptedPassword = encryptedPassword;
+    this.encryptionAlgorithm = encryptionAlgorithm;
     this.downstreamInputAlignmentName = downstreamInputAlignmentName;
     this.downstreamInputAlignmentVersion = downstreamInputAlignmentVersion;
     this.downstreamOutputAlignmentName = downstreamOutputAlignmentName;
@@ -35,22 +35,6 @@ public class SilPlatform {
     this.upstreamInputAlignmentVersion = upstreamInputAlignmentVersion;
     this.upstreamOutputAlignmentName = upstreamOutputAlignmentName;
     this.upstreamOutputAlignmentVersion = upstreamOutputAlignmentVersion;
-  }
-
-  public String getPlatformId() {
-    return platformId;
-  }
-
-  public void setPlatformId(String platformId) {
-    this.platformId = platformId;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   public String getBaseEndpoint() {
@@ -83,6 +67,22 @@ public class SilPlatform {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getEncryptedPassword() {
+    return encryptedPassword;
+  }
+
+  public void setEncryptedPassword(String encryptedPassword) {
+    this.encryptedPassword = encryptedPassword;
+  }
+
+  public String getEncryptionAlgorithm() {
+    return encryptionAlgorithm;
+  }
+
+  public void setEncryptionAlgorithm(String encryptionAlgorithm) {
+    this.encryptionAlgorithm = encryptionAlgorithm;
   }
 
   public String getDownstreamInputAlignmentName() {
@@ -152,12 +152,12 @@ public class SilPlatform {
   @Override
   public String toString() {
     return "SilPlatform{" +
-      "platformId='" + platformId + '\'' +
-      ", type='" + type + '\'' +
-      ", baseEndpoint='" + baseEndpoint + '\'' +
+      "  baseEndpoint='" + baseEndpoint + '\'' +
       ", location='" + location + '\'' +
       ", name='" + name + '\'' +
       ", username='" + username + '\'' +
+      ", encryptedPassword='" + encryptedPassword + '\'' +
+      ", encryptionAlgorithm='" + encryptionAlgorithm + '\'' +
       ", downstreamInputAlignmentName='" + downstreamInputAlignmentName + '\'' +
       ", downstreamInputAlignmentVersion='" + downstreamInputAlignmentVersion + '\'' +
       ", downstreamOutputAlignmentName='" + downstreamOutputAlignmentName + '\'' +
@@ -170,3 +170,4 @@ public class SilPlatform {
   }
 
 }
+

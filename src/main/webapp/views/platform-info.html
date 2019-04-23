@@ -1,9 +1,9 @@
 <div class="resource-container">
 
   <div class="resource-header">
-    <h3>Platform: {{main.getCurrentPlatform().name}}</h3>
+    <h3>Platform: {{platformInfo.platformData.currentPlatform.name}}</h3>
 
-    <div class="close-info" title="Close window" ng-click="main.closeDeviceInfo()">
+    <div class="close-info" title="Close window" ng-click="platformInfo.closeDeviceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
     </div>
   </div>
@@ -12,61 +12,72 @@
 
     <form class="add-form" name="add-platform">
 
-      <input type="text" placeholder="Id" ng-model="main.getCurrentPlatform().platformId">
+      <input type="text" placeholder="Id" ng-model="platformInfo.platformData.currentPlatform.platformId">
       <label class="form-label">Id:</label>
 
-      <select ng-model="main.getCurrentPlatform().type">
-        <option ng-repeat="option in main.getPlatformsType()" value="{{option}}">{{option}}</option>
+      <select ng-model="platformInfo.platformData.currentPlatform.type">
+        <option ng-repeat="option in platformInfo.platformData.platformsTypes" value="{{option}}">{{option}}</option>
       </select>
       <label class="form-label">Type:</label>
 
-      <input type="text" placeholder="Endpoint" ng-model="main.getCurrentPlatform().baseEndpoint">
+      <input type="text" placeholder="Endpoint" ng-model="platformInfo.platformData.currentPlatform.baseEndpoint">
       <label class="form-label">Endpoint:</label>
 
-      <input type="text" placeholder="Location" ng-model="main.getCurrentPlatform().location">
+      <input type="text" placeholder="Location" ng-model="platformInfo.platformData.currentPlatform.location">
       <label class="form-label">Location:</label>
 
-      <input type="text" placeholder="Name" ng-model="main.getCurrentPlatform().name">
+      <input type="text" placeholder="Name" ng-model="platformInfo.platformData.currentPlatform.name">
       <label class="form-label">Name:</label>
 
-      <input type="text" placeholder="Username" ng-model="main.getCurrentPlatform().username">
+      <input type="text" placeholder="Username" ng-model="platformInfo.platformData.currentPlatform.username">
       <label class="form-label">Username:</label>
 
-      <input type="password" placeholder="Password" ng-model="main.getCurrentPlatform().encryptedPassword">
+      <input type="password" placeholder="Password"
+             ng-model="platformInfo.platformData.currentPlatform.encryptedPassword">
       <label class="form-label">Password:</label>
 
-      <input type="text" placeholder="Algorithm" ng-model="main.getCurrentPlatform().encryptedAlgorithm">
+      <input type="text" placeholder="Algorithm"
+             ng-model="platformInfo.platformData.currentPlatform.encryptedAlgorithm">
       <label class="form-label">Algorithm:</label>
 
-      <input type="text" placeholder="Downstream Input Alignment Name" ng-model="main.getCurrentPlatform().downInputAligName">
+      <input type="text" placeholder="Downstream Input Alignment Name"
+             ng-model="platformInfo.platformData.currentPlatform.downInputAligName">
       <label class="form-label">Downstream Input Alignment Name:</label>
 
-      <input type="text" placeholder="Downstream Input Alignment Version" ng-model="main.getCurrentPlatform().downInputAligVers">
+      <input type="text" placeholder="Downstream Input Alignment Version"
+             ng-model="platformInfo.platformData.currentPlatform.downInputAligVers">
       <label class="form-label">Downstream Input Alignment Version:</label>
 
-      <input type="text" placeholder="Downstream Output Alignment Name" ng-model="main.getCurrentPlatform().downOutputAligName">
+      <input type="text" placeholder="Downstream Output Alignment Name"
+             ng-model="platformInfo.platformData.currentPlatform.downOutputAligName">
       <label class="form-label">Downstream Output Alignment Name:</label>
 
-      <input type="text" placeholder="Downstream Output Alignment Version" ng-model="main.getCurrentPlatform().downOutputAligVers">
+      <input type="text" placeholder="Downstream Output Alignment Version"
+             ng-model="platformInfo.platformData.currentPlatform.downOutputAligVers">
       <label class="form-label">Downstream Output Alignment Version:</label>
 
-      <input type="text" placeholder="Upstream Input Alignment Name" ng-model="main.getCurrentPlatform().upInputAligName">
+      <input type="text" placeholder="Upstream Input Alignment Name"
+             ng-model="platformInfo.platformData.currentPlatform.upInputAligName">
       <label class="form-label">Upstream Input Alignment Name:</label>
 
-      <input type="text" placeholder="Upstream Input Alignment Version" ng-model="main.getCurrentPlatform().upInputAligVers">
+      <input type="text" placeholder="Upstream Input Alignment Version"
+             ng-model="platformInfo.platformData.currentPlatform.upInputAligVers">
       <label class="form-label">Upstream Input Alignment Version:</label>
 
-      <input type="text" placeholder="Upstream Output Alignment Name" ng-model="main.getCurrentPlatform().upOutputAligName">
+      <input type="text" placeholder="Upstream Output Alignment Name"
+             ng-model="platformInfo.platformData.currentPlatform.upOutputAligName">
       <label class="form-label">Upstream Output Alignment Name:</label>
 
-      <input type="text" placeholder="Upstream Output Alignment Version" ng-model="main.getCurrentPlatform().upOutputAligVers">
+      <input type="text" placeholder="Upstream Output Alignment Version"
+             ng-model="platformInfo.platformData.currentPlatform.upOutputAligVers">
       <label class="form-label">Upstream Output Alignment Version:</label>
 
-      <button style="float: left" type="submit" class="create-button" ng-click="main.updatePlatform()">
+      <button style="float: left" type="submit" class="create-button" ng-click="platformInfo.updatePlatform()">
         <span>Update</span>
       </button>
 
-      <button style="float: right; margin-top: -30px" type="submit" class="create-button" ng-click="main.deletePlatform()">
+      <button style="float: right; margin-top: -30px" type="submit" class="create-button"
+              ng-click="platformInfo.deletePlatform()">
         <span>Delete</span>
       </button>
 
@@ -76,66 +87,66 @@
 
 </div>
 
-<div class="resource-container">
+<!--<div class="resource-container">-->
 
-  <div class="resource-header">
-    <h3>Alignment: {{main.getCurrentPlatform().platformId}}</h3>
+<!--  <div class="resource-header">-->
+<!--    <h3>Alignment: {{platformInfo.platformData.currentPlatform.platformId}}</h3>-->
 
-    <!--<div class="close-info" title="Close window" ng-click="main.closeDeviceInfo()">
-      <span class="glyphicon glyphicon-remove"></span>
-    </div>-->
-  </div>
+<!--    &lt;!&ndash;<div class="close-info" title="Close window" ng-click="platformInfo.closeDeviceInfo()">-->
+<!--      <span class="glyphicon glyphicon-remove"></span>-->
+<!--    </div>&ndash;&gt;-->
+<!--  </div>-->
 
-  <!-- <div class="info-container">
+<!--  &lt;!&ndash; <div class="info-container">-->
 
-     <form class="add-form" name="add-device">
+<!--     <form class="add-form" name="add-device">-->
 
-       <select ng-model="devCtrl.getSelectedDevice().deviceTypes[0]">
-         <option value="DEVICE">Device</option>
-         <option value="SENSOR">Sensor</option>
-         <option value="ACTUATOR">Actuator</option>
-       </select>
-       <label class="form-label">Type:</label>
+<!--       <select ng-model="devCtrl.getSelectedDevice().deviceTypes[0]">-->
+<!--         <option value="DEVICE">Device</option>-->
+<!--         <option value="SENSOR">Sensor</option>-->
+<!--         <option value="ACTUATOR">Actuator</option>-->
+<!--       </select>-->
+<!--       <label class="form-label">Type:</label>-->
 
-       <input type="text" placeholder="Id" ng-model="devCtrl.getSelectedDevice().deviceId">
-       <label class="form-label">Id:</label>
+<!--       <input type="text" placeholder="Id" ng-model="devCtrl.getSelectedDevice().deviceId">-->
+<!--       <label class="form-label">Id:</label>-->
 
-       <input type="text" placeholder="Host" ng-model="devCtrl.getSelectedDevice().hostedBy">
-       <label class="form-label">Hosted By:</label>
+<!--       <input type="text" placeholder="Host" ng-model="devCtrl.getSelectedDevice().hostedBy">-->
+<!--       <label class="form-label">Hosted By:</label>-->
 
-       <input type="text" placeholder="Location" ng-model="devCtrl.getSelectedDevice().location">
-       <label class="form-label">Location:</label>
+<!--       <input type="text" placeholder="Location" ng-model="devCtrl.getSelectedDevice().location">-->
+<!--       <label class="form-label">Location:</label>-->
 
-       <input type="text" placeholder="Name" ng-model="devCtrl.getSelectedDevice().name">
-       <label class="form-label">Name:</label>
+<!--       <input type="text" placeholder="Name" ng-model="devCtrl.getSelectedDevice().name">-->
+<!--       <label class="form-label">Name:</label>-->
 
-       <input type="text" placeholder="Hosts" ng-model="devCtrl.getSelectedDevice().hosts">
-       <label class="form-label">Hosts:</label>
+<!--       <input type="text" placeholder="Hosts" ng-model="devCtrl.getSelectedDevice().hosts">-->
+<!--       <label class="form-label">Hosts:</label>-->
 
-       <input type="text" placeholder="For Property" ng-model="devCtrl.getSelectedDevice().forProperty">
-       <label class="form-label">For Property:</label>
+<!--       <input type="text" placeholder="For Property" ng-model="devCtrl.getSelectedDevice().forProperty">-->
+<!--       <label class="form-label">For Property:</label>-->
 
-       <input type="text" placeholder="Made Actuation" ng-model="devCtrl.getSelectedDevice().madeActuation">
-       <label class="form-label">Made Actuation:</label>
+<!--       <input type="text" placeholder="Made Actuation" ng-model="devCtrl.getSelectedDevice().madeActuation">-->
+<!--       <label class="form-label">Made Actuation:</label>-->
 
-       <input type="text" placeholder="Implements Procedure" ng-model="devCtrl.getSelectedDevice().implementsProcedure">
-       <label class="form-label">Implements Procedure:</label>
+<!--       <input type="text" placeholder="Implements Procedure" ng-model="devCtrl.getSelectedDevice().implementsProcedure">-->
+<!--       <label class="form-label">Implements Procedure:</label>-->
 
-       <input type="text" placeholder="Observes" ng-model="devCtrl.getSelectedDevice().observes">
-       <label class="form-label">Observes:</label>
+<!--       <input type="text" placeholder="Observes" ng-model="devCtrl.getSelectedDevice().observes">-->
+<!--       <label class="form-label">Observes:</label>-->
 
-       <input type="text" placeholder="Detects" ng-model="devCtrl.getSelectedDevice().detects">
-       <label class="form-label">Detects:</label>
+<!--       <input type="text" placeholder="Detects" ng-model="devCtrl.getSelectedDevice().detects">-->
+<!--       <label class="form-label">Detects:</label>-->
 
-       <input type="text" placeholder="Made Observation" ng-model="devCtrl.getSelectedDevice().madeObservation">
-       <label class="form-label">Made Observation:</label>
+<!--       <input type="text" placeholder="Made Observation" ng-model="devCtrl.getSelectedDevice().madeObservation">-->
+<!--       <label class="form-label">Made Observation:</label>-->
 
-       <button type="submit" class="create-button" ng-click="devCtrl.updateDevice()">
-         <span>Update</span>
-       </button>
+<!--       <button type="submit" class="create-button" ng-click="devCtrl.updateDevice()">-->
+<!--         <span>Update</span>-->
+<!--       </button>-->
 
-     </form>
+<!--     </form>-->
 
-   </div>-->
+<!--   </div>&ndash;&gt;-->
 
-</div>
+<!--</div>-->

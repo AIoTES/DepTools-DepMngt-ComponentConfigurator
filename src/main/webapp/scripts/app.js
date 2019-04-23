@@ -133,8 +133,8 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
 
     .segment('platform_info', {
       templateUrl: 'views/platform-info.html',
-      // controller: 'mainCtrl',
-      // controllerAs: 'main'
+      controller: 'platformInfoCtrl',
+      controllerAs: 'platformInfo'
     })
 
     .segment('device_info', {

@@ -7,8 +7,8 @@
  * # AboutCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('componentCtrl', ['platformService', 'deviceService', '$location', 'clientService',
-  function (platformService, deviceService, $location, clientService) {
+app.controller('componentCtrl', ['platformService', 'deviceService', '$location', 'clientService', 'platformServiceData',
+  function (platformService, deviceService, $location, clientService, platformServiceData) {
 
     platformService.retrievePlatforms(clientService.getCurrentClientId());
     clientService.retrieveClients(clientService.getCurrentClientId());
@@ -16,26 +16,20 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
     var vm = this;
 
     vm.platform = platformService;
+    vm.platformData = platformServiceData;
     vm.deviceServ = deviceService;
     vm.clientService = clientService;
 
     vm.platform.consultPlatformTypes(clientService.getCurrentClientId());
     vm.platform.loadPlatformTypes();
 
-    vm.retrievePlatforms = function() {
-      platformService.retrievePlatforms();
-    };
-
-    vm.getPlatforms = function () {
-      return vm.platform.getPlatforms();
-    };
-
     vm.getClients = function () {
       return vm.clientService.getClients();
     };
 
     vm.selectPlatform = function (platform) {
-      vm.platform.setCurrentPlatform(platform);
+      platformServiceData.currentPlatform = platform;
+      platformServiceData.currentPlatformName = platform.name;
       vm.deviceServ.retrieveDevices(platform.platformId, vm.clientService.getCurrentClientId());
       $location.path('/main/component_configurator/component_view/platform_info');
     };
@@ -44,17 +38,13 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
       vm.clientService.setCurrentClientId(client);
     };
 
-    vm.getSelectedPlatform = function () {
-      return vm.platform.getCurrentPlatform().name || "Filter by Platform";
-    };
-
     vm.getSelectedClient = function () {
       return vm.clientService.getCurrentClientId() || "Select Client";
     };
 
     vm.getCurrentPlatform = function () {
       return vm.platform.getCurrentPlatform();
-    }
+    };
 
     vm.closeDeviceInfo = function () {
       $location.path('/main/component_configurator/');
@@ -63,9 +53,8 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
     vm.updatePlatform = function () {
       if (vm.platform.getCurrentPlatform().platformId === undefined) {
         alert("No platform selected.");
-      }
-      else {
-        let platform = vm.platform.getCurrentPlatform();
+      } else {
+        var platform = vm.platform.getCurrentPlatform();
         if (platform.platformId.substr(0, 7) !== 'http://')
           alert("El ID de la plataforma debe tener formato URI.");
         else if (platform.baseEndpoint.substr(0, 7) !== 'http://')
@@ -78,7 +67,7 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
     };
 
     vm.deletePlatform = function () {
-      let platformId = vm.platform.getCurrentPlatform().platformId;
+      var platformId = vm.platform.getCurrentPlatform().platformId;
 
       if (platformId === undefined)
         alert("No platform selected.");

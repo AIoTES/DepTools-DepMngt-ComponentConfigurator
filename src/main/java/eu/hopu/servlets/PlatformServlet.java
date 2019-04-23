@@ -2,7 +2,9 @@ package eu.hopu.servlets;
 
 import com.google.gson.Gson;
 import eu.hopu.Initializer;
+import eu.hopu.servlets.dto.CreateSilPlatform;
 import eu.hopu.servlets.dto.SilPlatform;
+import eu.hopu.servlets.dto.UpdateSilPlatform;
 import eu.hopu.sil.SilClient;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,7 @@ public class PlatformServlet {
   @POST
   @Consumes("application/json")
   @Produces("application/json")
-  public Response createPlatform(@Context HttpServletRequest request, SilPlatform platform) {
+  public Response createPlatform(@Context HttpServletRequest request, CreateSilPlatform platform) {
     SilPlatform silPlatform = client.createPlatform(platform, request.getHeader("Client-ID"));
     return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
@@ -41,8 +43,9 @@ public class PlatformServlet {
   @PUT
   @Consumes("application/json")
   @Produces("application/json")
-  public Response updatePlatform(@Context HttpServletRequest request, SilPlatform platform) {
-    SilPlatform silPlatform = client.updatePlatform(platform, request.getHeader("Client-ID"));
+  @Path("/{platformId}")
+  public Response updatePlatform(@Context HttpServletRequest request, @PathParam("platformId") String platformId, UpdateSilPlatform platform) {
+    UpdateSilPlatform silPlatform = client.updatePlatform(platformId, platform, request.getHeader("Client-ID"));
     return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
 

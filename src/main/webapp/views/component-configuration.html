@@ -1,7 +1,7 @@
 <div class="menu-container">
 
-  <div class="menu-bar" ng-click="openMenu = !openMenu; component.retrievePlatforms()">
-    <span>{{component.getSelectedPlatform()}}</span>
+  <div class="menu-bar" ng-click="openMenu = !openMenu">
+    <span>{{component.platformData.currentPlatformName}}</span>
     <div class="menu-square" ng-class="{'menu-square-active' : openMenu}">
       <span class="glyphicon glyphicon-chevron-down"></span>
     </div>
@@ -9,7 +9,7 @@
 
   <div class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu}">
     <div
-      ng-repeat="platform in component.getPlatforms()"
+      ng-repeat="platform in component.platformData.platforms"
       ng-click="component.selectPlatform(platform)">
       <div class="menu-option">
         <span>{{platform.name}}</span>

@@ -40,14 +40,14 @@ appDev.service('devPlatforms',
         );
       };
 
-      // service.updatePlatform = function () {
-      //   $httpBackend.whenPOST('/api/v1/platforms').respond(
-      //     function (method, url, data, headers) {
-      //       console.log('retrieveTypes → Received: ', method, url, data, headers);
-      //       return [200, angular.fromJson({"conversationId": "conv356c2d47-e44a-4d99-98b7-4757e50eb9cf"})]
-      //     }
-      //   );
-      // };
+      service.updatePlatform = function () {
+        $httpBackend.whenPOST('/api/v1/platforms').respond(
+          function (method, url, data, headers) {
+            console.log('retrieveTypes → Received: ', method, url, data, headers);
+            return [200, angular.fromJson({"conversationId": "conv356c2d47-e44a-4d99-98b7-4757e50eb9cf"})]
+          }
+        );
+      };
 
       return service;
     }
@@ -64,12 +64,6 @@ appDev.value('platforms',
       "name": "UniversAAL",
       "clientId": "http://inter-iot.eu/clients#Oscar",
       "username": "",
-      "timeCreated": 1555325394609,
-      "platformStatistics": {
-        "deviceCount": 1,
-        "subscribedDeviceCount": 1,
-        "subscriptionCount": 1
-      },
       "downstreamInputAlignmentName": "",
       "downstreamInputAlignmentVersion": "",
       "downstreamOutputAlignmentName": "",
@@ -87,12 +81,6 @@ appDev.value('platforms',
       "name": "UniversAAL2",
       "clientId": "http://inter-iot.eu/clients#Oscar",
       "username": "",
-      "timeCreated": 1555325394609,
-      "platformStatistics": {
-        "deviceCount": 1,
-        "subscribedDeviceCount": 1,
-        "subscriptionCount": 1
-      },
       "downstreamInputAlignmentName": "",
       "downstreamInputAlignmentVersion": "",
       "downstreamOutputAlignmentName": "",
@@ -110,12 +98,6 @@ appDev.value('platforms',
       "name": "UniversAAL3",
       "clientId": "http://inter-iot.eu/clients#Oscar",
       "username": "",
-      "timeCreated": 1555325394609,
-      "platformStatistics": {
-        "deviceCount": 1,
-        "subscribedDeviceCount": 1,
-        "subscriptionCount": 1
-      },
       "downstreamInputAlignmentName": "",
       "downstreamInputAlignmentVersion": "",
       "downstreamOutputAlignmentName": "",
@@ -133,12 +115,6 @@ appDev.value('platforms',
       "name": "UniversAAL4",
       "clientId": "http://inter-iot.eu/clients#Oscar",
       "username": "",
-      "timeCreated": 1555325394609,
-      "platformStatistics": {
-        "deviceCount": 1,
-        "subscribedDeviceCount": 1,
-        "subscriptionCount": 1
-      },
       "downstreamInputAlignmentName": "",
       "downstreamInputAlignmentVersion": "",
       "downstreamOutputAlignmentName": "",
