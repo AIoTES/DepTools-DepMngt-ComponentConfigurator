@@ -1,0 +1,76 @@
+<div class="resource-container">
+
+  <div class="resource-header">
+    <h3>Platform: {{platformInfo.platformData.currentPlatform.name}}</h3>
+
+    <div class="close-info" title="Close window" ng-click="platformInfo.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="info-container">
+
+    <form class="add-form" name="add-platform">
+
+      <input type="text" placeholder="Name" ng-model="platformInfo.platformUpdateRequest.name">
+      <label class="form-label">Name:</label>
+
+      <input type="text" placeholder="Endpoint" ng-model="platformInfo.platformUpdateRequest.baseEndpoint">
+      <label class="form-label">Endpoint:</label>
+
+      <input type="text" placeholder="Location" ng-model="platformInfo.platformUpdateRequest.location">
+      <label class="form-label">Location:</label>
+
+      <input type="text" placeholder="Username" ng-model="platformInfo.platformUpdateRequest.username">
+      <label class="form-label">Username:</label>
+
+      <input type="password" placeholder="Password"
+             ng-model="platformInfo.platformUpdateRequest.encryptedPassword">
+      <label class="form-label">Password:</label>
+
+      <input type="text" placeholder="Algorithm"
+             ng-model="platformInfo.platformUpdateRequest.encryptedAlgorithm">
+      <label class="form-label">Algorithm:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Name"
+             ng-model="platformInfo.platformUpdateRequest.downstreamInputAlignmentName">
+      <label class="form-label">Downstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Version"
+             ng-model="platformInfo.platformUpdateRequest.downstreamInputAlignmentVersion">
+      <label class="form-label">Downstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Name"
+             ng-model="platformInfo.platformUpdateRequest.downstreamOutputAlignmentName">
+      <label class="form-label">Downstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Version"
+             ng-model="platformInfo.platformUpdateRequest.downstreamOutputAlignmentVersion">
+      <label class="form-label">Downstream Output Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Name"
+             ng-model="platformInfo.platformUpdateRequest.upstreamInputAlignmentName">
+      <label class="form-label">Upstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Version"
+             ng-model="platformInfo.platformUpdateRequest.upstreamInputAlignmentVersion">
+      <label class="form-label">Upstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Name"
+             ng-model="platformInfo.platformUpdateRequest.upstreamOutputAlignmentName">
+      <label class="form-label">Upstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Version"
+             ng-model="platformInfo.platformUpdateRequest.upstreamOutputAlignmentVersion">
+      <label class="form-label">Upstream Output Alignment Version:</label>
+
+      <button style="float: right" type="submit" class="create-button"
+              ng-click="platformInfo.updatePlatform()">
+        <span>Update</span>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

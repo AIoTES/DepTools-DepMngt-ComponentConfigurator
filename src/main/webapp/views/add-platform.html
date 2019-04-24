@@ -12,54 +12,64 @@
 
     <form class="add-form" name="add-platform">
 
-      <input type="text" placeholder="Id" ng-model="addPlatform.platformId">
+      <input type="text" placeholder="Id" ng-model="addPlatform.platformCreateRequest.platformId">
       <label class="form-label">Id:</label>
 
-      <select ng-model="addPlatform.type">
-        <option ng-repeat="option in addPlatform.getPlatformsType()" value="{{option}}">{{option}}</option>
+      <select ng-model="addPlatform.platformCreateRequest.type">
+        <option ng-repeat="option in addPlatform.platformData.platformsTypes"
+                value="{{option}}">{{option}}
+        </option>
       </select>
       <label class="form-label">Type:</label>
 
-      <input type="text" placeholder="Endpoint" ng-model="addPlatform.baseEndpoint">
+      <input type="text" placeholder="Endpoint" ng-model="addPlatform.platformCreateRequest.baseEndpoint">
       <label class="form-label">Endpoint:</label>
 
-      <input type="text" placeholder="Location" ng-model="addPlatform.location">
+      <input type="text" placeholder="Location" ng-model="addPlatform.platformCreateRequest.location">
       <label class="form-label">Location:</label>
 
-      <input type="text" placeholder="Name" ng-model="addPlatform.name">
+      <input type="text" placeholder="Name" ng-model="addPlatform.platformCreateRequest.name">
       <label class="form-label">Name:</label>
 
-      <input type="text" placeholder="Username" ng-model="addPlatform.username">
+      <input type="text" placeholder="Username" ng-model="addPlatform.platformCreateRequest.username">
       <label class="form-label">Username:</label>
 
-      <input type="password" placeholder="Password" ng-model="addPlatform.encryptedPassword">
+      <input type="password" placeholder="Password" ng-model="addPlatform.platformCreateRequest.encryptedPassword">
       <label class="form-label">Password:</label>
 
-      <input type="text" placeholder="Algorithm" ng-model="addPlatform.encryptedAlgorithm">
+      <input type="text" placeholder="Algorithm" ng-model="addPlatform.platformCreateRequest.encryptedAlgorithm">
       <label class="form-label">Algorithm:</label>
 
-      <input type="text" placeholder="Downstream Input Alignment Name" ng-model="addPlatform.downInputAligName">
+      <input type="text" placeholder="Downstream Input Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.downstreamInputAlignmentName">
       <label class="form-label">Downstream Input Alignment Name:</label>
 
-      <input type="text" placeholder="Downstream Input Alignment Version" ng-model="addPlatform.downInputAligVers">
+      <input type="text" placeholder="Downstream Input Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.downstreamInputAlignmentVersion">
       <label class="form-label">Downstream Input Alignment Version:</label>
 
-      <input type="text" placeholder="Downstream Output Alignment Name" ng-model="addPlatform.downOutputAligName">
+      <input type="text" placeholder="Downstream Output Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.downstreamOutputAlignmentName">
       <label class="form-label">Downstream Output Alignment Name:</label>
 
-      <input type="text" placeholder="Downstream Output Alignment Version" ng-model="addPlatform.downOutputAligVers">
+      <input type="text" placeholder="Downstream Output Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.downstreamOutputAlignmentVersion">
       <label class="form-label">Downstream Output Alignment Version:</label>
 
-      <input type="text" placeholder="Upstream Input Alignment Name" ng-model="addPlatform.upInputAligName">
+      <input type="text" placeholder="Upstream Input Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.upstreamInputAlignmentName">
       <label class="form-label">Upstream Input Alignment Name:</label>
 
-      <input type="text" placeholder="Upstream Input Alignment Version" ng-model="addPlatform.upInputAligVers">
+      <input type="text" placeholder="Upstream Input Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.upstreamInputAlignmentVersion">
       <label class="form-label">Upstream Input Alignment Version:</label>
 
-      <input type="text" placeholder="Upstream Output Alignment Name" ng-model="addPlatform.upOutputAligName">
+      <input type="text" placeholder="Upstream Output Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.upstreamOutputAlignmentName">
       <label class="form-label">Upstream Output Alignment Name:</label>
 
-      <input type="text" placeholder="Upstream Output Alignment Version" ng-model="addPlatform.upOutputAligVers">
+      <input type="text" placeholder="Upstream Output Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.upstreamOutputAlignmentVersion">
       <label class="form-label">Upstream Output Alignment Version:</label>
 
       <hr class="line">

@@ -3,8 +3,8 @@
  */
 
 app.service('platformService',
-  ['platformServiceApi', 'platformServiceData', '$location',
-    function (platformServiceApi, platformServiceData, $location) {
+  ['platformServiceApi', 'platformServiceData', 'clientServiceData', '$location',
+    function (platformServiceApi, platformServiceData, clientServiceData, $location) {
 
       var service = this;
 
@@ -32,28 +32,13 @@ app.service('platformService',
         return platformServiceData.platforms;
       };
 
-      service.createPlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers) {
-        platformServiceApi.createPlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId, downInputAligName, downInputAligVers, downOutputAligName, downOutputAligVers, upInputAligName, upInputAligVers, upOutputAligName, upOutputAligVers)
+      service.createPlatform = function (createPlatformRequest) {
+        platformServiceApi.createPlatform(createPlatformRequest, clientServiceData.currentClientId)
           .then(
             function (response) {
-              platformServiceData.platforms.push({
-                "platformId": platformId,
-                "type": type,
-                "baseEndpoint": baseEndpoint,
-                "location": location,
-                "name": name,
-                "username": username,
-                "encryptedPassword": encryptedPassword,
-                "encryptionAlgorithm": encryptionAlgorithm,
-                "downstreamInputAlignmentName": downInputAligName,
-                "downstreamInputAlignmentVersion": downInputAligVers,
-                "downstreamOutputAlignmentName": downOutputAligName,
-                "downstreamOutputAlignmentVersion": downOutputAligVers,
-                "upstreamInputAlignmentName": upInputAligName,
-                "upstreamInputAlignmentVersion": upInputAligVers,
-                "upstreamOutputAlignmentName": upOutputAligName,
-                "upstreamOutputAlignmentVersion": upOutputAligVers
-              });
+              var platform = response.data;
+              platformServiceData.platforms.push(platform);
+
               if (response.status === 200) {
                 alert("Platform created");
                 $location.path('/main/component_configurator');
@@ -61,30 +46,83 @@ app.service('platformService',
 
             }
           )
-      };
-
-      service.updatePlatform = function (platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId) {
-        platformServiceApi.updatePlatform(platformId, type, baseEndpoint, location, name, username, encryptedPassword, encryptionAlgorithm, clientId);
-      };
-
-      service.deletePlatform = function (platformId, clientId) {
-        platformServiceApi.deletePlatform(platformId, clientId)
-          .then(
-            function (response) {
-              if (response.status === 200) {
-                alert("Platform deleted");
-                $location.path('/main/device_manager');
-              }
+          .catch(
+            function (reason) {
+              console.log("Cannot create platform");
             }
           )
       };
 
-      service.getCurrentPlatform = function () {
-        return platformServiceData.currentPlatform;
+      service.updatePlatform = function (platformId, platform) {
+        platformServiceApi.updatePlatform(platformId, platform, clientServiceData.currentClientId)
+          .then(
+            function (response) {
+              var updatedPlatform = response.data;
+
+              var platformIndex = platformServiceData.platforms.findIndex(
+                function (value) {
+                  return value.platformId === platformId;
+                }
+              );
+              platformServiceData.platforms[platformIndex].baseEndpoint = updatedPlatform.baseEndpoint;
+              platformServiceData.platforms[platformIndex].location = updatedPlatform.location;
+              platformServiceData.platforms[platformIndex].name = updatedPlatform.name;
+              platformServiceData.platforms[platformIndex].username = updatedPlatform.username;
+              platformServiceData.platforms[platformIndex].downstreamInputAlignmentName = updatedPlatform.downstreamInputAlignmentName;
+              platformServiceData.platforms[platformIndex].downstreamInputAlignmentVersion = updatedPlatform.downstreamInputAlignmentVersion;
+              platformServiceData.platforms[platformIndex].downstreamOutputAlignmentName = updatedPlatform.downstreamOutputAlignmentName;
+              platformServiceData.platforms[platformIndex].downstreamOutputAlignmentVersion = updatedPlatform.downstreamOutputAlignmentVersion;
+              platformServiceData.platforms[platformIndex].upstreamInputAlignmentName = updatedPlatform.upstreamInputAlignmentName;
+              platformServiceData.platforms[platformIndex].upstreamInputAlignmentVersion = updatedPlatform.upstreamInputAlignmentVersion;
+              platformServiceData.platforms[platformIndex].upstreamOutputAlignmentName = updatedPlatform.upstreamOutputAlignmentName;
+              platformServiceData.platforms[platformIndex].upstreamOutputAlignmentVersion = updatedPlatform.upstreamOutputAlignmentVersion;
+
+              if (platformServiceData.currentPlatform.platformId === platformId) {
+                platformServiceData.currentPlatform.baseEndpoint = updatedPlatform.baseEndpoint;
+                platformServiceData.currentPlatform.location = updatedPlatform.location;
+                platformServiceData.currentPlatform.name = updatedPlatform.name;
+                platformServiceData.currentPlatform.username = updatedPlatform.username;
+                platformServiceData.currentPlatform.downstreamInputAlignmentName = updatedPlatform.downstreamInputAlignmentName;
+                platformServiceData.currentPlatform.downstreamInputAlignmentVersion = updatedPlatform.downstreamInputAlignmentVersion;
+                platformServiceData.currentPlatform.downstreamOutputAlignmentName = updatedPlatform.downstreamOutputAlignmentName;
+                platformServiceData.currentPlatform.downstreamOutputAlignmentVersion = updatedPlatform.downstreamOutputAlignmentVersion;
+                platformServiceData.currentPlatform.upstreamInputAlignmentName = updatedPlatform.upstreamInputAlignmentName;
+                platformServiceData.currentPlatform.upstreamInputAlignmentVersion = updatedPlatform.upstreamInputAlignmentVersion;
+                platformServiceData.currentPlatform.upstreamOutputAlignmentName = updatedPlatform.upstreamOutputAlignmentName;
+                platformServiceData.currentPlatform.upstreamOutputAlignmentVersion = updatedPlatform.upstreamOutputAlignmentVersion;
+              }
+
+            }
+          )
+          .catch(
+            function () {
+              console.log("Cannot update platform");
+            }
+          );
       };
 
-      service.setCurrentPlatform = function (platform) {
-        platformServiceData.currentPlatform = platform;
+      service.deletePlatform = function (platformId) {
+        platformServiceApi.deletePlatform(platformId, clientServiceData.currentClientId)
+          .then(
+            function () {
+              var platformIndex = platformServiceData.platforms.findIndex(
+                function (value) {
+                  return value.platformId === platformId;
+                }
+              );
+
+              if (platformIndex !== -1)
+                platformServiceData.platforms.splice(platformIndex, 1);
+
+              alert("Platform deleted");
+              $location.path('/main/component_configurator/component_view');
+            }
+          )
+          .catch(
+            function (reason) {
+              console.log("Cannot delete platform");
+            }
+          )
       };
 
       service.loadPlatformTypes = function (clientId) {
