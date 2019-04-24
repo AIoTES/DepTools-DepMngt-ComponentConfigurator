@@ -4,11 +4,11 @@ app.service('deploymentService',
 
       var service = {};
 
-      service.retrieveDevices = function (idPlatform, clientId) {
-        deploymentServiceApi.getDevices(idPlatform, clientId)
+      service.retrieveDeployments = function (clientId) {
+        deploymentServiceApi.getDeployments(clientId)
           .then(
             function (response) {
-              deploymentServiceData.devices = response.data;
+              deploymentServiceData.deployments = response.data;
             }
           )
           .catch(
@@ -18,17 +18,17 @@ app.service('deploymentService',
           );
       };
 
-      service.getCurrentDevice = function() {
-        return deploymentServiceData.currentDevice;
-      }
+      service.getDeployments = function() {
+        return deploymentServiceData.deployments;
+      };
 
-      service.setCurrentDevice = function(device) {
-        deploymentServiceData.currentDevice = device
-      }
+      service.getCurrentDeployment = function() {
+        return deploymentServiceData.currentDeployment;
+      };
 
-      service.getDevices = function() {
-        return deploymentServiceData.devices;
-      }
+      service.setCurrentDeployment = function(deployment) {
+        deploymentServiceData.currentDeployment = deployment
+      };
 
       service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
         deploymentServiceApi.createDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)

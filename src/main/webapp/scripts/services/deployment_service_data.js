@@ -1,11 +1,8 @@
 app.service('deploymentServiceData', function() {
     var service = {
-      devices: [],
-      currentDevice: '',
-      deviceLastValuesIds: [],
-      deviceValues: {},
-      deviceLastUpdate: ""
-    }
+      deployments: [],
+      currentDeployment: ''
+    };
 
     return service;
   }

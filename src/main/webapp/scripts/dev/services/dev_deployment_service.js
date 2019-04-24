@@ -15,7 +15,12 @@ appDev.service('devDeployment',
       };
 
       service.retrieveDeployments = function () {
-
+        $httpBackend.whenGET('/api/v1/deployments').respond(
+          function (method, url, data, headers) {
+            console.log('retrieveDeployments → Received: ', method, url, data, headers);
+            return [200, angular.fromJson(clone_object(deployments))]
+          }
+        );
       };
 
       service.createDeployment = function () {
@@ -53,6 +58,54 @@ appDev.service('devDeployment',
 
 appDev.value('deployments',
   [
-    {}
+    {
+      "id": "deployment1",
+      "date": "\"2017-06-06\"^^xsd:date",
+      "location": "\"AREA[“Thessaloniki\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
+      "organization": {
+        "id": "organization1",
+        "label": "\"Municipality of Thessaloniki.\""
+      },
+      "platform": {
+        "id": "platform1",
+        "label": "\"Activage Platform GR 1\"",
+        "devices": [
+          "device1"
+        ]
+      }
+    },
+    {
+      "id": "deployment2",
+      "date": "\"2017-06-06\"^^xsd:date",
+      "location": "\"AREA[“Thessaloniki2\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
+      "organization": {
+        "id": "organization2",
+        "label": "\"Municipality of Thessaloniki2.\""
+      },
+      "platform": {
+        "id": "platform2",
+        "label": "\"Activage Platform GR 2\"",
+        "devices": [
+          "device2",
+          "device3"
+        ]
+      }
+    },
+    {
+      "id": "deployment3",
+      "date": "\"2017-06-06\"^^xsd:date",
+      "location": "\"AREA[“Thessaloniki3\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
+      "organization": {
+        "id": "organization3",
+        "label": "\"Municipality of Thessaloniki3.\""
+      },
+      "platform": {
+        "id": "platform3",
+        "label": "\"Activage Platform GR 3\"",
+        "devices": [
+          "device4"
+        ]
+      }
+    }
   ]
 );
