@@ -2,7 +2,7 @@
 
   <div class="option-header">
     <div class="option-header-left">
-      <h3>Deployment Information</h3>
+      <h3>Deployment: {{deployInfo.deploymentServiceData.currentDeployment.id}}</h3>
     </div>
     <div class="close-info" title="Close window" ng-click="deployInfo.closeDeploymentInfo()">
       <span class="glyphicon glyphicon-remove"></span>
@@ -15,21 +15,21 @@
         Id:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.id}}
+        {{deployInfo.deploymentServiceData.currentDeployment.id}}
       </div>
 
       <div class="info-left">
         Date:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.date}}
+        {{deployInfo.deploymentServiceData.currentDeployment.date}}
       </div>
 
       <div class="info-left">
         Location:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.location}}
+        {{deployInfo.deploymentServiceData.currentDeployment.location}}
       </div>
 
     <hr class="line">
@@ -38,14 +38,14 @@
         Organization Id:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.organization.id}}
+        {{deployInfo.deploymentServiceData.currentDeployment.organization.id}}
       </div>
 
       <div class="info-left">
         Organization Label:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.organization.label}}
+        {{deployInfo.deploymentServiceData.currentDeployment.organization.label}}
       </div>
 
     <hr class="line">
@@ -54,70 +54,25 @@
         Platform Id:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.platform.id}}
+        {{deployInfo.deploymentServiceData.currentDeployment.platform.id}}
       </div>
 
       <div class="info-left">
         Platform Label:
       </div>
       <div class="info-right">
-        {{deployInfo.currentDeployment.platform.label}}
+        {{deployInfo.deploymentServiceData.currentDeployment.platform.label}}
       </div>
 
       <div class="info-left">
         Devices:
       </div>
 
-      <div ng-repeat="x in deployInfo.currentDeployment.platform.devices">
+      <div ng-repeat="x in deployInfo.deploymentServiceData.currentDeployment.platform.devices">
         <div class="info-right">
           {{x}}
         </div>
       </div>
-    <!--<hr class="line">
-
-      <div class="info-left">
-        Device Id:
-      </div>
-      <div class="info-right">
-        Devices Id
-      </div>
-
-      <div class="info-left">
-        Device Label:
-      </div>
-      <div class="info-right">
-        Devices Label
-      </div>
-
-      <div class="info-left">
-        Device Type:
-      </div>
-      <div class="info-right">
-        Devices Type
-      </div>
-
-      <div class="info-left">
-        Sensors:
-      </div>
-      <div class="info-right">
-        Sensors
-      </div>
-
-    <hr class="line">
-
-      <div class="info-left">
-        Sensor Id:
-      </div>
-      <div class="info-right">
-        Sensor Id
-      </div>
-
-      <div class="info-left">
-        Sensor Type:
-      </div>
-      <div class="info-right">
-        Sensor Type
-      </div>-->
 
     <hr class="line">
 

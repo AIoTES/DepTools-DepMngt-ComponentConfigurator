@@ -12,16 +12,11 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
   vm.deploymentData = deploymentServiceData;
 
   vm.getDeployments = function () {
-    var x = vm.deployment.getDeployments();
-    return x;
+    return vm.deployment.getDeployments();
   };
 
   vm.selectDeployment = function (deployment) {
     vm.deployment.setCurrentDeployment(deployment);
-    vm.goToDeploymentInfo();
-  };
-
-  vm.goToDeploymentInfo = function () {
     $location.path('/main/deployment_manager/deployment_info');
   };
 

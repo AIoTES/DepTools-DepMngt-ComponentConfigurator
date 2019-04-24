@@ -13,6 +13,9 @@ app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'clien
 
   vm.currentDeployment = vm.deploymentService.getCurrentDeployment();
 
+  vm.deviceIdSelected = "";
+  vm.newDevicesId = "";
+
   vm.id = vm.currentDeployment.id;
   vm.date = date;
   vm.location = vm.currentDeployment.location;
@@ -26,10 +29,23 @@ app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'clien
   vm.deviceType = "";
   vm.sensors = "";
   vm.sensorId = "";
-  vm.sensorType = "";
-*/
+  vm.sensorType = "";*/
+
   vm.closeCreateDeployment = function () {
     $location.path('/main/deployment_manager');
+  };
+  vm.deleteDevice = function (deviceid) {
+    $location.path('/main/deployment_manager');
+  };
+  vm.addDevices = function () {
+    let devices = vm.newDevicesId.split(",");
+    if (devices.length > 0) {
+      devices.forEach(function(deviceId) {
+        vm.deploymentService.addDeviceToDeployment(vm.clientService.getCurrentClientId(), vm.id, deviceId);
+      });
+    }
+
+  //  $location.path('/main/deployment_manager');
   };
 
   vm.updateDeployment = function () {

@@ -26,6 +26,17 @@ app.service('deploymentServiceApi',
         });
       };
 
+      service.addDeviceToDeployment = function (clientId, deploymentId, deviceId) {
+        return $http({
+          method: 'PUT',
+          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
+          headers: {
+            "Content-Type": "application/json",
+            "Client-ID": clientId
+          }
+        });
+      }
+
       service.createDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//}, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
         return $http({
           method: 'POST',

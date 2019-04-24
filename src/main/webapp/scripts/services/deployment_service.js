@@ -30,6 +30,29 @@ app.service('deploymentService',
         deploymentServiceData.currentDeployment = deployment
       };
 
+      service.addDeviceToDeployment = function(clientId, deploymentId, deviceId) {
+        deploymentServiceApi.addDeviceToDeployment(clientId, deploymentId, deviceId)
+          .then(
+            function (response) {
+              if (response.status === 200) {
+                var deployment = response.data;
+
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
+                  function (value) {
+                    return value.id === deploymentId;
+                  }
+                );
+
+                if (deploymentIndex !== -1)
+                  deploymentServiceData.deployments[deploymentIndex] = deployment;
+
+                alert("Device " + deviceId + " added");
+                $location.path('/main/deployment_manager');
+              }
+            }
+          )
+      };
+
       service.createDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
         deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
           .then(

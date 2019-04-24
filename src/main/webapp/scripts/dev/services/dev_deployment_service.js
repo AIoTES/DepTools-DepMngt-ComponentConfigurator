@@ -1,6 +1,6 @@
 appDev.service('devDeployment',
-  ['$httpBackend', 'deployments',
-    function ($httpBackend, deployments) {
+  ['$httpBackend', 'deployments', 'deployment',
+    function ($httpBackend, deployments, deployment) {
 
       var service = {};
 
@@ -60,7 +60,12 @@ appDev.service('devDeployment',
       };
 
       service.addDeviceToDeployment = function () {
-
+        $httpBackend.whenPUT(/\/api\/v1\/deployments\/.*\/devices\/.*/).respond(
+          function (method, url, data, headers) {
+            console.log('addDeviceToDeployment → Received: ', method, url, data, headers);
+            return [200, angular.fromJson(clone_object(deployment))]
+          }
+        );
       };
 
       service.deleteDeviceFromDeployment = function () {
@@ -74,6 +79,25 @@ appDev.service('devDeployment',
       return service;
     }
   ]
+);
+
+appDev.value('deployment',
+    {
+      "id": "deployment1",
+      "date": "\"2017-06-06\"^^xsd:date",
+      "location": "\"AREA[“Thessaloniki\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
+      "organization": {
+        "id": "organization1",
+        "label": "\"Municipality of Thessaloniki.\""
+      },
+      "platform": {
+        "id": "platform1",
+        "label": "\"Activage Platform GR 1\"",
+        "devices": [
+          "device1"
+        ]
+      }
+    }
 );
 
 appDev.value('deployments',
