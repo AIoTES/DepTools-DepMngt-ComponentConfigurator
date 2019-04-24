@@ -55,10 +55,10 @@ app.service('deploymentServiceApi',
         });
       };
 
-      service.updateDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId) {
+      /*service.updateDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {
         return $http({
           method: 'PUT',
-          url: BACKEND_URL + '/api/v1/devices?deviceId=' + deviceId,
+          url: BACKEND_URL + '/api/v1/deployments?deviceId=' + deviceId,
           headers: {
             "Content-Type": "application/json",
             "Client-ID": clientId
@@ -78,12 +78,12 @@ app.service('deploymentServiceApi',
             "madeObservation": madeObservation
           }
         });
-      };
+      };*/
 
-      service.deleteDevice = function (deviceId, clientId) {
+      service.deleteDeployment = function (deploymentId, clientId) {
         return $http({
           method: 'DELETE',
-          url: BACKEND_URL + '/api/v1/devices?deviceId=' + deviceId,
+          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId,
           headers: {
             "Content-Type": "application/json;charset=utf-8",
             "Client-ID": clientId

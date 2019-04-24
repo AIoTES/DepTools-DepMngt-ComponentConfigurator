@@ -43,7 +43,7 @@ app.service('deviceService',
       };
 
       service.updateDevice = function (deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId) {
-        deviceServiceApi.updateDevice(deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId);
+        deviceServiceApi.updateDeployment(deviceTypes, deviceId, hostedBy, location, name, hosts, forProperty, madeActuation, implementsProcedure, observes, detects, madeObservation, clientId);
       };
 
       service.deleteDevice = function (deviceId, clientId) {

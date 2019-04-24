@@ -31,7 +31,7 @@ app.controller('createDeploymentCtrl', ['$location', 'deploymentService', 'clien
   };
 
   vm.createDeployment = function () {
-    vm.deploymentService.createDeployment(clientService.getCurrentClientId(), vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
+    vm.deploymentService.updateDeployment(clientService.getCurrentClientId(), vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
   };
 
 }]);

@@ -15,21 +15,21 @@
         Id:
       </div>
       <div class="info-right">
-        Deployment Id
+        {{deployInfo.currentDeployment.id}}
       </div>
 
       <div class="info-left">
         Date:
       </div>
       <div class="info-right">
-        Date
+        {{deployInfo.currentDeployment.date}}
       </div>
 
       <div class="info-left">
         Location:
       </div>
       <div class="info-right">
-        Location
+        {{deployInfo.currentDeployment.location}}
       </div>
 
     <hr class="line">
@@ -38,14 +38,14 @@
         Organization Id:
       </div>
       <div class="info-right">
-        Organization Id
+        {{deployInfo.currentDeployment.organization.id}}
       </div>
 
       <div class="info-left">
         Organization Label:
       </div>
       <div class="info-right">
-        Organization Label
+        {{deployInfo.currentDeployment.organization.label}}
       </div>
 
     <hr class="line">
@@ -54,24 +54,26 @@
         Platform Id:
       </div>
       <div class="info-right">
-        Platform Id
+        {{deployInfo.currentDeployment.platform.id}}
       </div>
 
       <div class="info-left">
         Platform Label:
       </div>
       <div class="info-right">
-        Platform Label
+        {{deployInfo.currentDeployment.platform.label}}
       </div>
 
       <div class="info-left">
         Devices:
       </div>
-      <div class="info-right">
-        Devices
-      </div>
 
-    <hr class="line">
+      <div ng-repeat="x in deployInfo.currentDeployment.platform.devices">
+        <div class="info-right">
+          {{x}}
+        </div>
+      </div>
+    <!--<hr class="line">
 
       <div class="info-left">
         Device Id:
@@ -115,7 +117,7 @@
       </div>
       <div class="info-right">
         Sensor Type
-      </div>
+      </div>-->
 
     <hr class="line">
 

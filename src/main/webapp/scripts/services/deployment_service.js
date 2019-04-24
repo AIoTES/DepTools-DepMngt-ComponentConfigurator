@@ -31,7 +31,7 @@ app.service('deploymentService',
       };
 
       service.createDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.createDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
+        deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
           .then(
             function(response) {
               if (response.status === 200) {
@@ -44,17 +44,26 @@ app.service('deploymentService',
           )
       };
 
-      service.updateDevice = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.updateDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
-      };
+      /*service.updateDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
+        deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
+      };*/
 
-      service.deleteDevice = function (deviceId, clientId) {
-        deploymentServiceApi.deleteDevice(deviceId, clientId)
+      service.deleteDeployment= function (deploymentId, clientId) {
+        deploymentServiceApi.deleteDeployment(deploymentId, clientId)
           .then(
             function(response) {
-              if (response.status === 200) {
+              if (response.status === 204) {
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
+                  function (value) {
+                    return value.id === deploymentId;
+                  }
+                );
+
+                if (deploymentIndex !== -1)
+                  deploymentServiceData.deployments.splice(deploymentIndex, 1);
+
                 alert("Device deleted");
-                $location.path('/main/device_manager');
+                $location.path('/main/deployment_manager');
               }
             }
           )

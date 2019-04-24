@@ -54,7 +54,7 @@ app.controller('componentDeviceCtrl', ['$location', 'platformService', 'deviceSe
         else if (device.location.substr(0, 7) !== 'http://')
           alert("Location debe tener formato URI.");
         else
-          vm.deviceService.updateDevice(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation, vm.clientService.getCurrentClientId())
+          vm.deviceService.updateDeployment(device.deviceTypes[0], device.deviceId, device.hostedBy, device.location, device.name, device.hosts, device.forProperty, device.madeActuation, device.implementsProcedure, device.observes, device.detects, device.madeObservation, vm.clientService.getCurrentClientId())
       }
     };
 

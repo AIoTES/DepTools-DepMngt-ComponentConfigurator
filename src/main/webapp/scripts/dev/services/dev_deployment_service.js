@@ -47,7 +47,12 @@ appDev.service('devDeployment',
       };
 
       service.deleteDeploymentById = function () {
-
+        $httpBackend.whenDELETE(/\/api\/v1\/deployments\/.*/).respond(
+          function (method, url, data, headers) {
+            console.log('deleteDeployment → Received: ', method, url, data, headers);
+            return [204]
+          }
+        );
       };
 
       service.getDeploymentHistoricById = function () {
