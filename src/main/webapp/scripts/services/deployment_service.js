@@ -1,6 +1,6 @@
 app.service('deploymentService',
-  ['deploymentServiceApi', 'deploymentServiceData',
-    function (deploymentServiceApi, deploymentServiceData) {
+  ['deploymentServiceApi', 'deploymentServiceData', '$location',
+    function (deploymentServiceApi, deploymentServiceData, $location) {
 
       var service = {};
 
@@ -30,11 +30,13 @@ app.service('deploymentService',
         deploymentServiceData.currentDeployment = deployment
       };
 
-      service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.createDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
+      service.createDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
+        deploymentServiceApi.createDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
           .then(
             function(response) {
               if (response.status === 200) {
+                var deployment = response.data;
+                deploymentServiceData.deployments.push(deployment);
                 alert("Deployment created");
                 $location.path('/main/deployment_manager');
               }

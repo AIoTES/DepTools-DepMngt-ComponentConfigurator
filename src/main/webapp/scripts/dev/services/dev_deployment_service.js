@@ -24,7 +24,22 @@ appDev.service('devDeployment',
       };
 
       service.createDeployment = function () {
-
+        $httpBackend.whenPOST('/api/v1/deployments').respond(
+          function (method, url, data, headers) {
+            var deployment = JSON.parse(data);
+            console.log('retrieveTypes → Received: ', method, url, data, headers);
+            return [200,
+              angular.fromJson({
+                  "id": deployment.id,
+                  "date": deployment.date,
+                  "location": deployment.location,
+                  "organization": deployment.organization,
+                  "platform": deployment.platform
+                }
+              )
+            ]
+          }
+        );
       };
 
       service.getDeploymentById = function () {

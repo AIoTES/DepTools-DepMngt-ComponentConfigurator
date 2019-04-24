@@ -17,7 +17,7 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
   };
 
   vm.selectDeployment = function (deployment) {
-    deployment.setCurrentDeployment(deployment);
+    vm.deployment.setCurrentDeployment(deployment);
     vm.goToDeploymentInfo();
   };
 

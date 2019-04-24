@@ -19,19 +19,19 @@ app.controller('createDeploymentCtrl', ['$location', 'deploymentService', 'clien
   vm.platformId = "";
   vm.platformLabel = "";
   vm.devices = "";
-  vm.deviceId = "";
+  /*vm.deviceId = "";
   vm.deviceLabel = "";
   vm.deviceType = "";
   vm.sensors = "";
   vm.sensorId = "";
   vm.sensorType = "";
-
+*/
   vm.closeCreateDeployment = function () {
     $location.path('/main/deployment_manager');
   };
 
   vm.createDeployment = function () {
-    vm.deploymentService.createDeployment(vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
+    vm.deploymentService.createDeployment(clientService.getCurrentClientId(), vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
   };
 
 }]);
