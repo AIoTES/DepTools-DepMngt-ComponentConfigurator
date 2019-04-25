@@ -2,7 +2,7 @@
 
   <div class="option-header">
     <div class="option-header-left">
-      <h3>Maintenance Info</h3>
+      <h3>Deployment: {{maintenanceInfo.deploymentData.currentDeployment.id}}</h3>
     </div>
     <div class="close-info" title="Close window" ng-click="maintenanceInfo.closeMaintenanceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
@@ -12,58 +12,69 @@
   <div class="option-device-container info-inner">
 
     <div class="info-left">
-      Deployment Id:
+      Id:
     </div>
     <div class="info-right">
-      Deployment Id
-    </div>
-
-    <div class="info-left">
-      Device Id:
-    </div>
-    <div class="info-right">
-      Device Id
-    </div>
-
-    <div class="info-left">
-      Description:
-    </div>
-    <div class="info-right">
-      Description
-    </div>
-
-    <div class="info-left">
-      Status:
-    </div>
-    <div class="info-right">
-      Status
-    </div>
-
-    <div class="info-left">
-      Type:
-    </div>
-    <div class="info-right">
-      Type
+      {{maintenanceInfo.deploymentData.currentDeployment.id}}
     </div>
 
     <div class="info-left">
       Date:
     </div>
     <div class="info-right">
-      Date
+      {{maintenanceInfo.deploymentData.currentDeployment.date}}
+    </div>
+
+    <div class="info-left">
+      Location:
+    </div>
+    <div class="info-right">
+      {{maintenanceInfo.deploymentData.currentDeployment.location}}
     </div>
 
     <hr class="line">
 
-    <div class="button-container-form">
-      <button type="submit" class="info-button" ng-click="maintenanceInfo.goToDeleteDeployment()">
-        <span>Delete</span>
-      </button>
-
-      <button type="submit" class="info-button" ng-click="maintenanceInfo.goToUpdateMaintenance()">
-        <span>Update</span>
-      </button>
+    <div class="info-left">
+      Organization Id:
     </div>
+    <div class="info-right">
+      {{maintenanceInfo.deploymentData.currentDeployment.organization.id}}
+    </div>
+
+    <div class="info-left">
+      Organization Label:
+    </div>
+    <div class="info-right">
+      {{maintenanceInfo.deploymentData.currentDeployment.organization.label}}
+    </div>
+
+    <hr class="line">
+
+    <div class="info-left">
+      Platform Id:
+    </div>
+    <div class="info-right">
+      {{maintenanceInfo.deploymentData.currentDeployment.platform.id}}
+    </div>
+
+    <div class="info-left">
+      Platform Label:
+    </div>
+    <div class="info-right">
+      {{maintenanceInfo.deploymentData.currentDeployment.platform.label}}
+    </div>
+
+    <div class="info-left">
+      Devices:
+    </div>
+
+    <div ng-repeat="x in maintenanceInfo.deploymentData.currentDeployment.platform.devices">
+      <div class="info-right">
+        {{x}}
+      </div>
+    </div>
+
+    <hr class="line">
 
   </div>
 

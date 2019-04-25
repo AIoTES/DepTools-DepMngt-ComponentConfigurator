@@ -2,24 +2,38 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('maintenanceCtrl', ['$location', function ($location) {
+app.controller('maintenanceCtrl',
+  ['$location', 'deploymentService', 'deploymentServiceData',
+    function ($location, deploymentService, deploymentServiceData) {
 
-  var vm = this;
+      var vm = this;
 
-  vm.goToMaintenanceInfo = function () {
-    $location.path('/main/maintenance_panel/maintenance_info');
-  };
+      if (deploymentServiceData.deployments.length === 0)
+        deploymentService.retrieveDeployments();
 
-  vm.goToAddMaintenance = function () {
-    $location.path('/main/maintenance_panel/add_maintenance');
-  };
+      vm.deploymentData = deploymentServiceData;
 
-  vm.goToUpdateDeployment = function () {
-    $location.path('/main/deployment_manager/update_deployment');
-  };
+      vm.selectDeployment = function (deployment) {
+        deploymentServiceData.currentDeployment = deployment;
+        vm.goToMaintenanceInfo();
+      };
 
-  vm.goToDeleteDeployment = function () {
-    $location.path('/main/deployment_manager/delete_deployment');
-  };
+      vm.goToMaintenanceInfo = function () {
+        $location.path('/main/maintenance_panel/maintenance_info');
+      };
 
-}]);
+      vm.goToAddMaintenance = function () {
+        $location.path('/main/maintenance_panel/add_maintenance');
+      };
+
+      vm.goToUpdateDeployment = function () {
+        $location.path('/main/deployment_manager/update_deployment');
+      };
+
+      vm.goToDeleteDeployment = function () {
+        $location.path('/main/deployment_manager/delete_deployment');
+      };
+
+    }
+  ]
+);

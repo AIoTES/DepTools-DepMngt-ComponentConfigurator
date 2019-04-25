@@ -18,12 +18,13 @@
 
   <div class="option-device-container">
 
-    <div class="option-device">
+    <div ng-repeat="deployment in maintenance.deploymentData.deployments" class="option-device">
 
-      <div class="option-name-container" ng-click="maintenance.goToMaintenanceInfo()">
-        <span class="option-name">Installation Name</span>
+      <div class="option-name-container"
+           ng-click="maintenance.selectDeployment(deployment)">
+        <span class="option-name">{{deployment.id}}</span>
         <br class="jump-line">
-        <span class="option-platform">Date</span>
+        <span class="option-platform">{{deployment.date}}</span>
       </div>
 
       <div class="option-buttons-container">
