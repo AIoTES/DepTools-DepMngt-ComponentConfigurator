@@ -22,7 +22,7 @@ app.service('deploymentService',
         deploymentServiceApi.getDevices()
           .then(
             function (response) {
-              deploymentServiceData.devices = response.data;
+              deploymentServiceData.deploymentDevices = response.data;
             }
           )
           .catch(
@@ -53,9 +53,9 @@ app.service('deploymentService',
           .then(
             function (response) {
               if (response.status === 200) {
-                let deployment = response.data;
+                var deployment = response.data;
 
-                let deploymentIndex = deploymentServiceData.deployments.findIndex(
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
                   function (value) {
                     return value.id === deploymentId;
                   }
@@ -76,9 +76,9 @@ app.service('deploymentService',
           .then(
             function (response) {
               if (response.status === 200) {
-                let deployment = response.data;
+                var deployment = response.data;
 
-                let deploymentIndex = deploymentServiceData.deployments.findIndex(
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
                   function (value) {
                     return value.id === deploymentId;
                   }
@@ -99,7 +99,7 @@ app.service('deploymentService',
           .then(
             function(response) {
               if (response.status === 200) {
-                let deployment = response.data;
+                var deployment = response.data;
                 deploymentServiceData.deployments.push(deployment);
                 alert("Deployment created");
                 $location.path('/main/deployment_manager');
@@ -117,7 +117,7 @@ app.service('deploymentService',
           .then(
             function(response) {
               if (response.status === 204) {
-                let deploymentIndex = deploymentServiceData.deployments.findIndex(
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
                   function (value) {
                     return value.id === deploymentId;
                   }

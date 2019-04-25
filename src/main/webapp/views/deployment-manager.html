@@ -20,17 +20,16 @@
   <div class="option-device-container">
 
     <div class="option-device"
-         ng-repeat="deployment in deployCtrl.getDeployments()"
-         ng-click="deployCtrl.selectDeployment(deployment)">
+         ng-repeat="deployment in deployCtrl.getDeployments()">
 
-      <div class="option-name-container">
+      <div class="option-name-container" ng-click="deployCtrl.selectDeployment(deployment)">
         <span class="option-name">{{deployment.id}}</span>
         <br class="jump-line">
         <span class="option-platform">{{deployment.date}}</span>
       </div>
 
       <div class="option-buttons-container">
-        <div class="square-option-device-button" ng-click="deployCtrl.goToUpdateDeployment()">
+        <div class="square-option-device-button" ng-click="deployCtrl.goToUpdateDeployment(deployment)">
           <span class="glyphicon glyphicon-edit"></span>
         </div>
       </div>
