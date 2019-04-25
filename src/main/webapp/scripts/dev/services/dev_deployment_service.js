@@ -4,9 +4,8 @@ appDev.service('devDeployment',
 
       var service = {};
 
-      // Esto es un ejemplo, eliminar cuando se entienda y se completen el resto de funciones
       service.retrieveDevices = function () {
-        $httpBackend.whenGET('api/v1/deployments/devices').respond(
+        $httpBackend.whenGET('/api/v1/deployments/devices').respond(
           function (method, url, data, headers) {
             console.log('retrieveDevices → Received: ', method, url, data, headers);
             return [200, angular.fromJson(clone_object(devices))]
@@ -27,7 +26,7 @@ appDev.service('devDeployment',
         $httpBackend.whenPOST('/api/v1/deployments').respond(
           function (method, url, data, headers) {
             var deployment = JSON.parse(data);
-            console.log('retrieveTypes → Received: ', method, url, data, headers);
+            console.log('createDeployment → Received: ', method, url, data, headers);
             return [200,
               angular.fromJson({
                   "id": deployment.id,
@@ -35,15 +34,19 @@ appDev.service('devDeployment',
                   "location": deployment.location,
                   "organization": deployment.organization,
                   "platform": deployment.platform
-                }
-              )
+              })
             ]
           }
         );
       };
 
       service.getDeploymentById = function () {
-
+        $httpBackend.whenGET(/\/api\/v1\/deployments\/.*/).respond(
+          function (method, url, data, headers) {
+            console.log('getDeploymentById → Received: ', method, url, data, headers);
+            return [200, angular.fromJson(clone_object(deployment))]
+          }
+        );
       };
 
       service.deleteDeploymentById = function () {
@@ -69,11 +72,12 @@ appDev.service('devDeployment',
       };
 
       service.deleteDeviceFromDeployment = function () {
-
-      };
-
-      service.retrieveDevices = function () {
-
+        $httpBackend.whenDELETE(/\/api\/v1\/deployments\/.*\/devices\/.*/).respond(
+          function (method, url, data, headers) {
+            console.log('deleteDeviceFromDeployment → Received: ', method, url, data, headers);
+            return [200, angular.fromJson(clone_object(deployment))]
+          }
+        );
       };
 
       return service;
