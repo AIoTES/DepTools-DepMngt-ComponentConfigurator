@@ -2,11 +2,21 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('deploymentCtrl', ['$location', function ($location) {
+app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', function ($location, deploymentService, deploymentServiceData, clientService) {
+
+  deploymentService.retrieveDeployments(clientService.getCurrentClientId());
 
   var vm = this;
 
-  vm.goToDeploymentInfo = function () {
+  vm.deployment = deploymentService;
+  vm.deploymentData = deploymentServiceData;
+
+  vm.getDeployments = function () {
+    return vm.deployment.getDeployments();
+  };
+
+  vm.selectDeployment = function (deployment) {
+    vm.deployment.setCurrentDeployment(deployment);
     $location.path('/main/deployment_manager/deployment_info');
   };
 

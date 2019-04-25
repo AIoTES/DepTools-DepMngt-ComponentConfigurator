@@ -2,9 +2,12 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('deploymentInfoCtrl', ['$location', function ($location) {
+app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', function ($location, deploymentService, deploymentServiceData, clientService) {
 
   var vm = this;
+
+  vm.deploymentService = deploymentService;
+  vm.deploymentServiceData = deploymentServiceData;
 
   vm.closeDeploymentInfo = function () {
     $location.path('/main/deployment_manager');
@@ -19,7 +22,7 @@ app.controller('deploymentInfoCtrl', ['$location', function ($location) {
   };
 
   vm.goToDeleteDeployment = function () {
-    $location.path('/main/deployment_manager/delete_deployment');
+    vm.deploymentService.deleteDeployment(vm.deploymentServiceData.currentDeployment.id, clientService.getCurrentClientId())
   };
 
 }]);

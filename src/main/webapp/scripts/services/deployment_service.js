@@ -1,14 +1,14 @@
 app.service('deploymentService',
-  ['deploymentServiceApi', 'deploymentServiceData',
-    function (deploymentServiceApi, deploymentServiceData) {
+  ['deploymentServiceApi', 'deploymentServiceData', '$location',
+    function (deploymentServiceApi, deploymentServiceData, $location) {
 
       var service = {};
 
-      service.retrieveDevices = function (idPlatform, clientId) {
-        deploymentServiceApi.getDevices(idPlatform, clientId)
+      service.retrieveDeployments = function (clientId) {
+        deploymentServiceApi.getDeployments(clientId)
           .then(
             function (response) {
-              deploymentServiceData.devices = response.data;
+              deploymentServiceData.deployments = response.data;
             }
           )
           .catch(
@@ -18,23 +18,48 @@ app.service('deploymentService',
           );
       };
 
-      service.getCurrentDevice = function() {
-        return deploymentServiceData.currentDevice;
-      }
+      service.getDeployments = function() {
+        return deploymentServiceData.deployments;
+      };
 
-      service.setCurrentDevice = function(device) {
-        deploymentServiceData.currentDevice = device
-      }
+      service.getCurrentDeployment = function() {
+        return deploymentServiceData.currentDeployment;
+      };
 
-      service.getDevices = function() {
-        return deploymentServiceData.devices;
-      }
+      service.setCurrentDeployment = function(deployment) {
+        deploymentServiceData.currentDeployment = deployment
+      };
 
-      service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.createDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
+      service.addDeviceToDeployment = function(clientId, deploymentId, deviceId) {
+        deploymentServiceApi.addDeviceToDeployment(clientId, deploymentId, deviceId)
+          .then(
+            function (response) {
+              if (response.status === 200) {
+                var deployment = response.data;
+
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
+                  function (value) {
+                    return value.id === deploymentId;
+                  }
+                );
+
+                if (deploymentIndex !== -1)
+                  deploymentServiceData.deployments[deploymentIndex] = deployment;
+
+                alert("Device " + deviceId + " added");
+                $location.path('/main/deployment_manager');
+              }
+            }
+          )
+      };
+
+      service.createDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
+        deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
           .then(
             function(response) {
               if (response.status === 200) {
+                var deployment = response.data;
+                deploymentServiceData.deployments.push(deployment);
                 alert("Deployment created");
                 $location.path('/main/deployment_manager');
               }
@@ -42,17 +67,26 @@ app.service('deploymentService',
           )
       };
 
-      service.updateDevice = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.updateDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
-      };
+      /*service.updateDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
+        deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
+      };*/
 
-      service.deleteDevice = function (deviceId, clientId) {
-        deploymentServiceApi.deleteDevice(deviceId, clientId)
+      service.deleteDeployment= function (deploymentId, clientId) {
+        deploymentServiceApi.deleteDeployment(deploymentId, clientId)
           .then(
             function(response) {
-              if (response.status === 200) {
+              if (response.status === 204) {
+                var deploymentIndex = deploymentServiceData.deployments.findIndex(
+                  function (value) {
+                    return value.id === deploymentId;
+                  }
+                );
+
+                if (deploymentIndex !== -1)
+                  deploymentServiceData.deployments.splice(deploymentIndex, 1);
+
                 alert("Device deleted");
-                $location.path('/main/device_manager');
+                $location.path('/main/deployment_manager');
               }
             }
           )
