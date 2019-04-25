@@ -31,7 +31,7 @@ app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', functi
     vm.deploymentService.deleteDeviceFromDeployment(vm.id, deviceId);
   };
   vm.addDevices = function () {
-    let devices = vm.newDevicesId.split(",");
+    var devices = vm.newDevicesId.split(",");
     if (devices.length > 0) {
       devices.forEach(function(deviceId) {
         vm.deploymentService.addDeviceToDeployment(vm.id, deviceId);

@@ -25,7 +25,8 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
     $location.path('/main/deployment_manager/create_deployment');
   };
 
-  vm.goToUpdateDeployment = function () {
+  vm.goToUpdateDeployment = function (deployment) {
+    vm.deployment.setCurrentDeployment(deployment);
     $location.path('/main/deployment_manager/update_deployment');
   };
 

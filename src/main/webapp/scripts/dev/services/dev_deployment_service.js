@@ -25,7 +25,7 @@ appDev.service('devDeployment',
       service.createDeployment = function () {
         $httpBackend.whenPOST('/api/v1/deployments').respond(
           function (method, url, data, headers) {
-            let deployment = JSON.parse(data);
+            var deployment = JSON.parse(data);
             console.log('createDeployment → Received: ', method, url, data, headers);
             return [200,
               angular.fromJson({
