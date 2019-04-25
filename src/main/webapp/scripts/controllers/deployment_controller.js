@@ -2,9 +2,10 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', function ($location, deploymentService, deploymentServiceData, clientService) {
+app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
-  deploymentService.retrieveDeployments(clientService.getCurrentClientId());
+  deploymentService.retrieveDeployments();
+  deploymentService.retrieveDevices();
 
   var vm = this;
 

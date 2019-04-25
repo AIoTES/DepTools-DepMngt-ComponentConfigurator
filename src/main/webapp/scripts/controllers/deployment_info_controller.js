@@ -2,7 +2,7 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', function ($location, deploymentService, deploymentServiceData, clientService) {
+app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
   var vm = this;
 
@@ -22,7 +22,7 @@ app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploym
   };
 
   vm.goToDeleteDeployment = function () {
-    vm.deploymentService.deleteDeployment(vm.deploymentServiceData.currentDeployment.id, clientService.getCurrentClientId())
+    vm.deploymentService.deleteDeployment(vm.deploymentServiceData.currentDeployment.id);
   };
 
 }]);

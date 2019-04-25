@@ -1,7 +1,8 @@
 app.service('deploymentServiceData', function() {
     var service = {
       deployments: [],
-      currentDeployment: ''
+      currentDeployment: '',
+      devices: []
     };
 
     return service;
