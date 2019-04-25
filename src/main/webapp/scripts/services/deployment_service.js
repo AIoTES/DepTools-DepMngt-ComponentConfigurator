@@ -48,8 +48,8 @@ app.service('deploymentService',
         deploymentServiceData.currentDeployment = deployment
       };
 
-      service.addDeviceToDeployment = function(clientId, deploymentId, deviceId) {
-        deploymentServiceApi.addDeviceToDeployment(clientId, deploymentId, deviceId)
+      service.addDeviceToDeployment = function(deploymentId, deviceId) {
+        deploymentServiceApi.addDeviceToDeployment(deploymentId, deviceId)
           .then(
             function (response) {
               if (response.status === 200) {
@@ -71,8 +71,8 @@ app.service('deploymentService',
           )
       };
 
-      service.createDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
+      service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
+        deploymentServiceApi.updateDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType)
           .then(
             function(response) {
               if (response.status === 200) {
@@ -89,8 +89,8 @@ app.service('deploymentService',
         deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
       };*/
 
-      service.deleteDeployment= function (deploymentId, clientId) {
-        deploymentServiceApi.deleteDeployment(deploymentId, clientId)
+      service.deleteDeployment= function (deploymentId) {
+        deploymentServiceApi.deleteDeployment(deploymentId)
           .then(
             function(response) {
               if (response.status === 204) {

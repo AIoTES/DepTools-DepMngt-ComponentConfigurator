@@ -2,7 +2,7 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', function ($location, deploymentService, deploymentServiceData, clientService) {
+app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
   var vm = this;
 

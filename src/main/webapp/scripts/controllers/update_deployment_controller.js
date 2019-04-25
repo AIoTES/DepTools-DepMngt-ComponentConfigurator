@@ -2,14 +2,13 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'clientService', function ($location, deploymentService, clientService) {
+app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', function ($location, deploymentService) {
 
   var vm = this;
 
   var date = Date.now();
 
   vm.deploymentService = deploymentService;
-  vm.clientService = clientService;
 
   vm.currentDeployment = vm.deploymentService.getCurrentDeployment();
 
@@ -41,7 +40,7 @@ app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'clien
     let devices = vm.newDevicesId.split(",");
     if (devices.length > 0) {
       devices.forEach(function(deviceId) {
-        vm.deploymentService.addDeviceToDeployment(vm.clientService.getCurrentClientId(), vm.id, deviceId);
+        vm.deploymentService.addDeviceToDeployment(vm.id, deviceId);
       });
     }
 
@@ -49,7 +48,7 @@ app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'clien
   };
 
   vm.updateDeployment = function () {
-    vm.deploymentService.updateDeployment(vm.clientService.getCurrentClientId(), vm.id, vm.date, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
+    vm.deploymentService.updateDeployment(vm.id, vm.date, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
   };
 
 }]);
