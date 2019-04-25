@@ -22,7 +22,7 @@ app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploym
   };
 
   vm.goToDeleteDeployment = function () {
-    vm.deploymentService.deleteDeployment(vm.deploymentServiceData.currentDeployment.id, clientService.getCurrentClientId())
+    vm.deploymentService.deleteDeployment(vm.deploymentServiceData.currentDeployment.id);
   };
 
 }]);

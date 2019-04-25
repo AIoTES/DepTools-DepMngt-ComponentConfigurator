@@ -25,7 +25,7 @@ appDev.service('devDeployment',
       service.createDeployment = function () {
         $httpBackend.whenPOST('/api/v1/deployments').respond(
           function (method, url, data, headers) {
-            var deployment = JSON.parse(data);
+            let deployment = JSON.parse(data);
             console.log('createDeployment → Received: ', method, url, data, headers);
             return [200,
               angular.fromJson({
@@ -145,47 +145,47 @@ appDev.value('deployments',
 appDev.value('devices',
   [
     {
-      "id":"1_1",
-      "label":"IoTDevice1",
-      "type":"Fibaro motion sensor",
-      "sensors":[
+      "id": "1_1",
+      "label": "IoTDevice1",
+      "type": "Fibaro motion sensor",
+      "sensors": [
         {
-          "id":"1_1",
-          "type":"IlluminanceSensor"
+          "id": "1_1",
+          "type": "IlluminanceSensor"
         },
         {
-          "id":"1_2",
-          "type":"TemperatureSensor"
+          "id": "1_2",
+          "type": "TemperatureSensor"
         },
         {
-          "id":"1_3",
-          "type":"UserOccupancySensor"
+          "id": "1_3",
+          "type": "UserOccupancySensor ."
         }
       ]
     },
     {
-      "id":"2_1",
-      "label":"IoTDevice2",
-      "type":"Fibaro motion sensor",
-      "sensors":[
+      "id": "2_1",
+      "label": "IoTDevice2",
+      "type": "Fibaro motion sensor",
+      "sensors": [
         {
-          "id":"2_1",
-          "type":"IlluminanceSensor"
+          "id": "2_1 ",
+          "type": "IlluminanceSensor"
         },
         {
-          "id":"2_2",
-          "type":"TemperatureSensor"
+          "id": "2_2 ",
+          "type": "TemperatureSensor ."
         }
       ]
     },
     {
-      "id":"3_1",
-      "label":"IoTDevice3",
-      "type":"Fibaro motion sensor",
-      "sensors":[
+      "id": "3_1",
+      "label": "IoTDevice3",
+      "type": "Fibaro motion sensor",
+      "sensors": [
         {
-          "id":"3_1",
-          "type":"IlluminanceSensor"
+          "id": "3_1 ",
+          "type": "IlluminanceSensor ."
         }
       ]
     }

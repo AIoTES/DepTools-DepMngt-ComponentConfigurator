@@ -32,7 +32,17 @@ app.service('deploymentServiceApi',
             "Content-Type": "application/json"
           }
         });
-      }
+      };
+
+      service.deleteDeviceFromDeployment = function (deploymentId, deviceId) {
+        return $http({
+          method: 'DELETE',
+          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+      };
 
       service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//}, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
         return $http({
