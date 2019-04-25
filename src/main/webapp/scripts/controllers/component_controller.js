@@ -30,7 +30,7 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
     vm.selectPlatform = function (platform) {
       platformServiceData.currentPlatform = platform;
       platformServiceData.currentPlatformName = platform.name;
-      vm.deviceServ.retrieveDevices(platform.platformId, vm.clientService.getCurrentClientId());
+      deviceService.retrieveDevices(platform.platformId);
       $location.path('/main/component_configurator/component_view/platform_info');
     };
 

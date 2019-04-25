@@ -1,7 +1,7 @@
 <div class="resource-container2">
 
   <div class="resource-header2">
-    <h3>Update Device: {{componentUpdate.getSelectedDevice().deviceId}}</h3>
+    <h3>Update Device: {{componentUpdate.deviceToUpdate.deviceId}}</h3>
 
     <div class="close-info" title="Close window" ng-click="componentUpdate.closeDeviceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
@@ -12,55 +12,58 @@
 
     <form class="add-form" name="add-device">
 
-      <select ng-model="componentUpdate.getSelectedDevice().deviceTypes[0]">
+      <select ng-model="componentUpdate.deviceToUpdate.deviceTypes[0]">
         <option value="DEVICE">Device</option>
         <option value="SENSOR">Sensor</option>
         <option value="ACTUATOR">Actuator</option>
       </select>
       <label class="form-label">Type:</label>
 
-      <input type="text" placeholder="Id" ng-model="componentUpdate.getSelectedDevice().deviceId">
+      <input type="text" placeholder="Id" ng-model="componentUpdate.deviceToUpdate.deviceId">
       <label class="form-label">Id:</label>
 
-      <select ng-model="componentUpdate.getSelectedDevice().hostedBy">
-        <option ng-repeat="option in componentUpdate.getPlatformsId()" value="{{option.platformId}}">{{option.name}}</option>
+      <select ng-model="componentUpdate.deviceToUpdate.hostedBy">
+        <option ng-repeat="option in componentUpdate.platformData.platforms" value="{{option.platformId}}">
+          {{option.platformId}}
+        </option>
       </select>
       <label class="form-label">Hosted By:</label>
 
-      <input type="text" placeholder="Location" ng-model="componentUpdate.getSelectedDevice().location">
+      <input type="text" placeholder="Location" ng-model="componentUpdate.deviceToUpdate.location">
       <label class="form-label">Location:</label>
 
-      <input type="text" placeholder="Name" ng-model="componentUpdate.getSelectedDevice().name">
+      <input type="text" placeholder="Name" ng-model="componentUpdate.deviceToUpdate.name">
       <label class="form-label">Name:</label>
 
-      <input type="text" placeholder="Hosts" ng-model="componentUpdate.getSelectedDevice().hosts">
+      <input type="text" placeholder="Hosts" ng-model="componentUpdate.deviceToUpdate.hosts">
       <label class="form-label">Hosts:</label>
 
-      <input type="text" placeholder="For Property" ng-model="componentUpdate.getSelectedDevice().forProperty">
+      <input type="text" placeholder="For Property" ng-model="componentUpdate.deviceToUpdate.forProperty">
       <label class="form-label">For Property:</label>
 
-      <input type="text" placeholder="Made Actuation" ng-model="componentUpdate.getSelectedDevice().madeActuation">
+      <input type="text" placeholder="Made Actuation" ng-model="componentUpdate.deviceToUpdate.madeActuation">
       <label class="form-label">Made Actuation:</label>
 
-      <input type="text" placeholder="Implements Procedure" ng-model="componentUpdate.getSelectedDevice().implementsProcedure">
+      <input type="text" placeholder="Implements Procedure"
+             ng-model="componentUpdate.deviceToUpdate.implementsProcedure">
       <label class="form-label">Implements Procedure:</label>
 
-      <input type="text" placeholder="Observes" ng-model="componentUpdate.getSelectedDevice().observes">
+      <input type="text" placeholder="Observes" ng-model="componentUpdate.deviceToUpdate.observes">
       <label class="form-label">Observes:</label>
 
-      <input type="text" placeholder="Detects" ng-model="componentUpdate.getSelectedDevice().detects">
+      <input type="text" placeholder="Detects" ng-model="componentUpdate.deviceToUpdate.detects">
       <label class="form-label">Detects:</label>
 
-      <input type="text" placeholder="Made Observation" ng-model="componentUpdate.getSelectedDevice().madeObservation">
+      <input type="text" placeholder="Made Observation" ng-model="componentUpdate.deviceToUpdate.madeObservation">
       <label class="form-label">Made Observation:</label>
 
       <hr class="line">
 
       <div class="button-container-form">
 
-      <button style="float: left" type="submit" class="info-button" ng-click="componentUpdate.updateDevice()">
-        <span>Update</span>
-      </button>
+        <button style="float: left" type="submit" class="info-button" ng-click="componentUpdate.updateDevice()">
+          <span>Update</span>
+        </button>
 
       </div>
 

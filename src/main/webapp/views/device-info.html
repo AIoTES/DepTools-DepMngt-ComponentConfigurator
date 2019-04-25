@@ -1,7 +1,7 @@
 <div class="resource-container2">
 
   <div class="resource-header2">
-    <h3>Device: {{componentDevice.getSelectedDevice().deviceId}}</h3>
+    <h3>Device: {{componentDevice.deviceData.currentDevice}}</h3>
 
     <div class="close-info" title="Close window" ng-click="componentDevice.closeDeviceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
@@ -14,84 +14,84 @@
       Type:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().deviceTypes[0]}}
+      {{componentDevice.deviceData.deviceValues.deviceTypes}}
     </div>
 
     <div class="info-left">
       Id:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().deviceId}}
+      {{componentDevice.deviceData.deviceValues.deviceId}}
     </div>
 
     <div class="info-left">
       Hosted By:
     </div>
-    <div class="info-right" ng-repeat="option in componentDevice.getPlatformsId()">
-      {{option.name}}
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.hostedBy}}
     </div>
 
     <div class="info-left">
       Location:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().location}}
+      {{componentDevice.deviceData.deviceValues.location}}
     </div>
 
     <div class="info-left">
       Name:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().name}}
+      {{componentDevice.deviceData.deviceValues.name}}
     </div>
 
     <div class="info-left">
       Hosts:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().hosts}}
+      {{componentDevice.deviceData.deviceValues.hosts}}
     </div>
 
     <div class="info-left">
       For Property:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().forProperty}}
+      {{componentDevice.deviceData.deviceValues.forProperty}}
     </div>
 
     <div class="info-left">
       Made Actuation:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().madeActuation}}
+      {{componentDevice.deviceData.deviceValues.madeActuation}}
     </div>
 
     <div class="info-left">
       ImplementsProcedure:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().implementsProcedure}}
+      {{componentDevice.deviceData.deviceValues.implementsProcedure}}
     </div>
 
     <div class="info-left">
       Observes:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().observes}}
+      {{componentDevice.deviceData.deviceValues.observes}}
     </div>
 
     <div class="info-left">
       Detects:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().detects}}
+      {{componentDevice.deviceData.deviceValues.detects}}
     </div>
 
     <div class="info-left">
       MadeObservation:
     </div>
     <div class="info-right">
-      {{componentDevice.getSelectedDevice().madeObservation}}
+      {{componentDevice.deviceData.deviceValues.madeObservation}}
     </div>
 
     <hr class="line">

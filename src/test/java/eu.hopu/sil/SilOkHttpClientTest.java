@@ -4,14 +4,13 @@ import eu.hopu.servlets.dto.CreateSilPlatform;
 import eu.hopu.servlets.dto.SilPlatform;
 import eu.hopu.servlets.dto.UpdateSilPlatform;
 import eu.hopu.sil.dto.ClientSil;
+import eu.hopu.sil.dto.SilDevice;
 import eu.hopu.utils.HopAsserts;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -88,6 +87,46 @@ public class SilOkHttpClientTest {
   @Test
   public void retrievePlatformTypes() {
     boolean result = client.retrievePlatformTypes(clientId);
+    Assert.assertTrue(result);
+  }
+
+  @Test
+  public void retrieveDevices() {
+    List<SilDevice> actual = client.retrieveDevices("http://example.inter-iot.eu/platforms/UAAL", clientId);
+    List<SilDevice> expected = new LinkedList<>();
+    List<String> deviceTypes = new LinkedList<>();
+    deviceTypes.add("DEVICE");
+    expected.add(new SilDevice(deviceTypes, "http://example.inter-iot.eu/devices/Device1", "http://example.inter-iot.eu/platforms/UAAL",
+      "http://test.inter-iot.eu/TestLocation", "Device1", new LinkedList<>(), new LinkedList<>(), null, null, new LinkedList<>(), null, null));
+
+    HopAsserts.assertEqualsJson(expected, actual);
+  }
+
+  @Test
+  public void createDevice() {
+    List<String> deviceTypes = new LinkedList<>();
+    deviceTypes.add("DEVICE");
+    SilDevice expected = new SilDevice(deviceTypes, "http://example.inter-iot.eu/devices/Device3", "http://example.inter-iot.eu/platforms/UAAL",
+      "http://test.inter-iot.eu/TestLocation", "Device2", new LinkedList<>(), new LinkedList<>(), "", "", new LinkedList<>(), "", "");
+    SilDevice actual = client.createDevice(expected, clientId);
+
+    HopAsserts.assertEqualsJson(expected, actual);
+  }
+
+  @Test
+  public void updateDevice() {
+    List<String> deviceTypes = new LinkedList<>();
+    deviceTypes.add("DEVICE");
+    SilDevice expected = new SilDevice(deviceTypes, "http://example.inter-iot.eu/devices/Device2", "http://example.inter-iot.eu/platforms/UAAL",
+      "http://test.inter-iot.eu/TestLocation", "Device3", new LinkedList<>(), new LinkedList<>(), "", "", new LinkedList<>(), "", "");
+    SilDevice actual = client.updateDevice(expected, clientId);
+
+    HopAsserts.assertEqualsJson(expected, actual);
+  }
+
+  @Test
+  public void deleteDevice() {
+    boolean result = client.deleteDevice("http://example.inter-iot.eu/devices/Device3", clientId);
     Assert.assertTrue(result);
   }
 

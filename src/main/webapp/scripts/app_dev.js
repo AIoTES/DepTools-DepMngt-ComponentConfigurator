@@ -22,6 +22,9 @@ appDev.run(
       devPlatforms.deletePlatform();
 
       devDevices.retrieveDevices();
+      devDevices.updateDevice();
+      devDevices.createDevice();
+      devDevices.deleteDevice();
 
       devDeployment.retrieveDeployments();
       devDeployment.createDeployment();

@@ -6,6 +6,8 @@ import eu.hopu.servlets.dto.CreateSilPlatform;
 import eu.hopu.servlets.dto.SilPlatform;
 import eu.hopu.servlets.dto.UpdateSilPlatform;
 import eu.hopu.sil.dto.ClientSil;
+import eu.hopu.sil.dto.CreateDevice;
+import eu.hopu.sil.dto.SilDevice;
 import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +27,7 @@ public class SilOkHttpClient implements SilClient {
 
   private static String CLIENTS_API = "/api/mw2mw/clients";
   private static String PLATFORMS_API = "/api/mw2mw/platforms";
+  private static String DEVICES_API = "/api/mw2mw/devices";
 
   private String silUrl;
   private Gson gson;
@@ -34,7 +37,7 @@ public class SilOkHttpClient implements SilClient {
     this.silUrl = silUrl;
     this.gson = new Gson();
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
-    builder.connectionPool(new ConnectionPool(10, 60L, TimeUnit.SECONDS));
+    builder.connectionPool(new ConnectionPool(10, 120L, TimeUnit.SECONDS));
     this.client = builder.build();
   }
 
@@ -248,6 +251,159 @@ public class SilOkHttpClient implements SilClient {
         return true;
       } else {
         LOG.warn("Cannot retrieve platform types in SIL");
+        return false;
+      }
+    } catch (IOException e) {
+      LOG.error("{} request throws exception → {}", stringUrl, e.getMessage());
+      return false;
+    }
+  }
+
+  @Override
+  public List<SilDevice> retrieveDevices(String platformId, String clientId) {
+    LOG.info("Retrieving registered clients in SIL");
+
+    String stringUrl = null;
+    try {
+      stringUrl = silUrl + DEVICES_API + "?platformId=" + URLEncoder.encode(platformId, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return new LinkedList<>();
+    }
+    URL url;
+    try {
+      url = new URL(stringUrl);
+    } catch (MalformedURLException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return new LinkedList<>();
+    }
+
+    Request request = new Request.Builder()
+      .url(url)
+      .get()
+      .addHeader("Client-ID", clientId)
+      .build();
+
+    try (Response response = client.newCall(request).execute()) {
+      if (response.isSuccessful()) {
+        List<SilDevice> silClients = gson.fromJson(response.body().string(), new TypeToken<List<SilDevice>>() {
+        }.getType());
+        LOG.debug("Devices retrieved successfully → {}", silClients);
+        return silClients;
+      } else {
+        LOG.warn("Cannot retrieve devices in SIL");
+        return new LinkedList<>();
+      }
+    } catch (IOException e) {
+      LOG.error("{} request throws exception → {}", stringUrl, e.getMessage());
+      return new LinkedList<>();
+    }
+  }
+
+  @Override
+  public SilDevice createDevice(SilDevice deviceToCreate, String clientId) {
+    LOG.info("Creating device in SIL");
+
+    String stringUrl = silUrl + DEVICES_API;
+    URL url;
+    try {
+      url = new URL(stringUrl);
+    } catch (MalformedURLException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return null;
+    }
+
+    CreateDevice createDevice = new CreateDevice(deviceToCreate);
+    Request request = new Request.Builder()
+      .url(url)
+      .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(createDevice)))
+      .addHeader("Client-ID", clientId)
+      .build();
+
+    try (Response response = client.newCall(request).execute()) {
+      if (response.isSuccessful()) {
+        LOG.debug("Device created successfully → {}", deviceToCreate);
+        return deviceToCreate;
+      } else {
+        LOG.warn("Cannot create device in SIL");
+        return null;
+      }
+    } catch (IOException e) {
+      LOG.error("{} request throws exception → {}", stringUrl, e.getMessage());
+      return null;
+    }
+  }
+
+  @Override
+  public SilDevice updateDevice(SilDevice deviceToUpdate, String clientId) {
+    LOG.info("Updating device in SIL");
+
+    String stringUrl = null;
+    try {
+      stringUrl = silUrl + DEVICES_API + "/" + URLEncoder.encode(deviceToUpdate.getDeviceId(), "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return null;
+    }
+    URL url;
+    try {
+      url = new URL(stringUrl);
+    } catch (MalformedURLException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return null;
+    }
+
+    Request request = new Request.Builder()
+      .url(url)
+      .put(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(deviceToUpdate)))
+      .addHeader("Client-ID", clientId)
+      .build();
+
+    try (Response response = client.newCall(request).execute()) {
+      if (response.isSuccessful()) {
+        LOG.debug("Device updated successfully → {}", deviceToUpdate);
+        return deviceToUpdate;
+      } else {
+        LOG.warn("Cannot update device in SIL");
+        return null;
+      }
+    } catch (IOException e) {
+      LOG.error("{} request throws exception → {}", stringUrl, e.getMessage());
+      return null;
+    }
+  }
+
+  @Override
+  public boolean deleteDevice(String deviceId, String clientId) {
+    LOG.info("Deleting device in SIL");
+
+    String stringUrl = null;
+    try {
+      stringUrl = silUrl + DEVICES_API + "/" + URLEncoder.encode(deviceId, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return false;
+    }
+    URL url;
+    try {
+      url = new URL(stringUrl);
+    } catch (MalformedURLException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return false;
+    }
+
+    Request request = new Request.Builder()
+      .url(url)
+      .delete()
+      .addHeader("Client-ID", clientId)
+      .build();
+
+    try (Response response = client.newCall(request).execute()) {
+      if (response.isSuccessful()) {
+        LOG.debug("Device deleted successfully → {}", deviceId);
+        return true;
+      } else {
+        LOG.warn("Cannot delete device in SIL");
         return false;
       }
     } catch (IOException e) {

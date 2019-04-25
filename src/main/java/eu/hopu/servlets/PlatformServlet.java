@@ -43,7 +43,6 @@ public class PlatformServlet {
   @PUT
   @Consumes("application/json")
   @Produces("application/json")
-  @Path("/{platformId}")
   public Response updatePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId, UpdateSilPlatform platform) {
     UpdateSilPlatform silPlatform = client.updatePlatform(platformId, platform, request.getHeader("Client-ID"));
     return Response.ok().entity(gson.toJson(silPlatform)).build();
