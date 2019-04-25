@@ -1,12 +1,12 @@
 appDev.service('devDeployment',
-  ['$httpBackend', 'deployments', 'deployment',
-    function ($httpBackend, deployments, deployment) {
+  ['$httpBackend', 'deployments', 'deployment', 'devices',
+    function ($httpBackend, deployments, deployment, devices) {
 
       var service = {};
 
       // Esto es un ejemplo, eliminar cuando se entienda y se completen el resto de funciones
       service.retrieveDevices = function () {
-        $httpBackend.whenGET(/\/api\/v1\/devices\?platformId=.*/).respond(
+        $httpBackend.whenGET('api/v1/deployments/devices').respond(
           function (method, url, data, headers) {
             console.log('retrieveDevices → Received: ', method, url, data, headers);
             return [200, angular.fromJson(clone_object(devices))]
@@ -134,22 +134,56 @@ appDev.value('deployments',
           "device3"
         ]
       }
+    }
+  ]
+);
+
+appDev.value('devices',
+  [
+    {
+      "id":"1_1",
+      "label":"IoTDevice1",
+      "type":"Fibaro motion sensor",
+      "sensors":[
+        {
+          "id":"1_1",
+          "type":"IlluminanceSensor"
+        },
+        {
+          "id":"1_2",
+          "type":"TemperatureSensor"
+        },
+        {
+          "id":"1_3",
+          "type":"UserOccupancySensor"
+        }
+      ]
     },
     {
-      "id": "deployment3",
-      "date": "\"2017-06-06\"^^xsd:date",
-      "location": "\"AREA[“Thessaloniki3\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
-      "organization": {
-        "id": "organization3",
-        "label": "\"Municipality of Thessaloniki3.\""
-      },
-      "platform": {
-        "id": "platform3",
-        "label": "\"Activage Platform GR 3\"",
-        "devices": [
-          "device4"
-        ]
-      }
+      "id":"2_1",
+      "label":"IoTDevice2",
+      "type":"Fibaro motion sensor",
+      "sensors":[
+        {
+          "id":"2_1",
+          "type":"IlluminanceSensor"
+        },
+        {
+          "id":"2_2",
+          "type":"TemperatureSensor"
+        }
+      ]
+    },
+    {
+      "id":"3_1",
+      "label":"IoTDevice3",
+      "type":"Fibaro motion sensor",
+      "sensors":[
+        {
+          "id":"3_1",
+          "type":"IlluminanceSensor"
+        }
+      ]
     }
   ]
 );

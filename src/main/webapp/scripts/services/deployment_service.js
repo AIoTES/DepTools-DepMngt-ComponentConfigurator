@@ -4,8 +4,8 @@ app.service('deploymentService',
 
       var service = {};
 
-      service.retrieveDeployments = function (clientId) {
-        deploymentServiceApi.getDeployments(clientId)
+      service.retrieveDeployments = function () {
+        deploymentServiceApi.getDeployments()
           .then(
             function (response) {
               deploymentServiceData.deployments = response.data;
@@ -18,9 +18,27 @@ app.service('deploymentService',
           );
       };
 
+      service.retrieveDevices = function () {
+        deploymentServiceApi.getDevices()
+          .then(
+            function (response) {
+              deploymentServiceData.devices = response.data;
+            }
+          )
+          .catch(
+            function (error) {
+              console.log(error);
+            }
+          );
+      };
+
       service.getDeployments = function() {
         return deploymentServiceData.deployments;
       };
+
+      service.getDevices = function() {
+        return deploymentServiceData.devices;
+      }
 
       service.getCurrentDeployment = function() {
         return deploymentServiceData.currentDeployment;
