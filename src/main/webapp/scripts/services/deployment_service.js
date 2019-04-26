@@ -5,50 +5,57 @@ app.service('deploymentService',
       var service = {};
 
       service.retrieveDeployments = function () {
+        deploymentServiceData.retrievalStatus["deployments"] = deploymentServiceData.operationStatus.IN_PROGRESS;
+
         deploymentServiceApi.getDeployments()
           .then(
             function (response) {
               deploymentServiceData.deployments = response.data;
+              deploymentServiceData.retrievalStatus["deployments"] = deploymentServiceData.operationStatus.SUCCESS;
             }
           )
           .catch(
             function (error) {
               console.log(error);
+              deploymentServiceData.retrievalStatus["deployments"] = deploymentServiceData.operationStatus.FAILURE;
             }
           );
       };
 
       service.retrieveDevices = function () {
+        deploymentServiceData.retrievalStatus["devices"] = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.getDevices()
           .then(
             function (response) {
               deploymentServiceData.deploymentDevices = response.data;
+              deploymentServiceData.retrievalStatus["devices"] = deploymentServiceData.operationStatus.SUCCESS;
             }
           )
           .catch(
             function (error) {
               console.log(error);
+              deploymentServiceData.retrievalStatus["devices"] = deploymentServiceData.operationStatus.FAILURE;
             }
           );
       };
 
-      service.getDeployments = function() {
+      service.getDeployments = function () {
         return deploymentServiceData.deployments;
       };
 
-      service.getDevices = function() {
+      service.getDevices = function () {
         return deploymentServiceData.devices;
       };
 
-      service.getCurrentDeployment = function() {
+      service.getCurrentDeployment = function () {
         return deploymentServiceData.currentDeployment;
       };
 
-      service.setCurrentDeployment = function(deployment) {
+      service.setCurrentDeployment = function (deployment) {
         deploymentServiceData.currentDeployment = deployment
       };
 
-      service.addDeviceToDeployment = function(deploymentId, deviceId) {
+      service.addDeviceToDeployment = function (deploymentId, deviceId) {
         deploymentServiceApi.addDeviceToDeployment(deploymentId, deviceId)
           .then(
             function (response) {
@@ -71,7 +78,7 @@ app.service('deploymentService',
           )
       };
 
-      service.deleteDeviceFromDeployment = function(deploymentId, deviceId) {
+      service.deleteDeviceFromDeployment = function (deploymentId, deviceId) {
         deploymentServiceApi.deleteDeviceFromDeployment(deploymentId, deviceId)
           .then(
             function (response) {
@@ -97,7 +104,7 @@ app.service('deploymentService',
       service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {
         deploymentServiceApi.updateDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))
           .then(
-            function(response) {
+            function (response) {
               if (response.status === 200) {
                 var deployment = response.data;
                 deploymentServiceData.deployments.push(deployment);
@@ -112,10 +119,10 @@ app.service('deploymentService',
         deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
       };*/
 
-      service.deleteDeployment= function (deploymentId) {
+      service.deleteDeployment = function (deploymentId) {
         deploymentServiceApi.deleteDeployment(deploymentId)
           .then(
-            function(response) {
+            function (response) {
               if (response.status === 204) {
                 var deploymentIndex = deploymentServiceData.deployments.findIndex(
                   function (value) {

@@ -2,28 +2,27 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('addMaintenanceCtrl', ['$location', 'deploymentService', 'clientService', function ($location, deploymentService, clientService) {
+app.controller('addMaintenanceCtrl',
+  ['$location', 'recordService', 'recordServiceData',
+    function ($location, recordService, recordServiceData) {
 
-  var vm = this;
+      var vm = this;
 
-  var date = Date.now();
+      vm.recordToCreate = {
+        "elementId": recordServiceData.selectedElementId,
+        "description": "",
+        "status": "",
+        "type": ""
+      };
 
-  vm.deploymentService = deploymentService;
-  vm.clientService = clientService;
+      vm.closeAddMaintenance = function () {
+        $location.path('/main/maintenance_panel');
+      };
 
-  vm.deployId = "";
-  vm.deviceId = "";
-  vm.description = "";
-  vm.status = "";
-  vm.type = "";
-  vm.date = date;
+      vm.addTicket = function () {
+        recordService.create_record(vm.recordToCreate);
+      };
 
-  vm.closeAddMaintenance = function () {
-    $location.path('/main/maintenance_panel');
-  };
-
-  vm.addTicket = function () {
-    vm.deploymentService.updateDeployment(vm.deployId, vm.date, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
-  };
-
-}]);
+    }
+  ]
+);

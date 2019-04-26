@@ -9,72 +9,51 @@
     </div>
   </div>
 
-  <div class="option-device-container info-inner">
+  <div
+    ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.IN_PROGRESS">
+    Loading...
+  </div>
 
-    <div class="info-left">
-      Id:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.id}}
-    </div>
+  <div
+    ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.FAILURE">
+    Cannot retrieve records by id
+  </div>
 
-    <div class="info-left">
-      Date:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.date}}
-    </div>
+  <div
+    ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.SUCCESS"
+    class="option-device-container info-inner">
 
-    <div class="info-left">
-      Location:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.location}}
-    </div>
+    <div
+      ng-repeat="record in maintenanceInfo.recordData.recordsByElementId[maintenanceInfo.recordData.selectedElementId]">
+      <div class="info-left">Id:</div>
+      <div class="info-right">{{record.id}}</div>
 
-    <hr class="line">
+      <div class="info-left">ElementId:</div>
+      <div class="info-right">{{record.elementId}}</div>
 
-    <div class="info-left">
-      Organization Id:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.organization.id}}
-    </div>
+      <div class="info-left">Description:</div>
+      <div class="info-right">{{record.description}}</div>
 
-    <div class="info-left">
-      Organization Label:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.organization.label}}
-    </div>
+      <div class="info-left">Status:</div>
+      <div class="info-right">{{record.status}}</div>
 
-    <hr class="line">
+      <div class="info-left">Type:</div>
+      <div class="info-right">{{record.type}}</div>
 
-    <div class="info-left">
-      Platform Id:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.platform.id}}
-    </div>
+      <div class="info-left">Timestamp:</div>
+      <div class="info-right">{{record.timestamp}}</div>
 
-    <div class="info-left">
-      Platform Label:
-    </div>
-    <div class="info-right">
-      {{maintenanceInfo.deploymentData.currentDeployment.platform.label}}
-    </div>
+      <button style="float: left" type="submit" class="create-button" ng-click="maintenanceInfo.updateRecord(record)">
+        <span>Update</span>
+      </button>
 
-    <div class="info-left">
-      Devices:
-    </div>
+      <button style="float: right; margin-top: -30px" type="submit" class="create-button"
+              ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
+        <span>Delete</span>
+      </button>
 
-    <div ng-repeat="x in maintenanceInfo.deploymentData.currentDeployment.platform.devices">
-      <div class="info-right">
-        {{x}}
-      </div>
+      <hr class="line">
     </div>
-
-    <hr class="line">
 
   </div>
 

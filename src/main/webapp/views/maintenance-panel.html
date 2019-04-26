@@ -16,7 +16,19 @@
     -->
   </div>
 
-  <div class="option-device-container">
+  <div ng-show="maintenance.deploymentData.retrievalStatus['deployments'] === maintenance.deploymentData.operationStatus.IN_PROGRESS &&
+                maintenance.deploymentData.retrievalStatus['devices'] === maintenance.deploymentData.operationStatus.IN_PROGRESS">
+    Loadings devices and deployments...
+  </div>
+
+  <div ng-show="maintenance.deploymentData.retrievalStatus['deployments'] === maintenance.deploymentData.operationStatus.FAILURE &&
+                maintenance.deploymentData.retrievalStatus['devices'] === maintenance.deploymentData.operationStatus.FAILURE">
+    Cannot retrieve devices and deployments
+  </div>
+
+  <div ng-show="maintenance.deploymentData.retrievalStatus['deployments'] === maintenance.deploymentData.operationStatus.SUCCESS &&
+                maintenance.deploymentData.retrievalStatus['devices'] === maintenance.deploymentData.operationStatus.SUCCESS"
+       class="option-device-container">
 
     <div ng-repeat="deployment in maintenance.deploymentData.deployments" class="option-device">
 
@@ -32,6 +44,23 @@
           <span class="glyphicon glyphicon-plus"></span>
         </div>
       </div>
+
+    </div>
+
+    <div ng-repeat="deploymentDevice in maintenance.deploymentData.deploymentDevices" class="option-device">
+
+      <div class="option-name-container" ng-click="maintenance.selectDeviceDeployment(deploymentDevice)">
+        <span class="option-name">{{deploymentDevice.id}}</span>
+        <br class="jump-line">
+        <span class="option-platform">{{deploymentDevice.label}}</span>
+      </div>
+
+      <div class="option-buttons-container">
+        <div class="square-option-device-button" ng-click="maintenance.goToAddMaintenance()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </div>
+      </div>
+
     </div>
 
   </div>

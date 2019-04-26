@@ -3,18 +3,32 @@
  */
 
 app.controller('maintenanceCtrl',
-  ['$location', 'deploymentService', 'deploymentServiceData',
-    function ($location, deploymentService, deploymentServiceData) {
+  ['$location', 'deploymentService', 'deploymentServiceData', 'recordService', 'recordServiceData',
+    function ($location, deploymentService, deploymentServiceData, recordService, recordServiceData) {
 
       var vm = this;
 
       if (deploymentServiceData.deployments.length === 0)
         deploymentService.retrieveDeployments();
 
+      if (deploymentServiceData.deploymentDevices.length === 0)
+        deploymentService.retrieveDevices();
+
       vm.deploymentData = deploymentServiceData;
 
       vm.selectDeployment = function (deployment) {
         deploymentServiceData.currentDeployment = deployment;
+        deploymentServiceData.selected = 'deployment';
+        recordService.retrieve_records_by_element_id(deployment.id);
+        recordServiceData.selectedElementId = deployment.id;
+        vm.goToMaintenanceInfo();
+      };
+
+      vm.selectDeviceDeployment = function (device) {
+        deploymentServiceData.currentDeviceDeployment = device;
+        deploymentServiceData.selected = 'device';
+        recordService.retrieve_records_by_element_id(device.id);
+        recordServiceData.selectedElementId = device.id;
         vm.goToMaintenanceInfo();
       };
 

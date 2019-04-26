@@ -1,6 +1,6 @@
 appDev.service('devDeployment',
-  ['$httpBackend', 'deployments', 'deployment', 'devices',
-    function ($httpBackend, deployments, deployment, devices) {
+  ['$httpBackend', 'deployments', 'deployment', 'deploymentDevices',
+    function ($httpBackend, deployments, deployment, deploymentDevices) {
 
       var service = {};
 
@@ -8,7 +8,7 @@ appDev.service('devDeployment',
         $httpBackend.whenGET('/api/v1/deployments/devices').respond(
           function (method, url, data, headers) {
             console.log('retrieveDevices → Received: ', method, url, data, headers);
-            return [200, angular.fromJson(clone_object(devices))]
+            return [200, angular.fromJson(clone_object(deploymentDevices))]
           }
         );
       };
@@ -142,7 +142,7 @@ appDev.value('deployments',
   ]
 );
 
-appDev.value('devices',
+appDev.value('deploymentDevices',
   [
     {
       "id": "1_1",
