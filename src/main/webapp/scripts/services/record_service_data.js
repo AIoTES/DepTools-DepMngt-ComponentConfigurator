@@ -7,9 +7,10 @@ app.service('recordServiceData',
       records: [],
       recordsById: {},
       recordsByElementId: {},
+      selectedElementId: "",
 
       operationStatus: retrievalStatus,
-      retrievalStatus: retrievalStatus.NOT_STARTED,
+      retrievalStatus: {},
       updateStatus: retrievalStatus.NOT_STARTED,
       deleteStatus: retrievalStatus.NOT_STARTED
     };

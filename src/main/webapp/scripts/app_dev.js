@@ -2,17 +2,12 @@ var appDev = angular.module('activageDashboardAppDev', ['activageDashboardApp', 
 
 
 appDev.run(
-  ['$httpBackend', 'devRecords', 'devClients', 'devPlatforms', 'devDevices', 'devDeployment',
-    function ($httpBackend, devRecords, devClients, devPlatforms, devDevices, devDeployment) {
+  ['$httpBackend', 'devClients', 'devPlatforms', 'devDevices', 'devDeployment', 'devRecord',
+    function ($httpBackend, devClients, devPlatforms, devDevices, devDeployment, devRecord) {
 
       devClients.retrieveClients();
       devClients.setCurrentClient();
       devClients.getCurrentClient();
-
-      devRecords.retrieveRecords();
-      devRecords.createRecord();
-      devRecords.updateRecord();
-      devRecords.deleteRecord();
 
       devPlatforms.retrievePlatforms();
       devPlatforms.retrievePlatformTypes();
@@ -26,14 +21,18 @@ appDev.run(
       devDevices.createDevice();
       devDevices.deleteDevice();
 
-      devDeployment.retrieveDevices();
       devDeployment.retrieveDeployments();
+      devDeployment.retrieveDevices();
       devDeployment.createDeployment();
       devDeployment.getDeploymentById();
       devDeployment.deleteDeploymentById();
       devDeployment.getDeploymentHistoricById();
       devDeployment.addDeviceToDeployment();
       devDeployment.deleteDeviceFromDeployment();
+
+      devRecord.retrieveRecordsByElement();
+      devRecord.createRecord();
+      devRecord.deleteRecord();
 
       /** URL passThrough - Evitan error en la fase de desarrollo **/
 

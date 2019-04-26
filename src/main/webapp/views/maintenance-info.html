@@ -2,67 +2,57 @@
 
   <div class="option-header">
     <div class="option-header-left">
-      <h3>Maintenance Info</h3>
+      <h3>Deployment: {{maintenanceInfo.deploymentData.currentDeployment.id}}</h3>
     </div>
     <div class="close-info" title="Close window" ng-click="maintenanceInfo.closeMaintenanceInfo()">
       <span class="glyphicon glyphicon-remove"></span>
     </div>
   </div>
 
-  <div class="option-device-container info-inner">
+  <div
+    ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.IN_PROGRESS">
+    Loading...
+  </div>
 
-    <div class="info-left">
-      Deployment Id:
-    </div>
-    <div class="info-right">
-      Deployment Id
-    </div>
+  <div
+    ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.FAILURE">
+    Cannot retrieve records by id
+  </div>
 
-    <div class="info-left">
-      Device Id:
-    </div>
-    <div class="info-right">
-      Device Id
-    </div>
+  <div
+    ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.SUCCESS"
+    class="option-device-container info-inner">
 
-    <div class="info-left">
-      Description:
-    </div>
-    <div class="info-right">
-      Description
-    </div>
+    <div
+      ng-repeat="record in maintenanceInfo.recordData.recordsByElementId[maintenanceInfo.recordData.selectedElementId]">
+      <div class="info-left">Id:</div>
+      <div class="info-right">{{record.id}}</div>
 
-    <div class="info-left">
-      Status:
-    </div>
-    <div class="info-right">
-      Status
-    </div>
+      <div class="info-left">ElementId:</div>
+      <div class="info-right">{{record.elementId}}</div>
 
-    <div class="info-left">
-      Type:
-    </div>
-    <div class="info-right">
-      Type
-    </div>
+      <div class="info-left">Description:</div>
+      <div class="info-right">{{record.description}}</div>
 
-    <div class="info-left">
-      Date:
-    </div>
-    <div class="info-right">
-      Date
-    </div>
+      <div class="info-left">Status:</div>
+      <div class="info-right">{{record.status}}</div>
 
-    <hr class="line">
+      <div class="info-left">Type:</div>
+      <div class="info-right">{{record.type}}</div>
 
-    <div class="button-container-form">
-      <button type="submit" class="info-button" ng-click="maintenanceInfo.goToDeleteDeployment()">
+      <div class="info-left">Timestamp:</div>
+      <div class="info-right">{{record.timestamp}}</div>
+
+      <button style="float: left" type="submit" class="create-button" ng-click="maintenanceInfo.updateRecord(record)">
+        <span>Update</span>
+      </button>
+
+      <button style="float: right; margin-top: -30px" type="submit" class="create-button"
+              ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
         <span>Delete</span>
       </button>
 
-      <button type="submit" class="info-button" ng-click="maintenanceInfo.goToUpdateMaintenance()">
-        <span>Update</span>
-      </button>
+      <hr class="line">
     </div>
 
   </div>

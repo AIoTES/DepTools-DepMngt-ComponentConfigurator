@@ -5,13 +5,12 @@ app.service('recordService',
       var service = {};
 
       service.retrieve_records_by_element_id = function (elementId) {
-        recordServiceData.retrievalStatus = recordServiceData.operationStatus.IN_PROGRESS;
+        recordServiceData.retrievalStatus[elementId] = recordServiceData.operationStatus.IN_PROGRESS;
 
         recordServiceApi.retrieve_records_by_element_id(elementId)
           .then(
             function (response) {
               var records = response.data;
-
               recordServiceData.recordsByElementId[elementId] = records;
               records.forEach(
                 function (record) {
@@ -19,12 +18,12 @@ app.service('recordService',
                 }
               );
 
-              recordServiceData.retrievalStatus = recordServiceData.operationStatus.SUCCESS;
+              recordServiceData.retrievalStatus[elementId] = recordServiceData.operationStatus.SUCCESS;
             }
           )
           .catch(
             function () {
-              recordServiceData.retrievalStatus = recordServiceData.operationStatus.FAILURE;
+              recordServiceData.retrievalStatus[elementId] = recordServiceData.operationStatus.FAILURE;
             }
           )
 
@@ -51,23 +50,32 @@ app.service('recordService',
           )
       };
 
-      service.update_record = function (record) {
+      service.update_record = function (recordToUpdate) {
         recordServiceData.updateStatus = recordServiceData.operationStatus.IN_PROGRESS;
 
-        recordServiceApi.update_record(record)
+        recordServiceApi.update_record(recordToUpdate)
           .then(
             function (response) {
-              var record = response.data;
+              var recordUpdated = response.data;
 
-              recordServiceData.recordsById[record.id] = record;
-
-              var result = recordServiceData.recordsByElementId.filter(
+              var recordIndex = recordServiceData.records.findIndex(
                 function (record) {
-                  return record.id !== recordId;
+                  return record.id === recordUpdated.id;
                 }
               );
-              recordServiceData.recordsByElementId[record.elementId] = result;
-              recordServiceData.recordsByElementId[record.elementId].push(record);
+
+              if (recordIndex !== -1)
+                recordServiceData.records[recordIndex] = recordUpdated;
+
+
+              recordIndex = recordServiceData.recordsByElementId[recordUpdated.elementId].findIndex(
+                function (record) {
+                  return record.id === recordUpdated.id;
+                }
+              );
+
+              if (recordIndex !== -1)
+                recordServiceData.recordsByElementId[recordUpdated.elementId][recordIndex] = recordUpdated;
 
               recordServiceData.updateStatus = recordServiceData.operationStatus.SUCCESS;
             }
@@ -84,17 +92,17 @@ app.service('recordService',
 
         recordServiceApi.delete_record(elementId, recordId)
           .then(
-            function (response) {
-              var record = response.data;
+            function () {
+              delete recordServiceData.recordsById[recordId];
 
-              delete recordServiceData.recordsById[record.id];
-
-              var result = recordServiceData.recordsByElementId.filter(
+              var recordIndex = recordServiceData.recordsByElementId[elementId].findIndex(
                 function (record) {
-                  return record.id !== recordId;
+                  return record.id === recordId;
                 }
               );
-              recordServiceData.recordsByElementId[record.elementId] = result;
+
+              if (recordIndex !== -1)
+                recordServiceData.recordsByElementId[elementId].splice(recordIndex, 1);
 
               recordServiceData.deleteStatus = recordServiceData.operationStatus.SUCCESS;
             }
