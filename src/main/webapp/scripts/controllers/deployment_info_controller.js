@@ -7,7 +7,7 @@ app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploym
   var vm = this;
 
   vm.deploymentService = deploymentService;
-  vm.deploymentServiceData = deploymentServiceData;
+  vm.deploymentData = deploymentServiceData;
 
   vm.closeDeploymentInfo = function () {
     $location.path('/main/deployment_manager');
@@ -18,11 +18,12 @@ app.controller('deploymentInfoCtrl', ['$location', 'deploymentService', 'deploym
   };
 
   vm.goToUpdateDeployment = function () {
+    vm.deploymentData.addDeviceStatus = deploymentServiceData.operationStatus.NOT_STARTED;
     $location.path('/main/deployment_manager/update_deployment');
   };
 
   vm.goToDeleteDeployment = function () {
-    vm.deploymentService.deleteDeployment(vm.deploymentServiceData.currentDeployment.id);
+    vm.deploymentService.deleteDeployment(vm.deploymentData.currentDeployment.id);
   };
 
 }]);

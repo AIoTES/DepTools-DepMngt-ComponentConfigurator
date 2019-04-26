@@ -10,15 +10,20 @@
         <span class="glyphicon glyphicon-trash"></span>
       </div>-->
       <div class="square-header-button" title="Create Deployment Installation"
-           ng-click="deployCtrl.goToCreateDeployment()">
+           ng-click="deployCtrl.createDeployment()">
         <span class="glyphicon glyphicon-plus"></span>
       </div>
 
     </div>
   </div>
 
-  <div class="option-device-container">
-
+  <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.IN_PROGRESS">
+    Loading deployments...
+  </div>
+  <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.FAILURE">
+    Cannot retrieve deployments
+  </div>
+  <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.SUCCESS" class="option-device-container">
     <div class="option-device"
          ng-repeat="deployment in deployCtrl.deploymentData.deployments">
 
@@ -29,12 +34,11 @@
       </div>
 
       <div class="option-buttons-container">
-        <div class="square-option-device-button" ng-click="deployCtrl.goToUpdateDeployment(deployment)">
+        <div class="square-option-device-button" ng-click="deployCtrl.updateDeployment(deployment)">
           <span class="glyphicon glyphicon-edit"></span>
         </div>
       </div>
     </div>
-
   </div>
 
 </div>

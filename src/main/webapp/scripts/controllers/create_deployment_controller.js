@@ -2,13 +2,25 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('createDeploymentCtrl', ['$location', 'deploymentService', function ($location, deploymentService) {
+app.controller('createDeploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
   var vm = this;
 
   var date = Date.now();
 
   vm.deploymentService = deploymentService;
+  vm.deploymentData = deploymentServiceData;
+
+  vm.currentDeployment = {
+    "id": "",
+    "date": date,
+    "location": "",
+    "organizationId": "",
+    "organizationLabel": "",
+    "platformId": "",
+    "platformLabel": "",
+    "devices": ""
+  };
 
   vm.deployId = "";
   vm.deployDate = date;
@@ -30,7 +42,7 @@ app.controller('createDeploymentCtrl', ['$location', 'deploymentService', functi
   };
 
   vm.createDeployment = function () {
-    vm.deploymentService.updateDeployment(vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
+    vm.deploymentService.createDeployment(vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
   };
 
 }]);

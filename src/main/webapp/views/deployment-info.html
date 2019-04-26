@@ -2,7 +2,7 @@
 
   <div class="option-header">
     <div class="option-header-left">
-      <h3>Deployment: {{deployInfo.deploymentServiceData.currentDeployment.id}}</h3>
+      <h3>Deployment: {{deployInfo.deploymentData.currentDeployment.id}}</h3>
     </div>
     <div class="close-info" title="Close window" ng-click="deployInfo.closeDeploymentInfo()">
       <span class="glyphicon glyphicon-remove"></span>
@@ -15,21 +15,21 @@
         Id:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.id}}
+        {{deployInfo.deploymentData.currentDeployment.id}}
       </div>
 
       <div class="info-left">
         Date:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.date}}
+        {{deployInfo.deploymentData.currentDeployment.date}}
       </div>
 
       <div class="info-left">
         Location:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.location}}
+        {{deployInfo.deploymentData.currentDeployment.location}}
       </div>
 
     <hr class="line">
@@ -38,14 +38,14 @@
         Organization Id:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.organization.id}}
+        {{deployInfo.deploymentData.currentDeployment.organization.id}}
       </div>
 
       <div class="info-left">
         Organization Label:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.organization.label}}
+        {{deployInfo.deploymentData.currentDeployment.organization.label}}
       </div>
 
     <hr class="line">
@@ -54,21 +54,21 @@
         Platform Id:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.platform.id}}
+        {{deployInfo.deploymentData.currentDeployment.platform.id}}
       </div>
 
       <div class="info-left">
         Platform Label:
       </div>
       <div class="info-right">
-        {{deployInfo.deploymentServiceData.currentDeployment.platform.label}}
+        {{deployInfo.deploymentData.currentDeployment.platform.label}}
       </div>
 
       <div class="info-left">
         Devices:
       </div>
 
-      <div ng-repeat="x in deployInfo.deploymentServiceData.currentDeployment.platform.devices">
+      <div ng-repeat="x in deployInfo.deploymentData.currentDeployment.platform.devices">
         <div class="info-right">
           {{x}}
         </div>
@@ -76,12 +76,42 @@
 
     <hr class="line">
 
-    <div class="button-container-form">
+    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.NOT_STARTED">
       <button type="submit" class="info-button" ng-click="deployInfo.goToDeleteDeployment()">
         <span>Delete</span>
       </button>
 
       <button type="submit" class="info-button" ng-click="deployInfo.goToUpdateDeployment()">
+        <span>Update</span>
+      </button>
+    </div>
+
+    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.IN_PROGRESS">
+      <button type="submit" class="info-button">
+        <span>Deleting...</span>
+      </button>
+
+      <button type="submit" class="info-button">
+        <span>Update</span>
+      </button>
+    </div>
+
+    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.FAILURE">
+      <button type="submit" class="info-button">
+        <span>¡ERROR!</span>
+      </button>
+
+      <button type="submit" class="info-button">
+        <span>Update</span>
+      </button>
+    </div>
+
+    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.SUCCESS">
+      <button type="submit" class="info-button">
+        <span>Deleted</span>
+      </button>
+
+      <button type="submit" class="info-button">
         <span>Update</span>
       </button>
     </div>

@@ -5,7 +5,7 @@
 app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
   deploymentService.retrieveDeployments();
-  deploymentService.retrieveDevices();
+//  deploymentService.retrieveDevices();
 
   var vm = this;
 
@@ -13,16 +13,33 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
   vm.deploymentData = deploymentServiceData;
 
   vm.selectDeployment = function (deployment) {
+    vm.deploymentData.deleteStatus = vm.deploymentData.operationStatus.NOT_STARTED;
     vm.deployment.setCurrentDeployment(deployment);
+    vm.goToDeploymentInfo();
+  };
+
+  vm.createDeployment = function () {
+    vm.deploymentData.createStatus = vm.deploymentData.operationStatus.NOT_STARTED;
+    vm.goToCreateDeployment();
+  }
+
+  vm.updateDeployment = function (deployment) {
+    vm.deploymentData.addDeviceStatus = vm.deploymentData.operationStatus.NOT_STARTED;
+    vm.deployment.setCurrentDeployment(deployment);
+    vm.goToUpdateDeployment();
+
+  }
+
+  vm.goToDeploymentInfo = function () {
     $location.path('/main/deployment_manager/deployment_info');
   };
+
 
   vm.goToCreateDeployment = function () {
     $location.path('/main/deployment_manager/create_deployment');
   };
 
-  vm.goToUpdateDeployment = function (deployment) {
-    vm.deployment.setCurrentDeployment(deployment);
+  vm.goToUpdateDeployment = function () {
     $location.path('/main/deployment_manager/update_deployment');
   };
 

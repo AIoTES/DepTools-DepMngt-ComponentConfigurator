@@ -24,6 +24,16 @@ app.service('deploymentServiceApi',
         });
       };
 
+      service.getDeploymentById = function (deploymentId) {
+        return $http({
+          method: 'GET',
+          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+      };
+
       service.addDeviceToDeployment = function (deploymentId, deviceId) {
         return $http({
           method: 'PUT',

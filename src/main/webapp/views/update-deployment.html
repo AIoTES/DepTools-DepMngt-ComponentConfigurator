@@ -53,8 +53,20 @@
       <input type="text" placeholder="Platform Label" ng-model="updateCtrl.newDevicesId">
       <label class="form-label">New Devices Id:</label>
 
-      <button type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
+      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.NOT_STARTED" type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
         <span>Add Devices</span>
+      </button>
+
+      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.IN_PROGRESS" type="submit" class="info-button">
+        <span>Adding Devices...</span>
+      </button>
+
+      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.FAILURE" type="submit" class="info-button">
+        <span>¡ERROR!</span>
+      </button>
+
+      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.SUCCESS" type="submit" class="info-button">
+        <span>Added Devices</span>
       </button>
 
     </form>

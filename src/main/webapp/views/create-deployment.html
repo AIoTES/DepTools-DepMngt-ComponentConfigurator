@@ -82,9 +82,29 @@
 
       <hr class="line">
 
-      <button type="submit" class="info-button" ng-click="createDeploy.updateDeployment()">
-        <span>Create</span>
-      </button>
+      <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="createDeploy.createDeployment()">
+          <span>Create</span>
+        </button>
+      </div>
+
+      <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.IN_PROGRESS">
+        <button type="submit" class="info-button" ng-click="">
+          <span>Creating...</span>
+        </button>
+      </div>
+
+      <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.FAILURE">
+        <button type="submit" class="info-button" ng-click="">
+          <span>¡Error!</span>
+        </button>
+      </div>
+
+      <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.SUCCESS">
+        <button type="submit" class="info-button" ng-click="">
+          <span>Created</span>
+        </button>
+      </div>
 
     </form>
 

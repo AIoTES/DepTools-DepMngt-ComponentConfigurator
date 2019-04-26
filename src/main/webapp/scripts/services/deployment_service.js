@@ -16,6 +16,7 @@ app.service('deploymentService',
           )
           .catch(
             function (error) {
+              console.log('ERROR');
               console.log(error);
               deploymentServiceData.retrievalStatus["deployments"] = deploymentServiceData.operationStatus.FAILURE;
             }
@@ -39,23 +40,29 @@ app.service('deploymentService',
           );
       };
 
-      service.getDeployments = function () {
-        return deploymentServiceData.deployments;
-      };
+      /*service.getDeploymentById = function (deploymentId) {
+        deploymentServiceData.retrievalStatus[deploymentId] = deploymentServiceData.operationStatus.IN_PROGRESS;
 
-      service.getDevices = function () {
-        return deploymentServiceData.devices;
-      };
-
-      service.getCurrentDeployment = function () {
-        return deploymentServiceData.currentDeployment;
-      };
+        deploymentServiceApi.getDeploymentById(deploymentId)
+          .then(
+            function (response) {
+              var deployment = response.data;
+              deploymentServiceData.retrievalStatus[deploymentId] = deploymentServiceData.operationStatus.SUCCESS;
+            }
+          )
+          .catch(
+            function () {
+              deploymentServiceData.retrievalStatus[deploymentId] = deploymentServiceData.operationStatus.FAILURE;
+            }
+          )
+      };*/
 
       service.setCurrentDeployment = function (deployment) {
-        deploymentServiceData.currentDeployment = deployment
+        deploymentServiceData.currentDeployment = deployment;
       };
 
       service.addDeviceToDeployment = function (deploymentId, deviceId) {
+        deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.addDeviceToDeployment(deploymentId, deviceId)
           .then(
             function (response) {
@@ -71,14 +78,20 @@ app.service('deploymentService',
                 if (deploymentIndex !== -1)
                   deploymentServiceData.deployments[deploymentIndex] = deployment;
 
-                alert("Device " + deviceId + " added");
-                $location.path('/main/deployment_manager');
+                deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.SUCCESS;
               }
+            }
+          )
+          .catch(
+            function(error) {
+              console.log(error);
+              deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.FAILURE;
             }
           )
       };
 
       service.deleteDeviceFromDeployment = function (deploymentId, deviceId) {
+        deploymentServiceData.removeDeviceStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.deleteDeviceFromDeployment(deploymentId, deviceId)
           .then(
             function (response) {
@@ -94,23 +107,36 @@ app.service('deploymentService',
                 if (deploymentIndex !== -1)
                   deploymentServiceData.deployments[deploymentIndex] = deployment;
 
-                alert("Device " + deviceId + " removed");
-                $location.path('/main/deployment_manager');
+                deploymentServiceData.removeDeviceStatus = deploymentServiceData.operationStatus.SUCCESS;
               }
+            }
+          )
+          .catch(
+            function(error) {
+              console.log(error);
+              deploymentServiceData.removeDeviceStatus = deploymentServiceData.operationStatus.FAILURE;
             }
           )
       };
 
       service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {
-        deploymentServiceApi.updateDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))
+        deploymentServiceData.createStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
+        deploymentServiceApi.createDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))
           .then(
             function (response) {
               if (response.status === 200) {
                 var deployment = response.data;
                 deploymentServiceData.deployments.push(deployment);
-                alert("Deployment created");
+                deploymentServiceData.createStatus = deploymentServiceData.operationStatus.SUCCESS;
+                deploymentServiceData.createStatus = deploymentServiceData.operationStatus.NOT_STARTED;
                 $location.path('/main/deployment_manager');
               }
+            }
+          )
+          .catch(
+            function(error) {
+              console.log(error);
+              deploymentServiceData.createStatus = deploymentServiceData.operationStatus.FAILURE;
             }
           )
       };
@@ -120,6 +146,7 @@ app.service('deploymentService',
       };*/
 
       service.deleteDeployment = function (deploymentId) {
+        deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.deleteDeployment(deploymentId)
           .then(
             function (response) {
@@ -133,9 +160,14 @@ app.service('deploymentService',
                 if (deploymentIndex !== -1)
                   deploymentServiceData.deployments.splice(deploymentIndex, 1);
 
-                alert("Device deleted");
-                $location.path('/main/deployment_manager');
+                deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.SUCCESS;
               }
+            }
+          )
+          .catch(
+            function(error) {
+              console.log(error);
+              deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.FAILURE;
             }
           )
       };
