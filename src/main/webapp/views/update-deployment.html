@@ -2,7 +2,7 @@
 
   <div class="option-header">
     <div class="option-header-left">
-      <h3>Update Deployment Installation</h3>
+      <h3>Update Deployment:  {{updateCtrl.currentDeployment.id}}</h3>
     </div>
     <div class="close-info" title="Close window" ng-click="updateCtrl.closeCreateDeployment()">
       <span class="glyphicon glyphicon-remove"></span>
@@ -13,38 +13,38 @@
 
     <form class="add-form" name="add-device">
 
-      <input type="text" disabled placeholder="Id" ng-model="updateCtrl.id">
+      <input type="text" disabled placeholder="Id" ng-model="updateCtrl.currentDeployment.id">
       <label class="form-label">Id:</label>
 
       <div class="info-left">
         Date:
       </div>
       <div class="info-right">
-        {{updateCtrl.date | date: 'dd-MM-yyyy HH:mm:ss'}}
+        {{updateCtrl.currentDeployment.date | date: 'dd-MM-yyyy HH:mm:ss'}}
       </div>
 
-      <input type="text" disabled placeholder="Location" ng-model="updateCtrl.location">
+      <input type="text" disabled placeholder="Location" ng-model="updateCtrl.currentDeployment.location">
       <label class="form-label">Location:</label>
 
       <hr class="line">
 
-      <input type="text" disabled placeholder="Organization Id" ng-model="updateCtrl.organizationId">
+      <input type="text" disabled placeholder="Organization Id" ng-model="updateCtrl.currentDeployment.organizationId">
       <label class="form-label">Organization Id:</label>
 
-      <input type="text" disabled placeholder="Organization Label" ng-model="updateCtrl.organizationLabel">
+      <input type="text" disabled placeholder="Organization Label" ng-model="updateCtrl.currentDeployment.organizationLabel">
       <label class="form-label">Organization Label:</label>
 
       <hr class="line">
 
-      <input type="text" disabled placeholder="Platform Id" ng-model="updateCtrl.platformId">
+      <input type="text" disabled placeholder="Platform Id" ng-model="updateCtrl.currentDeployment.platformId">
       <label class="form-label">Platform Id:</label>
 
-      <input type="text" disabled placeholder="Platform Label" ng-model="updateCtrl.platformLabel">
+      <input type="text" disabled placeholder="Platform Label" ng-model="updateCtrl.currentDeployment.platformLabel">
       <label class="form-label">Platform Label:</label>
 
       <label class="form-label">Devices:</label>
 
-      <div ng-repeat="device in updateCtrl.devices">
+      <div ng-repeat="device in updateCtrl.currentDeployment.devices">
         <input type="text" disabled placeholder="Devices" ng-model=device>
       </div>
 

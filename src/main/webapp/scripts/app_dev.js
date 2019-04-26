@@ -26,6 +26,7 @@ appDev.run(
       devDevices.createDevice();
       devDevices.deleteDevice();
 
+      devDeployment.retrieveDevices();
       devDeployment.retrieveDeployments();
       devDeployment.createDeployment();
       devDeployment.getDeploymentById();
@@ -33,7 +34,6 @@ appDev.run(
       devDeployment.getDeploymentHistoricById();
       devDeployment.addDeviceToDeployment();
       devDeployment.deleteDeviceFromDeployment();
-      devDeployment.retrieveDevices();
 
       /** URL passThrough - Evitan error en la fase de desarrollo **/
 

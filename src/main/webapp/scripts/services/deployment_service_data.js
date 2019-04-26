@@ -2,7 +2,8 @@ app.service('deploymentServiceData', function() {
     var service = {
       deployments: [],
       currentDeployment: '',
-      deploymentDevices: []
+      deploymentDevices: new Map(),
+      currentDeploymentDevices: []
     };
 
     return service;

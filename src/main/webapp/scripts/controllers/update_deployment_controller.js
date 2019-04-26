@@ -2,34 +2,37 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', function ($location, deploymentService) {
+app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
   var vm = this;
 
   var date = Date.now();
 
   vm.deploymentService = deploymentService;
-
-  vm.currentDeployment = vm.deploymentService.getCurrentDeployment();
+  vm.deploymentData = deploymentServiceData;
 
   vm.deviceIdSelected = "";
   vm.newDevicesId = "";
 
-  vm.id = vm.currentDeployment.id;
-  vm.date = date;
-  vm.location = vm.currentDeployment.location;
-  vm.organizationId = vm.currentDeployment.organization.id;
-  vm.organizationLabel = vm.currentDeployment.organization.label;
-  vm.platformId = vm.currentDeployment.platform.id;
-  vm.platformLabel = vm.currentDeployment.platform.label;
-  vm.devices = vm.currentDeployment.platform.devices;
+  vm.currentDeployment = {
+    "id": vm.deploymentData.currentDeployment.id,
+    "date": date,
+    "location": vm.deploymentData.currentDeployment.location,
+    "organizationId": vm.deploymentData.currentDeployment.organization.id,
+    "organizationLabel": vm.deploymentData.currentDeployment.organization.label,
+    "platformId": vm.deploymentData.currentDeployment.platform.id,
+    "platformLabel": vm.deploymentData.currentDeployment.platform.label,
+    "devices": vm.deploymentData.currentDeployment.platform.devices
+  };
 
   vm.closeCreateDeployment = function () {
     $location.path('/main/deployment_manager');
   };
+
   vm.deleteDevice = function (deviceId) {
     vm.deploymentService.deleteDeviceFromDeployment(vm.id, deviceId);
   };
+
   vm.addDevices = function () {
     var devices = vm.newDevicesId.split(",");
     if (devices.length > 0) {

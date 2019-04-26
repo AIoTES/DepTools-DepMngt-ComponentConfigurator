@@ -23,6 +23,11 @@ app.service('deploymentService',
           .then(
             function (response) {
               deploymentServiceData.deploymentDevices = response.data;
+
+/*              response.data.forEach(function(device){
+                deploymentServiceData.deploymentDevices.put(device.id, device);
+              });
+              console.log(deploymentServiceData.deploymentDevices);*/
             }
           )
           .catch(
@@ -30,18 +35,6 @@ app.service('deploymentService',
               console.log(error);
             }
           );
-      };
-
-      service.getDeployments = function() {
-        return deploymentServiceData.deployments;
-      };
-
-      service.getDevices = function() {
-        return deploymentServiceData.devices;
-      };
-
-      service.getCurrentDeployment = function() {
-        return deploymentServiceData.currentDeployment;
       };
 
       service.setCurrentDeployment = function(deployment) {

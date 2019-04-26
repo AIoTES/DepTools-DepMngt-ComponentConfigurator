@@ -20,7 +20,7 @@
   <div class="option-device-container">
 
     <div class="option-device"
-         ng-repeat="deployment in deployCtrl.getDeployments()">
+         ng-repeat="deployment in deployCtrl.deploymentData.deployments">
 
       <div class="option-name-container" ng-click="deployCtrl.selectDeployment(deployment)">
         <span class="option-name">{{deployment.id}}</span>
