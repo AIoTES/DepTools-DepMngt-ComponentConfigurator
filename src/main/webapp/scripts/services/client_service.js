@@ -9,6 +9,7 @@ app.service('clientService',
       var service = this;
 
       service.retrieveClients = function (clientId) {
+        clientServiceData.retrievalStatus = clientServiceData.operationStatus.IN_PROGRESS;
         if (clientServiceData.clientStatus !== clientServiceData.retrievalStatus.SUCCESS) {
           clientServiceApi.getClients(clientId)
             .then(
@@ -20,11 +21,13 @@ app.service('clientService',
                     clientServiceData.clients.push(value);
                   }
                 );
+                clientServiceData.retrievalStatus = clientServiceData.operationStatus.SUCCESS;
               }
             )
             .catch(
               function (error) {
                 console.log(error);
+                clientServiceData.retrievalStatus = clientServiceData.operationStatus.FAILURE;
               }
             );
         }

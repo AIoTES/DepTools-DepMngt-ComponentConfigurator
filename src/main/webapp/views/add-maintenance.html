@@ -36,9 +36,29 @@
 
       <hr class="line">
 
-      <button type="submit" class="info-button" ng-click="addMaintenance.addTicket()">
-        <span>Add Ticket</span>
-      </button>
+      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="addMaintenance.addTicket()">
+          <span>Add Ticket</span>
+        </button>
+      </div>
+
+      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.IN_PROGRESS">
+        <button type="submit" class="info-button">
+          <span>Adding Ticket...</span>
+        </button>
+      </div>
+
+      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.SUCCESS">
+        <button type="submit" class="info-button">
+          <span>Added Ticket</span>
+        </button>
+      </div>
+
+      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.FAILURE">
+        <button type="submit" class="info-button">
+          <span>¡ERROR!</span>
+        </button>
+      </div>
 
     </form>
 

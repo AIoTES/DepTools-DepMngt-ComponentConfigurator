@@ -17,7 +17,13 @@
 
   <div class="option-device-container">
 
-    <div class="option-device"
+    <div ng-show="componentView.deviceData.retrievalStatus['devices'] === componentView.deviceData.operationStatus.IN_PROGRESS">
+      Loading devices...
+    </div>
+    <div ng-show="componentView.deviceData.retrievalStatus['devices'] === componentView.deviceData.operationStatus.FAILURE">
+      Cannot retrieve devices
+    </div>
+    <div ng-show="componentView.deviceData.retrievalStatus['devices'] === componentView.deviceData.operationStatus.SUCCESS" class="option-device"
          ng-repeat="device in componentView.deviceData.devicesByPlatformId[componentView.platformData.currentPlatform.platformId]"
          ng-class="{ 'option-device-active' : device.deviceId === componentView.deviceData.currentDevice }"
          ng-click="componentView.selectDevice(device)">

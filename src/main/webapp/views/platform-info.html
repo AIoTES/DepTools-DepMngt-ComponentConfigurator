@@ -67,10 +67,30 @@
         <span>Update</span>
       </button>
 
-      <button style="float: right; margin-top: -30px" type="submit" class="create-button"
-              ng-click="platformInfo.deletePlatform()">
-        <span>Delete</span>
-      </button>
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.NOT_STARTED">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button"
+                ng-click="platformInfo.deletePlatform()">
+          <span>Delete</span>
+        </button>
+      </div>
+
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.IN_PROGRESS">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
+          <span>Deleting...</span>
+        </button>
+      </div>
+
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.SUCCESS">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
+          <span>Deleted</span>
+        </button>
+      </div>
+
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.FAILURE">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
+          <span>¡ERROR!</span>
+        </button>
+      </div>
 
     </form>
 

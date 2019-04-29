@@ -64,10 +64,31 @@
              ng-model="platformInfo.platformUpdateRequest.upstreamOutputAlignmentVersion">
       <label class="form-label">Upstream Output Alignment Version:</label>
 
-      <button style="float: right" type="submit" class="create-button"
-              ng-click="platformInfo.updatePlatform()">
-        <span>Update</span>
-      </button>
+      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.NOT_STARTED">
+        <button style="float: right" type="submit" class="create-button"
+                ng-click="platformInfo.updatePlatform()">
+          <span>Update</span>
+        </button>
+      </div>
+
+      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.IN_PROGRESS">
+        <button style="float: right" type="submit" class="create-button">
+          <span>Updating...</span>
+        </button>
+      </div>
+
+      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.SUCCESS">
+        <button style="float: right" type="submit" class="create-button">
+          <span>Updated</span>
+        </button>
+      </div>
+
+      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.FAILURE">
+        <button style="float: right" type="submit" class="create-button">
+          <span>¡ERROR!</span>
+        </button>
+      </div>
+
 
     </form>
 

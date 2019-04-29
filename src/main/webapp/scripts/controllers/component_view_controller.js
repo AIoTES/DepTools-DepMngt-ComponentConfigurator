@@ -19,6 +19,7 @@ app.controller('componentViewCtrl',
       vm.selectDevice = function (device) {
         deviceServiceData.currentDevice = device.deviceId;
         deviceServiceData.deviceValues = device;
+        vm.deviceData.deleteStatus = vm.deviceData.operationStatus.NOT_STARTED;
         $location.path('/main/component_configurator/component_view/device_info');
       };
 
@@ -63,10 +64,12 @@ app.controller('componentViewCtrl',
       };
 
       vm.goToAddPlatform = function () {
+        vm.platformData.createStatus = vm.platformData.operationStatus.NOT_STARTED;
         $location.path('/main/component_configurator/component_view/add_platform');
       };
 
       vm.goToAddDevice = function () {
+        vm.deviceData.createStatus = vm.deviceData.operationStatus.NOT_STARTED;
         $location.path('/main/component_configurator/component_view/add_device');
       };
 

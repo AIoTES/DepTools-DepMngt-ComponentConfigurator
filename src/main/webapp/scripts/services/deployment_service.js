@@ -16,7 +16,6 @@ app.service('deploymentService',
           )
           .catch(
             function (error) {
-              console.log('ERROR');
               console.log(error);
               deploymentServiceData.retrievalStatus["deployments"] = deploymentServiceData.operationStatus.FAILURE;
             }

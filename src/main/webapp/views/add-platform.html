@@ -74,9 +74,31 @@
 
       <hr class="line">
 
-      <button type="submit" class="info-button" ng-click="addPlatform.createPlatform()">
-        <span>Create</span>
-      </button>
+
+      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="addPlatform.createPlatform()">
+          <span>Create</span>
+        </button>
+      </div>
+
+      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.IN_PROGRESS">
+        <button type="submit" class="info-button">
+          <span>Creating...</span>
+        </button>
+      </div>
+
+      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.SUCCESS">
+        <button type="submit" class="info-button">
+          <span>Created</span>
+        </button>
+      </div>
+
+      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.FAILURE">
+        <button type="submit" class="info-button">
+          <span>¡ERROR!</span>
+        </button>
+      </div>
+
 
     </form>
 

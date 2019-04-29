@@ -9,6 +9,7 @@ app.service('platformService',
       var service = this;
 
       service.retrievePlatforms = function (clientId) {
+        platformServiceData.retrievalStatus["platforms"] = platformServiceData.operationStatus.IN_PROGRESS;
         platformServiceApi.getPlatforms(clientId)
           .then(
             function (response) {
@@ -19,11 +20,13 @@ app.service('platformService',
                   platformServiceData.platforms.push(value);
                 }
               );
+              platformServiceData.retrievalStatus["platforms"] = platformServiceData.operationStatus.SUCCESS;
             }
           )
           .catch(
             function (error) {
               console.log(error);
+              platformServiceData.retrievalStatus["platforms"] = platformServiceData.operationStatus.FAILURE;
             }
           );
       };
@@ -33,6 +36,7 @@ app.service('platformService',
       };
 
       service.createPlatform = function (createPlatformRequest) {
+        platformServiceData.createStatus = platformServiceData.operationStatus.IN_PROGRESS;
         platformServiceApi.createPlatform(createPlatformRequest, clientServiceData.currentClientId)
           .then(
             function (response) {
@@ -42,6 +46,7 @@ app.service('platformService',
               if (response.status === 200) {
                 alert("Platform created");
                 $location.path('/main/component_configurator');
+                platformServiceData.createStatus = platformServiceData.operationStatus.SUCCESS;
               }
 
             }
@@ -49,11 +54,14 @@ app.service('platformService',
           .catch(
             function (reason) {
               console.log("Cannot create platform");
+              console.log(reason);
+              platformServiceData.createStatus = platformServiceData.operationStatus.FAILURE;
             }
           )
       };
 
       service.updatePlatform = function (platformId, platform) {
+        platformServiceData.updateStatus = platformServiceData.operationStatus.IN_PROGRESS;
         platformServiceApi.updatePlatform(platformId, platform, clientServiceData.currentClientId)
           .then(
             function (response) {
@@ -64,6 +72,7 @@ app.service('platformService',
                   return value.platformId === platformId;
                 }
               );
+
               platformServiceData.platforms[platformIndex].baseEndpoint = updatedPlatform.baseEndpoint;
               platformServiceData.platforms[platformIndex].location = updatedPlatform.location;
               platformServiceData.platforms[platformIndex].name = updatedPlatform.name;
@@ -92,16 +101,19 @@ app.service('platformService',
                 platformServiceData.currentPlatform.upstreamOutputAlignmentVersion = updatedPlatform.upstreamOutputAlignmentVersion;
               }
 
+              platformServiceData.updateStatus = platformServiceData.operationStatus.SUCCESS;
             }
           )
           .catch(
             function () {
               console.log("Cannot update platform");
+              platformServiceData.updateStatus = platformServiceData.operationStatus.FAILURE;
             }
           );
       };
 
       service.deletePlatform = function (platformId) {
+        platformServiceData.deleteStatus = platformServiceData.operationStatus.IN_PROGRESS;
         platformServiceApi.deletePlatform(platformId, clientServiceData.currentClientId)
           .then(
             function () {
@@ -115,12 +127,15 @@ app.service('platformService',
                 platformServiceData.platforms.splice(platformIndex, 1);
 
               alert("Platform deleted");
+              platformServiceData.deleteStatus = platformServiceData.operationStatus.SUCCESS;
               $location.path('/main/component_configurator/component_view');
             }
           )
           .catch(
             function (reason) {
               console.log("Cannot delete platform");
+              console.log(reason);
+              platformServiceData.deleteStatus = platformServiceData.operationStatus.FAILURE;
             }
           )
       };
