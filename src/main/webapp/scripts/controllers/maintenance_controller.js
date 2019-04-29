@@ -33,10 +33,12 @@ app.controller('maintenanceCtrl',
       };
 
       vm.goToMaintenanceInfo = function () {
+        recordServiceData.deleteStatus = recordServiceData.operationStatus.NOT_STARTED;
         $location.path('/main/maintenance_panel/maintenance_info');
       };
 
       vm.goToAddMaintenance = function () {
+        recordServiceData.createStatus = recordServiceData.operationStatus.NOT_STARTED;
         $location.path('/main/maintenance_panel/add_maintenance');
       };
 

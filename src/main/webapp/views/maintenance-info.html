@@ -47,10 +47,30 @@
         <span>Update</span>
       </button>
 
-      <button style="float: right; margin-top: -30px" type="submit" class="create-button"
-              ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
-        <span>Delete</span>
-      </button>
+      <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.NOT_STARTED">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button"
+                ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
+          <span>Delete</span>
+        </button>
+      </div>
+
+      <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.IN_PROGRESS">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
+          <span>Deleting...</span>
+        </button>
+      </div>
+
+      <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.SUCCESS">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
+          <span>Deleted</span>
+        </button>
+      </div>
+
+      <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.FAILURE">
+        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
+          <span>¡ERROR!</span>
+        </button>
+      </div>
 
       <hr class="line">
     </div>

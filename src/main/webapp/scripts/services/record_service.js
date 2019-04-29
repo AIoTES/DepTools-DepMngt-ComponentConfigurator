@@ -15,6 +15,7 @@ app.service('recordService',
               records.forEach(
                 function (record) {
                   recordServiceData.recordsById[record.id] = record;
+                  recordServiceData.deletesStatus[record.id] = recordServiceData.operationStatus.NOT_STARTED;
                 }
               );
 
@@ -88,7 +89,7 @@ app.service('recordService',
       };
 
       service.delete_record = function (elementId, recordId) {
-        recordServiceData.deleteStatus = recordServiceData.operationStatus.IN_PROGRESS;
+        recordServiceData.deletesStatus[recordId] = recordServiceData.operationStatus.IN_PROGRESS;
 
         recordServiceApi.delete_record(elementId, recordId)
           .then(
@@ -104,12 +105,12 @@ app.service('recordService',
               if (recordIndex !== -1)
                 recordServiceData.recordsByElementId[elementId].splice(recordIndex, 1);
 
-              recordServiceData.deleteStatus = recordServiceData.operationStatus.SUCCESS;
+              recordServiceData.deletesStatus[recordId] = recordServiceData.operationStatus.SUCCESS;
             }
           )
           .catch(
             function () {
-              recordServiceData.deleteStatus = recordServiceData.operationStatus.FAILURE;
+              recordServiceData.deletesStatus[recordId] = recordServiceData.operationStatus.FAILURE;
             }
           )
       };

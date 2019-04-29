@@ -11,6 +11,8 @@ app.service('recordServiceData',
 
       operationStatus: retrievalStatus,
       retrievalStatus: {},
+      deletesStatus: {},
+      createStatus: retrievalStatus.NOT_STARTED,
       updateStatus: retrievalStatus.NOT_STARTED,
       deleteStatus: retrievalStatus.NOT_STARTED
     };

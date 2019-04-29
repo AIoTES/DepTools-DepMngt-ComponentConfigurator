@@ -8,8 +8,10 @@ app.controller('addMaintenanceCtrl',
 
       var vm = this;
 
+      vm.recordData = recordServiceData;
+
       vm.recordToCreate = {
-        "elementId": recordServiceData.selectedElementId,
+        "elementId": vm.recordData.selectedElementId,
         "description": "",
         "status": "",
         "type": ""
