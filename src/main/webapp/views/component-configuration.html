@@ -7,7 +7,14 @@
     </div>
   </div>
 
-  <div class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu}">
+
+  <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.IN_PROGRESS">
+    Loading platforms...
+  </div>
+  <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.FAILURE">
+    Cannot retrieve platforms
+  </div>
+  <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.SUCCESS" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu}">
     <div
       ng-repeat="platform in component.platformData.platforms"
       ng-click="component.selectPlatform(platform)">
@@ -26,7 +33,13 @@
     </div>
   </div>
 
-  <div class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu2}">
+  <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.IN_PROGRESS">
+    Loading clients...
+  </div>
+  <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.FAILURE">
+    Cannot retrieve clients
+  </div>
+  <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.SUCCESS" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu2}">
     <div
       ng-repeat="client in component.getClients()"
       ng-click="component.selectClient(client)">

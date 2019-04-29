@@ -7,8 +7,8 @@
  * # AboutCtrl
  * Controller of the activageDashboardApp
  */
-app.controller('componentCtrl', ['platformService', 'deviceService', '$location', 'clientService', 'platformServiceData',
-  function (platformService, deviceService, $location, clientService, platformServiceData) {
+app.controller('componentCtrl', ['platformService', 'deviceService', '$location', 'clientService', 'platformServiceData', 'clientServiceData',
+  function (platformService, deviceService, $location, clientService, platformServiceData, clientServiceData) {
 
     platformService.retrievePlatforms(clientService.getCurrentClientId());
     clientService.retrieveClients(clientService.getCurrentClientId());
@@ -19,6 +19,7 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
     vm.platformData = platformServiceData;
     vm.deviceServ = deviceService;
     vm.clientService = clientService;
+    vm.clientData = clientServiceData;
 
     vm.platform.consultPlatformTypes(clientService.getCurrentClientId());
     vm.platform.loadPlatformTypes();
@@ -32,6 +33,7 @@ app.controller('componentCtrl', ['platformService', 'deviceService', '$location'
       platformServiceData.currentPlatformName = platform.name;
       deviceService.retrieveDevices(platform.platformId);
       $location.path('/main/component_configurator/component_view/platform_info');
+      vm.platformData.deleteStatus = vm.platformData.operationStatus.NOT_STARTED;
     };
 
     vm.selectClient = function (client) {

@@ -37,6 +37,7 @@ app.controller('componentDeviceCtrl',
       };
 
       vm.goToUpdateDevice = function () {
+        vm.deviceData.updateStatus = vm.deviceData.operationStatus.NOT_STARTED;
         $location.path('/main/component_configurator/component_view/update_device');
       };
 

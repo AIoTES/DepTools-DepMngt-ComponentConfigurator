@@ -59,12 +59,28 @@
 
       <hr class="line">
 
-      <div class="button-container-form">
-
+      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.NOT_STARTED" class="button-container-form">
         <button style="float: left" type="submit" class="info-button" ng-click="componentUpdate.updateDevice()">
           <span>Update</span>
         </button>
+      </div>
 
+      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.IN_PROGRESS" class="button-container-form">
+        <button style="float: left" type="submit" class="info-button">
+          <span>Updating...</span>
+        </button>
+      </div>
+
+      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.SUCCESS" class="button-container-form">
+        <button style="float: left" type="submit" class="info-button">
+          <span>Updated</span>
+        </button>
+      </div>
+
+      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.FAILURE" class="button-container-form">
+        <button style="float: left" type="submit" class="info-button">
+          <span>¡ERROR!</span>
+        </button>
       </div>
 
 

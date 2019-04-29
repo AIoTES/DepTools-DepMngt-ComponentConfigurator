@@ -96,12 +96,42 @@
 
     <hr class="line">
 
-    <div class="button-container-form">
+    <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.NOT_STARTED" class="button-container-form">
       <button type="submit" class="info-button" ng-click="componentDevice.deleteDevice()">
         <span>Delete</span>
       </button>
 
       <button type="submit" class="info-button" ng-click="componentDevice.goToUpdateDevice()">
+        <span>Update</span>
+      </button>
+    </div>
+
+    <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.IN_PROGRESS" class="button-container-form">
+      <button type="submit" class="info-button">
+        <span>Deleting...</span>
+      </button>
+
+      <button type="submit" class="info-button">
+        <span>Update</span>
+      </button>
+    </div>
+
+    <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.SUCCESS" class="button-container-form">
+      <button type="submit" class="info-button">
+        <span>Deleted</span>
+      </button>
+
+      <button type="submit" class="info-button">
+        <span>Update</span>
+      </button>
+    </div>
+
+    <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.FAILURE" class="button-container-form">
+      <button type="submit" class="info-button">
+        <span>¡ERROR!</span>
+      </button>
+
+      <button type="submit" class="info-button">
         <span>Update</span>
       </button>
     </div>

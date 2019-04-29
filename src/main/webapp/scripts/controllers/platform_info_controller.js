@@ -31,6 +31,7 @@ app.controller('platformInfoCtrl',
       };
 
       vm.goToUpdatePlatform = function () {
+        vm.platformData.updateStatus = vm.platformData.operationStatus.NOT_STARTED;
         $location.path("/main/component_configurator/component_view/update_platform");
       };
 
