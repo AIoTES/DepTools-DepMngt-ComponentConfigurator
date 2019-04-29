@@ -25,6 +25,7 @@
   </div>
   <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.SUCCESS" class="option-device-container">
     <div class="option-device"
+         ng-class="{ 'option-device-active': deployment.id === deployCtrl.deploymentData.currentDeployment.id }"
          ng-repeat="deployment in deployCtrl.deploymentData.deployments">
 
       <div class="option-name-container" ng-click="deployCtrl.selectDeployment(deployment)">

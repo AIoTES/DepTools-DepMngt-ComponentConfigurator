@@ -30,7 +30,9 @@
                 maintenance.deploymentData.retrievalStatus['devices'] === maintenance.deploymentData.operationStatus.SUCCESS"
        class="option-device-container">
 
-    <div ng-repeat="deployment in maintenance.deploymentData.deployments" class="option-device">
+    <div ng-repeat="deployment in maintenance.deploymentData.deployments"
+         class="option-device"
+         ng-class="{ 'option-device-active' : deployment.id === maintenance.deploymentData.currentDeployment.id }">
 
       <div class="option-name-container"
            ng-click="maintenance.selectDeployment(deployment)">
@@ -47,7 +49,10 @@
 
     </div>
 
-    <div ng-repeat="deploymentDevice in maintenance.deploymentData.deploymentDevices" class="option-device">
+    <div ng-repeat="deploymentDevice in maintenance.deploymentData.deploymentDevices"
+         class="option-device"
+         ng-class="{ 'option-device-active' : deploymentDevice.id === maintenance.deploymentData.currentDeviceDeployment.id,
+                     'option-device' : maintenance.deploymentData.currentDeployment.id != null }">
 
       <div class="option-name-container" ng-click="maintenance.selectDeviceDeployment(deploymentDevice)">
         <span class="option-name">{{deploymentDevice.id}}</span>

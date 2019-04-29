@@ -25,34 +25,43 @@
 
     <div
       ng-repeat="record in maintenanceInfo.recordData.recordsByElementId[maintenanceInfo.recordData.selectedElementId]">
-      <div class="info-left">Id:</div>
-      <div class="info-right">{{record.id}}</div>
+      <table class="maintenance-table">
+        <thead>
+          <tr>
+            <td>Id</td>
+            <td>ElementId</td>
+            <td>Description</td>
+            <td>Status</td>
+            <td>Type</td>
+            <td>Timestamp</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{record.id}}</td>
+            <td>{{record.elementId}}</td>
+            <td>{{record.description}}</td>
+            <td>{{record.status}}</td>
+            <td>{{record.type}}</td>
+            <td>{{record.timestamp}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="info-left">ElementId:</div>
-      <div class="info-right">{{record.elementId}}</div>
+      <div class="button-container-form" ng-show="maintenanceInfo.deploymentData.deleteStatus === maintenanceInfo.deploymentData.operationStatus.NOT_STARTED">
 
-      <div class="info-left">Description:</div>
-      <div class="info-right">{{record.description}}</div>
+        <button style="float: left" type="submit" class="info-button" ng-click="maintenanceInfo.updateRecord(record)">
+          <span>Update</span>
+        </button>
 
-      <div class="info-left">Status:</div>
-      <div class="info-right">{{record.status}}</div>
+        <button style="float: right; margin-top: -30px" type="submit" class="info-button"
+                ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
+          <span>Delete</span>
+        </button>
 
-      <div class="info-left">Type:</div>
-      <div class="info-right">{{record.type}}</div>
+      </div>
 
-      <div class="info-left">Timestamp:</div>
-      <div class="info-right">{{record.timestamp}}</div>
-
-      <button style="float: left" type="submit" class="create-button" ng-click="maintenanceInfo.updateRecord(record)">
-        <span>Update</span>
-      </button>
-
-      <button style="float: right; margin-top: -30px" type="submit" class="create-button"
-              ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
-        <span>Delete</span>
-      </button>
-
-      <hr class="line">
+      <hr class="line line-margin-top">
     </div>
 
   </div>

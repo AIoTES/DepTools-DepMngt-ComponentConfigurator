@@ -25,7 +25,18 @@
       <img src="images/activage-logo.png" title="activage project" alt="activage project">
     </a>
     <div class="header-title">
-      <h2>Interoperability Demo Application</h2>
+      <h2 ng-show="('main.about' | routeSegmentStartsWith)">
+        Interoperability Demo Application
+      </h2>
+      <h2 ng-show="('main.deployment_manager' | routeSegmentStartsWith)">
+        Deployment Manager
+      </h2>
+      <h2 ng-show="('main.component_configurator' | routeSegmentStartsWith)">
+        Component Configurator
+      </h2>
+      <h2 ng-show="('main.maintenance_panel' | routeSegmentStartsWith)">
+        Maintenance Panel
+      </h2>
     </div>
   </div>
 

@@ -32,6 +32,8 @@ app.controller('maintenanceCtrl',
         vm.goToMaintenanceInfo();
       };
 
+      // console.log(vm.selectDeviceDeployment());
+
       vm.goToMaintenanceInfo = function () {
         $location.path('/main/maintenance_panel/maintenance_info');
       };

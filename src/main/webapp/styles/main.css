@@ -209,8 +209,8 @@ header {
   transition: 0.5s ease all;
   display: inline-flex;
   justify-content: start;
-  /*background: url("../images/bg.svg") center no-repeat;*/
-  /*background-size: 100vw;*/
+  background: url("../images/bg.svg") center no-repeat;
+  background-size: 100vw;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
@@ -645,6 +645,7 @@ header {
   border-bottom: 1px solid #ccc;
   padding: 0 10px;
   cursor: pointer;
+  color: #fff;
   transition: 0.3s ease all;
 }
 
@@ -653,7 +654,7 @@ header {
 }
 
 .menu-option:hover span {
-  color: #0f2144;
+  color: #fff;
 }
 
 .menu-option span {
@@ -671,40 +672,37 @@ header {
 
 .option-container {
   width: calc(100% - 30px);
-  height: calc(50% - 30px);
-  margin: 20px 10px 20px 20px;
+  height: calc(100% - 40px);
+  margin: 20px 10px 0 20px;
   background: #f5f5f5;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .option-container {
     width: 100%;
-    height: calc(50% - 10px);
-    margin: 0 0 10px 0;
+    height: calc(100% - 40px);
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .option-container {
     width: 100%;
-    height: calc(50% - 10px);
-    margin: 10px 0 10px 0;
+    height: calc(100% - 40px);
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
   .option-container {
     width: 100%;
-    height: calc(50% - 10px);
-    margin: 10px 0 10px 0;
+    height: calc(100% - 40px);
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: landscape) {
   .option-container {
     width: 100%;
-    height: calc(50% - 10px);
-    margin: 10px 0 10px 0;
+    height: calc(100% - 40px);
+    margin: 10px 0 0 0;
   }
 }
 
@@ -867,6 +865,26 @@ header {
 
 .jump-line {
   line-height: 25px;
+}
+
+.maintenance-table {
+  width: calc(100% - 20px);
+  margin: 0 10px 10px 10px;
+}
+
+.maintenance-table thead {
+  line-height: 40px;
+  background: #2bbee8;
+  color: #fff;
+}
+
+.maintenance-table tbody tr {
+  line-height: 40px;
+  border-bottom: 1px solid #2bbee8;
+}
+
+.maintenance-table td {
+  padding: 0 10px;
 }
 
 .option-platform {
@@ -1146,9 +1164,10 @@ header {
 
 .resource-container {
   width: calc(100% - 30px);
-  height: calc(51% - 40px);
-  margin: 20px 20px 20px 10px;
+  height: calc(100% - 40px);
+  margin: 20px 20px 0 10px;
   background: #ededed;
+  border-bottom: 1px solid #2bbee8;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
@@ -1629,7 +1648,7 @@ pre {
 .info-button {
   width: auto;
   height: 30px;
-  margin: 0 10px 0 10px;
+  margin: 0 10px 0 10px !important;
   float: right;
   text-align: center;
   padding: 0 20px;
@@ -1702,6 +1721,10 @@ pre {
   clear: both;
   border-bottom: 1px solid #b3b3b3;
   margin-bottom: 12px;
+}
+
+.line-margin-top {
+  margin-top: 50px;
 }
 
 .info-left {

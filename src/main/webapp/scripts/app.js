@@ -28,7 +28,7 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
     rewriteLinks: true
   }).hashPrefix('');
 
-  $routeProvider.otherwise({redirectTo: '/main'});
+  $routeProvider.otherwise({redirectTo: '/main/about/deployment_manager'});
 
   $routeSegmentProvider
     .when('/main', 'main')
