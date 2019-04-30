@@ -9,11 +9,18 @@
 
 
   <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.IN_PROGRESS">
-    Loading platforms...
+    <div class="spinner-very-small-container">
+      <div class="spinner-very-small">
+      </div>
+    </div>
   </div>
+
   <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.FAILURE">
-    Cannot retrieve platforms
+    <div class="message-container-100 error">
+      <span>Cannot retrieve platforms</span>
+    </div>
   </div>
+
   <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.SUCCESS" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu}">
     <div
       ng-repeat="platform in component.platformData.platforms"
@@ -34,11 +41,18 @@
   </div>
 
   <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.IN_PROGRESS">
-    Loading clients...
+    <div class="spinner-very-small-container">
+      <div class="spinner-very-small">
+      </div>
+    </div>
   </div>
+
   <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.FAILURE">
-    Cannot retrieve clients
+    <div class="message-container-100 error">
+      <span>Cannot retrieve clients</span>
+    </div>
   </div>
+
   <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.SUCCESS" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu2}">
     <div
       ng-repeat="client in component.getClients()"

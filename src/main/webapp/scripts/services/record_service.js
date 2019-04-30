@@ -30,6 +30,11 @@ app.service('recordService',
 
       };
 
+      service.setCurrentRecord = function (element) {
+        debugger;
+        recordServiceData.currentRecord = element;
+      };
+
       service.create_record = function (record) {
         recordServiceData.createStatus = recordServiceData.operationStatus.IN_PROGRESS;
 

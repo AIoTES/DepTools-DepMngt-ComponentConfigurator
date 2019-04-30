@@ -5,7 +5,15 @@
       <h3>Deployment Installations</h3>
     </div>
     <div class="option-header-right">
-      <div class="square-header-button" title="Create Deployment Installation"
+      <div class="square-header-button"
+           title="List of Devices"
+           ng-class="{ 'button-header-active' : ('main.deployment_manager.device_list' | routeSegmentEqualsTo) }"
+           ng-click="deployCtrl.goToDeviceList()">
+        <span class="glyphicon glyphicon-th-list"></span>
+      </div>
+      <div class="square-header-button"
+           title="Create Deployment Installation"
+           ng-class="{ 'button-header-active' : ('main.deployment_manager.create_deployment' | routeSegmentEqualsTo) }"
            ng-click="deployCtrl.createDeployment()">
         <span class="glyphicon glyphicon-plus"></span>
       </div>
@@ -14,13 +22,18 @@
   </div>
 
   <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.IN_PROGRESS">
-    Loading deployments...
+    <div class="spinner-container">
+      <div class="spinner">
+      </div>
+    </div>
   </div>
   <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.FAILURE">
     Cannot retrieve deployments
   </div>
-  <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.SUCCESS" class="option-device-container">
+  <div ng-show="deployCtrl.deploymentData.retrievalStatus['deployments'] === deployCtrl.deploymentData.operationStatus.SUCCESS"
+       class="option-device-container">
     <div class="option-device"
+         ng-class="{ 'option-device-active': deployment.id === deployCtrl.deploymentData.currentDeployment.id }"
          ng-repeat="deployment in deployCtrl.deploymentData.deployments">
 
       <div class="option-name-container" ng-click="deployCtrl.selectDeployment(deployment)">
@@ -30,7 +43,9 @@
       </div>
 
       <div class="option-buttons-container">
-        <div class="square-option-device-button" ng-click="deployCtrl.updateDeployment(deployment)">
+        <div class="square-option-device-button"
+             ng-class="{ 'option-device-button-active' : deployment.id === deployCtrl.deploymentData.currentDeployment.id }"
+             ng-click="deployCtrl.updateDeployment(deployment)">
           <span class="glyphicon glyphicon-edit"></span>
         </div>
       </div>

@@ -41,6 +41,7 @@ appDev.run(
 
       $httpBackend.whenGET('views/main.html').passThrough();
 
+      $httpBackend.whenGET('views/device-list.html').passThrough();
       $httpBackend.whenGET('views/deployment-manager.html').passThrough();
       $httpBackend.whenGET('views/create-deployment.html').passThrough();
       $httpBackend.whenGET('views/delete-deployment.html').passThrough();

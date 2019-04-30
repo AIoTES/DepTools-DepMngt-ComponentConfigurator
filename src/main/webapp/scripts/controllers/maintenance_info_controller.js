@@ -16,10 +16,10 @@ app.controller('maintenanceInfoCtrl',
       };
 
       vm.updateRecord = function (record) {
-        // TODO delete this line
-        record.description = "updated";
 
-        recordService.update_record(record);
+        // recordService.update_record(record);
+        vm.recordData.setCurrentRecord(record);
+        vm.goToUpdateMaintenance();
       };
 
       vm.closeMaintenanceInfo = function () {

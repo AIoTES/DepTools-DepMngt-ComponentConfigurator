@@ -5,6 +5,7 @@ app.service('recordServiceData',
 
     var service = {
       records: [],
+      currentRecord: '',
       recordsById: {},
       recordsByElementId: {},
       selectedElementId: "",
