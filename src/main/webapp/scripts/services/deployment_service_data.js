@@ -14,7 +14,7 @@ app.service('deploymentServiceData', function () {
         devices: retrievalStatus.NOT_STARTED
       },
       addDeviceStatus: retrievalStatus.NOT_STARTED,
-      removeDeviceStatus: retrievalStatus.NOT_STARTED,
+      removeDeviceStatus: {},
       createStatus: retrievalStatus.NOT_STARTED,
       updateStatus: retrievalStatus.NOT_STARTED,
       deleteStatus: retrievalStatus.NOT_STARTED

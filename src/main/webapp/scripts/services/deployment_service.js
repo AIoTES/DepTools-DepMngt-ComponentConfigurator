@@ -56,10 +56,6 @@ app.service('deploymentService',
           )
       };*/
 
-      service.setCurrentDeployment = function (deployment) {
-        deploymentServiceData.currentDeployment = deployment;
-      };
-
       service.addDeviceToDeployment = function (deploymentId, deviceId) {
         deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.addDeviceToDeployment(deploymentId, deviceId)
@@ -74,10 +70,12 @@ app.service('deploymentService',
                   }
                 );
 
-                if (deploymentIndex !== -1)
+                if (deploymentIndex !== -1) {
                   deploymentServiceData.deployments[deploymentIndex] = deployment;
-
-                deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.SUCCESS;
+                  deploymentServiceData.currentDeployment = deployment;
+                  deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.SUCCESS;
+                  $location.path('/main/deployment_manager/deployment_info');
+                }
               }
             }
           )
@@ -90,7 +88,7 @@ app.service('deploymentService',
       };
 
       service.deleteDeviceFromDeployment = function (deploymentId, deviceId) {
-        deploymentServiceData.removeDeviceStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
+        deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.deleteDeviceFromDeployment(deploymentId, deviceId)
           .then(
             function (response) {
@@ -103,17 +101,18 @@ app.service('deploymentService',
                   }
                 );
 
-                if (deploymentIndex !== -1)
+                if (deploymentIndex !== -1){
                   deploymentServiceData.deployments[deploymentIndex] = deployment;
-
-                deploymentServiceData.removeDeviceStatus = deploymentServiceData.operationStatus.SUCCESS;
+                  deploymentServiceData.currentDeployment = deployment;
+                  deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.SUCCESS;
+                }
               }
             }
           )
           .catch(
             function(error) {
               console.log(error);
-              deploymentServiceData.removeDeviceStatus = deploymentServiceData.operationStatus.FAILURE;
+              deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.FAILURE;
             }
           )
       };
@@ -123,11 +122,11 @@ app.service('deploymentService',
         deploymentServiceApi.createDeployment(deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))
           .then(
             function (response) {
+              console.log(response);
               if (response.status === 200) {
                 var deployment = response.data;
                 deploymentServiceData.deployments.push(deployment);
                 deploymentServiceData.createStatus = deploymentServiceData.operationStatus.SUCCESS;
-                deploymentServiceData.createStatus = deploymentServiceData.operationStatus.NOT_STARTED;
                 $location.path('/main/deployment_manager');
               }
             }
@@ -140,26 +139,23 @@ app.service('deploymentService',
           )
       };
 
-      /*service.updateDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
-        deploymentServiceApi.updateDeployment(clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices.split(","))//, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType);
-      };*/
-
       service.deleteDeployment = function (deploymentId) {
         deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.deleteDeployment(deploymentId)
           .then(
             function (response) {
-              if (response.status === 204) {
+              if (response.status === 200) {
                 var deploymentIndex = deploymentServiceData.deployments.findIndex(
                   function (value) {
                     return value.id === deploymentId;
                   }
                 );
 
-                if (deploymentIndex !== -1)
+                if (deploymentIndex !== -1) {
                   deploymentServiceData.deployments.splice(deploymentIndex, 1);
-
-                deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.SUCCESS;
+                  deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.SUCCESS;
+                  $location.path('/main/deployment_manager');
+                }
               }
             }
           )

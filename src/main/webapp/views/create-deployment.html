@@ -13,36 +13,39 @@
 
     <form class="add-form" name="add-device">
 
-      <input type="text" placeholder="Id" ng-model="createDeploy.id">
+      <input type="text" placeholder="Id" ng-model="createDeploy.currentDeployment.id">
       <label class="form-label">Id:</label>
+
+     <!-- <input type="text" placeholder="Id" ng-model="createDeploy.currentDeployment.date">
+      <label class="form-label">Date:</label>-->
 
       <div class="info-left padding-0">
         Date:
       </div>
       <div class="info-right padding-0">
-        {{createDeploy.date | date: 'dd-MM-yyyy HH:mm:ss'}}
+        {{createDeploy.currentDeployment.date | date: 'dd-MM-yyyy'}}
       </div>
 
-      <input type="text" placeholder="Location" ng-model="createDeploy.location">
+      <input type="text" placeholder="Location" ng-model="createDeploy.currentDeployment.location">
       <label class="form-label">Location:</label>
 
       <hr class="line">
 
-      <input type="text" placeholder="Organization Id" ng-model="createDeploy.organizationId">
+      <input type="text" placeholder="Organization Id" ng-model="createDeploy.currentDeployment.organizationId">
       <label class="form-label">Organization Id:</label>
 
-      <input type="text" placeholder="Organization Label" ng-model="createDeploy.organizationLabel">
+      <input type="text" placeholder="Organization Label" ng-model="createDeploy.currentDeployment.organizationLabel">
       <label class="form-label">Organization Label:</label>
 
       <hr class="line">
 
-      <input type="text" placeholder="Platform Id" ng-model="createDeploy.platformId">
+      <input type="text" placeholder="Platform Id" ng-model="createDeploy.currentDeployment.platformId">
       <label class="form-label">Platform Id:</label>
 
-      <input type="text" placeholder="Platform Label" ng-model="createDeploy.platformLabel">
+      <input type="text" placeholder="Platform Label" ng-model="createDeploy.currentDeployment.platformLabel">
       <label class="form-label">Platform Label:</label>
 
-      <input type="text" placeholder="Devices" ng-model="createDeploy.devices">
+      <input type="text" placeholder="Devices" ng-model="createDeploy.currentDeployment.devices">
       <label class="form-label">Devices:</label>
 
 
@@ -89,19 +92,19 @@
       </div>
 
       <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.IN_PROGRESS">
-        <button type="submit" class="info-button" ng-click="">
+        <button type="submit" class="info-button">
           <span>Creating...</span>
         </button>
       </div>
 
       <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.FAILURE">
-        <button type="submit" class="info-button" ng-click="">
+        <button type="submit" class="info-button">
           <span>¡Error!</span>
         </button>
       </div>
 
       <div ng-show="createDeploy.deploymentData.createStatus === createDeploy.deploymentData.operationStatus.SUCCESS">
-        <button type="submit" class="info-button" ng-click="">
+        <button type="submit" class="info-button">
           <span>Created</span>
         </button>
       </div>

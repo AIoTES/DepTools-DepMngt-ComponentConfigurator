@@ -6,14 +6,14 @@ app.controller('createDeploymentCtrl', ['$location', 'deploymentService', 'deplo
 
   var vm = this;
 
-  var date = Date.now();
+  var date = new Date();
 
   vm.deploymentService = deploymentService;
   vm.deploymentData = deploymentServiceData;
 
   vm.currentDeployment = {
     "id": "",
-    "date": date,
+    "date": date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
     "location": "",
     "organizationId": "",
     "organizationLabel": "",
@@ -22,27 +22,12 @@ app.controller('createDeploymentCtrl', ['$location', 'deploymentService', 'deplo
     "devices": ""
   };
 
-  vm.deployId = "";
-  vm.deployDate = date;
-  vm.location = "";
-  vm.organizationId = "";
-  vm.organizationLabel = "";
-  vm.platformId = "";
-  vm.platformLabel = "";
-  vm.devices = "";
-  /*vm.deviceId = "";
-  vm.deviceLabel = "";
-  vm.deviceType = "";
-  vm.sensors = "";
-  vm.sensorId = "";
-  vm.sensorType = "";
-*/
   vm.closeCreateDeployment = function () {
     $location.path('/main/deployment_manager');
   };
 
   vm.createDeployment = function () {
-    vm.deploymentService.createDeployment(vm.deployId, vm.deployDate, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
+    vm.deploymentService.createDeployment(vm.currentDeployment.id, vm.currentDeployment.date, vm.currentDeployment.location, vm.currentDeployment.organizationId, vm.currentDeployment.organizationLabel, vm.currentDeployment.platformId, vm.currentDeployment.platformLabel, vm.currentDeployment.devices);//, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
   };
 
 }]);

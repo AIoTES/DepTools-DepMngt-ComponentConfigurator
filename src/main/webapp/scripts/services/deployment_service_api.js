@@ -1,13 +1,13 @@
 app.service('deploymentServiceApi',
-  ['$http', 'BACKEND_URL',
-    function ($http, BACKEND_URL) {
+  ['$http', 'DEPLOYMENT_MANAGER_BACKEND_URL',
+    function ($http, DEPLOYMENT_MANAGER_BACKEND_URL) {
 
       var service = {};
 
       service.getDevices = function () {
         return $http({
           method: 'GET',
-          url: BACKEND_URL + '/api/v1/deployments/devices',
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/devices',
           headers: {
             "Content-Type": "application/json"
           }
@@ -17,7 +17,7 @@ app.service('deploymentServiceApi',
       service.getDeployments = function () {
         return $http({
           method: 'GET',
-          url: BACKEND_URL + '/api/v1/deployments',
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments',
           headers: {
             "Content-Type": "application/json"
           }
@@ -27,7 +27,7 @@ app.service('deploymentServiceApi',
       service.getDeploymentById = function (deploymentId) {
         return $http({
           method: 'GET',
-          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId,
           headers: {
             "Content-Type": "application/json"
           }
@@ -37,7 +37,7 @@ app.service('deploymentServiceApi',
       service.addDeviceToDeployment = function (deploymentId, deviceId) {
         return $http({
           method: 'PUT',
-          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
           headers: {
             "Content-Type": "application/json"
           }
@@ -47,7 +47,7 @@ app.service('deploymentServiceApi',
       service.deleteDeviceFromDeployment = function (deploymentId, deviceId) {
         return $http({
           method: 'DELETE',
-          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
           headers: {
             "Content-Type": "application/json"
           }
@@ -57,27 +57,23 @@ app.service('deploymentServiceApi',
       service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//}, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
         return $http({
           method: 'POST',
-          url: BACKEND_URL + '/api/v1/deployments',
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments',
           headers: {
             "Content-Type": "application/json"
           },
           data: {
-            "deployment": [
-              {
-                "id": deployId,
-                "date": deployDate,
-                "location": location,
-                "organization" : {
-                  "id": organizationId,
-                  "label": organizationLabel
-                },
-                "platform" : {
-                  "id": platformId,
-                  "label": platformLabel,
-                  "devices": devices
-                }
-              }
-            ]
+            "id": deployId,
+            "date": deployDate,
+            "location": location,
+            "organization" : {
+              "id": organizationId,
+              "label": organizationLabel
+            },
+            "platform" : {
+              "id": platformId,
+              "label": platformLabel,
+              "devices": devices
+            }
           }
         });
       };
@@ -110,7 +106,7 @@ app.service('deploymentServiceApi',
       service.deleteDeployment = function (deploymentId) {
         return $http({
           method: 'DELETE',
-          url: BACKEND_URL + '/api/v1/deployments/' + deploymentId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId,
           headers: {
             "Content-Type": "application/json;charset=utf-8"
           }

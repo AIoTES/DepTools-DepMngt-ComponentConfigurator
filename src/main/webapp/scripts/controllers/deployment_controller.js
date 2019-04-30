@@ -14,7 +14,7 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
 
   vm.selectDeployment = function (deployment) {
     vm.deploymentData.deleteStatus = vm.deploymentData.operationStatus.NOT_STARTED;
-    vm.deployment.setCurrentDeployment(deployment);
+    vm.deploymentData.currentDeployment = deployment;
     vm.goToDeploymentInfo();
   };
 
@@ -25,7 +25,7 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
 
   vm.updateDeployment = function (deployment) {
     vm.deploymentData.addDeviceStatus = vm.deploymentData.operationStatus.NOT_STARTED;
-    vm.deployment.setCurrentDeployment(deployment);
+    vm.deploymentData.currentDeployment = deployment;
     vm.goToUpdateDeployment();
 
   };
