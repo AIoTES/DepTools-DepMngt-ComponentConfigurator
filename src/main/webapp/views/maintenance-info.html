@@ -11,7 +11,12 @@
 
   <div
     ng-show="maintenanceInfo.recordData.retrievalStatus[maintenanceInfo.recordData.selectedElementId] === maintenanceInfo.recordData.operationStatus.IN_PROGRESS">
-    Loading...
+
+    <div class="spinner-container">
+      <div class="spinner">
+      </div>
+    </div>
+
   </div>
 
   <div
@@ -48,35 +53,34 @@
         </tbody>
       </table>
 
-      <div class="button-container-form" ng-show="maintenanceInfo.deploymentData.deleteStatus === maintenanceInfo.deploymentData.operationStatus.NOT_STARTED">
-
-
-        <button style="float: left" type="submit" class="create-button" ng-click="maintenanceInfo.updateRecord(record)">
-          <span>Update</span>
-        </button>
-
-        <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.NOT_STARTED">
-          <button type="submit" class="info-button"
-                  ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
-            <span>Delete</span>
-          </button>
-        </div>
+      <div class="button-container-form">
 
         <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.IN_PROGRESS">
-          <button type="submit" class="info-button">
-            <span>Deleting...</span>
-          </button>
-        </div>
-
-        <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.SUCCESS">
-          <button type="submit" class="info-button">
-            <span>Deleted</span>
-          </button>
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
         </div>
 
         <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.FAILURE">
-          <button type="submit" class="info-button">
-            <span>¡ERROR!</span>
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Deleted!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="maintenanceInfo.recordData.deletesStatus[record.id] === maintenanceInfo.recordData.operationStatus.NOT_STARTED">
+          <button type="submit" class="info-button" ng-click="maintenanceInfo.deleteRecord(record.elementId, record.id)">
+            <span>Delete</span>
+          </button>
+
+          <button type="submit" class="info-button" ng-click="maintenanceInfo.goToUpdateMaintenance()">
+            <span>Update</span>
           </button>
         </div>
 

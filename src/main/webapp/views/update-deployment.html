@@ -42,32 +42,78 @@
       <input type="text" disabled placeholder="Platform Label" ng-model="updateCtrl.currentDeployment.platformLabel">
       <label class="form-label">Platform Label:</label>
 
-      <label class="form-label">Devices:</label>
+      <!--<label class="form-label">Devices:</label>-->
 
-      <div ng-repeat="device in updateCtrl.currentDeployment.devices">
-        <input type="text" disabled placeholder="Devices" ng-model=device>
+      <!--<div ng-repeat="device in updateCtrl.currentDeployment.devices">-->
+        <!--<input type="text" disabled placeholder="Devices" ng-model=device>-->
+      <!--</div>-->
+
+      <hr class="line">
+
+      <div class="deployment-device-header">
+        Devices:
+      </div>
+
+      <div class="deployment-device-container" ng-repeat="device in updateCtrl.currentDeployment.devices">
+        <div class="info-left">
+          <span>{{device}}</span>
+        </div>
+        <div class="right-button-container"
+             title="Delete Device {{device}}"
+             ng-click="updateCtrl.deploymentService.deleteDeviceFromDeployment(updateCtrl.deploymentData.currentDeployment.id, device)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </div>
       </div>
 
       <hr class="line">
 
-      <input type="text" placeholder="Platform Label" ng-model="updateCtrl.newDevicesId">
-      <label class="form-label">New Devices Id:</label>
+      <div class="deployment-device-header">
+        Add Devices:
+      </div>
 
-      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.NOT_STARTED" type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
-        <span>Add Devices</span>
-      </button>
+      <div class="deployment-device-container"
+           ng-repeat="newDevice in updateCtrl.deviceData.devices">
+        <div class="info-left">
+          <span>{{newDevice.name}}</span>
+        </div>
+        <div class="right-button-container"
+             title="Add Device {{newDevice.name}}"
+             ng-click="updateCtrl.deploymentService.deleteDeviceFromDeployment(updateCtrl.deploymentData.currentDeployment.id, newDevice.deviceId)">
+          <span class="glyphicon glyphicon-plus"></span>
+        </div>
+      </div>
 
-      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.IN_PROGRESS" type="submit" class="info-button">
-        <span>Adding Devices...</span>
-      </button>
+      <hr class="line">
 
-      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.FAILURE" type="submit" class="info-button">
-        <span>¡ERROR!</span>
-      </button>
+      <div class="button-container-form">
 
-      <button ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.SUCCESS" type="submit" class="info-button">
-        <span>Added Devices</span>
-      </button>
+        <div ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Updated!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
+            <span>Add Devices</span>
+          </button>
+        </div>
+
+      </div>
 
     </form>
 

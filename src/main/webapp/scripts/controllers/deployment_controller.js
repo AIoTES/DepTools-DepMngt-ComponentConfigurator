@@ -30,6 +30,10 @@ app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentS
 
   };
 
+  vm.goToDeviceList = function () {
+    $location.path('/main/deployment_manager/device_list');
+  };
+
   vm.goToDeploymentInfo = function () {
     $location.path('/main/deployment_manager/deployment_info');
   };

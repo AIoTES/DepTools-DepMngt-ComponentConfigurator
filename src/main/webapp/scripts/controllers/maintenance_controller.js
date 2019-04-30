@@ -21,6 +21,8 @@ app.controller('maintenanceCtrl',
         deploymentServiceData.selected = 'deployment';
         recordService.retrieve_records_by_element_id(deployment.id);
         recordServiceData.selectedElementId = deployment.id;
+        vm.deploymentClass = true;
+        vm.deviceClass = false;
         vm.goToMaintenanceInfo();
       };
 
@@ -29,6 +31,8 @@ app.controller('maintenanceCtrl',
         deploymentServiceData.selected = 'device';
         recordService.retrieve_records_by_element_id(device.id);
         recordServiceData.selectedElementId = device.id;
+        vm.deploymentClass = false;
+        vm.deviceClass = true;
         vm.goToMaintenanceInfo();
       };
 

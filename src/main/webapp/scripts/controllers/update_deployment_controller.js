@@ -2,7 +2,8 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
+app.controller('updateDeploymentCtrl', ['$location', 'deviceService', 'deviceServiceData', 'deploymentService', 'deploymentServiceData',
+  function ($location, deviceService, deviceServiceData, deploymentService, deploymentServiceData) {
 
   var vm = this;
 
@@ -10,6 +11,11 @@ app.controller('updateDeploymentCtrl', ['$location', 'deploymentService', 'deplo
 
   vm.deploymentService = deploymentService;
   vm.deploymentData = deploymentServiceData;
+
+  vm.deviceService = deviceService;
+  vm.deviceData = deviceServiceData;
+
+  vm.deploymentService.retrieveDeployments();
 
   vm.deviceIdSelected = "";
   vm.newDevicesId = "";

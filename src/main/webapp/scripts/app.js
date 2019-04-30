@@ -33,6 +33,7 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
   $routeSegmentProvider
     .when('/main', 'main')
     .when('/main/deployment_manager', 'main.deployment_manager')
+    .when('/main/deployment_manager/device_list', 'main.deployment_manager.device_list')
     .when('/main/deployment_manager/deployment_info', 'main.deployment_manager.deployment_info')
     .when('/main/deployment_manager/create_deployment', 'main.deployment_manager.create_deployment')
     .when('/main/deployment_manager/update_deployment', 'main.deployment_manager.update_deployment')
@@ -71,6 +72,12 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
     })
 
     .within()
+
+    .segment('device_list', {
+      templateUrl: 'views/device-list.html',
+      controller: 'deviceListCtrl',
+      controllerAs: 'deviceList'
+    })
 
     .segment('deployment_info', {
       templateUrl: 'views/deployment-info.html',

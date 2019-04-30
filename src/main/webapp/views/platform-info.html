@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="info-container">
+  <div class="option-device-container info-inner">
 
     <form class="add-form" name="add-platform">
 
@@ -63,33 +63,39 @@
              ng-model="platformInfo.platformData.currentPlatform.upstreamOutputAlignmentVersion">
       <label class="form-label">Upstream Output Alignment Version:</label>
 
-      <button style="float: left" type="submit" class="create-button" ng-click="platformInfo.goToUpdatePlatform()">
-        <span>Update</span>
-      </button>
+      <hr class="line">
 
-      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.NOT_STARTED">
-        <button style="float: right; margin-top: -30px" type="submit" class="create-button"
-                ng-click="platformInfo.deletePlatform()">
-          <span>Delete</span>
-        </button>
-      </div>
+      <div class="button-container-form">
 
-      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.IN_PROGRESS">
-        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
-          <span>Deleting...</span>
-        </button>
-      </div>
+        <div ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
 
-      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.SUCCESS">
-        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
-          <span>Deleted</span>
-        </button>
-      </div>
+        <div ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
 
-      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.FAILURE">
-        <button style="float: right; margin-top: -30px" type="submit" class="create-button">
-          <span>¡ERROR!</span>
-        </button>
+        <div ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Deleted!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.NOT_STARTED">
+          <button type="submit" class="info-button" ng-click="platformInfo.deletePlatform()">
+            <span>Delete</span>
+          </button>
+
+          <button type="submit" class="info-button" ng-click="platformInfo.goToUpdatePlatform()">
+            <span>Update</span>
+          </button>
+        </div>
+
       </div>
 
     </form>

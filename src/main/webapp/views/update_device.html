@@ -59,30 +59,35 @@
 
       <hr class="line">
 
-      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.NOT_STARTED" class="button-container-form">
-        <button style="float: left" type="submit" class="info-button" ng-click="componentUpdate.updateDevice()">
-          <span>Update</span>
-        </button>
-      </div>
+      <div class="button-container-form">
 
-      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.IN_PROGRESS" class="button-container-form">
-        <button style="float: left" type="submit" class="info-button">
-          <span>Updating...</span>
-        </button>
-      </div>
+        <div ng-show="componentUpdate.deploymentData.deleteStatus === componentUpdate.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
 
-      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.SUCCESS" class="button-container-form">
-        <button style="float: left" type="submit" class="info-button">
-          <span>Updated</span>
-        </button>
-      </div>
+        <div ng-show="componentUpdate.deploymentData.deleteStatus === componentUpdate.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
 
-      <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.FAILURE" class="button-container-form">
-        <button style="float: left" type="submit" class="info-button">
-          <span>¡ERROR!</span>
-        </button>
-      </div>
+        <div ng-show="componentUpdate.deploymentData.deleteStatus === componentUpdate.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Updated!</span>
+          </div>
+        </div>
 
+        <div class="info-button-container" ng-show="componentUpdate.deploymentData.deleteStatus === componentUpdate.deploymentData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="componentUpdate.updateDevice()">
+            <span>Update</span>
+          </button>
+        </div>
+
+      </div>
 
     </form>
 

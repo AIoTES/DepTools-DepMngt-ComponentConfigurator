@@ -4,21 +4,24 @@
     <div class="option-header-left">
       <h3>Deployments & Devices</h3>
     </div>
-    <!--
+
     <div class="option-header-right">
-      <div class="square-header-button" title="Delete Deployment Installation" ng-click="deployCtrl.goToDeleteDeployment()">
-        <span class="glyphicon glyphicon-trash"></span>
-      </div>
-      <div class="square-header-button" title="Create Deployment Installation" ng-click="deployCtrl.goToCreateDeployment()">
+      <div class="square-header-button"
+           ng-class="{ 'button-header-active' : ('main.maintenance_panel.add_maintenance' | routeSegmentEqualsTo) }"
+           title="Create Deployment Installation"
+           ng-click="maintenance.goToAddMaintenance()">
         <span class="glyphicon glyphicon-plus"></span>
       </div>
     </div>
-    -->
+
   </div>
 
   <div ng-show="maintenance.deploymentData.retrievalStatus['deployments'] === maintenance.deploymentData.operationStatus.IN_PROGRESS &&
                 maintenance.deploymentData.retrievalStatus['devices'] === maintenance.deploymentData.operationStatus.IN_PROGRESS">
-    Loadings devices and deployments...
+    <div class="spinner-container">
+      <div class="spinner">
+      </div>
+    </div>
   </div>
 
   <div ng-show="maintenance.deploymentData.retrievalStatus['deployments'] === maintenance.deploymentData.operationStatus.FAILURE &&
@@ -32,7 +35,8 @@
 
     <div ng-repeat="deployment in maintenance.deploymentData.deployments"
          class="option-device"
-         ng-class="{ 'option-device-active' : deployment.id === maintenance.deploymentData.currentDeployment.id }">
+         ng-class="{ 'option-device-active' : deployment.id === maintenance.deploymentData.currentDeployment.id && maintenance.deploymentClass,
+                     'option-device-unactive' : maintenance.deviceClass }">
 
       <div class="option-name-container"
            ng-click="maintenance.selectDeployment(deployment)">
@@ -42,8 +46,9 @@
       </div>
 
       <div class="option-buttons-container">
-        <div class="square-option-device-button" ng-click="maintenance.goToAddMaintenance()">
-          <span class="glyphicon glyphicon-plus"></span>
+        <div class="square-option-device-button"
+             ng-class="{ 'option-device-button-active' : deployment.id === maintenance.deploymentData.currentDeployment.id && maintenance.deploymentClass }">
+          <span class="glyphicon glyphicon-info-sign"></span>
         </div>
       </div>
 
@@ -51,8 +56,8 @@
 
     <div ng-repeat="deploymentDevice in maintenance.deploymentData.deploymentDevices"
          class="option-device"
-         ng-class="{ 'option-device-active' : deploymentDevice.id === maintenance.deploymentData.currentDeviceDeployment.id,
-                     'option-device' : maintenance.deploymentData.currentDeployment.id != null }">
+         ng-class="{ 'option-device-active' : deploymentDevice.id === maintenance.deploymentData.currentDeviceDeployment.id && maintenance.deviceClass,
+                     'option-device-unactive' : maintenance.deploymentClass }">
 
       <div class="option-name-container" ng-click="maintenance.selectDeviceDeployment(deploymentDevice)">
         <span class="option-name">{{deploymentDevice.id}}</span>
@@ -61,8 +66,9 @@
       </div>
 
       <div class="option-buttons-container">
-        <div class="square-option-device-button" ng-click="maintenance.goToAddMaintenance()">
-          <span class="glyphicon glyphicon-plus"></span>
+        <div class="square-option-device-button"
+             ng-class="{ 'option-device-button-active' : deploymentDevice.id === maintenance.deploymentData.currentDeviceDeployment.id && maintenance.deviceClass }">
+          <span class="glyphicon glyphicon-info-sign"></span>
         </div>
       </div>
 

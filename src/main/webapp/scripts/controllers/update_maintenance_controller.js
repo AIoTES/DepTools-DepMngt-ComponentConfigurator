@@ -2,21 +2,24 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('updateMaintenanceCtrl', ['$location', 'deploymentService', 'clientService', function ($location, deploymentService, clientService) {
+app.controller('updateMaintenanceCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', 'recordServiceData',
+  function ($location, deploymentService, deploymentServiceData, clientService, recordServiceData) {
 
   var vm = this;
 
-  var date = Date.now();
-
   vm.deploymentService = deploymentService;
+  vm.deploymentData = deploymentServiceData;
   vm.clientService = clientService;
+  vm.recordData = recordServiceData;
 
-  vm.deployId = "";
-  vm.deviceId = "";
-  vm.description = "";
-  vm.status = "";
-  vm.type = "";
-  vm.date = date;
+  vm.currentRecord = {
+    "id": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].id,
+    "elementId": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].elementId,
+    "description": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].description,
+    "status": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].status,
+    "type": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].type,
+    "timestamp": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].timestamp
+  };
 
   vm.closeAddMaintenance = function () {
     $location.path('/main/maintenance_panel');

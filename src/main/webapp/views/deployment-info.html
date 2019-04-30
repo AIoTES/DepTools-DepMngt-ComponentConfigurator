@@ -64,56 +64,56 @@
         {{deployInfo.deploymentData.currentDeployment.platform.label}}
       </div>
 
-      <div class="info-left">
+    <hr class="line">
+
+      <div class="deployment-device-header">
         Devices:
       </div>
 
-      <div ng-repeat="x in deployInfo.deploymentData.currentDeployment.platform.devices">
-        <div class="info-right">
-          {{x}}
+      <div class="deployment-device-container" ng-repeat="device in deployInfo.deploymentData.currentDeployment.platform.devices">
+        <div class="info-left">
+          <span>{{device}}</span>
+        </div>
+        <div class="right-button-container"
+             title="Delete Device {{device}}"
+              ng-click="deployInfo.deploymentService.deleteDeviceFromDeployment(deployInfo.deploymentData.currentDeployment.id, device)">
+          <span class="glyphicon glyphicon-trash"></span>
         </div>
       </div>
 
     <hr class="line">
 
-    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.NOT_STARTED">
-      <button type="submit" class="info-button" ng-click="deployInfo.goToDeleteDeployment()">
-        <span>Delete</span>
-      </button>
+    <div class="button-container-form">
 
-      <button type="submit" class="info-button" ng-click="deployInfo.goToUpdateDeployment()">
-        <span>Update</span>
-      </button>
-    </div>
+      <div ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.IN_PROGRESS">
+        <div class="spinner-small-container">
+          <div class="spinner-small">
+          </div>
+        </div>
+      </div>
 
-    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.IN_PROGRESS">
-      <button type="submit" class="info-button">
-        <span>Deleting...</span>
-      </button>
+      <div ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.FAILURE">
+        <div class="message-container error">
+          <span>Error!</span>
+        </div>
+      </div>
 
-      <button type="submit" class="info-button">
-        <span>Update</span>
-      </button>
-    </div>
+      <div ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.SUCCESS">
+        <div class="message-container success">
+          <span>Deleted!</span>
+        </div>
+      </div>
 
-    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.FAILURE">
-      <button type="submit" class="info-button">
-        <span>¡ERROR!</span>
-      </button>
+      <div class="info-button-container" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="deployInfo.goToDeleteDeployment()">
+          <span>Delete</span>
+        </button>
 
-      <button type="submit" class="info-button">
-        <span>Update</span>
-      </button>
-    </div>
+        <button type="submit" class="info-button" ng-click="deployInfo.goToUpdateDeployment()">
+          <span>Update</span>
+        </button>
+      </div>
 
-    <div class="button-container-form" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.SUCCESS">
-      <button type="submit" class="info-button">
-        <span>Deleted</span>
-      </button>
-
-      <button type="submit" class="info-button">
-        <span>Update</span>
-      </button>
     </div>
 
   </div>

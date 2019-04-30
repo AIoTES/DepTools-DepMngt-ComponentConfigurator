@@ -25,18 +25,11 @@
       <img src="images/activage-logo.png" title="activage project" alt="activage project">
     </a>
     <div class="header-title">
-      <h2 ng-show="('main.about' | routeSegmentStartsWith)">
-        Interoperability Demo Application
+
+      <h2>
+        {{root.webTitle}}
       </h2>
-      <h2 ng-show="('main.deployment_manager' | routeSegmentStartsWith)">
-        Deployment Manager
-      </h2>
-      <h2 ng-show="('main.component_configurator' | routeSegmentStartsWith)">
-        Component Configurator
-      </h2>
-      <h2 ng-show="('main.maintenance_panel' | routeSegmentStartsWith)">
-        Maintenance Panel
-      </h2>
+
     </div>
   </div>
 
@@ -178,7 +171,8 @@
   </div>
   <div class="right-div-50"
        app-view-segment="2"
-       ng-show="('main.deployment_manager.deployment_info' | routeSegmentEqualsTo) ||
+       ng-show="('main.deployment_manager.device_list' | routeSegmentEqualsTo) ||
+                ('main.deployment_manager.deployment_info' | routeSegmentEqualsTo) ||
                 ('main.deployment_manager.create_deployment' | routeSegmentEqualsTo) ||
                 ('main.deployment_manager.update_deployment' | routeSegmentEqualsTo) ||
                 ('main.deployment_manager.delete_deployment' | routeSegmentEqualsTo) ||
@@ -252,6 +246,7 @@
 <script src="scripts/controllers/add_service_controller.js"></script>
 <script src="scripts/controllers/deployment_controller.js"></script>
 <script src="scripts/controllers/create_deployment_controller.js"></script>
+<script src="scripts/controllers/device_list_controller.js"></script>
 <script src="scripts/controllers/deployment_info_controller.js"></script>
 <script src="scripts/controllers/update_deployment_controller.js"></script>
 <script src="scripts/controllers/maintenance_controller.js"></script>

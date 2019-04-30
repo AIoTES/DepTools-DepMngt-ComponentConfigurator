@@ -43,7 +43,7 @@ header {
 }
 
 .button-header-active {
-  background: #0f2144;
+  background: #0f2144 !important;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
@@ -876,11 +876,13 @@ header {
   line-height: 40px;
   background: #2bbee8;
   color: #fff;
+  text-align: center;
 }
 
 .maintenance-table tbody tr {
   line-height: 40px;
   border-bottom: 1px solid #2bbee8;
+  text-align: center;
 }
 
 .maintenance-table td {
@@ -900,7 +902,7 @@ header {
 .option-device {
   width: 100%;
   height: 50px;
-  padding: 0 5px 0 10px;
+  padding: 0 5px 0 10px !important;
   border-bottom: 1px solid #b3b3b3;
   background: transparent;
   cursor: pointer;
@@ -937,6 +939,10 @@ header {
   padding: 0 10px;
   background: #ddd;
   border-bottom: 1px solid #b3b3b3;
+}
+
+.option-device-unactive {
+  background: transparent;
 }
 
 /*.option-device-active:after {*/
@@ -1108,11 +1114,11 @@ header {
 }
 
 .option-device-button-active {
-  background: #0f2144;
+  background: #2bbee8;
 }
 
 .option-device-button-active span {
-  color: #fff;
+  color: #fff !important;
 }
 
 .square-option-device-button {
@@ -1139,7 +1145,7 @@ header {
 }
 
 .square-option-device-button:hover {
-  background: #0f2144 !important;
+  background: #2bbee8;
 }
 
 .square-option-device-button span {
@@ -1155,7 +1161,7 @@ header {
 }
 
 .square-option-device-button-active {
-  background: #0f2144;
+  background: #2bbee8;
 }
 
 .square-option-device-button-active span {
@@ -1749,6 +1755,61 @@ pre {
   transition: 0.3s ease all;
 }
 
+.deployment-device-header {
+  width: calc(100% - 20px);
+  height: 40px;
+  margin: 0 10px;
+  clear: both;
+  background: #2bbee8;
+  color: #fff;
+  line-height: 40px;
+  padding: 0 10px;
+}
+
+.deployment-device-container {
+  width: calc(100% - 20px);
+  height: 40px;
+  margin: 0 10px;
+  clear: both;
+  border-bottom: 1px solid #ccc;
+}
+
+.deployment-device-container span {
+  line-height: 40px;
+  color: #2bbee8;
+}
+
+.deployment-device-container .info-left {
+  margin: 0 !important;
+}
+
+.right-button-container {
+  width: 40px;
+  height: 40px;
+  float: right;
+  background: transparent;
+  text-align: center !important;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.right-button-container:hover {
+  background: #2bbee8;
+}
+
+.right-button-container span {
+  float: none;
+  text-align: center;
+  margin: auto !important;
+  line-height: 38px;
+  color: #2bbee8;
+  transition: 0.3s ease all;
+}
+
+.right-button-container:hover span {
+  color: #fff;
+}
+
 .button-container-form {
   width: 100%;
   /*padding: 0 10px;*/
@@ -1861,4 +1922,110 @@ pre {
   overflow-y: auto;
   padding: 10px;
   border-bottom: 1px solid #2bbee8;
+}
+
+.spinner-container {
+  width: 50px;
+  height: 50px;
+  margin: calc(50% - 75px) calc(50% - 25px);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-color: transparent #2bbee8 transparent #2bbee8;
+  border-width: 2px;
+  border-style: solid;
+  animation: 0.5s all linear infinite;
+  animation-name: spinner;
+}
+
+.spinner-small-container {
+  width: 30px;
+  height: 30px;
+  left: 10px;
+  position: absolute;
+  float: left;
+}
+
+.spinner-small {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-color: transparent #2bbee8 transparent #2bbee8;
+  border-width: 2px;
+  border-style: solid;
+  animation: 0.5s all linear infinite;
+  animation-name: spinner;
+}
+
+.spinner-very-small-container {
+  width: 20px;
+  height: 20px;
+  margin-top: -30px;
+  margin-left: calc(20% - 80px);
+  position: absolute;
+  float: left;
+}
+
+.spinner-very-small {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-color: transparent #2bbee8 transparent #2bbee8;
+  border-width: 2px;
+  border-style: solid;
+  animation: 0.5s all linear infinite;
+  animation-name: spinner;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.info-button-container {
+  float: right;
+}
+
+.info-button-container button {
+  float: none;
+}
+
+.message-container {
+  height: 30px;
+  width: auto;
+  padding: 0 10px;
+  left: 10px;
+  position: absolute;
+  float: left;
+}
+
+.message-container-100 {
+  height: 30px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.error {
+  background: #dc3545;
+}
+
+.success {
+  background: #28a745;
+}
+
+.message-container span {
+  color: #fff;
+  line-height: 30px;
+}
+
+.message-container-100 span {
+  color: #fff;
+  line-height: 30px;
 }
