@@ -54,7 +54,7 @@ app.service('deploymentServiceApi',
         });
       };
 
-      service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {//}, deviceId, deviceLabel, deviceType, sensors, sensorId, sensorType) {
+      service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {
         return $http({
           method: 'POST',
           url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments',
@@ -77,31 +77,6 @@ app.service('deploymentServiceApi',
           }
         });
       };
-
-      /*service.updateDeployment = function (clientId, deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {
-        return $http({
-          method: 'PUT',
-          url: BACKEND_URL + '/api/v1/deployments?deviceId=' + deviceId,
-          headers: {
-            "Content-Type": "application/json",
-            "Client-ID": clientId
-          },
-          data: {
-            "deviceTypes": [deviceTypes],
-            "deviceId": deviceId,
-            "hostedBy": hostedBy,
-            "location": location,
-            "name": name,
-            "hosts": [hosts],
-            "forProperty": forProperty,
-            "madeActuation": madeActuation,
-            "implementsProcedure": implementsProcedure,
-            "observes": observes,
-            "detects": detects,
-            "madeObservation": madeObservation
-          }
-        });
-      };*/
 
       service.deleteDeployment = function (deploymentId) {
         return $http({

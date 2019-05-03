@@ -1,6 +1,6 @@
 app.service('deviceService',
-  ['deviceServiceApi', 'deviceServiceData', 'clientServiceData', '$location',
-    function (deviceServiceApi, deviceServiceData, clientServiceData, $location) {
+  ['deviceServiceApi', 'deviceServiceData', 'clientServiceData',
+    function (deviceServiceApi, deviceServiceData, clientServiceData) {
 
       var service = {};
 

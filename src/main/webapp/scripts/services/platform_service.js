@@ -3,8 +3,8 @@
  */
 
 app.service('platformService',
-  ['platformServiceApi', 'platformServiceData', 'clientServiceData', '$location',
-    function (platformServiceApi, platformServiceData, clientServiceData, $location) {
+  ['platformServiceApi', 'platformServiceData', 'clientServiceData',
+    function (platformServiceApi, platformServiceData, clientServiceData) {
 
       var service = this;
 
