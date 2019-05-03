@@ -1,14 +1,15 @@
 'use strict';
 
 app.controller('addDeviceCtrl',
-  ['$location', 'deviceService', 'platformService', 'platformServiceData',
-    function ($location, deviceService, platformService, platformServiceData) {
+  ['$location', 'deviceService', 'platformService', 'platformServiceData', 'deviceServiceData',
+    function ($location, deviceService, platformService, platformServiceData, deviceServiceData) {
 
       var vm = this;
 
       vm.deviceService = deviceService;
 
       vm.platformData = platformServiceData;
+      vm.deviceData = deviceServiceData;
 
       vm.deviceToCreate = {
         "deviceId": "",

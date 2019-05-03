@@ -44,8 +44,6 @@ app.service('platformService',
               platformServiceData.platforms.push(platform);
 
               if (response.status === 200) {
-                alert("Platform created");
-                $location.path('/main/component_configurator');
                 platformServiceData.createStatus = platformServiceData.operationStatus.SUCCESS;
               }
 
@@ -126,9 +124,7 @@ app.service('platformService',
               if (platformIndex !== -1)
                 platformServiceData.platforms.splice(platformIndex, 1);
 
-              alert("Platform deleted");
               platformServiceData.deleteStatus = platformServiceData.operationStatus.SUCCESS;
-              $location.path('/main/component_configurator/component_view');
             }
           )
           .catch(

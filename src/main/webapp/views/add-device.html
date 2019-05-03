@@ -58,9 +58,35 @@
 
       <hr class="line">
 
-      <button type="submit" class="info-button" ng-click="addDevice.createDevice()">
-        <span>Create</span>
-      </button>
+      <div class="button-container-form">
+
+        <div ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Created!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="addDevice.createDevice()">
+            <span>Create</span>
+          </button>
+        </div>
+
+      </div>
 
     </form>
 

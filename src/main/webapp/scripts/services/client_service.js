@@ -9,27 +9,29 @@ app.service('clientService',
       var service = this;
 
       service.retrieveClients = function (clientId) {
-        clientServiceData.retrievalStatus = clientServiceData.operationStatus.IN_PROGRESS;
-        if (clientServiceData.clientStatus !== clientServiceData.retrievalStatus.SUCCESS) {
-          clientServiceApi.getClients(clientId)
-            .then(
-              function (response) {
-                clientServiceData.clients = [];
-                var data = response.data;
-                data.forEach(
-                  function (value) {
-                    clientServiceData.clients.push(value);
-                  }
-                );
-                clientServiceData.retrievalStatus = clientServiceData.operationStatus.SUCCESS;
-              }
-            )
-            .catch(
-              function (error) {
-                console.log(error);
-                clientServiceData.retrievalStatus = clientServiceData.operationStatus.FAILURE;
-              }
-            );
+        if (clientServiceData.retrievalStatus !== clientServiceData.operationStatus.SUCCESS) {
+          clientServiceData.retrievalStatus = clientServiceData.operationStatus.IN_PROGRESS;
+          if (clientServiceData.clientStatus !== clientServiceData.operationStatus.SUCCESS) {
+            clientServiceApi.getClients(clientId)
+              .then(
+                function (response) {
+                  clientServiceData.clients = [];
+                  var data = response.data;
+                  data.forEach(
+                    function (value) {
+                      clientServiceData.clients.push(value);
+                    }
+                  );
+                  clientServiceData.retrievalStatus = clientServiceData.operationStatus.SUCCESS;
+                }
+              )
+              .catch(
+                function (error) {
+                  console.log(error);
+                  clientServiceData.retrievalStatus = clientServiceData.operationStatus.FAILURE;
+                }
+              );
+          }
         }
       };
 
@@ -38,20 +40,20 @@ app.service('clientService',
       };
 
       service.getCurrentClientId = function () {
-        if (clientServiceData.clientStatus !== clientServiceData.retrievalStatus.SUCCESS) {
-          if (clientServiceData.clientStatus === clientServiceData.retrievalStatus.NOT_STARTED) {
-            clientServiceData.clientStatus = clientServiceData.retrievalStatus.IN_PROGRESS;
+        if (clientServiceData.clientStatus !== clientServiceData.operationStatus.SUCCESS) {
+          if (clientServiceData.clientStatus === clientServiceData.operationStatus.NOT_STARTED) {
+            clientServiceData.clientStatus = clientServiceData.operationStatus.IN_PROGRESS;
 
             clientServiceApi.getCurrentClientId()
               .then(
                 function (response) {
                   clientServiceData.currentClientId = response.data["clientId"];
-                  clientServiceData.clientStatus = clientServiceData.retrievalStatus.SUCCESS;
+                  clientServiceData.clientStatus = clientServiceData.operationStatus.SUCCESS;
                 }
               )
               .catch(
                 function (error) {
-                  clientServiceData.clientStatus = clientServiceData.retrievalStatus.FAILURE;
+                  clientServiceData.clientStatus = clientServiceData.operationStatus.FAILURE;
                   console.log(error);
                 }
               );

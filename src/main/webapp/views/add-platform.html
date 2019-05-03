@@ -15,6 +15,9 @@
       <input type="text" placeholder="Id" ng-model="addPlatform.platformCreateRequest.platformId">
       <label class="form-label">Id:</label>
 
+      <input type="text" placeholder="Name" ng-model="addPlatform.platformCreateRequest.name">
+      <label class="form-label">Name:</label>
+
       <select ng-model="addPlatform.platformCreateRequest.type">
         <option ng-repeat="option in addPlatform.platformData.platformsTypes"
                 value="{{option}}">{{option}}
@@ -27,9 +30,6 @@
 
       <input type="text" placeholder="Location" ng-model="addPlatform.platformCreateRequest.location">
       <label class="form-label">Location:</label>
-
-      <input type="text" placeholder="Name" ng-model="addPlatform.platformCreateRequest.name">
-      <label class="form-label">Name:</label>
 
       <input type="text" placeholder="Username" ng-model="addPlatform.platformCreateRequest.username">
       <label class="form-label">Username:</label>
@@ -74,31 +74,35 @@
 
       <hr class="line">
 
+      <div class="button-container-form">
 
-      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.NOT_STARTED">
-        <button type="submit" class="info-button" ng-click="addPlatform.createPlatform()">
-          <span>Create</span>
-        </button>
+        <div ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Created!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="addPlatform.createPlatform()">
+            <span>Create</span>
+          </button>
+        </div>
+
       </div>
-
-      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.IN_PROGRESS">
-        <button type="submit" class="info-button">
-          <span>Creating...</span>
-        </button>
-      </div>
-
-      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.SUCCESS">
-        <button type="submit" class="info-button">
-          <span>Created</span>
-        </button>
-      </div>
-
-      <div ng-show="addPlatform.platformData.updateStatus === addPlatform.platformData.operationStatus.FAILURE">
-        <button type="submit" class="info-button">
-          <span>¡ERROR!</span>
-        </button>
-      </div>
-
 
     </form>
 

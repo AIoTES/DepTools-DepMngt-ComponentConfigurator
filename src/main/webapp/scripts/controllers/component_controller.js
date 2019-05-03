@@ -10,8 +10,8 @@
 app.controller('componentCtrl', ['platformService', 'deviceService', '$location', 'clientService', 'platformServiceData', 'clientServiceData',
   function (platformService, deviceService, $location, clientService, platformServiceData, clientServiceData) {
 
-    platformService.retrievePlatforms(clientService.getCurrentClientId());
     clientService.retrieveClients(clientService.getCurrentClientId());
+    platformService.retrievePlatforms(clientService.getCurrentClientId());
 
     var vm = this;
 

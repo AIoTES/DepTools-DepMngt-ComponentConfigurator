@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="info-container">
+  <div class="option-device-container info-inner">
 
     <form class="add-form" name="add-platform">
 
@@ -64,31 +64,37 @@
              ng-model="platformInfo.platformUpdateRequest.upstreamOutputAlignmentVersion">
       <label class="form-label">Upstream Output Alignment Version:</label>
 
-      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.NOT_STARTED">
-        <button style="float: right" type="submit" class="create-button"
-                ng-click="platformInfo.updatePlatform()">
-          <span>Update</span>
-        </button>
-      </div>
+      <hr class="line">
 
-      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.IN_PROGRESS">
-        <button style="float: right" type="submit" class="create-button">
-          <span>Updating...</span>
-        </button>
-      </div>
+      <div class="button-container-form">
 
-      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.SUCCESS">
-        <button style="float: right" type="submit" class="create-button">
-          <span>Updated</span>
-        </button>
-      </div>
+        <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
 
-      <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.FAILURE">
-        <button style="float: right" type="submit" class="create-button">
-          <span>¡ERROR!</span>
-        </button>
-      </div>
+        <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
 
+        <div ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Updated!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="platformInfo.platformData.updateStatus === platformInfo.platformData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="platformInfo.updatePlatform()">
+            <span>Update</span>
+          </button>
+        </div>
+
+      </div>
 
     </form>
 

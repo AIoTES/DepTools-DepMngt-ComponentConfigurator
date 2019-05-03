@@ -1,8 +1,8 @@
-app.service('channelServiceApi', ['$http', 'BACKEND_URL', function ($http, BACKEND_URL) {
+app.service('channelServiceApi', ['$http', 'COMPONENT_CONFIGURATION_BACKEND_URL', function ($http, COMPONENT_CONFIGURATION_BACKEND_URL) {
   this.getChannels = function (clientId) {
     return $http({
       method: 'GET',
-      url: BACKEND_URL+ '/api/v1/channels',
+      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/channels',
       headers: {
         "Content-Type": "application/json",
         "Client-ID": clientId
@@ -13,7 +13,7 @@ app.service('channelServiceApi', ['$http', 'BACKEND_URL', function ($http, BACKE
   this.createChannel = function (source, inpAlignmentName, inpAlignmentVersion, outAlignmentName, outAlignmentVersion, sink, parallelism, clientId) {
     return $http({
       method: 'POST',
-      url: BACKEND_URL+ '/api/v1/channels',
+      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/channels',
       headers: {
         "Content-Type": "application/json",
         "Client-ID": clientId
@@ -33,7 +33,7 @@ app.service('channelServiceApi', ['$http', 'BACKEND_URL', function ($http, BACKE
   this.deleteChannel = function (channelId, clientId) {
     return $http({
       method: 'DELETE',
-      url: BACKEND_URL+ '/api/v1/channels/' + channelId,
+      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/channels/' + channelId,
       headers: {
         "Client-ID": clientId
       }

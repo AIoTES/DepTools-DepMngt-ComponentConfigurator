@@ -10,95 +10,138 @@
 
   <div class="option-device-container info-inner">
 
-    <form class="add-form" name="add-platform">
+    <div class="info-left">
+      Id:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.platformId}}
+    </div>
 
-      <input type="text" disabled placeholder="Id" ng-model="platformInfo.platformData.currentPlatform.platformId">
-      <label class="form-label">Id:</label>
+    <div class="info-left">
+      Name:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.name}}
+    </div>
 
-      <input type="text" disabled placeholder="Name" ng-model="platformInfo.platformData.currentPlatform.name">
-      <label class="form-label">Name:</label>
+    <div class="info-left">
+      Type:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.type}}
+    </div>
 
-      <input type="text" disabled placeholder="Type" ng-model="platformInfo.platformData.currentPlatform.type">
-      <label class="form-label">Type:</label>
+    <div class="info-left">
+      Endpoint:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.baseEndpoint}}
+    </div>
 
-      <input type="text" disabled placeholder="Endpoint"
-             ng-model="platformInfo.platformData.currentPlatform.baseEndpoint">
-      <label class="form-label">Endpoint:</label>
+    <div class="info-left">
+      Location:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.location}}
+    </div>
 
-      <input type="text" disabled placeholder="Location" ng-model="platformInfo.platformData.currentPlatform.location">
-      <label class="form-label">Location:</label>
+    <div class="info-left">
+      Username:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.username}}
+    </div>
 
-      <input type="text" disabled placeholder="Username" ng-model="platformInfo.platformData.currentPlatform.username">
-      <label class="form-label">Username:</label>
+    <div class="info-left">
+      Downstream Input Alignment Name:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.downstreamInputAlignmentName}}
+    </div>
 
-      <input type="text" disabled placeholder="Downstream Input Alignment Name"
-             ng-model="platformInfo.platformData.currentPlatform.downstreamInputAlignmentName">
-      <label class="form-label">Downstream Input Alignment Name:</label>
+    <div class="info-left">
+      Downstream Input Alignment Version:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.downstreamInputAlignmentVersion}}
+    </div>
 
-      <input type="text" disabled placeholder="Downstream Input Alignment Version"
-             ng-model="platformInfo.platformData.currentPlatform.downstreamInputAlignmentVersion">
-      <label class="form-label">Downstream Input Alignment Version:</label>
+    <div class="info-left">
+      Downstream Output Alignment Name:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.downstreamOutputAlignmentName}}
+    </div>
 
-      <input type="text" disabled placeholder="Downstream Output Alignment Name"
-             ng-model="platformInfo.platformData.currentPlatform.downstreamOutputAlignmentName">
-      <label class="form-label">Downstream Output Alignment Name:</label>
+    <div class="info-left">
+      Downstream Output Alignment Version:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.downstreamOutputAlignmentVersion}}
+    </div>
 
-      <input type="text" disabled placeholder="Downstream Output Alignment Version"
-             ng-model="platformInfo.platformData.currentPlatform.downstreamOutputAlignmentVersion">
-      <label class="form-label">Downstream Output Alignment Version:</label>
+    <div class="info-left">
+      Upstream Input Alignment Name:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.upstreamInputAlignmentName}}
+    </div>
 
-      <input type="text" disabled placeholder="Upstream Input Alignment Name"
-             ng-model="platformInfo.platformData.currentPlatform.upstreamInputAlignmentName">
-      <label class="form-label">Upstream Input Alignment Name:</label>
+    <div class="info-left">
+      Upstream Input Alignment Version:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.upstreamInputAlignmentVersion}}
+    </div>
 
-      <input type="text" disabled placeholder="Upstream Input Alignment Version"
-             ng-model="platformInfo.platformData.currentPlatform.upstreamInputAlignmentVersion">
-      <label class="form-label">Upstream Input Alignment Version:</label>
+    <div class="info-left">
+      Upstream Output Alignment Name:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.upstreamOutputAlignmentName}}
+    </div>
 
-      <input type="text" disabled placeholder="Upstream Output Alignment Name"
-             ng-model="platformInfo.platformData.currentPlatform.upstreamOutputAlignmentName">
-      <label class="form-label">Upstream Output Alignment Name:</label>
+    <div class="info-left">
+      Upstream Output Alignment Version:
+    </div>
+    <div class="info-right">
+      {{platformInfo.platformData.currentPlatform.upstreamOutputAlignmentVersion}}
+    </div>
 
-      <input type="text" disabled placeholder="Upstream Output Alignment Version"
-             ng-model="platformInfo.platformData.currentPlatform.upstreamOutputAlignmentVersion">
-      <label class="form-label">Upstream Output Alignment Version:</label>
+    <hr class="line">
 
-      <hr class="line">
+    <div class="button-container-form">
 
-      <div class="button-container-form">
-
-        <div ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.IN_PROGRESS">
-          <div class="spinner-small-container">
-            <div class="spinner-small">
-            </div>
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.IN_PROGRESS">
+        <div class="spinner-small-container">
+          <div class="spinner-small">
           </div>
         </div>
-
-        <div ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.FAILURE">
-          <div class="message-container error">
-            <span>Error!</span>
-          </div>
-        </div>
-
-        <div ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.SUCCESS">
-          <div class="message-container success">
-            <span>Deleted!</span>
-          </div>
-        </div>
-
-        <div class="info-button-container" ng-show="platformInfo.deploymentData.deleteStatus === platformInfo.deploymentData.operationStatus.NOT_STARTED">
-          <button type="submit" class="info-button" ng-click="platformInfo.deletePlatform()">
-            <span>Delete</span>
-          </button>
-
-          <button type="submit" class="info-button" ng-click="platformInfo.goToUpdatePlatform()">
-            <span>Update</span>
-          </button>
-        </div>
-
       </div>
 
-    </form>
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.FAILURE">
+        <div class="message-container error">
+          <span>Error!</span>
+        </div>
+      </div>
+
+      <div ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.SUCCESS">
+        <div class="message-container success">
+          <span>Deleted!</span>
+        </div>
+      </div>
+
+      <div class="info-button-container" ng-show="platformInfo.platformData.deleteStatus === platformInfo.platformData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="platformInfo.deletePlatform()">
+          <span>Delete</span>
+        </button>
+
+        <button type="submit" class="info-button" ng-click="platformInfo.goToUpdatePlatform()">
+          <span>Update</span>
+        </button>
+      </div>
+
+    </div>
 
   </div>
 
