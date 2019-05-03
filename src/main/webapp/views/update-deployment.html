@@ -16,12 +16,15 @@
       <input type="text" disabled placeholder="Id" ng-model="updateCtrl.currentDeployment.id">
       <label class="form-label">Id:</label>
 
-      <div class="info-left">
+      <input type="text" disabled placeholder="Id" ng-model="updateCtrl.currentDeployment.date">
+      <label class="form-label">Date:</label>
+
+      <!--<div class="info-left">
         Date:
       </div>
       <div class="info-right">
-        {{updateCtrl.currentDeployment.date | date: 'dd-MM-yyyy HH:mm:ss'}}
-      </div>
+        {{updateCtrl.currentDeployment.date | date: 'yyyy-MM-dd'}}
+      </div>-->
 
       <input type="text" disabled placeholder="Location" ng-model="updateCtrl.currentDeployment.location">
       <label class="form-label">Location:</label>
@@ -60,7 +63,7 @@
         </div>
         <div class="right-button-container"
              title="Delete Device {{device}}"
-             ng-click="updateCtrl.deploymentService.deleteDeviceFromDeployment(updateCtrl.deploymentData.currentDeployment.id, device)">
+             ng-click="updateCtrl.deleteDevice(device)">
           <span class="glyphicon glyphicon-trash"></span>
         </div>
       </div>
