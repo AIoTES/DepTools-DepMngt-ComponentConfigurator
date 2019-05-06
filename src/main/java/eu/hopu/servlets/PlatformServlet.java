@@ -14,6 +14,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+import static eu.hopu.Initializer.CLIENT_ID;
+
 @Path("/platforms")
 public class PlatformServlet {
 
@@ -28,7 +30,8 @@ public class PlatformServlet {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response getPlatforms(@Context HttpServletRequest request) {
-    List<SilPlatform> silPlatforms = client.retrieveRegisteredPlatforms(request.getHeader("Client-ID"));
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    List<SilPlatform> silPlatforms = client.retrieveRegisteredPlatforms(clientId);
     return Response.ok().entity(gson.toJson(silPlatforms)).build();
   }
 
@@ -36,7 +39,8 @@ public class PlatformServlet {
   @Consumes("application/json")
   @Produces("application/json")
   public Response createPlatform(@Context HttpServletRequest request, CreateSilPlatform platform) {
-    SilPlatform silPlatform = client.createPlatform(platform, request.getHeader("Client-ID"));
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    SilPlatform silPlatform = client.createPlatform(platform, clientId);
     return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
 
@@ -44,13 +48,15 @@ public class PlatformServlet {
   @Consumes("application/json")
   @Produces("application/json")
   public Response updatePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId, UpdateSilPlatform platform) {
-    UpdateSilPlatform silPlatform = client.updatePlatform(platformId, platform, request.getHeader("Client-ID"));
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    UpdateSilPlatform silPlatform = client.updatePlatform(platformId, platform, clientId);
     return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
 
   @DELETE
   public Response deletePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId) {
-    boolean result = client.deletePlatform(platformId, request.getHeader("Client-ID"));
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    boolean result = client.deletePlatform(platformId, clientId);
     if (result)
       return Response.noContent().build();
     else
@@ -68,7 +74,8 @@ public class PlatformServlet {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/platform-types")
   public Response consultTypes(@Context HttpServletRequest request) {
-    boolean result = client.retrievePlatformTypes(request.getHeader("Client-ID"));
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    boolean result = client.retrievePlatformTypes(clientId);
     if (result)
       return Response.ok().build();
     else
