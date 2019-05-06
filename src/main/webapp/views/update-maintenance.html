@@ -46,37 +46,33 @@
 
       <div class="button-container-form">
 
-        <div ng-show="updateMaintenance.deploymentData.deleteStatus === updateMaintenance.deploymentData.operationStatus.IN_PROGRESS">
+        <div ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.IN_PROGRESS">
           <div class="spinner-small-container">
             <div class="spinner-small">
             </div>
           </div>
         </div>
 
-        <div ng-show="updateMaintenance.deploymentData.deleteStatus === updateMaintenance.deploymentData.operationStatus.FAILURE">
+        <div ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.FAILURE">
           <div class="message-container error">
             <span>Error!</span>
           </div>
         </div>
 
-        <div ng-show="updateMaintenance.deploymentData.deleteStatus === updateMaintenance.deploymentData.operationStatus.SUCCESS">
+        <div ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.SUCCESS">
           <div class="message-container success">
             <span>Updated!</span>
           </div>
         </div>
 
-        <div class="info-button-container" ng-show="updateMaintenance.deploymentData.deleteStatus === updateMaintenance.deploymentData.operationStatus.NOT_STARTED">
+        <div class="info-button-container" ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.NOT_STARTED">
 
-          <button type="submit" class="info-button" ng-click="updateMaintenance.addTicket()">
+          <button type="submit" class="info-button" ng-click="updateMaintenance.updateRecord()">
             <span>Update Ticket</span>
           </button>
         </div>
 
       </div>
-
-      <!--<button type="submit" class="info-button" ng-click="updateMaintenance.addTicket()">-->
-        <!--<span>Update Ticket</span>-->
-      <!--</button>-->
 
     </form>
 

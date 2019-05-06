@@ -36,28 +36,34 @@
 
       <hr class="line">
 
-      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.NOT_STARTED">
-        <button type="submit" class="info-button" ng-click="addMaintenance.addTicket()">
-          <span>Add Ticket</span>
-        </button>
-      </div>
+      <div class="button-container-form">
 
-      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.IN_PROGRESS">
-        <button type="submit" class="info-button">
-          <span>Adding Ticket...</span>
-        </button>
-      </div>
+        <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
 
-      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.SUCCESS">
-        <button type="submit" class="info-button">
-          <span>Added Ticket</span>
-        </button>
-      </div>
+        <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
 
-      <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.FAILURE">
-        <button type="submit" class="info-button">
-          <span>¡ERROR!</span>
-        </button>
+        <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Added!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="addMaintenance.addTicket()">
+            <span>Add Ticket</span>
+          </button>
+        </div>
+
       </div>
 
     </form>

@@ -36,16 +36,18 @@ app.controller('maintenanceCtrl',
         vm.goToMaintenanceInfo();
       };
 
-      // console.log(vm.selectDeviceDeployment());
-
       vm.goToMaintenanceInfo = function () {
         recordServiceData.deleteStatus = recordServiceData.operationStatus.NOT_STARTED;
         $location.path('/main/maintenance_panel/maintenance_info');
       };
 
       vm.goToAddMaintenance = function () {
-        recordServiceData.createStatus = recordServiceData.operationStatus.NOT_STARTED;
-        $location.path('/main/maintenance_panel/add_maintenance');
+        if (recordServiceData.selectedElementId === '')
+          alert('First select a deployment/device.');
+        else {
+          recordServiceData.createStatus = recordServiceData.operationStatus.NOT_STARTED;
+          $location.path('/main/maintenance_panel/add_maintenance');
+        }
       };
 
       vm.goToUpdateDeployment = function () {

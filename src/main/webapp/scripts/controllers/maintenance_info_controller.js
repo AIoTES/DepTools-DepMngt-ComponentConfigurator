@@ -16,9 +16,8 @@ app.controller('maintenanceInfoCtrl',
       };
 
       vm.updateRecord = function (record) {
-
-        // recordService.update_record(record);
-        vm.recordData.setCurrentRecord(record);
+        vm.recordData.updateStatus = vm.recordData.operationStatus.NOT_STARTED;
+        vm.recordData.currentRecord = record;
         vm.goToUpdateMaintenance();
       };
 

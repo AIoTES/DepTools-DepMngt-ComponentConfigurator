@@ -1,6 +1,6 @@
 app.service('recordServiceApi',
-  ['$http', 'BACKEND_URL',
-    function ($http, BACKEND_URL) {
+  ['$http', 'MAINTENANCE_PANEL_BACKEND_URL',
+    function ($http, MAINTENANCE_PANEL_BACKEND_URL) {
 
       var service_api = {};
 
@@ -8,7 +8,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'GET',
-            url: BACKEND_URL + '/api/v1/records/element/' + elementId
+            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records/element/' + elementId
           }
         );
       };
@@ -17,7 +17,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'POST',
-            url: BACKEND_URL + '/api/v1/records',
+            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records',
             data: record
           }
         );
@@ -27,7 +27,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'PUT',
-            url: BACKEND_URL + '/api/v1/records',
+            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records',
             data: record
           }
         );
@@ -37,7 +37,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'DELETE',
-            url: BACKEND_URL + '/api/v1/records/' + recordId + "/element/" + elementId
+            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records/' + recordId + "/element/" + elementId
           }
         );
       };

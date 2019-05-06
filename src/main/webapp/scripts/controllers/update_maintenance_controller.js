@@ -2,31 +2,29 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('updateMaintenanceCtrl', ['$location', 'deploymentService', 'deploymentServiceData', 'clientService', 'recordServiceData',
-  function ($location, deploymentService, deploymentServiceData, clientService, recordServiceData) {
+app.controller('updateMaintenanceCtrl', ['$location', 'recordService', 'recordServiceData',
+  function ($location, recordService, recordServiceData) {
 
   var vm = this;
 
-  vm.deploymentService = deploymentService;
-  vm.deploymentData = deploymentServiceData;
-  vm.clientService = clientService;
+  vm.recordService = recordService;
   vm.recordData = recordServiceData;
 
   vm.currentRecord = {
-    "id": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].id,
-    "elementId": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].elementId,
-    "description": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].description,
-    "status": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].status,
-    "type": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].type,
-    "timestamp": vm.recordData.recordsByElementId[vm.recordData.selectedElementId].timestamp
+    "id": vm.recordData.currentRecord.id,
+    "elementId": vm.recordData.currentRecord.elementId,
+    "description": vm.recordData.currentRecord.description,
+    "status": vm.recordData.currentRecord.status,
+    "type": vm.recordData.currentRecord.type,
+    "timestamp": vm.recordData.currentRecord.timestamp
   };
 
   vm.closeAddMaintenance = function () {
     $location.path('/main/maintenance_panel');
   };
 
-  vm.addTicket = function () {
-    vm.deploymentService.updateDeployment(vm.deployId, vm.date, vm.location, vm.organizationId, vm.organizationLabel, vm.platformId, vm.platformLabel, vm.devices, vm.deviceId, vm.deviceLabel, vm.deviceType, vm.sensors, vm.sensorId, vm.sensorType, vm.clientService.getCurrentClientId());
+  vm.updateRecord = function () {
+    vm.recordService.update_record(vm.currentRecord);
   };
 
 }]);

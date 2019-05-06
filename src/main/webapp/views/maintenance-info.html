@@ -48,7 +48,7 @@
             <td>{{record.description}}</td>
             <td>{{record.status}}</td>
             <td>{{record.type}}</td>
-            <td>{{record.timestamp}}</td>
+            <td>{{record.timestamp | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
           </tr>
         </tbody>
       </table>
@@ -79,7 +79,7 @@
             <span>Delete</span>
           </button>
 
-          <button type="submit" class="info-button" ng-click="maintenanceInfo.goToUpdateMaintenance()">
+          <button type="submit" class="info-button" ng-click="maintenanceInfo.updateRecord(record)">
             <span>Update</span>
           </button>
         </div>
