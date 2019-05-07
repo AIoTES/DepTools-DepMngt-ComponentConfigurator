@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+
+  maintenance-panel-database:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_USER=activage
+      - POSTGRES_PASSWORD=activage
+      - POSTGRES_DB=activage-maintenance-panel
+    ports:
+      - 5432:5432
+    networks:
+      - activage-network
+
+networks:
+  activage-network:
+    external: true

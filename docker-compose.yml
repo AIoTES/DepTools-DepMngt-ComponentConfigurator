@@ -2,10 +2,10 @@ version: '3'
 
 services:
   activage-component-configurator:
-    image: activage-component-configurator:develop
+    image: activage-component-configurator:2.0
     environment:
-      - CLIENT_ID=myclient
-      - SIL_URL=http://activage-test-intermw.inter-iot.eu
+      - CLIENT_ID=Oscar
+      - SIL_URL=http://192.168.1.56:8080
       - DOCKER=True
     ports:
-      - "8080:8080"
+      - "8002:8080"
