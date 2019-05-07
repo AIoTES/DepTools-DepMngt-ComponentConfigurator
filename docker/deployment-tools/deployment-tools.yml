@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+
+  deployment-manager:
+    image: activage-deployment-manager:1.0
+    ports:
+      - 8001:8080
+    environment:
+      - METADATA_STORAGE_SERVER_URL=http://metadata_storage_server:8081
+    networks:
+      - activage-network
+
+  component-configurator:
+    image: activage-component-configurator:2.0
+    environment:
+      - CLIENT_ID=Oscar
+      - SIL_URL=http://192.168.1.56:8080
+      - DOCKER=True
+    ports:
+      - "8002:8080"
+    networks:
+      - activage-network
+
+  maintenance-panel:
+    image: activage-maintenance-panel:1.0
+    environment:
+      - POSTGRES_HOST=maintenance-panel-database
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=activage-maintenance-panel
+      - POSTGRES_USER=activage
+      - POSTGRES_PASSWORD=activage
+    ports:
+      - 8003:8080
+    networks:
+      - activage-network
+
+networks:
+  activage-network:
+    external: true

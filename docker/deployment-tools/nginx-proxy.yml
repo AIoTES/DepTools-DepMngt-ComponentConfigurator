@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+  reverse-proxy:
+    image: nginx:1.15.12-alpine
+    ports:
+     - target: 80
+       published: 80
+       protocol: tcp
+       mode: host
+     - target: 443
+       published: 443
+       protocol: tcp
+       mode: host
+    volumes: 
+      - "./sites:/usr/share/nginx"
+      - "./sites-conf:/etc/nginx/conf.d"
+      - "./certs:/usr/share/certs"
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external:
+      name: activage-network
