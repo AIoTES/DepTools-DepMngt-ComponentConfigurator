@@ -14,7 +14,6 @@ app.controller('deviceListCtrl', ['$location', 'deviceService', 'deviceServiceDa
   vm.deviceData = deviceServiceData;
 
   vm.deploymentService.retrieveDeployments();
-  console.log(vm.deploymentData);
 
   vm.closeDeploymentInfo = function () {
     $location.path('/main/deployment_manager');

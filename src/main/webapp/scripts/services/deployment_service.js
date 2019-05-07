@@ -28,6 +28,13 @@ app.service('deploymentService',
           .then(
             function (response) {
               deploymentServiceData.deploymentDevices = response.data;
+              if (deploymentServiceData.currentDeployment !== '') {
+                deploymentServiceData.notDeploymentDevicesSelected = [];
+                deploymentServiceData.deploymentDevices.forEach(function(device){
+                  if (!deploymentServiceData.currentDeployment.platform.devices.includes(device.id))
+                    deploymentServiceData.notDeploymentDevicesSelected.push(device.id);
+                });
+              }
               deploymentServiceData.retrievalStatus["devices"] = deploymentServiceData.operationStatus.SUCCESS;
             }
           )
@@ -39,25 +46,8 @@ app.service('deploymentService',
           );
       };
 
-      /*service.getDeploymentById = function (deploymentId) {
-        deploymentServiceData.retrievalStatus[deploymentId] = deploymentServiceData.operationStatus.IN_PROGRESS;
-
-        deploymentServiceApi.getDeploymentById(deploymentId)
-          .then(
-            function (response) {
-              var deployment = response.data;
-              deploymentServiceData.retrievalStatus[deploymentId] = deploymentServiceData.operationStatus.SUCCESS;
-            }
-          )
-          .catch(
-            function () {
-              deploymentServiceData.retrievalStatus[deploymentId] = deploymentServiceData.operationStatus.FAILURE;
-            }
-          )
-      };*/
-
       service.addDeviceToDeployment = function (deploymentId, deviceId) {
-        deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
+        deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.addDeviceToDeployment(deploymentId, deviceId)
           .then(
             function (response) {
@@ -73,8 +63,7 @@ app.service('deploymentService',
                 if (deploymentIndex !== -1) {
                   deploymentServiceData.deployments[deploymentIndex] = deployment;
                   deploymentServiceData.currentDeployment = deployment;
-                  deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.SUCCESS;
-                  $location.path('/main/deployment_manager/deployment_info');
+                  deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.SUCCESS;
                 }
               }
             }
@@ -82,7 +71,7 @@ app.service('deploymentService',
           .catch(
             function(error) {
               console.log(error);
-              deploymentServiceData.addDeviceStatus = deploymentServiceData.operationStatus.FAILURE;
+              deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.FAILURE;
             }
           )
       };

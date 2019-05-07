@@ -6,6 +6,7 @@ app.service('deploymentServiceData', function () {
       deployments: [],
       currentDeployment: '',
       deploymentDevices: [],
+      notDeploymentDevicesSelected: [],
       selected: 'deployment',
 
       operationStatus: retrievalStatus,
@@ -13,8 +14,8 @@ app.service('deploymentServiceData', function () {
         deployments: retrievalStatus.NOT_STARTED,
         devices: retrievalStatus.NOT_STARTED
       },
-      addDeviceStatus: retrievalStatus.NOT_STARTED,
-      removeDeviceStatus: {},
+      removeDeviceStatus: [],
+      addStatus: [],
       createStatus: retrievalStatus.NOT_STARTED,
       updateStatus: retrievalStatus.NOT_STARTED,
       deleteStatus: retrievalStatus.NOT_STARTED

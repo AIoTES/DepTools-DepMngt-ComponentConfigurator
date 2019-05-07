@@ -5,7 +5,6 @@
 app.controller('deploymentCtrl', ['$location', 'deploymentService', 'deploymentServiceData', function ($location, deploymentService, deploymentServiceData) {
 
   deploymentService.retrieveDeployments();
-//  deploymentService.retrieveDevices();
 
   var vm = this;
 

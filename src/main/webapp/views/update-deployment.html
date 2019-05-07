@@ -19,13 +19,6 @@
       <input type="text" disabled placeholder="Id" ng-model="updateCtrl.currentDeployment.date">
       <label class="form-label">Date:</label>
 
-      <!--<div class="info-left">
-        Date:
-      </div>
-      <div class="info-right">
-        {{updateCtrl.currentDeployment.date | date: 'yyyy-MM-dd'}}
-      </div>-->
-
       <input type="text" disabled placeholder="Location" ng-model="updateCtrl.currentDeployment.location">
       <label class="form-label">Location:</label>
 
@@ -45,12 +38,6 @@
       <input type="text" disabled placeholder="Platform Label" ng-model="updateCtrl.currentDeployment.platformLabel">
       <label class="form-label">Platform Label:</label>
 
-      <!--<label class="form-label">Devices:</label>-->
-
-      <!--<div ng-repeat="device in updateCtrl.currentDeployment.devices">-->
-        <!--<input type="text" disabled placeholder="Devices" ng-model=device>-->
-      <!--</div>-->
-
       <hr class="line">
 
       <div class="deployment-device-header">
@@ -61,11 +48,32 @@
         <div class="info-left">
           <span>{{device}}</span>
         </div>
+
         <div class="right-button-container"
              title="Delete Device {{device}}"
-             ng-click="updateCtrl.deleteDevice(device)">
+             ng-click="updateCtrl.deploymentService.deleteDeviceFromDeployment(updateCtrl.currentDeployment.id, device)"
+             ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
           <span class="glyphicon glyphicon-trash"></span>
         </div>
+        <div ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Deleted!</span>
+          </div>
+        </div>
+
       </div>
 
       <hr class="line">
@@ -75,14 +83,33 @@
       </div>
 
       <div class="deployment-device-container"
-           ng-repeat="newDevice in updateCtrl.deviceData.devices">
+           ng-repeat="newDevice in updateCtrl.deploymentData.notDeploymentDevicesSelected">
         <div class="info-left">
-          <span>{{newDevice.name}}</span>
+          <span>{{newDevice}}</span>
         </div>
         <div class="right-button-container"
-             title="Add Device {{newDevice.name}}"
-             ng-click="updateCtrl.deploymentService.deleteDeviceFromDeployment(updateCtrl.deploymentData.currentDeployment.id, newDevice.deviceId)">
+             title="Add Device {{newDevice}}"
+             ng-click="updateCtrl.deploymentService.addDeviceToDeployment(updateCtrl.deploymentData.currentDeployment.id, newDevice)"
+             ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
           <span class="glyphicon glyphicon-plus"></span>
+        </div>
+        <div ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Added!</span>
+          </div>
         </div>
       </div>
 
@@ -90,31 +117,14 @@
 
       <div class="button-container-form">
 
-        <div ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.IN_PROGRESS">
-          <div class="spinner-small-container">
-            <div class="spinner-small">
-            </div>
-          </div>
-        </div>
 
-        <div ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.FAILURE">
-          <div class="message-container error">
-            <span>Error!</span>
-          </div>
-        </div>
 
-        <div ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.SUCCESS">
-          <div class="message-container success">
-            <span>Updated!</span>
-          </div>
-        </div>
+<!--        <div class="info-button-container" ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
 
-        <div class="info-button-container" ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
-
-          <button type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
+          &lt;!&ndash;<button type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
             <span>Add Devices</span>
-          </button>
-        </div>
+          </button>&ndash;&gt;
+        </div>-->
 
       </div>
 

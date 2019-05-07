@@ -14,6 +14,7 @@ app.controller('updateDeploymentCtrl', ['$location', 'deviceService', 'deviceSer
   vm.deviceData = deviceServiceData;
 
   vm.deploymentService.retrieveDeployments();
+  vm.deploymentService.retrieveDevices();
 
   vm.deviceIdSelected = "";
   vm.newDeviceId = "";
@@ -29,22 +30,20 @@ app.controller('updateDeploymentCtrl', ['$location', 'deviceService', 'deviceSer
     "devices": vm.deploymentData.currentDeployment.platform.devices
   };
 
-  vm.currentDeployment.devices.forEach(
-    function (device) {
-      vm.deploymentData.removeDeviceStatus[device] = vm.deploymentData.operationStatus.NOT_STARTED;
-    }
-  );
+    vm.currentDeployment.devices.forEach(
+      function (device) {
+        vm.deploymentData.removeDeviceStatus[device] = vm.deploymentData.operationStatus.NOT_STARTED;
+      }
+    );
+
+    vm.deploymentData.notDeploymentDevicesSelected.forEach(
+      function (device) {
+        vm.deploymentData.addStatus[device] = vm.deploymentData.operationStatus.NOT_STARTED;
+      }
+    );
 
   vm.closeCreateDeployment = function () {
     $location.path('/main/deployment_manager');
-  };
-
-  vm.deleteDevice = function (deviceId) {
-    vm.deploymentService.deleteDeviceFromDeployment(vm.currentDeployment.id, deviceId);
-  };
-
-  vm.addDevice = function () {
-    vm.deploymentService.addDeviceToDeployment(vm.currentDeployment.id, vm.newDeviceId);
   };
 
   vm.updateDeployment = function () {

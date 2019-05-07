@@ -9,12 +9,22 @@
     </div>
   </div>
 
-  <div class="option-device-container" ng-init="deviceList.deviceService.retrieveDevices()">
+  <div ng-show="deviceList.deploymentData.retrievalStatus['devices'] === deviceList.deploymentData.operationStatus.IN_PROGRESS">
+    <div class="spinner-container">
+      <div class="spinner">
+      </div>
+    </div>
+  </div>
+  <div ng-show="deviceList.deploymentData.retrievalStatus['devices'] === deviceList.deploymentData.operationStatus.FAILURE">
+    Cannot retrieve deployments
+  </div>
+  <div ng-show="deviceList.deploymentData.retrievalStatus['devices'] === deviceList.deploymentData.operationStatus.SUCCESS"
+       class="option-device-container" ng-init="deviceList.deploymentService.retrieveDevices()">
 
-    <div class="option-device" ng-repeat="device in deviceList.deviceData.devices">
-      <span class="option-name">{{device.name}}</span>
+    <div class="option-device" ng-repeat="device in deviceList.deploymentData.deploymentDevices">
+      <span class="option-name">{{device.id}}</span>
       <br class="jump-line">
-      <span class="option-platform">{{device.deviceId}}</span>
+      <span class="option-platform">{{device.label}}</span>
     </div>
 
   </div>
