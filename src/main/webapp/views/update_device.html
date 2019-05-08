@@ -1,0 +1,96 @@
+<div class="resource-container2">
+
+  <div class="resource-header2">
+    <h3>Update Device: {{componentUpdate.deviceToUpdate.deviceId}}</h3>
+
+    <div class="close-info" title="Close window" ng-click="componentUpdate.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-device">
+
+      <select ng-model="componentUpdate.deviceToUpdate.deviceTypes[0]">
+        <option value="DEVICE">Device</option>
+        <option value="SENSOR">Sensor</option>
+        <option value="ACTUATOR">Actuator</option>
+      </select>
+      <label class="form-label">Type:</label>
+
+      <input type="text" placeholder="Id" ng-model="componentUpdate.deviceToUpdate.deviceId">
+      <label class="form-label">Id:</label>
+
+      <select ng-model="componentUpdate.deviceToUpdate.hostedBy">
+        <option ng-repeat="option in componentUpdate.platformData.platforms" value="{{option.platformId}}">
+          {{option.platformId}}
+        </option>
+      </select>
+      <label class="form-label">Hosted By:</label>
+
+      <input type="text" placeholder="Location" ng-model="componentUpdate.deviceToUpdate.location">
+      <label class="form-label">Location:</label>
+
+      <input type="text" placeholder="Name" ng-model="componentUpdate.deviceToUpdate.name">
+      <label class="form-label">Name:</label>
+
+      <input type="text" placeholder="Hosts" ng-model="componentUpdate.deviceToUpdate.hosts">
+      <label class="form-label">Hosts:</label>
+
+      <input type="text" placeholder="For Property" ng-model="componentUpdate.deviceToUpdate.forProperty">
+      <label class="form-label">For Property:</label>
+
+      <input type="text" placeholder="Made Actuation" ng-model="componentUpdate.deviceToUpdate.madeActuation">
+      <label class="form-label">Made Actuation:</label>
+
+      <input type="text" placeholder="Implements Procedure"
+             ng-model="componentUpdate.deviceToUpdate.implementsProcedure">
+      <label class="form-label">Implements Procedure:</label>
+
+      <input type="text" placeholder="Observes" ng-model="componentUpdate.deviceToUpdate.observes">
+      <label class="form-label">Observes:</label>
+
+      <input type="text" placeholder="Detects" ng-model="componentUpdate.deviceToUpdate.detects">
+      <label class="form-label">Detects:</label>
+
+      <input type="text" placeholder="Made Observation" ng-model="componentUpdate.deviceToUpdate.madeObservation">
+      <label class="form-label">Made Observation:</label>
+
+      <hr class="line">
+
+      <div class="button-container-form">
+
+        <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Updated!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="componentUpdate.deviceData.updateStatus === componentUpdate.deviceData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="componentUpdate.updateDevice()">
+            <span>Update</span>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

@@ -8,55 +8,85 @@
     </div>
   </div>
 
-  <div class="info-container2">
+  <div class="option-device-container info-inner">
 
     <form class="add-form" name="add-device">
 
-      <select ng-model="addDevice.deviceType">
+      <select ng-model="addDevice.deviceToCreate.deviceTypes[0]">
         <option value="DEVICE">Device</option>
         <option value="SENSOR">Sensor</option>
         <option value="ACTUATOR">Actuator</option>
       </select>
       <label class="form-label">Type:</label>
 
-      <input type="text" placeholder="Id" ng-model="addDevice.deviceId">
+      <input type="text" placeholder="Id" ng-model="addDevice.deviceToCreate.deviceId">
       <label class="form-label">Id:</label>
 
-      <select ng-model="addDevice.hostedBy">
-        <option ng-repeat="option in addDevice.getPlatformsId()" value="{{option.platformId}}">{{option.name}}</option>
+      <select ng-model="addDevice.deviceToCreate.hostedBy">
+        <option ng-repeat="option in addDevice.platformData.platforms" value="{{option.platformId}}">
+          {{option.platformId}}
+        </option>
       </select>
       <label class="form-label">Hosted By:</label>
 
-      <input type="text" placeholder="Location" ng-model="addDevice.location">
+      <input type="text" placeholder="Location" ng-model="addDevice.deviceToCreate.location">
       <label class="form-label">Location:</label>
 
-      <input type="text" placeholder="Name" ng-model="addDevice.name">
+      <input type="text" placeholder="Name" ng-model="addDevice.deviceToCreate.name">
       <label class="form-label">Name:</label>
 
-      <input type="text" placeholder="Hosts" ng-model="addDevice.hosts">
+      <input type="text" placeholder="Hosts" ng-model="addDevice.deviceToCreate.hosts[0]">
       <label class="form-label">Hosts:</label>
 
-      <input type="text" placeholder="For Property" ng-model="addDevice.forProperty">
+      <input type="text" placeholder="For Property" ng-model="addDevice.deviceToCreate.forProperty[0]">
       <label class="form-label">For Property:</label>
 
-      <input type="text" placeholder="Made Actuation" ng-model="addDevice.madeActuation">
+      <input type="text" placeholder="Made Actuation" ng-model="addDevice.deviceToCreate.madeActuation">
       <label class="form-label">Made Actuation:</label>
 
-      <input type="text" placeholder="Implements Procedure" ng-model="addDevice.implementsProcedure">
+      <input type="text" placeholder="Implements Procedure" ng-model="addDevice.deviceToCreate.implementsProcedure">
       <label class="form-label">Implements Procedure:</label>
 
-      <input type="text" placeholder="Observes" ng-model="addDevice.observes">
+      <input type="text" placeholder="Observes" ng-model="addDevice.deviceToCreate.observes[0]">
       <label class="form-label">Observes:</label>
 
-      <input type="text" placeholder="Detects" ng-model="addDevice.detects">
+      <input type="text" placeholder="Detects" ng-model="addDevice.deviceToCreate.detects">
       <label class="form-label">Detects:</label>
 
-      <input type="text" placeholder="Made Observation" ng-model="addDevice.madeObservation">
+      <input type="text" placeholder="Made Observation" ng-model="addDevice.deviceToCreate.madeObservation">
       <label class="form-label">Made Observation:</label>
 
-      <button type="submit" class="create-button" ng-click="addDevice.createDevice()">
-        <span>Create</span>
-      </button>
+      <hr class="line">
+
+      <div class="button-container-form">
+
+        <div ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Created!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="addDevice.deviceData.createStatus === addDevice.deviceData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="addDevice.createDevice()">
+            <span>Create</span>
+          </button>
+        </div>
+
+      </div>
 
     </form>
 

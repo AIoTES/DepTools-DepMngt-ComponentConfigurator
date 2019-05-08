@@ -1,0 +1,1042 @@
+{
+	"info": {
+		"_postman_id": "b03724dc-7fd1-4719-bde4-af5e6053ff54",
+		"name": "activage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "metadata-storage-server",
+			"item": [
+				{
+					"name": "Create device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"deviceID\": \"test_device\",\r\n\t\"context\": \"@prefix iotpex: <http://inter-iot.eu/GOIoTP#> . @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . @prefix sosa: <http://www.w3.org/ns/sosa/> . @prefix act: <http://www.semanticweb.org/activage/ontologies/2018/4/activage-core#> . <Device/1_1> a iotpex:IoTDevice ; rdfs:label \\\"Fibaro motion sensor\\\"@en ; sosa:hosts <Sensor/1_1> ; sosa:hosts <Sensor/1_2> ; sosa:hosts <Sensor/1_3> . <Sensor/1_1 > a act:IlluminanceSensor . <Sensor/1_2 > a act:TemperatureSensor . <Sensor/1_3 > a act:UserOccupancySensor .\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/devices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/devices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get device by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/devices/test_device_4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"devices",
+								"test_device_4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update device",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"deviceID\": \"test_device\",\r\n\t\"context\": \"@prefix iotpex: <http://inter-iot.eu/GOIoTP#> . @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . @prefix sosa: <http://www.w3.org/ns/sosa/> . @prefix act: <http://www.semanticweb.org/activage/ontologies/2018/4/activage-core#> . <Device/1_1> a iotpex:IoTDevice ; rdfs:label \\\"Fibaro motion sensor\\\"@en ; sosa:hosts <Sensor/1_1> ; sosa:hosts <Sensor/1_2> ; sosa:hosts <Sensor/1_3> ;  sosa:hosts <Sensor/1_4> . <Sensor/1_1 > a act:IlluminanceSensor . <Sensor/1_2 > a act:TemperatureSensor . <Sensor/1_3 > a act:UserOccupancySensor . <Sensor/1_4 > a act:UserOccupancySensor . \"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/devices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/devices/deviceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"devices",
+								"deviceId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create deployment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\": \"test_ds_1\",\r\n\t\"context\": \"@prefix prov: <http://www.w3.org/ns/prov#>. @prefix ssn: <http://www.w3.org/ns/ssn/> . @prefix iot: <http://inter-iot.eu/GOIoTP#> . @prefix org: <http://www.w3.org/ns/org#> . @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. @prefix sosa: <http://www.w3.org/ns/sosa/> . <Organization/1> a org:Organization ; rdfs:label \\\"Municipality of Thessaloniki.\\\"@en . <Deployment/PX_HOME1> a ssn:Deployment ; prov:startedAtTime \\\"2017-06-06\\\"^^xsd:date ; iot:hasLocation \\\"AREA[“Thessaloniki\\\"]\\\"^^http://www.opengis.net/ont/geosparql#wktLiteral prov:wasAssociatedWith <Organization/1> ; ssn:deployedOnPlatform <Platform/1> . <Platform/1> a sosa:Platform ; rdfs:label \\\"Activage Platform GR 1\\\"@en ; sosa:hosts <Device/1_1> ; sosa:hosts <Device/1_2>\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/deployments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"deployments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all deployments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/deployments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"deployments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get deployment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/deployments/test_ds_1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"deployments",
+								"test_ds_1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update deployment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\": \"test_ds_1\",\r\n\t\"context\": \"@prefix prov: <http://www.w3.org/ns/prov#>. @prefix ssn: <http://www.w3.org/ns/ssn/> . @prefix iot: <http://inter-iot.eu/GOIoTP#> . @prefix org: <http://www.w3.org/ns/org#> . @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. @prefix sosa: <http://www.w3.org/ns/sosa/> . <Organization/1> a org:Organization ; rdfs:label \\\"Municipality of Thessaloniki.\\\"@en . <Deployment/PX_HOME1> a ssn:Deployment ; prov:startedAtTime \\\"2017-06-06\\\"^^xsd:date ; iot:hasLocation \\\"AREA[“Thessaloniki\\\"]\\\"^^http://www.opengis.net/ont/geosparql#wktLiteral prov:wasAssociatedWith <Organization/1> ; ssn:deployedOnPlatform <Platform/1> . <Platform/1> a sosa:Platform ; rdfs:label \\\"Activage Platform GR 1\\\"@en ; sosa:hosts <Device/1_1> ; sosa:hosts <Device/1_2>\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/deployments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"deployments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete deployment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/deployments/test_ds_1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"deployments",
+								"test_ds_1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "maintenance-panel",
+			"item": [
+				{
+					"name": "retrieve records by element id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8003/api/v1/records/element/elementId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"api",
+								"v1",
+								"records",
+								"element",
+								"elementId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"elementId\": \"elementId\",\n\t\"description\": \"description40\",\n\t\"status\": \"pending\",\n\t\"type\": \"note\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8003/api/v1/records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"api",
+								"v1",
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update record",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"elementId\": \"elementId\",\n    \"description\": \"description12\",\n    \"status\": \"pending\",\n    \"type\": \"issue\",\n    \"timestamp\": 1555316554106\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8003/api/v1/records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"api",
+								"v1",
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete record",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8003/api/v1/records/2/element/elementId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"api",
+								"v1",
+								"records",
+								"2",
+								"element",
+								"elementId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "component-configuration",
+			"item": [
+				{
+					"name": "clients",
+					"item": [
+						{
+							"name": "retrieve current client",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "{{Client-ID}}",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/clients/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "set current client",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "{{Client-ID}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"clientId\": \"myclient\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/clients/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"clients",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "retrieve sil registered clients",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/clients",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "devices",
+					"item": [
+						{
+							"name": "List all devices registered from a specific platform",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/devices?platformId=http://example.inter-iot.eu/platforms/UAAL",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"devices"
+									],
+									"query": [
+										{
+											"key": "platformId",
+											"value": "http://example.inter-iot.eu/platforms/UAAL"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register device",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n      \"deviceTypes\": [\n        \"DEVICE\"\n      ],\n      \"deviceId\": \"http://Hopy\",\n      \"hostedBy\": \"http://inter-iot.eu/platforms/UAAL\",\n      \"location\": \"http://fasda\",\n      \"name\": \"http://HOPu\",\n      \"hosts\": [\n        \"string\"\n      ],\n      \"forProperty\": [],\n      \"madeActuation\": \"string\",\n      \"implementsProcedure\": \"string\",\n      \"observes\": [],\n      \"detects\": \"string\",\n      \"madeObservation\": \"string\"\n    }\n"
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/devices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"devices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update device",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n      \"deviceTypes\": [\n        \"DEVICE\"\n      ],\n      \"deviceId\": \"http://Hopy\",\n      \"hostedBy\": \"http://inter-iot.eu/platforms/UAAL\",\n      \"location\": \"http://fasda\",\n      \"name\": \"http://HOPu\",\n      \"hosts\": [\n        \"strong\"\n      ],\n      \"forProperty\": [],\n      \"madeActuation\": \"string\",\n      \"implementsProcedure\": \"string\",\n      \"observes\": [],\n      \"detects\": \"string\",\n      \"madeObservation\": \"string\"\n    }\n"
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/devices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"devices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete specified device",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/devices/?deviceId=http://Hopy",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"devices",
+										""
+									],
+									"query": [
+										{
+											"key": "deviceId",
+											"value": "http://Hopy"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "platforms",
+					"item": [
+						{
+							"name": "list all platforms registered",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/platforms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"platforms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list platform types",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "{{Client-ID}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/platforms/types",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"platforms",
+										"types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register a new platform instance",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"platformId\": \"http://inter-iot.eu/platforms/Bobo\", \n  \"type\": \"http://inter-iot.eu/UniversAAL\",\n  \"baseEndpoint\": \"http://192.168.1.0:1234\", \n  \"location\": \"http://test.inter-iot.eu/prueba\",\n  \"name\": \"Bobo\",\n  \"username\": \"\",\n  \"encryptedPassword\": \"\",\n  \"encryptionAlgorithm\": \"\",\n  \"downstreamInputAlignmentName\": \"\",\n  \"downstreamInputAlignmentVersion\": \"\",\n  \"downstreamOutputAlignmentName\": \"\",\n  \"downstreamOutputAlignmentVersion\": \"\",\n  \"upstreamInputAlignmentName\": \"\",\n  \"upstreamInputAlignmentVersion\": \"\",\n  \"upstreamOutputAlignmentName\": \"\",\n  \"upstreamOutputAlignmentVersion\": \"\"\n}\n"
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/platforms",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"platforms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update platform instance",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"baseEndpoint\": \"http://192.168.1.0:1234\", \n  \"location\": \"http://test.inter-iot.eu/prueba\",\n  \"name\": \"Bobo\",\n  \"username\": \"Oscar\",\n  \"encryptedPassword\": \"\",\n  \"encryptionAlgorithm\": \"\",\n  \"downstreamInputAlignmentName\": \"\",\n  \"downstreamInputAlignmentVersion\": \"\",\n  \"downstreamOutputAlignmentName\": \"\",\n  \"downstreamOutputAlignmentVersion\": \"\",\n  \"upstreamInputAlignmentName\": \"\",\n  \"upstreamInputAlignmentVersion\": \"\",\n  \"upstreamOutputAlignmentName\": \"\",\n  \"upstreamOutputAlignmentVersion\": \"\"\n}\n"
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/platforms?platformId=http://inter-iot.eu/platforms/Bobo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"platforms"
+									],
+									"query": [
+										{
+											"key": "platformId",
+											"value": "http://inter-iot.eu/platforms/Bobo"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove specified platform instance",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Client-ID",
+										"value": "Oscar"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8002/api/v1/platforms/?platformId=http://inter-iot.eu/platforms/HOPo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8002",
+									"path": [
+										"api",
+										"v1",
+										"platforms",
+										""
+									],
+									"query": [
+										{
+											"key": "platformId",
+											"value": "http://inter-iot.eu/platforms/HOPo"
+										}
+									]
+								},
+								"description": "Removes specified platform from the registry and undeploys the bridge."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "analytics-tools",
+			"item": [
+				{
+					"name": "Select feature - filter method - pearson",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dataDesc\": {\n    \"query\": \"select temperature, humidity, gas_no2 from env_sensors where ds = 'DS_GRC'\"\n  },\n  \"method\":  \"pearson\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.1.192:5000/selectFeatures/filterMethod",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"192"
+							],
+							"port": "5000",
+							"path": [
+								"selectFeatures",
+								"filterMethod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select feature - filter method - mutual information",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dataDesc\": {\n    \"query\": \"select temperature, humidity, gas_no2 from env_sensors where ds = 'DS_GRC'\"\n  },\n  \"method\":  \"mutual_information\"\n}"
+						},
+						"url": {
+							"raw": "http://192.168.1.192:5000/selectFeatures/filterMethod",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"192"
+							],
+							"port": "5000",
+							"path": [
+								"selectFeatures",
+								"filterMethod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select feature - filter method - anova",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dataDesc\": {\n    \"query\": \"select temperature, humidity, gas_no2 from env_sensors where ds = 'DS_GRC'\"\n  },\n  \"method\": {\n  \t\"anova\": {\n  \t\t\"dependent_variable\": \"Working Electrode NO2\",\n  \t\t\"independent_variables\": [\"Auxiliar Electrode NO2\"]\n  \t}\n  }\n}"
+						},
+						"url": {
+							"raw": "http://192.168.1.192:5000/selectFeatures/filterMethod",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"192"
+							],
+							"port": "5000",
+							"path": [
+								"selectFeatures",
+								"filterMethod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clustering - hierarchical",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"dataDesc\": {\n    \t\"data\": [\n    \t  [5.1, 3.5, 1.4, 0.2],\n    \t  [5.8, 4.0, 1.2, 0.2],\n    \t  [5.7, 4.4, 1.5, 0.4],\n    \t  [5.4, 3.9, 1.3, 0.4],\n    \t  [5.1, 3.5, 1.4, 0.3],\n    \t  [5.7, 3.8, 1.7, 0.3],\n    \t  [5.1, 3.8, 1.5, 0.3],\n    \t  [5.4, 3.4, 1.7, 0.2],\n    \t  [5.1, 3.7, 1.5, 0.4],\n    \t  [4.6, 3.6, 1.0, 0.2]\n    \t],\n    \t\"expression\": \"coords\"\n\t},\n\t\"options\": {\n\t    \"distanceType\": \"euclidean\",\n\t    \"linkage\": \"complete\",\n\t    \"n_clusters\": 4\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/clustering/hierarchical",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"clustering",
+								"hierarchical"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,81 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Update Maintenance</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="updateMaintenance.closeAddMaintenance()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-device">
+
+      <input type="text" disabled ng-model="updateMaintenance.currentRecord.id">
+      <label class="form-label">Id:</label>
+
+      <input type="text" disabled ng-model="updateMaintenance.currentRecord.elementId">
+      <label class="form-label">Element Id:</label>
+
+      <textarea class="text-area" placeholder="description" ng-model="updateMaintenance.currentRecord.description"></textarea>
+      <label class="form-label">description:</label>
+
+      <select ng-model="updateMaintenance.currentRecord.status">
+        <option value="PENDING">Pending</option>
+        <option value="COMPLETED">Completed</option>
+      </select>
+      <label class="form-label">Status:</label>
+
+      <select ng-model="updateMaintenance.currentRecord.type">
+        <option value="NOTE">Note</option>
+        <option value="ISSUE">Issue</option>
+        <option value="TODO">Todo</option>
+      </select>
+      <label class="form-label">Type:</label>
+
+      <div class="info-left padding-0">
+        Date:
+      </div>
+      <div class="info-right padding-0">
+        {{updateMaintenance.currentRecord.timestamp | date: 'dd-MM-yyyy HH:mm:ss'}}
+      </div>
+
+      <hr class="line">
+
+      <div class="button-container-form">
+
+        <div ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Updated!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="updateMaintenance.recordData.updateStatus === updateMaintenance.recordData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="updateMaintenance.updateRecord()">
+            <span>Update Ticket</span>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

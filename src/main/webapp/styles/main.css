@@ -7,7 +7,7 @@ body {
 header {
   width: 100vw;
   height: 50px;
-  background: #ededed;
+  background: #f5f5f5;
 }
 
 .logo-container {
@@ -43,7 +43,7 @@ header {
 }
 
 .button-header-active {
-  background: #0f2144;
+  background: #0f2144 !important;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
@@ -160,57 +160,330 @@ header {
   }
 }
 
+.burger-container {
+  width: 50px;
+  height: 50px;
+  float: right;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  color: #2bbee8;
+}
+
+.burger-container-active {
+  color: #0f2144;
+}
+
+@media screen and (min-width: 1025px) {
+  .burger-container {
+    display: none;
+  }
+}
+
+/*-----MENU LATERAL-----*/
+
+.lateral-nav {
+  width: 50px;
+  height: calc(100vh - 50px);
+  float: left;
+  margin-right: -10px;
+  overflow: hidden;
+  transition: 0.5s ease all;
+}
+
+@media screen and (max-width: 1024px) {
+  .lateral-nav {
+    display: none;
+  }
+}
+
+.lateral-nav:hover {
+  width: 240px;
+}
+
+.main-container {
+  width: calc(100vw - 60px);
+  height: calc(100vh - 50px);
+  /*background: blue;*/
+  float: right;
+  transition: 0.5s ease all;
+  display: inline-flex;
+  justify-content: start;
+  background: url("../images/bg.svg") center no-repeat;
+  background-size: 100vw;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .main-container {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    margin: 10px;
+    float: none;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .main-container {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    margin: 10px;
+    float: none;
+    display: block;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .main-container {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    margin: 10px;
+    float: none;
+    display: block;
+  }
+}
+
+.lateral-nav:hover~.main-container {
+  width: calc(100vw - 250px);
+}
+
+.button-menu {
+  width: 50px;
+  height: 50px;
+  margin: 0 0 0 0;
+  padding: 0 5px;
+  border-bottom: 1px solid #ccc;
+  transition: 0.5s ease all;
+  cursor: pointer;
+}
+
+.button-menu-active {
+  background: #f5f5f5;
+  border-left: 3px solid #2bbee8;
+  padding: 0 5px 0 2px;
+}
+
+.lateral-nav:hover .button-menu {
+  width: 250px;
+}
+
+.icon-container {
+  width: 30px;
+  height: 30px;
+  margin: 10px 5px;
+  float: left;
+}
+
+.button-text {
+  width: 0;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  margin-left: 40px;
+  opacity: 0;
+  overflow: hidden;
+  color: #2bbee8;
+  float: right;
+  transition: 0.5s ease all;
+  /*transition-delay: 0.5s;*/
+}
+
+.lateral-nav:hover .button-text {
+  width: 200px;
+  opacity: 1;
+}
+
+.button-text:hover {
+  color: #0f2144;
+}
+
+/*-----FIN DEL MENU LATERAL-----*/
+
+/*-----MENU DISPOSITIVO MOVIL-----*/
+.mobile-nav {
+  width: 100%;
+  height: auto;
+  /*float: left;*/
+  overflow: hidden;
+  position: absolute;
+  transition: 0.5s ease all;
+  z-index: 9999;
+}
+
+@media screen and (min-width: 1025px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.mobile-button-menu {
+  width: 100%;
+  height: 50px;
+  margin: 0 0 0 0;
+  background: #f5f5f5;
+  padding: 0 5px;
+  border-bottom: 1px solid #ccc;
+  transition: 0.5s ease all;
+  cursor: pointer;
+}
+
+.mobile-button-menu-active {
+  background: #f5f5f5;
+  border-left: 3px solid #2bbee8;
+  padding: 0 5px 0 2px;
+}
+
+.mobile-icon-container {
+  width: 30px;
+  height: 30px;
+  margin: 10px 5px;
+  float: left;
+}
+
+.mobile-button-text {
+  width: calc(100% - 50px);
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  margin-left: 40px;
+  overflow: hidden;
+  color: #2bbee8;
+  float: right;
+  transition: 0.5s ease all;
+  /*transition-delay: 0.5s;*/
+}
+
+/*-----FIN MENU DISPOSITIVO MOVIL-----*/
+
 .left-div {
   width: 20%;
   height: calc(100vh - 50px);
-  position: absolute;
+  margin: 0 0 0 10px;
+  /*float: left;*/
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .left-div {
-    width: calc(100% - 20px);
-    height: auto;
+    width: 100%;
+    height: 100px;
+    margin: auto;
     z-index: 10;
+    /*position: absolute;*/
+    /*float: none;*/
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .left-div {
-    width: 30%;
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    /*display: inline-flex;*/
+    /*justify-content: space-between;*/
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .left-div {
-    width: 30%;
+    width: 100%;
+    height: 40px;
+    margin: 0;
+  }
+}
+
+.left-div-50 {
+  width: calc(50% - 20px);
+  height: calc(100vh - 90px);
+  margin: 20px 10px 20px 10px;
+  /*float: left;*/
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .left-div-50 {
+    width: 100%;
+    height: calc(100vh - 70px);
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .left-div-50 {
+    width: 100%;
+    height: calc(100vh - 70px);
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .left-div-50 {
+    width: 100%;
+    height: calc(100vh - 70px);
+    margin: 0;
+  }
+}
+
+.right-div-50 {
+  width: calc(50% - 30px);
+  height: calc(100vh - 90px);
+  /*background: blue;*/
+  margin: 20px 20px 20px 10px;
+  /*float: left;*/
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .right-div-50 {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    position: absolute;
+    margin: 0;
+    top: 60px;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .right-div-50 {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    position: absolute;
+    margin: 0;
+    top: 60px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .right-div-50 {
+    width: calc(100% - 20px);
+    height: calc(100vh - 70px);
+    position: absolute;
+    margin: 0;
+    top: 60px;
   }
 }
 
 .center-div {
-  width: 40%;
+  width: calc(40% - 10px);
   height: calc(100vh - 50px);
-  left: 20%;
-  position: absolute;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .center-div {
     width: 100%;
-    top: 110px;
-    left: 0;
+    height: calc(100vh - 160px);
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .center-div {
-    width: 70%;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 110px);
     left: 30%;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .center-div {
-    width: 70%;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 110px);
     left: 30%;
   }
 }
@@ -218,43 +491,92 @@ header {
 .right-div {
   width: 40%;
   height: calc(100vh - 50px);
-  left: 60%;
-  position: absolute;
+  /*left: 60%;*/
+
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .right-div {
     width: 100%;
-    top: 110px;
+    height: calc(100vh - 130px);
+    top: 160px;
     left: 0;
+    position: absolute;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .right-div {
-    width: 70%;
-    left: 30%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    top: 110px;
+    left: 0;
+    position: absolute;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .right-div {
-    width: 70%;
-    left: 30%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    top: 110px;
+    left: 0;
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .right-div {
+    /*width: 70%;*/
+    /*left: 30%;*/
   }
 }
 
 .menu-container {
-  width: calc(100% - 20px);
+  width: 100%;
   height: calc(100% - 40px);
-  margin: 20px 0 0 20px;
+  margin: 20px 0 0 0;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait){
+  .menu-container {
+    margin: 10px auto;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape){
+  .menu-container {
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .menu-container {
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: space-between;
+  }
 }
 
 .menu-bar {
   width: 100%;
   height: 40px;
-  background: #ededed;
+  background: #f5f5f5;
   cursor: pointer;
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape){
+  .menu-bar {
+    width: calc(50% - 5px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .menu-bar {
+    width: calc(50% - 5px);
+  }
 }
 
 .menu-bar span {
@@ -323,6 +645,7 @@ header {
   border-bottom: 1px solid #ccc;
   padding: 0 10px;
   cursor: pointer;
+  color: #fff;
   transition: 0.3s ease all;
 }
 
@@ -331,7 +654,7 @@ header {
 }
 
 .menu-option:hover span {
-  color: #0f2144;
+  color: #fff;
 }
 
 .menu-option span {
@@ -349,26 +672,37 @@ header {
 
 .option-container {
   width: calc(100% - 30px);
-  height: calc(51% - 40px);
-  margin: 20px 10px 20px 20px;
-  background: #ededed;
+  height: calc(100% - 40px);
+  margin: 20px 10px 0 20px;
+  background: #f5f5f5;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .option-container {
-    width: calc(100% - 40px);
+    width: 100%;
+    height: calc(100% - 40px);
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .option-container {
-    width: calc(100% - 40px);
+    width: 100%;
+    height: calc(100% - 40px);
   }
 }
 
-@media screen and (min-width: 721px) and (max-width: 1024px) {
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
   .option-container {
-    width: calc(100% - 40px);
+    width: 100%;
+    height: calc(100% - 40px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: landscape) {
+  .option-container {
+    width: 100%;
+    height: calc(100% - 40px);
+    margin: 10px 0 0 0;
   }
 }
 
@@ -397,6 +731,31 @@ header {
   }
 }
 
+.option-container-margen0 {
+  width: 100%;
+  height: 100%;
+  /*margin: 20px 10px 20px 20px;*/
+  background: #f5f5f5;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .option-container-margin0 {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .option-container-margin0 {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) {
+  .option-container-margin0 {
+    width: 100%;
+  }
+}
+
 .option-header {
   width: 100%;
   height: 40px;
@@ -410,6 +769,36 @@ header {
   margin: 0 0 0 10px;
   padding: 0;
   float: left;
+}
+
+.option-header-left {
+  height: 40px;
+  width: calc(100% - 120px);
+  float: left;
+}
+
+.option-header-right {
+  height: 40px;
+  width: 120px;
+  float: right;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.square-header-button {
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  border-left: 1px solid #fff;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.square-header-button:hover {
+  background: #0f2144;
 }
 
 .option-header-button {
@@ -427,11 +816,12 @@ header {
 }
 
 .option-device-container {
-  width: calc(100% + 35px);
+  width: 100%;
   height: calc(100% - 40px);
-  overflow: hidden;
+  overflow: auto;
   margin: auto;
   position: relative;
+  border-bottom: 1px solid #2bbee8;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
@@ -477,6 +867,28 @@ header {
   line-height: 25px;
 }
 
+.maintenance-table {
+  width: calc(100% - 20px);
+  margin: 0 10px 10px 10px;
+}
+
+.maintenance-table thead {
+  line-height: 40px;
+  background: #2bbee8;
+  color: #fff;
+  text-align: center;
+}
+
+.maintenance-table tbody tr {
+  line-height: 40px;
+  border-bottom: 1px solid #2bbee8;
+  text-align: center;
+}
+
+.maintenance-table td {
+  padding: 0 10px;
+}
+
 .option-platform {
   color: #00b3ee;
   margin-top: 0;
@@ -488,9 +900,9 @@ header {
 }
 
 .option-device {
-  width: calc(100% - 40px);
+  width: 100%;
   height: 50px;
-  padding: 0 10px;
+  padding: 0 5px 0 10px !important;
   border-bottom: 1px solid #b3b3b3;
   background: transparent;
   cursor: pointer;
@@ -499,34 +911,38 @@ header {
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .option-device {
-    width: calc(100% - 18px);
+    width: 100%;
     font-size: 12px;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .option-device {
-    width: calc(100% - 18px);
+    width: 100%;
     font-size: 12px;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .option-device {
-    width: calc(100% - 18px);
+    width: 100%;
   }
 }
 
 .option-device:hover {
-  background: #ccc;
+  background: #ddd;
 }
 
 .option-device-active {
   height: 50px;
-  width: calc(100% - 40px);
+  width: 100%;
   padding: 0 10px;
-  background: #ccc;
+  background: #ddd;
   border-bottom: 1px solid #b3b3b3;
+}
+
+.option-device-unactive {
+  background: transparent;
 }
 
 /*.option-device-active:after {*/
@@ -564,8 +980,10 @@ header {
   float: left;
   height: 50px;
   text-align: left;
+  width: calc(100% - 40px)
 }
 
+/*
 @media screen and (max-width: 720px) {
   .option-name-container {
     width: 65%;
@@ -592,9 +1010,10 @@ header {
 
 @media screen and (min-width: 1367px){
   .option-name-container {
-    width: 75% !important;
+    width: calc(100% - 40px)
   }
 }
+*/
 
 .option-platform-container {
   width: 30%;
@@ -615,11 +1034,11 @@ header {
 }
 
 .option-buttons-container {
-  width: 25%;
+  width: auto;
   margin-top: 5px;
   float: right;
 }
-
+/*
 @media screen and (max-width: 720px) {
   .option-buttons-container {
     width: 34%;
@@ -637,6 +1056,7 @@ header {
     width: 28%;
   }
 }
+*/
 
 .option-subscription-container {
   width: 40px;
@@ -694,18 +1114,66 @@ header {
 }
 
 .option-device-button-active {
-  background: #0f2144;
+  background: #2bbee8;
 }
 
 .option-device-button-active span {
+  color: #fff !important;
+}
+
+.square-option-device-button {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  float: right;
+  text-align: center;
+  line-height: 40px;
+  /*padding: 0 20px;*/
+  /*background: rgba(43, 190, 232, 0.5);*/
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .square-option-device-button {
+    padding: 0 10px;
+  }
+}
+
+.option-device:hover .square-option-device-button {
+  background: #2bbee8;
+}
+
+.square-option-device-button:hover {
+  background: #2bbee8;
+}
+
+.square-option-device-button span {
+  line-height: 40px !important;
+  float: none !important;
+  color: #2bbee8;
+  margin: 0;
+  transition: 0.3s ease all;
+}
+
+.option-device:hover .square-option-device-button span {
+  color: #fff;
+}
+
+.square-option-device-button-active {
+  background: #2bbee8;
+}
+
+.square-option-device-button-active span {
   color: #fff;
 }
 
 .resource-container {
   width: calc(100% - 30px);
-  height: calc(51% - 40px);
-  margin: 20px 20px 20px 10px;
+  height: calc(100% - 40px);
+  margin: 20px 20px 0 10px;
   background: #ededed;
+  border-bottom: 1px solid #2bbee8;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
@@ -733,27 +1201,27 @@ header {
   width: calc(100% - 30px);
   height: calc(100% - 40px);
   margin: 20px 20px 20px 10px;
-  background: #ededed;
+  background: #f5f5f5;
 }
 
 @media screen and (max-width: 720px) and (orientation: portrait) {
   .resource-container2 {
-    width: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 0 10px;
   }
 }
 
 @media screen and (max-width: 720px) and (orientation: landscape) {
   .resource-container2 {
-    width: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 0 10px;
   }
 }
 
 @media screen and (min-width: 721px) and (max-width: 1024px) {
   .resource-container2 {
-    width: calc(100% - 40px);
-    margin: 20px;
+    width: calc(100% - 20px);
+    margin: 0 10px;
   }
 }
 
@@ -835,7 +1303,6 @@ header {
   width: calc(100% - 20px);
   height: calc(50% - 60px);
   margin: 10px auto 10px auto;
-  /*background: red;*/
   border: 1px solid #999;
 }
 
@@ -1027,34 +1494,42 @@ pre {
 }
 
 .add-form {
-  width: calc(100% - 20px);
-  margin: 10px;
+  width: 100%;
+  /*padding: 10px;*/
 }
 
 .add-form label {
-  width: 35%;
+  width: calc(35% - 10px);
   float: left;
   line-height: 30px;
-  margin-bottom: 10px;
+  margin: 0 0 10px 10px;
   font-weight: normal;
   clear: left;
 }
 
 .add-form input {
-  width: 65%;
+  width: calc(65% - 10px);
   float: right;
   height: 30px;
   padding-left: 5px;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
   transition: 0.3s ease all;
 }
 
 .add-form select {
-  width: 65%;
+  width: calc(65% - 10px);
   float: right;
   height: 30px;
   padding-left: 5px;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
+}
+
+.add-form textarea {
+  width: calc(65% - 10px);
+  float: right;
+  height: 200px;
+  resize: none;
+  margin: 0 10px 5px 0;
 }
 
 .add-form input:focus {
@@ -1068,11 +1543,20 @@ pre {
   border: 1px solid #2bbee8;
 }
 
+.add-form textarea:focus {
+  outline: none;
+  border: 1px solid #2bbee8;
+}
+
 .add-form input:focus + .form-label {
   color: #2bbee8;
 }
 
 .add-form select:focus + .form-label {
+  color: #2bbee8;
+}
+
+.add-form textarea:focus + .form-label {
   color: #2bbee8;
 }
 
@@ -1082,11 +1566,16 @@ pre {
   }
 
   .add-form input {
-    width: 100%;
+    width: calc(100% - 20px);
   }
 
   .add-form select {
-    width: 100%;
+    width: calc(100% - 20px);
+  }
+
+  .add-form textarea {
+    width: calc(100% - 20px);
+    margin: 0 10px 10px 0;
   }
 }
 
@@ -1096,11 +1585,16 @@ pre {
   }
 
   .add-form input {
-    width: 100%;
+    width: calc(100% - 20px);
   }
 
   .add-form select {
-    width: 100%;
+    width: calc(100% - 20px);
+  }
+
+  .add-form textarea {
+    width: calc(100% - 20px);
+    margin: 0 10px 10px 0;
   }
 }
 
@@ -1133,6 +1627,8 @@ pre {
   cursor: pointer;
   clear: both;
   border: none;
+  display: inline-flex;
+  justify-content: flex-end;
   user-select: none;
   transition: 0.3s ease all;
 }
@@ -1153,4 +1649,383 @@ pre {
 
 .create-button:focus {
   outline: none;
+}
+
+.info-button {
+  width: auto;
+  height: 30px;
+  margin: 0 10px 0 10px !important;
+  float: right;
+  text-align: center;
+  padding: 0 20px;
+  background: rgba(43,190,232,0.5);
+  cursor: pointer;
+  clear: both;
+  border: none;
+  display: inline-flex;
+  justify-content: flex-end;
+  user-select: none;
+  transition: 0.3s ease all;
+}
+
+@media screen and (max-width: 720px){
+  .info-button {
+    margin: 0 10px 10px 10px;
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px){
+  .info-button {
+    margin: 0 10px 10px 10px;
+  }
+}
+
+.info-button span {
+  line-height: 30px;
+  color: #0f2144;
+  margin: 0;
+}
+
+.info-button:hover {
+  background: #0f2144;
+}
+
+.info-button:hover span {
+  color: #fff;
+}
+
+.info-button:focus {
+  outline: none;
+}
+
+/*---CUSTOM SCROLL BAR---*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2b709a;
+  transition: 0.3s ease all;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0f2144;
+}
+
+/*---END CUSTOM SCROLL BAR---*/
+
+.line {
+  clear: both;
+  border-bottom: 1px solid #b3b3b3;
+  margin-bottom: 12px;
+}
+
+.line-margin-top {
+  margin-top: 50px;
+}
+
+.info-left {
+  width: 35%;
+  float: left;
+  line-height: 30px;
+  margin-bottom: 10px;
+  font-weight: normal;
+  clear: left;
+  padding: 0 10px;
+}
+
+.info-right {
+  width: 65%;
+  float: right;
+  line-height: 30px;
+  height: 30px;
+  color: #2bbee8;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  text-align: right;
+  transition: 0.3s ease all;
+}
+
+.deployment-device-header {
+  width: calc(100% - 20px);
+  height: 40px;
+  margin: 0 10px;
+  clear: both;
+  background: #2bbee8;
+  color: #fff;
+  line-height: 40px;
+  padding: 0 10px;
+}
+
+.deployment-device-container {
+  width: calc(100% - 20px);
+  height: 40px;
+  margin: 0 10px;
+  clear: both;
+  border-bottom: 1px solid #ccc;
+}
+
+.deployment-device-container span {
+  line-height: 40px;
+  color: #2bbee8;
+}
+
+.deployment-device-container .info-left {
+  margin: 0 !important;
+}
+
+.right-button-container {
+  width: 40px;
+  height: 40px;
+  float: right;
+  background: transparent;
+  text-align: center !important;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.right-button-container:hover {
+  background: #2bbee8;
+}
+
+.right-button-container span {
+  float: none;
+  text-align: center;
+  margin: auto !important;
+  line-height: 38px;
+  color: #2bbee8;
+  transition: 0.3s ease all;
+}
+
+.right-button-container:hover span {
+  color: #fff;
+}
+
+.button-container-form {
+  width: 100%;
+  /*padding: 0 10px;*/
+  float: right;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.info-inner {
+  padding-top: 10px;
+}
+
+.center-container {
+  max-width: 1200px;
+  max-height: calc(80% - 50px);
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .center-container{
+    max-height: calc(100vh - 50px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: portrait) {
+  .center-container{
+    max-height: calc(100vh - 50px);
+  }
+}
+
+@media screen and (min-width: 721px) and (max-width: 1024px) and (orientation: landscape) {
+  .center-container{
+    max-height: calc(100vh - 50px);
+  }
+}
+
+.about-menu {
+  width: 100%;
+  height: 50px;
+  display: inline-flex;
+  justify-content: flex-start;
+}
+
+.about-button {
+  height: 50px;
+  width: auto;
+  padding: 0 20px;
+  margin-right: 2px;
+  line-height: 50px;
+  background: rgba(43,190,232,0.5);
+  border-radius: 3px 3px 0 0;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s ease all;
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .about-button {
+    padding: 5px 20px;
+    line-height: 20px;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: landscape) {
+  .about-button {
+    line-height: 50px;
+  }
+}
+
+.about-button:hover {
+  background: #0f2144;
+}
+
+.about-button-active {
+  background: #2bbee8;
+}
+
+.about-container {
+  height: calc(100% - 50px);
+  width: 100%;
+}
+
+.about-info-container {
+  height: 100%;
+  width: 100%;
+  background: #f5f5f5;
+}
+
+.about-info-header {
+  height: 40px;
+  width: 100%;
+  background: #2bbee8;
+}
+
+.about-info-header h3 {
+  font-size: 16px;
+  line-height: 40px;
+  color: #fff;
+  margin: 0 0 0 10px;
+  padding: 0;
+  float: left;
+}
+
+.about-info-inner {
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  padding: 10px;
+  border-bottom: 1px solid #2bbee8;
+}
+
+.spinner-container {
+  width: 50px;
+  height: 50px;
+  margin: calc(50% - 75px) calc(50% - 25px);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-color: transparent #2bbee8 transparent #2bbee8;
+  border-width: 2px;
+  border-style: solid;
+  animation: 0.5s all linear infinite;
+  animation-name: spinner;
+}
+
+.spinner-small-container {
+  width: 30px;
+  height: 30px;
+  left: 10px;
+  position: absolute;
+  float: left;
+}
+
+.spinner-small {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-color: transparent #2bbee8 transparent #2bbee8;
+  border-width: 2px;
+  border-style: solid;
+  animation: 0.5s all linear infinite;
+  animation-name: spinner;
+}
+
+.spinner-very-small-container {
+  width: 20px;
+  height: 20px;
+  margin-top: -30px;
+  margin-left: calc(20% - 80px);
+  position: absolute;
+  float: left;
+}
+
+.spinner-very-small {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-color: transparent #2bbee8 transparent #2bbee8;
+  border-width: 2px;
+  border-style: solid;
+  animation: 0.5s all linear infinite;
+  animation-name: spinner;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.info-button-container {
+  float: right;
+}
+
+.info-button-container button {
+  float: none;
+}
+
+.message-container {
+  height: 30px;
+  width: auto;
+  padding: 0 10px;
+  left: 10px;
+  position: absolute;
+  float: left;
+}
+
+.message-container-100 {
+  height: 30px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.error {
+  background: #dc3545;
+}
+
+.success {
+  background: #28a745;
+}
+
+.message-container span {
+  color: #fff;
+  line-height: 30px;
+}
+
+.message-container-100 span {
+  color: #fff;
+  line-height: 30px;
 }

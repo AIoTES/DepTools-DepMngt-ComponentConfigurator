@@ -7,7 +7,8 @@ app.service('clientServiceData', function () {
       currentClient: '',
       currentClientId: '',
 
-      retrievalStatus: retrievalStatus,
+      operationStatus: retrievalStatus,
+      retrievalStatus: retrievalStatus.NOT_STARTED,
       clientStatus: retrievalStatus.NOT_STARTED
     };
 

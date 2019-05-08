@@ -1,150 +1,85 @@
 package eu.hopu.servlets;
 
-import com.google.gson.JsonObject;
-import eu.hopu.storage.MeasuresStorage;
-import eu.hopu.utils.GetEnvOrProperty;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import com.google.gson.Gson;
+import eu.hopu.Initializer;
+import eu.hopu.servlets.dto.CreateSilPlatform;
+import eu.hopu.servlets.dto.SilPlatform;
+import eu.hopu.servlets.dto.UpdateSilPlatform;
+import eu.hopu.sil.SilClient;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.List;
+
+import static eu.hopu.Initializer.CLIENT_ID;
 
 @Path("/platforms")
 public class PlatformServlet {
-  private MeasuresStorage measuresStorage = MeasuresStorage.getInstance();
-  private final String SERVER_ADDR = GetEnvOrProperty.getInstance().get("SIL_URL");
-  private final String CLIENT_ID = GetEnvOrProperty.getInstance().get("CLIENT_ID");
-  OkHttpClient client = new OkHttpClient();
 
-  public static final okhttp3.MediaType JSON = okhttp3.MediaType.parse("application/json; charset=utf-8");
+  private final Gson gson;
+  private final SilClient client;
+
+  public PlatformServlet() {
+    this.client = Initializer.silClient;
+    this.gson = new Gson();
+  }
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("")
   public Response getPlatforms(@Context HttpServletRequest request) {
-    String clientId = request.getHeader("Client-ID");
-    if (clientId == null)
-      clientId = CLIENT_ID;
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms").header("Client-ID", clientId).get().build();
-
-    try (okhttp3.Response resp = client.newCall(req).execute()) {
-      String bodyStr = resp.body().string();
-      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
-
-    }
-
-    return Response.ok().build();
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    List<SilPlatform> silPlatforms = client.retrieveRegisteredPlatforms(clientId);
+    return Response.ok().entity(gson.toJson(silPlatforms)).build();
   }
 
   @POST
   @Consumes("application/json")
-  @Path("/new")
-  public Response newPlatform(@Context HttpServletRequest request) throws IOException {
-    String bString = DeviceServlet.getJsonBodyString(request.getInputStream());
-    String clientId = request.getHeader("Client-ID");
-    RequestBody body = RequestBody.create(JSON, bString);
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms").header("Client-ID", clientId).post(body).build();
-
-    try (okhttp3.Response resp = client.newCall(req).execute()) {
-      String bodyStr = resp.body().string();
-      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
-
-    }
-
-    return Response.ok().build();
+  @Produces("application/json")
+  public Response createPlatform(@Context HttpServletRequest request, CreateSilPlatform platform) {
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    SilPlatform silPlatform = client.createPlatform(platform, clientId);
+    return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
 
   @PUT
   @Consumes("application/json")
-  @Path("/{platformId}")
-  public Response updatePlatform(@Context HttpServletRequest request,
-                               @PathParam("platformId") String platformId) throws IOException {
-    String bod = DeviceServlet.getJsonBodyString(request.getInputStream());
-    String clientId = request.getHeader("Client-ID");
-    RequestBody body = RequestBody.create(JSON, bod);
-
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms/" + platformId).header("Client-ID", clientId).put(body).build();
-
-    try (okhttp3.Response resp = client.newCall(req).execute()) {
-      String bodyStr = resp.body().string();
-      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
-
-    }
-    return Response.ok().build();
+  @Produces("application/json")
+  public Response updatePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId, UpdateSilPlatform platform) {
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    UpdateSilPlatform silPlatform = client.updatePlatform(platformId, platform, clientId);
+    return Response.ok().entity(gson.toJson(silPlatform)).build();
   }
 
   @DELETE
-  @Path("")
-  public Response deletePlatform(@Context HttpServletRequest request,
-                               @QueryParam("platformId") String platformId) throws IOException {
-    String clientId = request.getHeader("Client-ID");
-
-    String platform = URLEncoder.encode(platformId, "UTF-8");
-
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platforms/" + platform).header("Client-ID", clientId).delete().build();
-
-    try (okhttp3.Response resp = client.newCall(req).execute()) {
-      String bodyStr = resp.body().string();
-      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
-
-    }
-    return Response.ok().build();
+  public Response deletePlatform(@Context HttpServletRequest request, @QueryParam("platformId") String platformId) {
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    boolean result = client.deletePlatform(platformId, clientId);
+    if (result)
+      return Response.noContent().build();
+    else
+      return Response.status(400).build();
   }
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/types")
   public Response getPlatformTypes(@Context HttpServletRequest request) {
-    String clientId = request.getHeader("Client-ID");
-    if (clientId == null)
-      clientId = CLIENT_ID;
-
-    List<String> tipos = measuresStorage.getTypesPlatform();
-
-    JsonObject json = new JsonObject();
-
-    for (int i = 0; i<tipos.size(); i++) {
-      json.addProperty("tipo"+i, tipos.get(i));
-    }
-
-    String p = tipos.toString();
-
-    return Response.ok(json.toString(), MediaType.APPLICATION_JSON).build();
+    return Response.ok().entity(gson.toJson(Initializer.platformTypes)).build();
   }
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/platform-types")
   public Response consultTypes(@Context HttpServletRequest request) {
-    String clientId = request.getHeader("Client-ID");
-    if (clientId == null)
-      clientId = CLIENT_ID;
-    Request req = new Request.Builder().url(SERVER_ADDR + "/api/mw2mw/platform-types").header("Client-ID", clientId).get().build();
-
-    try (okhttp3.Response resp = client.newCall(req).execute()) {
-      String bodyStr = resp.body().string();
-      return Response.ok(bodyStr, MediaType.APPLICATION_JSON).build();
-    }
-    catch (IOException ex) {
-
-    }
-
-    return Response.ok().build();
+    String clientId = request.getHeader("Client-ID") != null ? request.getHeader("Client-ID") : CLIENT_ID;
+    boolean result = client.retrievePlatformTypes(clientId);
+    if (result)
+      return Response.ok().build();
+    else
+      return Response.status(400).build();
   }
 
 }

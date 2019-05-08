@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
-import static eu.hopu.servlets.DeviceServlet.getJsonBodyString;
+import static eu.hopu.utils.InputStreamToString.getJsonBodyString;
 
 @Path("/alignments")
 public class AlignmentServlet {

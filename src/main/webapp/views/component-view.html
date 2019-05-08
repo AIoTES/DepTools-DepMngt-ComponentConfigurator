@@ -1,0 +1,59 @@
+<div class="option-container">
+
+  <div class="option-header">
+    <h3>Device Manager</h3>
+
+    <div class="option-header-right">
+      <div class="square-header-button"
+           title="Add Platform"
+           ng-class="{ 'button-header-active' : ('main.component_configurator.component_view.add_platform' | routeSegmentEqualsTo) }"
+           ng-click="componentView.goToAddPlatform()">
+        <span class="glyphicon glyphicon-tasks"></span>
+      </div>
+      <div class="square-header-button"
+           title="Add Device"
+           ng-class="{ 'button-header-active' : ('main.component_configurator.component_view.add_device' | routeSegmentEqualsTo) }"
+           ng-click="componentView.goToAddDevice()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="option-device-container">
+
+    <div ng-show="componentView.deviceData.retrievalStatus['devices'] === componentView.deviceData.operationStatus.IN_PROGRESS">
+      <div class="spinner-container">
+        <div class="spinner">
+        </div>
+      </div>
+    </div>
+    <div ng-show="componentView.deviceData.retrievalStatus['devices'] === componentView.deviceData.operationStatus.FAILURE">
+      <div class="message-container-100 error">
+        <span>Cannot retrieve devices</span>
+      </div>
+    </div>
+    <div ng-show="componentView.deviceData.retrievalStatus['devices'] === componentView.deviceData.operationStatus.SUCCESS" class="option-device"
+         ng-repeat="device in componentView.deviceData.devicesByPlatformId[componentView.platformData.currentPlatform.platformId]"
+         ng-class="{ 'option-device-active' : device.deviceId === componentView.deviceData.currentDevice }"
+         ng-click="componentView.selectDevice(device)">
+
+      <div class="option-name-container">
+        <span class="option-name">{{device.deviceId}}</span>
+        <br class="jump-line">
+        <span class="option-platform">{{device.hostedBy}}</span>
+      </div>
+
+      <div class="option-buttons-container">
+        <div class="square-option-device-button"
+             ng-class="{ 'option-device-button-active' : device.deviceId === componentView.deviceData.currentDevice }">
+          <span class="glyphicon glyphicon-info-sign"></span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
