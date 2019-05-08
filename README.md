@@ -3,7 +3,8 @@
 ## Introduction
 The component configuration tool provides an easy and intuitive GUI for the semantic interoperability layer. 
 
-// TODO añadir aquí lo que se pone en la documentación
+The component configuration deployment tool is a GUI through which the deployer of a component (device or service) can provide appropriate values for all configurable
+parameters that are necessary for the deployment of a component in an actual deployment unit.
 
 ## Architecture
 The project is made up of a backend, that serves as proxy for the SIL API requests and responses, 
@@ -57,14 +58,14 @@ sudo npm install bower -g
 ### Build
 
 ### Build the frontend dependencies
-// TODO añadir aquí la típica frase de para que el frontend funcione correctamente necesita satisfacer dependenciar por lo que hay que ejecutar esto.
+For the correct functioning of the frontend, it is necessary to satisfy several dependencies, so the following commands must be executed
 ````
 npm install
 bower install
 ````
 
 #### Build the tool using maven
-// TODO añade aquí un par de líneas diciendo lo básico de: se hace uso de maven, hay que situarse en el directorio root del proyecto y ejecutar esto
+This tool uses maven so for its use it should be placed in the root directory of the project and execute:
 ```bash
 $ mvn clean install
 ```
@@ -82,7 +83,9 @@ Grunt provides profiles to allow the developer to run only the frontend applicat
 ````
 grunt serve
 ````
-// TODO explicar aquí como se cambia el módulo de la aplicación a desarrollo y lo que se gana (modulo de desarrollo con peticiones mock)
+To change to development mode, you have to modify the index.html, changing the ng-app of the body by 'activageDashboardAppDev' and modify all the *.service_api.js by changing the corresponding backend url by 'BACKEND_URL'.
+
+With this, it is used to use mock requests that will return the expected answers and thus can debug and check the correct operation of the application.
 
 #### Run the tool using the tomcat embedded-server
 The tool can be run using the maven tomcat plugin. This plugin launches a tomcat embedded server in the port configured in pom.xml.
@@ -127,12 +130,10 @@ docker service logs [service_name]
 ````
 
 ### Docker environmental variables
-// Ejemplo rellenar con la variables reales
-Three profiles have been created to treat the database as we are interested in a specific case. The created profiles are:
+To deploy the application using a docker, it's necessary to specify two environment variables:
 
-- **PRODUCTION**. Profile for production. With this profile active, Hibernate not modify the database or tables, only inserts data. It is the default mode.
-- **DEVELOPMENT**. Profile for development ONLY. With this profile active, every time Homard is launched, Hibernate deletes the old database and creates a new database. 
-- **UPDATE**. Profile to update the database tables. With this profile active, when Homard is launched, Hibernate updates the tables with the new design. If no changes are made to the database, this profile does not allow Homard to be started.
+- **CLIENT_ID**. This is a client id that is already registered in the SIL.
+- **SIL_URL**. The URL where SIL is displayed. 
 
 ## Testing 
 The tool provides tests ensuring the main operations are probed. To execute the tests you have to run:
