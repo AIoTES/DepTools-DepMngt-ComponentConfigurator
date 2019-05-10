@@ -1,0 +1,73 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Add Maintenance</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="addMaintenance.closeAddMaintenance()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-device">
+
+
+      <input type="text" disabled ng-model="addMaintenance.recordToCreate.elementId">
+      <label class="form-label">ElementId:</label>
+
+      <textarea class="text-area" placeholder="description"
+                ng-model="addMaintenance.recordToCreate.description"></textarea>
+      <label class="form-label">description:</label>
+
+      <select ng-model="addMaintenance.recordToCreate.status">
+        <option value="PENDING">Pending</option>
+        <option value="COMPLETED">Completed</option>
+      </select>
+      <label class="form-label">Status:</label>
+
+      <select ng-model="addMaintenance.recordToCreate.type">
+        <option value="NOTE">Note</option>
+        <option value="ISSUE">Issue</option>
+        <option value="TODO">Todo</option>
+      </select>
+      <label class="form-label">Type:</label>
+
+      <hr class="line">
+
+      <div class="button-container-form">
+
+        <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Added!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="addMaintenance.recordData.createStatus === addMaintenance.recordData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="addMaintenance.addTicket()">
+            <span>Add Ticket</span>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

@@ -1,0 +1,20 @@
+<div class="about-menu">
+  <div class="about-button"
+       ng-click="about.goToDeployManager()"
+       ng-class="{ 'about-button-active' : ('main.about.deployment_manager' | routeSegmentStartsWith)}">
+    Deployment Manager
+  </div>
+  <div class="about-button"
+       ng-click="about.goToComponentConfigurator()"
+       ng-class="{ 'about-button-active' : ('main.about.component_configurator' | routeSegmentStartsWith)}">
+    Component Configurator
+  </div>
+  <div class="about-button"
+       ng-click="about.goToMaintenancePanel()"
+       ng-class="{ 'about-button-active' : ('main.about.maintenance_panel' | routeSegmentStartsWith)}">
+    Maintenance Panel
+  </div>
+</div>
+<div class="about-container" app-view-segment="2">
+
+</div>

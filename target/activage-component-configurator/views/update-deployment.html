@@ -1,0 +1,135 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Update Deployment:  {{updateCtrl.currentDeployment.id}}</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="updateCtrl.closeCreateDeployment()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-device">
+
+      <input type="text" disabled placeholder="Id" ng-model="updateCtrl.currentDeployment.id">
+      <label class="form-label">Id:</label>
+
+      <input type="text" disabled placeholder="Id" ng-model="updateCtrl.currentDeployment.date">
+      <label class="form-label">Date:</label>
+
+      <input type="text" disabled placeholder="Location" ng-model="updateCtrl.currentDeployment.location">
+      <label class="form-label">Location:</label>
+
+      <hr class="line">
+
+      <input type="text" disabled placeholder="Organization Id" ng-model="updateCtrl.currentDeployment.organizationId">
+      <label class="form-label">Organization Id:</label>
+
+      <input type="text" disabled placeholder="Organization Label" ng-model="updateCtrl.currentDeployment.organizationLabel">
+      <label class="form-label">Organization Label:</label>
+
+      <hr class="line">
+
+      <input type="text" disabled placeholder="Platform Id" ng-model="updateCtrl.currentDeployment.platformId">
+      <label class="form-label">Platform Id:</label>
+
+      <input type="text" disabled placeholder="Platform Label" ng-model="updateCtrl.currentDeployment.platformLabel">
+      <label class="form-label">Platform Label:</label>
+
+      <hr class="line">
+
+      <div class="deployment-device-header">
+        Devices:
+      </div>
+
+      <div class="deployment-device-container" ng-repeat="device in updateCtrl.currentDeployment.devices">
+        <div class="info-left">
+          <span>{{device}}</span>
+        </div>
+
+        <div class="right-button-container"
+             title="Delete Device {{device}}"
+             ng-click="updateCtrl.deploymentService.deleteDeviceFromDeployment(updateCtrl.currentDeployment.id, device)"
+             ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
+          <span class="glyphicon glyphicon-trash"></span>
+        </div>
+        <div ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.removeDeviceStatus[device] === updateCtrl.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Deleted!</span>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="line">
+
+      <div class="deployment-device-header">
+        Add Devices:
+      </div>
+
+      <div class="deployment-device-container"
+           ng-repeat="newDevice in updateCtrl.deploymentData.notDeploymentDevicesSelected">
+        <div class="info-left">
+          <span>{{newDevice}}</span>
+        </div>
+        <div class="right-button-container"
+             title="Add Device {{newDevice}}"
+             ng-click="updateCtrl.deploymentService.addDeviceToDeployment(updateCtrl.deploymentData.currentDeployment.id, newDevice)"
+             ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
+          <span class="glyphicon glyphicon-plus"></span>
+        </div>
+        <div ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateCtrl.deploymentData.addStatus[newDevice] === updateCtrl.deploymentData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Added!</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="line">
+
+      <div class="button-container-form">
+
+
+
+<!--        <div class="info-button-container" ng-show="updateCtrl.deploymentData.addDeviceStatus === updateCtrl.deploymentData.operationStatus.NOT_STARTED">
+
+          &lt;!&ndash;<button type="submit" class="info-button" ng-click="updateCtrl.addDevices()">
+            <span>Add Devices</span>
+          </button>&ndash;&gt;
+        </div>-->
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

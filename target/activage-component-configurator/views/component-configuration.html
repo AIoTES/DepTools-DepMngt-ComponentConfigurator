@@ -1,0 +1,66 @@
+<div class="menu-container">
+
+  <div class="menu-bar" ng-click="openMenu = !openMenu">
+    <span>{{component.platformData.currentPlatformName}}</span>
+    <div class="menu-square" ng-class="{'menu-square-active' : openMenu}">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </div>
+  </div>
+
+
+  <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.IN_PROGRESS">
+    <div class="spinner-very-small-container">
+      <div class="spinner-very-small">
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.FAILURE">
+    <div class="message-container-100 error">
+      <span>Cannot retrieve platforms</span>
+    </div>
+  </div>
+
+  <div ng-show="component.platformData.retrievalStatus['platforms'] === component.platformData.operationStatus.SUCCESS" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu}">
+    <div
+      ng-repeat="platform in component.platformData.platforms"
+      ng-click="component.selectPlatform(platform)">
+      <div class="menu-option">
+        <span>{{platform.name}}</span>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <div class="menu-bar" ng-click="openMenu2 = !openMenu2">
+    <span>{{component.getSelectedClient()}}</span>
+    <div class="menu-square" ng-class="{'menu-square-active' : openMenu2}">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </div>
+  </div>
+
+  <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.IN_PROGRESS">
+    <div class="spinner-very-small-container">
+      <div class="spinner-very-small">
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.FAILURE">
+    <div class="message-container-100 error">
+      <span>Cannot retrieve clients</span>
+    </div>
+  </div>
+
+  <div ng-show="component.clientData.retrievalStatus === component.clientData.operationStatus.SUCCESS" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu2}">
+    <div
+      ng-repeat="client in component.getClients()"
+      ng-click="component.selectClient(client)">
+      <div class="menu-option">
+        <span>{{client.clientId}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

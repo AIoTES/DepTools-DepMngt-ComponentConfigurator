@@ -18,7 +18,7 @@ services:
       - SIL_URL=http://192.168.1.56:8080
       - DOCKER=True
     ports:
-      - "8002:8080"
+      - 8002:8080
     networks:
       - activage-network
 

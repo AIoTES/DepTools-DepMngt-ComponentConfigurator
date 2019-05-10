@@ -1,0 +1,111 @@
+<div class="resource-container2">
+
+  <div class="resource-header2">
+    <h3>Add Platform</h3>
+
+    <div class="close-info" title="Close window" ng-click="addPlatform.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <form class="add-form" name="add-platform">
+
+      <input type="text" placeholder="Id" ng-model="addPlatform.platformCreateRequest.platformId">
+      <label class="form-label">Id:</label>
+
+      <input type="text" placeholder="Name" ng-model="addPlatform.platformCreateRequest.name">
+      <label class="form-label">Name:</label>
+
+      <select ng-model="addPlatform.platformCreateRequest.type">
+        <option ng-repeat="option in addPlatform.platformData.platformsTypes"
+                value="{{option}}">{{option}}
+        </option>
+      </select>
+      <label class="form-label">Type:</label>
+
+      <input type="text" placeholder="Endpoint" ng-model="addPlatform.platformCreateRequest.baseEndpoint">
+      <label class="form-label">Endpoint:</label>
+
+      <input type="text" placeholder="Location" ng-model="addPlatform.platformCreateRequest.location">
+      <label class="form-label">Location:</label>
+
+      <input type="text" placeholder="Username" ng-model="addPlatform.platformCreateRequest.username">
+      <label class="form-label">Username:</label>
+
+      <input type="password" placeholder="Password" ng-model="addPlatform.platformCreateRequest.encryptedPassword">
+      <label class="form-label">Password:</label>
+
+      <input type="text" placeholder="Algorithm" ng-model="addPlatform.platformCreateRequest.encryptedAlgorithm">
+      <label class="form-label">Algorithm:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.downstreamInputAlignmentName">
+      <label class="form-label">Downstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Input Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.downstreamInputAlignmentVersion">
+      <label class="form-label">Downstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.downstreamOutputAlignmentName">
+      <label class="form-label">Downstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Downstream Output Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.downstreamOutputAlignmentVersion">
+      <label class="form-label">Downstream Output Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.upstreamInputAlignmentName">
+      <label class="form-label">Upstream Input Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Input Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.upstreamInputAlignmentVersion">
+      <label class="form-label">Upstream Input Alignment Version:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Name"
+             ng-model="addPlatform.platformCreateRequest.upstreamOutputAlignmentName">
+      <label class="form-label">Upstream Output Alignment Name:</label>
+
+      <input type="text" placeholder="Upstream Output Alignment Version"
+             ng-model="addPlatform.platformCreateRequest.upstreamOutputAlignmentVersion">
+      <label class="form-label">Upstream Output Alignment Version:</label>
+
+      <hr class="line">
+
+      <div class="button-container-form">
+
+        <div ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Created!</span>
+          </div>
+        </div>
+
+        <div class="info-button-container" ng-show="addPlatform.platformData.createStatus === addPlatform.platformData.operationStatus.NOT_STARTED">
+
+          <button type="submit" class="info-button" ng-click="addPlatform.createPlatform()">
+            <span>Create</span>
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

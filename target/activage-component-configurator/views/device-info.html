@@ -1,0 +1,134 @@
+<div class="resource-container2">
+
+  <div class="resource-header2">
+    <h3>Device: {{componentDevice.deviceData.currentDevice}}</h3>
+
+    <div class="close-info" title="Close window" ng-click="componentDevice.closeDeviceInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+    <div class="info-left">
+      Type:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.deviceTypes}}
+    </div>
+
+    <div class="info-left">
+      Id:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.deviceId}}
+    </div>
+
+    <div class="info-left">
+      Hosted By:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.hostedBy}}
+    </div>
+
+    <div class="info-left">
+      Location:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.location}}
+    </div>
+
+    <div class="info-left">
+      Name:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.name}}
+    </div>
+
+    <div class="info-left">
+      Hosts:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.hosts}}
+    </div>
+
+    <div class="info-left">
+      For Property:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.forProperty}}
+    </div>
+
+    <div class="info-left">
+      Made Actuation:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.madeActuation}}
+    </div>
+
+    <div class="info-left">
+      ImplementsProcedure:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.implementsProcedure}}
+    </div>
+
+    <div class="info-left">
+      Observes:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.observes}}
+    </div>
+
+    <div class="info-left">
+      Detects:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.detects}}
+    </div>
+
+    <div class="info-left">
+      MadeObservation:
+    </div>
+    <div class="info-right">
+      {{componentDevice.deviceData.deviceValues.madeObservation}}
+    </div>
+
+    <hr class="line">
+
+    <div class="button-container-form">
+
+      <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.IN_PROGRESS">
+        <div class="spinner-small-container">
+          <div class="spinner-small">
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.FAILURE">
+        <div class="message-container error">
+          <span>Error!</span>
+        </div>
+      </div>
+
+      <div ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.SUCCESS">
+        <div class="message-container success">
+          <span>Deleted!</span>
+        </div>
+      </div>
+
+      <div class="info-button-container" ng-show="componentDevice.deviceData.deleteStatus === componentDevice.deviceData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="componentDevice.deleteDevice()">
+          <span>Delete</span>
+        </button>
+
+        <button type="submit" class="info-button" ng-click="componentDevice.goToUpdateDevice()">
+          <span>Update</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

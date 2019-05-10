@@ -1,0 +1,32 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>List of Devices</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="deviceList.closeDeploymentInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div ng-show="deviceList.deploymentData.retrievalStatus['devices'] === deviceList.deploymentData.operationStatus.IN_PROGRESS">
+    <div class="spinner-container">
+      <div class="spinner">
+      </div>
+    </div>
+  </div>
+  <div ng-show="deviceList.deploymentData.retrievalStatus['devices'] === deviceList.deploymentData.operationStatus.FAILURE">
+    Cannot retrieve deployments
+  </div>
+  <div ng-show="deviceList.deploymentData.retrievalStatus['devices'] === deviceList.deploymentData.operationStatus.SUCCESS"
+       class="option-device-container" ng-init="deviceList.deploymentService.retrieveDevices()">
+
+    <div class="option-device" ng-repeat="device in deviceList.deploymentData.deploymentDevices">
+      <span class="option-name">{{device.id}}</span>
+      <br class="jump-line">
+      <span class="option-platform">{{device.label}}</span>
+    </div>
+
+  </div>
+
+</div>

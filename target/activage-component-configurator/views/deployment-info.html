@@ -1,0 +1,116 @@
+<div class="option-container-margen0">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Deployment: {{deployInfo.deploymentData.currentDeployment.id}}</h3>
+    </div>
+    <div class="close-info" title="Close window" ng-click="deployInfo.closeDeploymentInfo()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
+  </div>
+
+  <div class="option-device-container info-inner">
+
+      <div class="info-left">
+        Id:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.id}}
+      </div>
+
+      <div class="info-left">
+        Date:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.date}}
+      </div>
+
+      <div class="info-left">
+        Location:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.location}}
+      </div>
+
+    <hr class="line">
+
+      <div class="info-left">
+        Organization Id:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.organization.id}}
+      </div>
+
+      <div class="info-left">
+        Organization Label:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.organization.label}}
+      </div>
+
+    <hr class="line">
+
+      <div class="info-left">
+        Platform Id:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.platform.id}}
+      </div>
+
+      <div class="info-left">
+        Platform Label:
+      </div>
+      <div class="info-right">
+        {{deployInfo.deploymentData.currentDeployment.platform.label}}
+      </div>
+
+    <hr class="line">
+
+      <div class="deployment-device-header">
+        Devices:
+      </div>
+
+      <div class="deployment-device-container" ng-repeat="device in deployInfo.deploymentData.currentDeployment.platform.devices">
+        <div class="info-left">
+          <span>{{device}}</span>
+        </div>
+      </div>
+
+    <hr class="line">
+
+    <div class="button-container-form">
+
+      <div ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.IN_PROGRESS">
+        <div class="spinner-small-container">
+          <div class="spinner-small">
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.FAILURE">
+        <div class="message-container error">
+          <span>Error!</span>
+        </div>
+      </div>
+
+      <div ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.SUCCESS">
+        <div class="message-container success">
+          <span>Deleted!</span>
+        </div>
+      </div>
+
+      <div class="info-button-container" ng-show="deployInfo.deploymentData.deleteStatus === deployInfo.deploymentData.operationStatus.NOT_STARTED">
+        <button type="submit" class="info-button" ng-click="deployInfo.goToDeleteDeployment()">
+          <span>Delete</span>
+        </button>
+
+        <button type="submit" class="info-button" ng-click="deployInfo.goToUpdateDeployment()">
+          <span>Update</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
