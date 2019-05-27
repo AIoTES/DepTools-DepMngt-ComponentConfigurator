@@ -25,14 +25,16 @@ appDev.run(
       devDeployment.retrieveDevices();
       devDeployment.createDeployment();
       devDeployment.getDeploymentById();
+      devDeployment.deleteDeviceFromDeployment();
       devDeployment.deleteDeploymentById();
       devDeployment.getDeploymentHistoricById();
       devDeployment.addDeviceToDeployment();
-      devDeployment.deleteDeviceFromDeployment();
+
 
       devRecord.retrieveRecordsByElement();
       devRecord.createRecord();
       devRecord.deleteRecord();
+      devRecord.updateRecord();
 
       /** URL passThrough - Evitan error en la fase de desarrollo **/
 

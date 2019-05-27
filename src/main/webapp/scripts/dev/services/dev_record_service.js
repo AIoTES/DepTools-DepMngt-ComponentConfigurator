@@ -67,7 +67,7 @@ appDev.value('records',
     {
       "id": 1,
       "elementId": "http://deviceId2",
-      "description": "description",
+      "description": "Device FibaroSmartDevice sending anamalous values",
       "status": "pending",
       "type": "note",
       "timestamp": 0
@@ -75,7 +75,7 @@ appDev.value('records',
     {
       "id": 2,
       "elementId": "http://deviceId2",
-      "description": "description",
+      "description": "Device SmartIlluminance not connected",
       "status": "completed",
       "type": "issue",
       "timestamp": 0
@@ -83,7 +83,7 @@ appDev.value('records',
     {
       "id": 3,
       "elementId": "http://deviceId2",
-      "description": "description",
+      "description": "Update service to latest version",
       "status": "completed",
       "type": "todo",
       "timestamp": 0

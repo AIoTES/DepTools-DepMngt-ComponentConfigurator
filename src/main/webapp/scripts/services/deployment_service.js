@@ -1,6 +1,6 @@
 app.service('deploymentService',
-  ['deploymentServiceApi', 'deploymentServiceData', '$location',
-    function (deploymentServiceApi, deploymentServiceData, $location) {
+  ['deploymentServiceApi', 'deploymentServiceData', '$location', '$interval',
+    function (deploymentServiceApi, deploymentServiceData, $location, $interval) {
 
       var service = {};
 
@@ -30,7 +30,7 @@ app.service('deploymentService',
               deploymentServiceData.deploymentDevices = response.data;
               if (deploymentServiceData.currentDeployment !== '') {
                 deploymentServiceData.notDeploymentDevicesSelected = [];
-                deploymentServiceData.deploymentDevices.forEach(function(device){
+                deploymentServiceData.deploymentDevices.forEach(function (device) {
                   if (!deploymentServiceData.currentDeployment.platform.devices.includes(device.id))
                     deploymentServiceData.notDeploymentDevicesSelected.push(device.id);
                 });
@@ -64,14 +64,33 @@ app.service('deploymentService',
                   deploymentServiceData.deployments[deploymentIndex] = deployment;
                   deploymentServiceData.currentDeployment = deployment;
                   deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.SUCCESS;
+                  var promise_interval = $interval(
+                    function () {
+                      deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.NOT_STARTED;
+                      $interval.cancel(promise_interval);
+                    }, 1500
+                  );
                 }
+
+                deploymentServiceData.notDeploymentDevicesSelected = deploymentServiceData.notDeploymentDevicesSelected.filter(function (value) {
+                  return value !== deviceId;
+                });
+                console.log("AddDevice");
+                console.log("Assigned devices: " + deploymentServiceData.currentDeployment.platform.devices);
+                console.log("Unassigned devices: " + deploymentServiceData.notDeploymentDevicesSelected);
               }
             }
           )
           .catch(
-            function(error) {
+            function (error) {
               console.log(error);
               deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.FAILURE;
+              var promise_interval = $interval(
+                function () {
+                  deploymentServiceData.addStatus[deviceId] = deploymentServiceData.operationStatus.NOT_STARTED;
+                  $interval.cancel(promise_interval);
+                }, 1500
+              );
             }
           )
       };
@@ -81,27 +100,52 @@ app.service('deploymentService',
         deploymentServiceApi.deleteDeviceFromDeployment(deploymentId, deviceId)
           .then(
             function (response) {
-              if (response.status === 200) {
-                var deployment = response.data;
+              var deployment = response.data;
 
-                var deploymentIndex = deploymentServiceData.deployments.findIndex(
-                  function (value) {
-                    return value.id === deploymentId;
-                  }
-                );
-
-                if (deploymentIndex !== -1){
-                  deploymentServiceData.deployments[deploymentIndex] = deployment;
-                  deploymentServiceData.currentDeployment = deployment;
-                  deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.SUCCESS;
+              var deploymentIndex = deploymentServiceData.deployments.findIndex(
+                function (value) {
+                  return value.id === deploymentId;
                 }
+              );
+
+              if (deploymentIndex !== -1) {
+                deploymentServiceData.deployments[deploymentIndex].platform.devices = deployment.platform.devices;
+
+                // var deviceIndex = deploymentServiceData.currentDeployment.platform.devices.findIndex(
+                //   function (value) {
+                //     return value === deviceId;
+                //   }
+                // );
+                //
+                // if (deviceIndex !== -1) {
+                //   deploymentServiceData.currentDeployment.platform.devices.splice(deviceIndex, 1);
+                // }
+
+                deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.SUCCESS;
+                var promise_interval = $interval(
+                  function () {
+                    deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.NOT_STARTED;
+                    $interval.cancel(promise_interval);
+                  }, 1500
+                );
               }
+
+              deploymentServiceData.notDeploymentDevicesSelected.push(deviceId);
+              console.log("DeleteDevice");
+              console.log("Assigned devices: " + deploymentServiceData.currentDeployment.platform.devices);
+              console.log("Unassigned devices: " + deploymentServiceData.notDeploymentDevicesSelected);
             }
           )
           .catch(
-            function(error) {
+            function (error) {
               console.log(error);
               deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.FAILURE;
+              var promise_interval = $interval(
+                function () {
+                  deploymentServiceData.removeDeviceStatus[deviceId] = deploymentServiceData.operationStatus.NOT_STARTED;
+                  $interval.cancel(promise_interval);
+                }, 1500
+              );
             }
           )
       };
@@ -116,14 +160,27 @@ app.service('deploymentService',
                 var deployment = response.data;
                 deploymentServiceData.deployments.push(deployment);
                 deploymentServiceData.createStatus = deploymentServiceData.operationStatus.SUCCESS;
+                var promise_interval = $interval(
+                  function () {
+                    deploymentServiceData.createStatus = deploymentServiceData.operationStatus.NOT_STARTED;
+                    $interval.cancel(promise_interval);
+                  }, 1500
+                );
                 $location.path('/main/deployment_manager');
               }
             }
           )
           .catch(
-            function(error) {
+            function (error) {
               console.log(error);
               deploymentServiceData.createStatus = deploymentServiceData.operationStatus.FAILURE;
+              var promise_interval = $interval(
+                function () {
+                  deploymentServiceData.createStatus = deploymentServiceData.operationStatus.NOT_STARTED;
+                  $interval.cancel(promise_interval);
+                }, 1500
+              );
+
             }
           )
       };
@@ -132,26 +189,37 @@ app.service('deploymentService',
         deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.IN_PROGRESS;
         deploymentServiceApi.deleteDeployment(deploymentId)
           .then(
-            function (response) {
-              if (response.status === 200) {
-                var deploymentIndex = deploymentServiceData.deployments.findIndex(
-                  function (value) {
-                    return value.id === deploymentId;
-                  }
+            function () {
+              var deploymentIndex = deploymentServiceData.deployments.findIndex(
+                function (value) {
+                  return value.id === deploymentId;
+                }
+              );
+
+              if (deploymentIndex !== -1) {
+                deploymentServiceData.deployments.splice(deploymentIndex, 1);
+                deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.SUCCESS;
+                var promise_interval = $interval(
+                  function () {
+                    deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.NOT_STARTED;
+                    $interval.cancel(promise_interval);
+                  }, 1500
                 );
 
-                if (deploymentIndex !== -1) {
-                  deploymentServiceData.deployments.splice(deploymentIndex, 1);
-                  deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.SUCCESS;
-                  $location.path('/main/deployment_manager');
-                }
+                $location.path('/main/deployment_manager');
               }
             }
           )
           .catch(
-            function(error) {
+            function (error) {
               console.log(error);
               deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.FAILURE;
+              var promise_interval = $interval(
+                function () {
+                  deploymentServiceData.deleteStatus = deploymentServiceData.operationStatus.NOT_STARTED;
+                  $interval.cancel(promise_interval);
+                }, 1500
+              );
             }
           )
       };
