@@ -31,7 +31,6 @@ app.service('recordService',
       };
 
       service.setCurrentRecord = function (element) {
-        debugger;
         recordServiceData.currentRecord = element;
       };
 

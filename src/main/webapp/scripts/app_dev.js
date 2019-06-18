@@ -2,8 +2,8 @@ var appDev = angular.module('activageDashboardAppDev', ['activageDashboardApp', 
 
 
 appDev.run(
-  ['$httpBackend', 'devClients', 'devPlatforms', 'devDevices', 'devDeployment', 'devRecord',
-    function ($httpBackend, devClients, devPlatforms, devDevices, devDeployment, devRecord) {
+  ['$httpBackend', 'devClients', 'devPlatforms', 'devDevices', 'devDeployment', 'devRecord', 'devRegistry',
+    function ($httpBackend, devClients, devPlatforms, devDevices, devDeployment, devRecord, devRegistry) {
 
       devClients.retrieveClients();
       devClients.setCurrentClient();
@@ -35,6 +35,13 @@ appDev.run(
       devRecord.createRecord();
       devRecord.deleteRecord();
       devRecord.updateRecord();
+
+      devRegistry.retrieve_images();
+      devRegistry.retrieve_tags_by_image_id();
+      devRegistry.retrieve_image_info_by_image_id();
+      devRegistry.create_image_info_by_image_id();
+      devRegistry.update_image_info_by_image_id();
+      devRegistry.delete_image_info_by_image_id();
 
       /** URL passThrough - Evitan error en la fase de desarrollo **/
 
