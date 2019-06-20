@@ -2,7 +2,7 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('updateManagerCtrl',
+app.controller('createEditorCtrl',
   ['registryService', 'registryServiceData', '$location',
     function (registryService, registryServiceData, $location) {
 
@@ -11,20 +11,23 @@ app.controller('updateManagerCtrl',
       vm.registry = registryService;
       vm.registryData = registryServiceData;
 
-      registryServiceData.currentImage = 'Select an Image';
-      registryService.retrieve_images();
-      // registryService.retrieve_tags_by_image_id("imageId");
-      // registryService.retrieve_image_info_by_image_id("imageId");
+      // vm.tags = registryServiceData.imagesData.tags;
       // registryService.create_image_info_by_image_id("imageId", "imageInfo");
       // registryService.update_image_info_by_image_id("imageId", "imageInfo2");
       // registryService.delete_image_info_by_image_id("imageId");
 
-      console.log(registryServiceData.currentImage);
+      function getDescription() {
+        return registryServiceData.imagesData[registryServiceData.currentImage].info;
+      }
+      getDescription();
 
-      vm.selectImage = function (image) {
-        registryServiceData.currentImage = image;
-        registryService.retrieve_tags_by_image_id(image);
-        registryService.retrieve_image_info_by_image_id(image);
+      vm.description = '';
+
+      vm.saveDescription = function () {
+        registryService.create_image_info_by_image_id(registryServiceData.currentImage, vm.description);
+      };
+
+      vm.closeUpdateDescription = function () {
         $location.path('/main/update_manager/update_info');
       };
 

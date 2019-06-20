@@ -120,6 +120,16 @@
     </div>
   </div>
   <div class="button-menu"
+       ng-class="{'button-menu-active': ('main.update_manager' | routeSegmentStartsWith)}"
+       ng-click="root.goToUpdateManager()">
+    <div class="icon-container">
+      <img src="images/update-icon.svg">
+    </div>
+    <div class="button-text">
+      Update Manager
+    </div>
+  </div>
+  <div class="button-menu"
        ng-class="{'button-menu-active': ('main.about' | routeSegmentStartsWith)}"
        ng-click="root.goToAbout()">
     <div class="icon-container">
@@ -160,13 +170,16 @@
                 ('main.component_configurator.component_view.platform_info' | routeSegmentEqualsTo) ||
                 ('main.component_configurator.component_view.device_info' | routeSegmentEqualsTo) ||
                 ('main.component_configurator.component_view.update_device' | routeSegmentEqualsTo) ||
-                ('main.component_configurator.component_view.update_platform' | routeSegmentEqualsTo)">
+                ('main.component_configurator.component_view.update_platform' | routeSegmentEqualsTo) ||
+                ('main.update_manager.update_info.update_editor' | routeSegmentEqualsTo) ||
+                ('main.update_manager.update_info.create_editor' | routeSegmentEqualsTo)">
   </div>
 
   <div class="left-div-50"
        app-view-segment="1"
        ng-hide="('main' | routeSegmentEqualsTo) ||
                 ('main.component_configurator' | routeSegmentStartsWith) ||
+                ('main.update_manager' | routeSegmentStartsWith) ||
                 ('main.about' | routeSegmentStartsWith)">
   </div>
   <div class="right-div-50"
@@ -188,15 +201,12 @@
        ng-hide="('main' | routeSegmentEqualsTo) ||
                 ('main.deployment_manager' | routeSegmentStartsWith) ||
                 ('main.maintenance_panel' | routeSegmentStartsWith) ||
-                ('main.component_configurator' | routeSegmentStartsWith)">
+                ('main.component_configurator' | routeSegmentStartsWith) ||
+                ('main.update_manager' | routeSegmentStartsWith) ||
+                ('main.create_manager' | routeSegmentStartsWith)">
   </div>
 
 </div>
-
-<div ng-controller="updateManagerCtrl as updateCtrl">
-  <p>Prueba</p>
-</div>
-
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 <script>
@@ -224,6 +234,8 @@
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/angular-route-segment/build/angular-route-segment.js"></script>
 <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/showdown/dist/showdown.js"></script>
+<script src="bower_components/ng-showdown/dist/ng-showdown.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -260,6 +272,9 @@
 <script src="scripts/controllers/update_maintenance_controller.js"></script>
 <script src="scripts/controllers/platform_info_controller.js"></script>
 <script src="scripts/controllers/update_manager_controller.js"></script>
+<script src="scripts/controllers/update_info_controller.js"></script>
+<script src="scripts/controllers/update_editor_controller.js"></script>
+<script src="scripts/controllers/create_editor_controller.js"></script>
 
 <script src="scripts/services/platform_service.js"></script>
 <script src="scripts/services/device_service.js"></script>

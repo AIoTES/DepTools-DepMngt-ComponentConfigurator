@@ -17,7 +17,8 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'route-segment',
-    'view-segment'
+    'view-segment',
+    'ng-showdown'
   ]);
 
 app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', function ($locationProvider, $routeSegmentProvider, $routeProvider) {
@@ -52,10 +53,15 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
     .when('/main/maintenance_panel/add_maintenance', 'main.maintenance_panel.add_maintenance')
     .when('/main/maintenance_panel/update_maintenance', 'main.maintenance_panel.update_maintenance')
     .when('/main/maintenance_panel/delete_maintenance', 'main.maintenance_panel.delete_maintenance')
+    .when('/main/update_manager', 'main.update_manager')
+    .when('/main/update_manager/update_info', 'main.update_manager.update_info')
+    .when('/main/update_manager/update_info/update_editor', 'main.update_manager.update_info.update_editor')
+    .when('/main/update_manager/update_info/create_editor', 'main.update_manager.update_info.create_editor')
     .when('/main/about', 'main.about')
     .when('/main/about/deployment_manager', 'main.about.deployment_manager')
     .when('/main/about/component_configurator', 'main.about.component_configurator')
     .when('/main/about/maintenance_panel', 'main.about.maintenance_panel')
+    .when('/main/about/update_manager', 'main.about.update_manager')
 
     .segment('main', {
       templateUrl: 'views/main.html',
@@ -200,6 +206,37 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
 
     .up()
 
+    .segment('update_manager', {
+      templateUrl: 'views/update-manager.html',
+      controller: 'updateManagerCtrl',
+      controllerAs: 'updateManager'
+    })
+
+    .within()
+
+    .segment('update_info', {
+      templateUrl: 'views/update-info.html',
+      controller: 'updateInfoCtrl',
+      controllerAs: 'updateInfo'
+    })
+
+    .within()
+
+    .segment('update_editor', {
+      templateUrl: 'views/update-editor.html',
+      controller: 'updateEditorCtrl',
+      controllerAs: 'updateEditor'
+    })
+
+    .segment('create_editor', {
+      templateUrl: 'views/create-editor.html',
+      controller: 'createEditorCtrl',
+      controllerAs: 'createEditor'
+    })
+
+    .up()
+    .up()
+
     .segment('about', {
       templateUrl: 'views/about.html',
       controller: 'aboutCtrl',
@@ -222,6 +259,12 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', func
 
     .segment('maintenance_panel', {
       templateUrl: 'views/about-maintenance-panel.html',
+      // controller: 'aboutCtrl',
+      // controllerAs: 'about'
+    })
+
+    .segment('update_manager', {
+      templateUrl: 'views/about-update-manager.html',
       // controller: 'aboutCtrl',
       // controllerAs: 'about'
     });

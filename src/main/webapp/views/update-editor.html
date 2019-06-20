@@ -1,0 +1,60 @@
+<div class="resource-container">
+
+  <div class="option-header">
+    <div class="option-header-left">
+      <h3>Edit Description in Markdown</h3>
+    </div>
+
+    <div class="option-header-right">
+
+      <div class="square-header-button"
+           title="Close Window"
+           ng-click="updateEditor.closeUpdateDescription()">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="info-inner">
+
+    <textarea class="description-textarea" ng-model="updateEditor.description"></textarea>
+
+    <div class="button-container-form">
+
+      <div class="button-container-left">
+        <div ng-show="updateEditor.registryData.update_info_status === updateEditor.registryData.operationStatus.IN_PROGRESS">
+          <div class="spinner-small-container">
+            <div class="spinner-small">
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="updateEditor.registryData.update_info_status === UpdateEditor.registryData.operationStatus.FAILURE">
+          <div class="message-container error">
+            <span>Error!</span>
+          </div>
+        </div>
+
+        <div ng-show="updateEditor.registryData.update_info_status === updateEditor.registryData.operationStatus.SUCCESS">
+          <div class="message-container success">
+            <span>Updated!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-button-container">
+        <button type="submit" class="info-button" ng-click="updateEditor.closeUpdateDescription()">
+          <span>Cancel</span>
+        </button>
+
+        <button type="submit" class="info-button" ng-click="updateEditor.saveDescription()">
+          <span>Save</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

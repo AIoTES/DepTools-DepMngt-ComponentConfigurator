@@ -6,7 +6,6 @@ app.service('registryService',
 
       var service = {};
 
-
       service.retrieve_images = function () {
         registryServiceData.retrieve_images_status = registryServiceData.operationStatus.IN_PROGRESS;
 

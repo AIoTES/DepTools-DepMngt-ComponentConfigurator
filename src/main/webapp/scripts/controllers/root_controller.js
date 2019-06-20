@@ -27,6 +27,11 @@ app.controller('rootCtrl', ['$location', function ($location) {
     $location.path('/main/maintenance_panel');
   };
 
+  vm.goToUpdateManager = function () {
+    vm.webTitle = 'Update Manager';
+    $location.path('/main/update_manager');
+  };
+
   vm.goToAbout = function () {
     vm.webTitle = 'Interoperability Demo Application';
     $location.path('/main/about/deployment_manager');
