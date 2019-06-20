@@ -11,19 +11,16 @@ app.controller('updateEditorCtrl',
       vm.registry = registryService;
       vm.registryData = registryServiceData;
 
-      // registryService.create_image_info_by_image_id("imageId", "imageInfo");
-      // registryService.update_image_info_by_image_id("imageId", "imageInfo2");
-      // registryService.delete_image_info_by_image_id("imageId");
-
       function getDescription() {
-        return registryServiceData.imagesData[registryServiceData.currentImage].info;
+        return registryServiceData.imagesData[registryServiceData.currentImageId].info;
       }
+
       getDescription();
 
-      vm.description = registryServiceData.imagesData[registryServiceData.currentImage].info;
+      vm.description = registryServiceData.imagesData[registryServiceData.currentImageId].info;
 
       vm.saveDescription = function () {
-        registryService.update_image_info_by_image_id(registryServiceData.currentImage, vm.description);
+        registryService.update_image_info_by_image_id(registryServiceData.currentImageId, vm.description);
       };
 
       vm.closeUpdateDescription = function () {

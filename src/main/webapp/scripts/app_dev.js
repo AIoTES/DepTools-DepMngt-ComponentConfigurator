@@ -36,6 +36,7 @@ appDev.run(
       devRecord.deleteRecord();
       devRecord.updateRecord();
 
+      devRegistry.retrieve_image_info_clickdigital();
       devRegistry.retrieve_images();
       devRegistry.retrieve_tags_by_image_id();
       devRegistry.retrieve_image_info_by_image_id();

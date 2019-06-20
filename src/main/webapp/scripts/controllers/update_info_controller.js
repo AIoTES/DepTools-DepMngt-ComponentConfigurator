@@ -3,40 +3,22 @@
  */
 
 app.controller('updateInfoCtrl',
-  ['registryService', 'registryServiceData', '$location', '$showdown', '$scope',
-    function (registryService, registryServiceData, $location, $showdown, $scope) {
+  ['registryService', 'registryServiceData', '$location', '$showdown',
+    function (registryService, registryServiceData, $location, $showdown) {
 
       var vm = this;
+
+      var array = [];
 
       vm.registry = registryService;
       vm.registryData = registryServiceData;
 
-      // registryService.create_image_info_by_image_id("imageId", "imageInfo");
-      // registryService.update_image_info_by_image_id("imageId", "imageInfo2");
-      // registryService.delete_image_info_by_image_id("imageId");
+      if (registryServiceData.currentImageId === 'Select an Image')
+        $location.path('/main/update_manager');
 
-      function getTags() {
-        return registryServiceData.imagesData[registryServiceData.currentImage].tags;
-      }
-      getTags();
-
-      function getDescription() {
-        return registryServiceData.imagesData[registryServiceData.currentImage].info;
-      }
-      getDescription();
-
-      vm.showAddButton = false;
-      if (registryServiceData.imagesData[registryServiceData.currentImage].info === undefined) {
-        vm.showAddButton = true;
-      } else {
-        vm.showAddButton = false;
-      }
-
-      vm.tags = registryServiceData.imagesData[registryServiceData.currentImage].tags;
-      vm.descriptionMarkdown = $showdown.makeHtml(registryServiceData.imagesData[registryServiceData.currentImage].info);
 
       vm.deleteImage = function () {
-        registryService.delete_image_info_by_image_id(registryServiceData.currentImage);
+        registryService.delete_image_info_by_image_id(registryServiceData.currentImageId);
         $location.path('/main/update_manager');
       };
 

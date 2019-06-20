@@ -3,7 +3,7 @@
  */
 
 (function (add_delay) {
-  var NET_DELAY = 1500;
+  var NET_DELAY = 3000;
 
   if (add_delay) {
     appDev.config(function ($provide) {

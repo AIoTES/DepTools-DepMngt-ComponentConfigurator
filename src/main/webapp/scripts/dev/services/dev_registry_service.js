@@ -17,7 +17,10 @@ appDev.service('devRegistry',
         $httpBackend.whenGET(/\/api\/v1\/registry\/images\/.*\/tags/).respond(
           function (method, url, data, headers) {
             console.log('retrieveTags → Received: ', method, url, data, headers);
-            return [200, angular.fromJson(clone_object(["0.1", "0.2", "develop", "latest"]))]
+            var urlArray = url.split("/");
+            var imageId = urlArray[urlArray.length - 2];
+
+            return [200, angular.fromJson(clone_object([imageId, "0.1", "0.2", "develop", "latest"]))]
           }
         );
       };
@@ -34,6 +37,15 @@ appDev.service('devRegistry',
         );
       };
 
+      service.retrieve_image_info_clickdigital = function () {
+        $httpBackend.whenGET("/api/v1/registry/images/clickdigital/info").respond(
+          function (method, url, data, headers) {
+            console.log('retrieveImageInfo → Received: ', method, url, data, headers);
+            return [404]
+          }
+        );
+      };
+
       service.create_image_info_by_image_id = function () {
         $httpBackend.whenPOST(/\/api\/v1\/registry\/images\/.*\/info/).respond(
           function (method, url, data, headers) {
@@ -41,7 +53,7 @@ appDev.service('devRegistry',
             var urlArray = url.split("/");
             var imageId = urlArray[urlArray.length - 2];
 
-            return [200, angular.fromJson(clone_object({imageId: imageId, imageInfo: markdown}))]
+            return [200, angular.fromJson(clone_object({imageId: imageId, imageInfo: data}))]
           }
         );
       };
@@ -53,7 +65,7 @@ appDev.service('devRegistry',
             var urlArray = url.split("/");
             var imageId = urlArray[urlArray.length - 2];
 
-            return [200, angular.fromJson(clone_object({imageId: imageId, imageInfo: markdown}))]
+            return [200, angular.fromJson(clone_object({imageId: imageId, imageInfo: data}))]
           }
         );
       };

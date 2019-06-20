@@ -1,6 +1,6 @@
 app.service('registryService',
-  ['registryServiceApi', 'registryServiceData', '$interval',
-    function (registryServiceApi, registryServiceData, $interval) {
+  ['registryServiceApi', 'registryServiceData', '$interval', '$showdown',
+    function (registryServiceApi, registryServiceData, $interval, $showdown) {
 
       var SHOW_FAILURE_TIME = 3000;
 
@@ -64,6 +64,7 @@ app.service('registryService',
               if (!registryServiceData.imagesData.hasOwnProperty(imageId))
                 registryServiceData.imagesData[imageId] = {};
               registryServiceData.imagesData[imageId].info = value.data.imageInfo;
+              registryServiceData.imagesData[imageId].infoHTML = $showdown.makeHtml(value.data.imageInfo);
               registryServiceData.retrieve_info_status[imageId] = registryServiceData.operationStatus.SUCCESS;
             }
           )
@@ -89,7 +90,14 @@ app.service('registryService',
               if (!registryServiceData.imagesData.hasOwnProperty(imageId))
                 registryServiceData.imagesData[imageId] = {};
               registryServiceData.imagesData[imageId].info = value.data.imageInfo;
+              registryServiceData.imagesData[imageId].infoHTML = $showdown.makeHtml(value.data.imageInfo);
               registryServiceData.create_info_status[imageId] = registryServiceData.operationStatus.SUCCESS;
+              var promise_interval = $interval(
+                function () {
+                  registryServiceData.create_info_status[imageId] = registryServiceData.operationStatus.NOT_STARTED;
+                  $interval.cancel(promise_interval);
+                }, SHOW_FAILURE_TIME
+              );
             }
           )
           .catch(
@@ -114,7 +122,14 @@ app.service('registryService',
               if (!registryServiceData.imagesData.hasOwnProperty(imageId))
                 registryServiceData.imagesData[imageId] = {};
               registryServiceData.imagesData[imageId].info = value.data.imageInfo;
+              registryServiceData.imagesData[imageId].infoHTML = $showdown.makeHtml(value.data.imageInfo);
               registryServiceData.update_info_status[imageId] = registryServiceData.operationStatus.SUCCESS;
+              var promise_interval = $interval(
+                function () {
+                  registryServiceData.update_info_status[imageId] = registryServiceData.operationStatus.NOT_STARTED;
+                  $interval.cancel(promise_interval);
+                }, SHOW_FAILURE_TIME
+              );
             }
           )
           .catch(
