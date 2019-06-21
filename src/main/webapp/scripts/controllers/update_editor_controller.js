@@ -20,7 +20,10 @@ app.controller('updateEditorCtrl',
       vm.description = registryServiceData.imagesData[registryServiceData.currentImageId].info;
 
       vm.saveDescription = function () {
-        registryService.update_image_info_by_image_id(registryServiceData.currentImageId, vm.description);
+        if (registryServiceData.imagesData[registryServiceData.currentImageId].info === undefined)
+          registryService.create_image_info_by_image_id(registryServiceData.currentImageId, vm.description);
+        else
+          registryService.update_image_info_by_image_id(registryServiceData.currentImageId, vm.description);
       };
 
       vm.closeUpdateDescription = function () {

@@ -11,10 +11,10 @@ app.controller('updateManagerCtrl',
       vm.registry = registryService;
       vm.registryData = registryServiceData;
 
+      vm.openMenu = false;
+
       registryServiceData.currentImageId = 'Select an Image';
       registryService.retrieve_images();
-
-      console.log(registryServiceData.currentImage);
 
       vm.selectImage = function (image) {
         registryServiceData.currentImageId = image;

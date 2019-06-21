@@ -69,14 +69,18 @@ app.service('registryService',
             }
           )
           .catch(
-            function () {
-              registryServiceData.retrieve_info_status[imageId] = registryServiceData.operationStatus.FAILURE;
-              var promise_interval = $interval(
-                function () {
-                  registryServiceData.retrieve_info_status[imageId] = registryServiceData.operationStatus.NOT_STARTED;
-                  $interval.cancel(promise_interval);
-                }, SHOW_FAILURE_TIME
-              );
+            function (error) {
+              if (error.status === 404)
+                registryServiceData.retrieve_info_status[imageId] = registryServiceData.operationStatus.SUCCESS;
+              else {
+                registryServiceData.retrieve_info_status[imageId] = registryServiceData.operationStatus.FAILURE;
+                var promise_interval = $interval(
+                  function () {
+                    registryServiceData.retrieve_info_status[imageId] = registryServiceData.operationStatus.NOT_STARTED;
+                    $interval.cancel(promise_interval);
+                  }, SHOW_FAILURE_TIME
+                );
+              }
             }
           );
       };
@@ -152,6 +156,7 @@ app.service('registryService',
           .then(
             function () {
               registryServiceData.imagesData[imageId].info = "";
+              registryServiceData.imagesData[imageId].infoHTML = "";
               registryServiceData.delete_info_status[imageId] = registryServiceData.operationStatus.SUCCESS;
             }
           )

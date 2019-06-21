@@ -1,8 +1,8 @@
 <div class="menu-container">
 
-  <div class="menu-bar" ng-click="openMenu = !openMenu">
+  <div class="menu-bar" ng-click="updateManager.openMenu = !updateManager.openMenu">
     <span>{{updateManager.registryData.currentImageId}}</span>
-    <div class="menu-square" ng-class="{'menu-square-active' : openMenu}">
+    <div class="menu-square" ng-class="{'menu-square-active' : updateManager.openMenu}">
       <span class="glyphicon glyphicon-chevron-down"></span>
     </div>
   </div>
@@ -23,7 +23,8 @@
     </div>
   </div>
 
-  <div ng-show="true" class="menu-option-container" ng-class="{ 'menu-option-container-active' : openMenu}">
+  <div ng-show="true" class="menu-option-container"
+       ng-class="{ 'menu-option-container-active' : updateManager.openMenu}">
     <div
       ng-repeat="image in updateManager.registryData.images"
       ng-click="updateManager.selectImage(image)">
