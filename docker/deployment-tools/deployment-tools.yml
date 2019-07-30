@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   deployment-manager:
-    image: activage-deployment-manager:1.0
+    image: docker-activage.satrd.es/deployment-manager:1.0
     ports:
       - 8001:8080
     environment:
@@ -12,10 +12,10 @@ services:
       - activage-network
 
   component-configurator:
-    image: activage-component-configurator:2.0
+    image: docker-activage.satrd.es/component-configuration:2.0
     environment:
-      - CLIENT_ID=Oscar
-      - SIL_URL=http://192.168.1.56:8080
+      - CLIENT_ID=Test
+      - SIL_URL=http://activage-test-intermw.inter-iot.eu
       - DOCKER=True
     ports:
       - 8002:8080
@@ -23,7 +23,7 @@ services:
       - activage-network
 
   maintenance-panel:
-    image: activage-maintenance-panel:1.0
+    image: docker-activage.satrd.es/maintenance-panel:1.0
     environment:
       - POSTGRES_HOST=maintenance-panel-database
       - POSTGRES_PORT=5432
@@ -36,7 +36,7 @@ services:
       - activage-network
 
   update-manager:
-    image: activage-update-manager:1.0
+    image: docker-activage.satrd.es/update-manager:1.0
     environment:
       - DOCKER_REGISTRY_SERVER_URL=https://docker-activage.satrd.es
       - DOCKER_REGISTRY_USER=activage

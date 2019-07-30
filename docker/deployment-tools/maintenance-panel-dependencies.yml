@@ -8,8 +8,6 @@ services:
       - POSTGRES_USER=activage
       - POSTGRES_PASSWORD=activage
       - POSTGRES_DB=activage-maintenance-panel
-    ports:
-      - 5432:5432
     networks:
       - activage-network
 

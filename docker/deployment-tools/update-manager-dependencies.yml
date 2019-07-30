@@ -7,5 +7,3 @@ services:
       - POSTGRES_USER=activage
       - POSTGRES_PASSWORD=activage
       - POSTGRES_DB=activage-update-manager
-    ports:
-      - 5432:5432
