@@ -25,20 +25,60 @@ public class SilOkHttpClient implements SilClient {
 
   private static final Logger LOG = LogManager.getLogger(SilOkHttpClient.class);
 
-  private static String CLIENTS_API = "/api/mw2mw/clients";
-  private static String PLATFORMS_API = "/api/mw2mw/platforms";
-  private static String DEVICES_API = "/api/mw2mw/devices";
+  private static String CLIENTS_API;
+  private static String PLATFORMS_API;
+  private static String DEVICES_API;
 
   private String silUrl;
   private Gson gson;
   private OkHttpClient client;
 
-  public SilOkHttpClient(String silUrl) {
+  public SilOkHttpClient(String silUrl, String basePath) {
     this.silUrl = silUrl;
+    CLIENTS_API = basePath + "clients";
+    PLATFORMS_API = basePath + "platforms";
+    DEVICES_API = basePath + "devices";
     this.gson = new Gson();
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
     builder.connectionPool(new ConnectionPool(10, 120L, TimeUnit.SECONDS));
     this.client = builder.build();
+  }
+
+  @Override
+  public ClientSil registerClient(ClientSil clientSil) {
+    LOG.info("Registering client {}", clientSil);
+
+    String stringUrl = silUrl + CLIENTS_API;
+    URL url;
+    try {
+      url = new URL(stringUrl);
+    } catch (MalformedURLException e) {
+      LOG.error("Cannot perform operation over a malformed url → {}", stringUrl);
+      return null;
+    }
+
+    Request request = new Request.Builder()
+      .url(url)
+      .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(clientSil)))
+      .build();
+
+    try (Response response = client.newCall(request).execute()) {
+      if (response.isSuccessful()) {
+        LOG.debug("Client created successfully → {}", clientSil);
+        return clientSil;
+      } else if (response.code() == 409) {
+        LOG.debug("Client already registered. ");
+        return null;
+      } else {
+        LOG.warn("Cannot create client in SIL");
+        return null;
+      }
+    } catch (IOException e) {
+      LOG.error("{} request throws exception → {}", stringUrl, e.getMessage());
+      return null;
+    }
+
+
   }
 
   @Override

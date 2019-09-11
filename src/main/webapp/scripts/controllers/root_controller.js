@@ -6,7 +6,7 @@ app.controller('rootCtrl', ['$location', function ($location) {
 
   var vm = this;
 
-  vm.webTitle = 'Interoperability Demo Application';
+  vm.webTitle = 'AIOTES Deployment tool';
 
   vm.toggleMenu = function () {
     vm.openMenu = !vm.openMenu;

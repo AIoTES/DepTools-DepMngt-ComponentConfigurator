@@ -8,7 +8,7 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
@@ -90,16 +90,16 @@
 </div>
 
 <div class="lateral-nav">
-  <div class="button-menu"
-       ng-class="{'button-menu-active': ('main.deployment_manager' | routeSegmentStartsWith)}"
-       ng-click="root.goToDeployManager()">
-    <div class="icon-container">
-      <img src="images/deploy-icon.svg">
-    </div>
-    <div class="button-text">
-      Deployment Manager
-    </div>
-  </div>
+<!--  <div class="button-menu"-->
+<!--       ng-class="{'button-menu-active': ('main.deployment_manager' | routeSegmentStartsWith)}"-->
+<!--       ng-click="root.goToDeployManager()">-->
+<!--    <div class="icon-container">-->
+<!--      <img src="images/deploy-icon.svg">-->
+<!--    </div>-->
+<!--    <div class="button-text">-->
+<!--      Deployment Manager-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="button-menu"
        ng-class="{'button-menu-active': ('main.component_configurator' | routeSegmentStartsWith)}"
        ng-click="root.goToComponentConfigurator()">
@@ -110,36 +110,36 @@
       Component Configurator
     </div>
   </div>
-  <div class="button-menu"
-       ng-class="{'button-menu-active': ('main.maintenance_panel' | routeSegmentStartsWith)}"
-       ng-click="root.goToMaintenancePanel()">
-    <div class="icon-container">
-      <img src="images/maintenance-icon.svg">
-    </div>
-    <div class="button-text">
-      Maintenance Panel
-    </div>
-  </div>
-  <div class="button-menu"
-       ng-class="{'button-menu-active': ('main.update_manager' | routeSegmentStartsWith)}"
-       ng-click="root.goToUpdateManager()">
-    <div class="icon-container">
-      <img src="images/update-icon.svg">
-    </div>
-    <div class="button-text">
-      Update Manager
-    </div>
-  </div>
-  <div class="button-menu"
-       ng-class="{'button-menu-active': ('main.about' | routeSegmentStartsWith)}"
-       ng-click="root.goToAbout()">
-    <div class="icon-container">
-      <img src="images/about-icon.svg">
-    </div>
-    <div class="button-text">
-      About
-    </div>
-  </div>
+<!--  <div class="button-menu"-->
+<!--       ng-class="{'button-menu-active': ('main.maintenance_panel' | routeSegmentStartsWith)}"-->
+<!--       ng-click="root.goToMaintenancePanel()">-->
+<!--    <div class="icon-container">-->
+<!--      <img src="images/maintenance-icon.svg">-->
+<!--    </div>-->
+<!--    <div class="button-text">-->
+<!--      Maintenance Panel-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="button-menu"-->
+<!--       ng-class="{'button-menu-active': ('main.update_manager' | routeSegmentStartsWith)}"-->
+<!--       ng-click="root.goToUpdateManager()">-->
+<!--    <div class="icon-container">-->
+<!--      <img src="images/update-icon.svg">-->
+<!--    </div>-->
+<!--    <div class="button-text">-->
+<!--      Update Manager-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="button-menu"-->
+<!--       ng-class="{'button-menu-active': ('main.about' | routeSegmentStartsWith)}"-->
+<!--       ng-click="root.goToAbout()">-->
+<!--    <div class="icon-container">-->
+<!--      <img src="images/about-icon.svg">-->
+<!--    </div>-->
+<!--    <div class="button-text">-->
+<!--      About-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 
 <div class="main-container" app-view-segment="0" ng-show="('main' | routeSegmentEqualsTo)">

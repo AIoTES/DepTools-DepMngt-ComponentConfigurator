@@ -24,7 +24,7 @@ public class SilOkHttpClientTest {
 
   @Before
   public void setUp() throws Exception {
-    client = new SilOkHttpClient("http://192.168.1.56:8080");
+    client = new SilOkHttpClient("http://192.168.1.56:8080", "/api/mw2mw/");
     clientId = "Oscar";
   }
 
