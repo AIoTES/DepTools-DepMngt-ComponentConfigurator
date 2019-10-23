@@ -164,6 +164,8 @@ public class SilOkHttpClient implements SilClient {
       return null;
     }
 
+
+    LOG.debug("POST {} with platform: {} and client-id: {}", stringUrl, platform, clientId);
     Request request = new Request.Builder()
       .url(url)
       .post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), gson.toJson(platform)))

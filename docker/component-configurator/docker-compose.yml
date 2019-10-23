@@ -2,7 +2,7 @@ version: '3'
 
 services:
   activage-component-configurator:
-    image: docker-activage.satrd.es/component-configuration:brussels-demo-19-v0.1
+    image: docker-activage.satrd.es/component-configuration:brussels-demo-19-v0.1.2
     environment:
       - CLIENT_ID=Oscar
       - SIL_URL=http://activage-test-intermw.inter-iot.eu
