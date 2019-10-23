@@ -8,7 +8,7 @@ app.service('registryServiceApi',
         return $http(
           {
             method: 'GET',
-            url: UPDATE_MANAGER_BACKEND_URL + '/api/v1/registry/images'
+            url: UPDATE_MANAGER_BACKEND_URL + 'api/v1/registry/images'
           }
         );
       };
@@ -17,7 +17,7 @@ app.service('registryServiceApi',
         return $http(
           {
             method: 'GET',
-            url: UPDATE_MANAGER_BACKEND_URL + '/api/v1/registry/images/' + imageId + '/tags'
+            url: UPDATE_MANAGER_BACKEND_URL + 'api/v1/registry/images/' + imageId + '/tags'
           }
         );
       };
@@ -26,7 +26,7 @@ app.service('registryServiceApi',
         return $http(
           {
             method: 'GET',
-            url: UPDATE_MANAGER_BACKEND_URL + '/api/v1/registry/images/' + imageId + '/info'
+            url: UPDATE_MANAGER_BACKEND_URL + 'api/v1/registry/images/' + imageId + '/info'
           }
         );
       };
@@ -35,7 +35,7 @@ app.service('registryServiceApi',
         return $http(
           {
             method: 'POST',
-            url: UPDATE_MANAGER_BACKEND_URL + '/api/v1/registry/images/' + imageId + '/info',
+            url: UPDATE_MANAGER_BACKEND_URL + 'api/v1/registry/images/' + imageId + '/info',
             headers: {
               "Content-Type": "text/plain"
             },
@@ -48,7 +48,7 @@ app.service('registryServiceApi',
         return $http(
           {
             method: 'PUT',
-            url: UPDATE_MANAGER_BACKEND_URL + '/api/v1/registry/images/' + imageId + '/info',
+            url: UPDATE_MANAGER_BACKEND_URL + 'api/v1/registry/images/' + imageId + '/info',
             headers: {
               "Content-Type": "text/plain"
             },
@@ -61,7 +61,7 @@ app.service('registryServiceApi',
         return $http(
           {
             method: 'DELETE',
-            url: UPDATE_MANAGER_BACKEND_URL + '/api/v1/registry/images/' + imageId + '/info'
+            url: UPDATE_MANAGER_BACKEND_URL + 'api/v1/registry/images/' + imageId + '/info'
           }
         );
       };

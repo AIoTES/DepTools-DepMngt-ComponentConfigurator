@@ -2,7 +2,7 @@ app.service('alignmentServiceApi', ['$http', 'COMPONENT_CONFIGURATION_BACKEND_UR
   this.getAlignments = function (clientId) {
     return $http({
       method: 'GET',
-      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/alignments',
+      url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/alignments',
       headers: {
         "Content-Type": "application/json",
         "Client-ID": clientId
@@ -13,7 +13,7 @@ app.service('alignmentServiceApi', ['$http', 'COMPONENT_CONFIGURATION_BACKEND_UR
   this.getAlignment = function (name, version, clientId) {
     return $http({
       method: 'GET',
-      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/alignments/' + name + '/' + version,
+      url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/alignments/' + name + '/' + version,
       headers: {
         "Content-Type": "application/json",
         "Client-ID": clientId
@@ -24,7 +24,7 @@ app.service('alignmentServiceApi', ['$http', 'COMPONENT_CONFIGURATION_BACKEND_UR
   this.createAlignment = function (clientId) {
     return $http({
       method: 'POST',
-      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/alignments',
+      url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/alignments',
       headers: {
         "Content-Type": "application/json",
         "Client-ID": clientId
@@ -45,7 +45,7 @@ app.service('alignmentServiceApi', ['$http', 'COMPONENT_CONFIGURATION_BACKEND_UR
   this.deleteAlignment = function (name, version, clientId) {
     return $http({
       method: 'DELETE',
-      url: COMPONENT_CONFIGURATION_BACKEND_URL+ '/api/v1/alignments/' + name + '/' + version,
+      url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/alignments/' + name + '/' + version,
       headers: {
         "Client-ID": clientId
       }

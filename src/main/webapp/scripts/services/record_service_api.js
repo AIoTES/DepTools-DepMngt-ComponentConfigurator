@@ -8,7 +8,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'GET',
-            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records/element/' + elementId
+            url: MAINTENANCE_PANEL_BACKEND_URL + 'api/v1/records/element/' + elementId
           }
         );
       };
@@ -17,7 +17,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'POST',
-            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records',
+            url: MAINTENANCE_PANEL_BACKEND_URL + 'api/v1/records',
             data: record
           }
         );
@@ -27,7 +27,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'PUT',
-            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records',
+            url: MAINTENANCE_PANEL_BACKEND_URL + 'api/v1/records',
             data: record
           }
         );
@@ -37,7 +37,7 @@ app.service('recordServiceApi',
         return $http(
           {
             method: 'DELETE',
-            url: MAINTENANCE_PANEL_BACKEND_URL + '/api/v1/records/' + recordId + "/element/" + elementId
+            url: MAINTENANCE_PANEL_BACKEND_URL + 'api/v1/records/' + recordId + "/element/" + elementId
           }
         );
       };
