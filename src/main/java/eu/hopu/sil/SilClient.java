@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface SilClient {
 
+  ClientSil registerClient(ClientSil clientSil);
+
   List<ClientSil> retrieveRegisteredClients(String clientId);
 
   List<SilPlatform> retrieveRegisteredPlatforms(String clientId);
