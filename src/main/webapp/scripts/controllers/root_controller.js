@@ -2,9 +2,12 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('rootCtrl', ['$location', function ($location) {
+app.controller('rootCtrl', ['$location', 'Identity', function ($location, Identity) {
 
   var vm = this;
+
+  vm.identity = Identity;
+  vm.username = Identity.authc.json.preferred_username;
 
   vm.webTitle = 'AIOTES Deployment tool';
 
