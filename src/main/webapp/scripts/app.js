@@ -35,6 +35,7 @@ angular.element(document).ready(function ($http) {
 
       angular.bootstrap(document, ["activageDashboardApp"]);
     }).error(function () {
+      console.log("eo");
       window.location.reload();
     });
   } else {
