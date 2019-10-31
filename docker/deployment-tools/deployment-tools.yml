@@ -12,7 +12,7 @@ services:
       - activage-network
 
   component-configurator:
-    image: docker-activage.satrd.es/component-configuration:2.1
+    image: docker-activage.satrd.es/component-configuration:2.2
     environment:
       - CLIENT_ID=Oscar
       - SIL_URL=http://activage-test-intermw.inter-iot.eu
