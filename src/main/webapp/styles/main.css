@@ -11,7 +11,7 @@ header {
 }
 
 .logo-container {
-  width: 75%;
+  width: calc(100% - 290px);
   float: left;
   height: 40px;
   margin: 5px 0 5px 20px;
@@ -174,10 +174,110 @@ header {
   color: #0f2144;
 }
 
+.user-container {
+  display: none;
+}
+
 @media screen and (min-width: 1025px) {
   .burger-container {
     display: none;
   }
+
+  .user-container {
+    width: 250px;
+    height: 40px;
+    float: right;
+    margin: 5px 20px 5px 0;
+    display: inline-flex;
+  }
+
+  .user-data {
+    width: calc(100% - 50px);
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .user-data span {
+    line-height: 40px;
+    color: #2bbee8;
+    font-size: 16px;
+  }
+
+  .user-icon-container {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #2bbee8;
+    border-radius: 50%;
+    text-align: center;
+    float: left;
+  }
+
+  .user-text {
+    width: calc(100% - 50px);
+    height: 40px;
+    margin-left: 10px;
+    float: right;
+  }
+
+  .user-text p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 40px;
+    color: #2bbee8;
+  }
+
+  .exit-button-container {
+    width: 40px;
+    height: 40px;
+    background: #2bbee8;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+    transition: 0.3s ease all;
+  }
+
+  .exit-button-container span {
+    line-height: 38px;
+    color: #fff;
+  }
+
+  .exit-button-container:hover {
+    background: #0f2144;
+  }
+
+}
+
+.user-icon-mobile-container {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #2bbee8;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.user-icon-mobile-container span {
+  line-height: 26px;
+  color: #2bbee8;
+}
+
+.exit-mobile-button-container {
+  width: 30px;
+  height: 30px;
+  background: #2bbee8;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.exit-mobile-button-container span {
+  line-height: 28px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.exit-mobile-button-container:hover {
+  background: #0f2144;
 }
 
 /*-----MENU LATERAL-----*/
@@ -351,6 +451,14 @@ header {
   float: right;
   transition: 0.5s ease all;
   /*transition-delay: 0.5s;*/
+}
+
+.mobile-button-text p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 50px;
+  color: #2bbee8;
 }
 
 /*-----FIN MENU DISPOSITIVO MOVIL-----*/

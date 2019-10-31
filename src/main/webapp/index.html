@@ -38,9 +38,19 @@
     </div>
   </div>
 
-  <!--<div class="button-container" ng-controller="componentCtrl as component">-->
-
-  <!--</div>-->
+  <div class="user-container">
+    <div class="user-data">
+      <div class="user-icon-container">
+        <span class="glyphicon glyphicon-user"></span>
+      </div>
+      <div class="user-text">
+        <p>{{root.username}}</p>
+      </div>
+    </div>
+    <div class="exit-button-container" title="Log out" ng-click="root.identity.logout()">
+      <span class="glyphicon glyphicon-log-out"></span>
+    </div>
+  </div>
 
   <div class="burger-container"
        ng-class="{'burger-container-active' : root.openMenu}"
@@ -51,6 +61,18 @@
 
 <div class="mobile-nav"
      ng-show="root.openMenu">
+  <div class="mobile-button-menu">
+    <div class="mobile-icon-container">
+      <div class="user-icon-mobile-container">
+        <span class="glyphicon glyphicon-user"></span>
+      </div>
+    </div>
+    <div class="mobile-button-text">
+      <p>{{root.username}}</p>
+    </div>
+  </div>
+
+
   <div class="mobile-button-menu"
        ng-class="{'mobile-button-menu-active': ('main.deployment_manager' | routeSegmentStartsWith)}"
        ng-click="root.goToDeployManager(); root.toggleMenu()">
@@ -91,6 +113,19 @@
       About
     </div>
   </div>
+
+  <div class="mobile-button-menu"
+       ng-click="root.identity.logout()">
+    <div class="mobile-icon-container">
+      <div class="exit-mobile-button-container">
+        <span class="glyphicon glyphicon-log-out"></span>
+      </div>
+    </div>
+    <div class="mobile-button-text">
+      Log out
+    </div>
+  </div>
+
 </div>
 
 <div class="lateral-nav">
@@ -243,6 +278,11 @@
 <script src="bower_components/ng-showdown/dist/ng-showdown.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/identity.js"></script>
+<script src="scripts/jwt-decode.min.js"></script>
+
 <script src="scripts/app_dev.js"></script>
 <script src="scripts/dev/config/net_delay_config.js"></script>
 <script src="scripts/dev/services/dev_utils.js"></script>
@@ -253,10 +293,6 @@
 <script src="scripts/dev/services/dev_deployment_service.js"></script>
 <script src="scripts/dev/services/dev_record_service.js"></script>
 <script src="scripts/dev/services/dev_registry_service.js"></script>
-
-<!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/identity.js"></script>
-<script src="scripts/jwt-decode.min.js"></script>
 
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/root_controller.js"></script>
