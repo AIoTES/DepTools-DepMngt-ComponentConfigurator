@@ -1,0 +1,17 @@
+FROM node:8
+
+ENV SECURITY_ENABLED=false
+ENV SECURITY_REALM=demo
+ENV SECURITY_KEYCLOAK_URL=https://keycloak-activage.hopu.eu/auth
+ENV SECURITY_CLIENT_ID=deployment-tools-login
+
+WORKDIR /app
+COPY frontend-server/ /app
+RUN npm install
+COPY src/main/webapp /app/webapp
+EXPOSE 8080
+
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["node", "server.js"]
+
