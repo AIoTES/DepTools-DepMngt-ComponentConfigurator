@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+
+  metadata_storage_server:
+    image: docker-activage.satrd.es/metadata-storage-server:0.1.1
+    networks:
+      - activage-network
+
+  mongo:
+    image: mongo:3
+    networks:
+      - activage-network
+
+networks:
+  activage-network:
+    external: true

@@ -7,7 +7,10 @@ app.controller('rootCtrl', ['$location', 'Identity', function ($location, Identi
   var vm = this;
 
   vm.identity = Identity;
-  vm.username = Identity.authc.json.preferred_username;
+  if (Identity.loggedIn)
+    vm.username = Identity.authc.json.preferred_username;
+  else
+    vm.username = 'Anonymous';
 
   vm.webTitle = 'AIOTES Deployment tool';
 

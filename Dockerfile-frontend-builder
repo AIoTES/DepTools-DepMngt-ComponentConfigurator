@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:10
 
 ENV SECURITY_ENABLED=false
 ENV SECURITY_REALM=demo

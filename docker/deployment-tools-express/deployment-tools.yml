@@ -1,0 +1,74 @@
+version: '3.3'
+
+services:
+
+  frontend:
+    image: docker-activage.satrd.es/deployment-tools-frontend:1.1
+#    ports:
+#      - 9000:8080
+    environment:
+      - SECURITY_ENABLED=true
+      - SECURITY_REALM=${AUTH_SERVER_REALM}
+      - SECURITY_KEYCLOAK_URL=http://${AIOTES_HOSTNAME}:${REST_API_PORT}/auth
+      - SECURITY_CLIENT_ID=${PUBLIC_CLIENT_ID}
+    networks:
+      - activage-network
+
+  deployment-manager:
+    image: docker-activage.satrd.es/deployment-manager:1.0
+    ports:
+      - 8001:8080
+    environment:
+      - METADATA_STORAGE_SERVER_URL=http://metadata_storage_server:8081
+    networks:
+      - activage-network
+
+  component-configurator:
+    image: docker-activage.satrd.es/component-configuration:2.2
+    environment:
+      - CLIENT_ID=Oscar
+      - SIL_URL=http://activage-test-intermw.inter-iot.eu
+      - DOCKER=True
+      - CALLBACK_URL=http://192.168.1.192:8002
+      - RECEIVING_CAPACITY=1
+      - RESPONSE_FORMAT=JSON_LD
+      - RESPONSE_DELIVERY=SERVER_PUSH
+      - BASE_PATH=/api/mw2mw/
+    ports:
+      - 8002:8080
+    networks:
+      - activage-network
+
+  maintenance-panel:
+    image: docker-activage.satrd.es/maintenance-panel:1.0
+    environment:
+      - POSTGRES_HOST=maintenance-panel-database
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=activage-maintenance-panel
+      - POSTGRES_USER=activage
+      - POSTGRES_PASSWORD=activage
+    ports:
+      - 8003:8080
+    networks:
+      - activage-network
+
+  update-manager:
+    image: docker-activage.satrd.es/update-manager:1.0
+    environment:
+      - DOCKER_REGISTRY_SERVER_URL=https://docker-activage.satrd.es
+      - DOCKER_REGISTRY_USER=activage
+      - DOCKER_REGISTRY_PASSWORD=docker.activage
+      - STORAGE=POSTGRES
+      - POSTGRES_HOST=update-manager-database
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=activage-update-manager
+      - POSTGRES_USER=activage
+      - POSTGRES_PASSWORD=activage
+    ports:
+      - 8004:8080
+    networks:
+      - activage-network
+
+networks:
+  activage-network:
+    external: true

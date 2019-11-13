@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+
+  express-gw:
+    image: docker-activage.satrd.es/express-gateway-with-keycloak-plugin:v1.16.7
+    ports:
+      - "${REST_API_PORT}:8080"
+      - "${EXPRESS_ADMIN_PORT}:9876"
+    environment:
+      - LOG_LEVEL=debug
+      - AUTH_SERVER_URL=${AUTH_SERVER_URL}
+      - AUTH_SERVER_REALM=${AUTH_SERVER_REALM}
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - EXTERNAL_ENDPOINT=http://${AIOTES_HOSTNAME}:${REST_API_PORT}/auth
+    volumes:
+      - ./swagger-conf:/var/lib/eg
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external:
+      name: activage-network
