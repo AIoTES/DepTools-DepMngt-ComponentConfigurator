@@ -59,8 +59,10 @@ app.config(['$locationProvider', '$routeSegmentProvider', '$routeProvider', '$qP
       rewriteLinks: true
     }).hashPrefix('');
 
+
     $routeProvider.otherwise({redirectTo: '/main/about/deployment_manager'});
 
+    $routeSegmentProvider.options.autoLoadTemplates = true;
     $routeSegmentProvider
       .when('/main', 'main')
       .when('/main/deployment_manager', 'main.deployment_manager')
