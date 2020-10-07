@@ -7,7 +7,7 @@ app.service('deploymentServiceApi',
       service.getDevices = function () {
         return $http({
           method: 'GET',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/devices',
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments/devices',
           headers: {
             "Content-Type": "application/json"
           }
@@ -17,7 +17,7 @@ app.service('deploymentServiceApi',
       service.getDeployments = function () {
         return $http({
           method: 'GET',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments',
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments',
           headers: {
             "Content-Type": "application/json"
           }
@@ -27,7 +27,7 @@ app.service('deploymentServiceApi',
       service.getDeploymentById = function (deploymentId) {
         return $http({
           method: 'GET',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments/' + deploymentId,
           headers: {
             "Content-Type": "application/json"
           }
@@ -37,7 +37,7 @@ app.service('deploymentServiceApi',
       service.addDeviceToDeployment = function (deploymentId, deviceId) {
         return $http({
           method: 'PUT',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
           headers: {
             "Content-Type": "application/json"
           }
@@ -47,7 +47,7 @@ app.service('deploymentServiceApi',
       service.deleteDeviceFromDeployment = function (deploymentId, deviceId) {
         return $http({
           method: 'DELETE',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments/' + deploymentId + '/devices/' + deviceId,
           headers: {
             "Content-Type": "application/json"
           }
@@ -57,7 +57,7 @@ app.service('deploymentServiceApi',
       service.createDeployment = function (deployId, deployDate, location, organizationId, organizationLabel, platformId, platformLabel, devices) {
         return $http({
           method: 'POST',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments',
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments',
           headers: {
             "Content-Type": "application/json"
           },
@@ -81,7 +81,7 @@ app.service('deploymentServiceApi',
       service.deleteDeployment = function (deploymentId) {
         return $http({
           method: 'DELETE',
-          url: DEPLOYMENT_MANAGER_BACKEND_URL + '/api/v1/deployments/' + deploymentId,
+          url: DEPLOYMENT_MANAGER_BACKEND_URL + 'api/v1/deployments/' + deploymentId,
           headers: {
             "Content-Type": "application/json;charset=utf-8"
           }

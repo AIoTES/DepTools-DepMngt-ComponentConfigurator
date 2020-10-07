@@ -2,8 +2,8 @@ var appDev = angular.module('activageDashboardAppDev', ['activageDashboardApp', 
 
 
 appDev.run(
-  ['$httpBackend', 'devClients', 'devPlatforms', 'devDevices', 'devDeployment', 'devRecord',
-    function ($httpBackend, devClients, devPlatforms, devDevices, devDeployment, devRecord) {
+  ['$httpBackend', 'devClients', 'devPlatforms', 'devDevices', 'devDeployment', 'devRecord', 'devRegistry',
+    function ($httpBackend, devClients, devPlatforms, devDevices, devDeployment, devRecord, devRegistry) {
 
       devClients.retrieveClients();
       devClients.setCurrentClient();
@@ -25,14 +25,24 @@ appDev.run(
       devDeployment.retrieveDevices();
       devDeployment.createDeployment();
       devDeployment.getDeploymentById();
+      devDeployment.deleteDeviceFromDeployment();
       devDeployment.deleteDeploymentById();
       devDeployment.getDeploymentHistoricById();
       devDeployment.addDeviceToDeployment();
-      devDeployment.deleteDeviceFromDeployment();
+
 
       devRecord.retrieveRecordsByElement();
       devRecord.createRecord();
       devRecord.deleteRecord();
+      devRecord.updateRecord();
+
+      devRegistry.retrieve_image_info_clickdigital();
+      devRegistry.retrieve_images();
+      devRegistry.retrieve_tags_by_image_id();
+      devRegistry.retrieve_image_info_by_image_id();
+      devRegistry.create_image_info_by_image_id();
+      devRegistry.update_image_info_by_image_id();
+      devRegistry.delete_image_info_by_image_id();
 
       /** URL passThrough - Evitan error en la fase de desarrollo **/
 
@@ -65,10 +75,16 @@ appDev.run(
       $httpBackend.whenGET('views/maintenance-info.html').passThrough();
       $httpBackend.whenGET('views/update-maintenance.html').passThrough();
 
+      $httpBackend.whenGET('views/update-manager.html').passThrough();
+      $httpBackend.whenGET('views/update-info.html').passThrough();
+      $httpBackend.whenGET('views/update-editor.html').passThrough();
+      $httpBackend.whenGET('views/create-editor.html').passThrough();
+
       $httpBackend.whenGET('views/about.html').passThrough();
       $httpBackend.whenGET('views/about-deployment-manager.html').passThrough();
       $httpBackend.whenGET('views/about-component-configurator.html').passThrough();
       $httpBackend.whenGET('views/about-maintenance-panel.html').passThrough();
+      $httpBackend.whenGET('views/about-update-manager.html').passThrough();
 
       /** URL passThrough - Evitan error en la fase de desarrollo **/
 

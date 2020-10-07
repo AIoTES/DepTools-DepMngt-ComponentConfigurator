@@ -143,3 +143,9 @@ $ mvn clean test
 If some tests appear as ignored you have to delete the @Ignore annotation in the class or test inside the src/test/java/ directory.
 
 For functional testing the tool provides an Postman collection where the developer can test the HTTP REST methods. 
+
+## Credits
+- Felipe Roca Blaya - felipe@hopu.eu
+
+## License
+- Eclipse Public License - v 2.0

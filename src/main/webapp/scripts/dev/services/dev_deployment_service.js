@@ -27,13 +27,14 @@ appDev.service('devDeployment',
           function (method, url, data, headers) {
             var deployment = JSON.parse(data);
             console.log('createDeployment → Received: ', method, url, data, headers);
+            deployments.push(deployment);
             return [200,
               angular.fromJson({
-                  "id": deployment.id,
-                  "date": deployment.date,
-                  "location": deployment.location,
-                  "organization": deployment.organization,
-                  "platform": deployment.platform
+                "id": deployment.id,
+                "date": deployment.date,
+                "location": deployment.location,
+                "organization": deployment.organization,
+                "platform": deployment.platform
               })
             ]
           }
@@ -53,6 +54,17 @@ appDev.service('devDeployment',
         $httpBackend.whenDELETE(/\/api\/v1\/deployments\/.*/).respond(
           function (method, url, data, headers) {
             console.log('deleteDeployment → Received: ', method, url, data, headers);
+            var urlAsArray = url.split("/");
+
+            var deploymentIndex = deployments.findIndex(
+              function (element) {
+                return element.id === urlAsArray[4];
+              }
+            );
+
+            if (deploymentIndex !== -1)
+              deployments.splice(urlAsArray[0], 1);
+
             return [204]
           }
         );
@@ -66,7 +78,18 @@ appDev.service('devDeployment',
         $httpBackend.whenPUT(/\/api\/v1\/deployments\/.*\/devices\/.*/).respond(
           function (method, url, data, headers) {
             console.log('addDeviceToDeployment → Received: ', method, url, data, headers);
-            return [200, angular.fromJson(clone_object(deployment))]
+            var urlAsArray = url.split("/");
+
+            var deploymentIndex = deployments.findIndex(
+              function (element) {
+                return element.id === urlAsArray[4];
+              }
+            );
+
+            if (deploymentIndex !== -1)
+              deployments[deploymentIndex].platform.devices.push(urlAsArray[6]);
+
+            return [200, angular.fromJson(clone_object(deployments[deploymentIndex]))]
           }
         );
       };
@@ -75,7 +98,28 @@ appDev.service('devDeployment',
         $httpBackend.whenDELETE(/\/api\/v1\/deployments\/.*\/devices\/.*/).respond(
           function (method, url, data, headers) {
             console.log('deleteDeviceFromDeployment → Received: ', method, url, data, headers);
-            return [200, angular.fromJson(clone_object(deployment))]
+            var urlAsArray = url.split("/");
+
+            var deploymentIndex = deployments.findIndex(
+              function (element) {
+                return element.id === urlAsArray[4];
+              }
+            );
+
+            if (deploymentIndex !== -1) {
+
+              var deviceIndex = deployments[deploymentIndex].platform.devices.findIndex(
+                function (element) {
+                  return element === urlAsArray[6];
+                }
+              );
+
+              if (deviceIndex !== -1)
+                deployments[deploymentIndex].platform.devices.splice(deviceIndex, 1);
+
+            }
+
+            return [200, angular.fromJson(clone_object(deployments[deploymentIndex]))];
           }
         );
       };
@@ -86,56 +130,56 @@ appDev.service('devDeployment',
 );
 
 appDev.value('deployment',
-    {
-      "id": "deployment1",
-      "date": "\"2017-06-06\"^^xsd:date",
-      "location": "\"AREA[“Thessaloniki\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
-      "organization": {
-        "id": "organization1",
-        "label": "\"Municipality of Thessaloniki.\""
-      },
-      "platform": {
-        "id": "platform1",
-        "label": "\"Activage Platform GR 1\"",
-        "devices": [
-          "device1"
-        ]
-      }
+  {
+    "id": "PersonalHome_DeploymentInstallation",
+    "date": "\"2017-06-06\"^^xsd:date",
+    "location": "\"AREA[“Thessaloniki\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
+    "organization": {
+      "id": "Organization1",
+      "label": "\"Municipality of Thessaloniki.\""
+    },
+    "platform": {
+      "id": "UniversAAL_Platform",
+      "label": "\"Activage Platform GR 1\"",
+      "devices": [
+        "FibaroSmartDevice"
+      ]
     }
+  }
 );
 
 appDev.value('deployments',
   [
     {
-      "id": "deployment1",
+      "id": "PersonalHome_DeploymentInstallation",
       "date": "\"2017-06-06\"^^xsd:date",
       "location": "\"AREA[“Thessaloniki\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
       "organization": {
-        "id": "organization1",
+        "id": "Organization1",
         "label": "\"Municipality of Thessaloniki.\""
       },
       "platform": {
-        "id": "platform1",
+        "id": "UniversAAL_Platform",
         "label": "\"Activage Platform GR 1\"",
         "devices": [
-          "device1"
+          "FibaroSmartDevice"
         ]
       }
     },
     {
-      "id": "deployment2",
+      "id": "Custom_DeploymentInstallation",
       "date": "\"2017-06-06\"^^xsd:date",
       "location": "\"AREA[“Thessaloniki2\"]\"^^http://www.opengis.net/ont/geosparql#wktLiteral",
       "organization": {
-        "id": "organization2",
+        "id": "Organization2",
         "label": "\"Municipality of Thessaloniki2.\""
       },
       "platform": {
-        "id": "platform2",
+        "id": "Fiware_Platform",
         "label": "\"Activage Platform GR 2\"",
         "devices": [
-          "device2",
-          "device3"
+          "SmartIlluminance",
+          "IlluminanceDevice"
         ]
       }
     }
@@ -145,47 +189,47 @@ appDev.value('deployments',
 appDev.value('deploymentDevices',
   [
     {
-      "id": "1_1",
-      "label": "IoTDevice1",
+      "id": "FibaroSmartDevice",
+      "label": "IoTDevice",
       "type": "Fibaro motion sensor",
       "sensors": [
         {
-          "id": "1_1",
+          "id": "Illuminance1",
           "type": "IlluminanceSensor"
         },
         {
-          "id": "1_2",
+          "id": "Temperature1",
           "type": "TemperatureSensor"
         },
         {
-          "id": "1_3",
+          "id": "Occupancy1",
           "type": "UserOccupancySensor ."
         }
       ]
     },
     {
-      "id": "2_1",
-      "label": "IoTDevice2",
+      "id": "SmartIlluminance",
+      "label": "IoTIlluminance",
       "type": "Fibaro motion sensor",
       "sensors": [
         {
-          "id": "2_1 ",
+          "id": "Illuminance2",
           "type": "IlluminanceSensor"
         },
         {
-          "id": "2_2 ",
-          "type": "TemperatureSensor ."
+          "id": "Temperature2",
+          "type": "TemperatureSensor"
         }
       ]
     },
     {
-      "id": "3_1",
-      "label": "IoTDevice3",
+      "id": "IlluminanceDevice",
+      "label": "IlluminanceDevice",
       "type": "Fibaro motion sensor",
       "sensors": [
         {
-          "id": "3_1 ",
-          "type": "IlluminanceSensor ."
+          "id": "Illuminance3",
+          "type": "IlluminanceSensor"
         }
       ]
     }

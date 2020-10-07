@@ -2,8 +2,20 @@ version: '3.7'
 
 services:
 
+  frontend:
+    image: docker-activage.satrd.es/deployment-tools-frontend:1.0
+    ports:
+      - 9000:8080
+    environment:
+      - SECURITY_ENABLED=true
+      - SECURITY_REALM=demo
+      - SECURITY_KEYCLOAK_URL=https://keycloak-activage.hopu.eu/auth
+      - SECURITY_CLIENT_ID=deployment-tools-login
+    networks:
+      - activage-network
+
   deployment-manager:
-    image: activage-deployment-manager:1.0
+    image: docker-activage.satrd.es/deployment-manager:1.0
     ports:
       - 8001:8080
     environment:
@@ -12,18 +24,23 @@ services:
       - activage-network
 
   component-configurator:
-    image: activage-component-configurator:2.0
+    image: docker-activage.satrd.es/component-configuration:2.2
     environment:
       - CLIENT_ID=Oscar
-      - SIL_URL=http://192.168.1.56:8080
+      - SIL_URL=http://activage-test-intermw.inter-iot.eu
       - DOCKER=True
+      - CALLBACK_URL=http://192.168.1.192:8002
+      - RECEIVING_CAPACITY=1
+      - RESPONSE_FORMAT=JSON_LD
+      - RESPONSE_DELIVERY=SERVER_PUSH
+      - BASE_PATH=/api/mw2mw/
     ports:
       - 8002:8080
     networks:
       - activage-network
 
   maintenance-panel:
-    image: activage-maintenance-panel:1.0
+    image: docker-activage.satrd.es/maintenance-panel:1.0
     environment:
       - POSTGRES_HOST=maintenance-panel-database
       - POSTGRES_PORT=5432
@@ -32,6 +49,23 @@ services:
       - POSTGRES_PASSWORD=activage
     ports:
       - 8003:8080
+    networks:
+      - activage-network
+
+  update-manager:
+    image: docker-activage.satrd.es/update-manager:1.0
+    environment:
+      - DOCKER_REGISTRY_SERVER_URL=https://docker-activage.satrd.es
+      - DOCKER_REGISTRY_USER=activage
+      - DOCKER_REGISTRY_PASSWORD=docker.activage
+      - STORAGE=POSTGRES
+      - POSTGRES_HOST=update-manager-database
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=activage-update-manager
+      - POSTGRES_USER=activage
+      - POSTGRES_PASSWORD=activage
+    ports:
+      - 8004:8080
     networks:
       - activage-network
 

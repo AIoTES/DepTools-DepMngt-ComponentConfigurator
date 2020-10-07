@@ -5,30 +5,29 @@
 app.controller('updateDeploymentCtrl', ['$location', 'deviceService', 'deviceServiceData', 'deploymentService', 'deploymentServiceData',
   function ($location, deviceService, deviceServiceData, deploymentService, deploymentServiceData) {
 
-  var vm = this;
+    var vm = this;
 
-  vm.deploymentService = deploymentService;
-  vm.deploymentData = deploymentServiceData;
+    vm.deploymentService = deploymentService;
+    vm.deploymentData = deploymentServiceData;
 
-  vm.deviceService = deviceService;
-  vm.deviceData = deviceServiceData;
+    vm.deviceService = deviceService;
+    vm.deviceData = deviceServiceData;
 
-  vm.deploymentService.retrieveDeployments();
-  vm.deploymentService.retrieveDevices();
+    vm.deploymentService.retrieveDevices();
 
-  vm.deviceIdSelected = "";
-  vm.newDeviceId = "";
+    vm.deviceIdSelected = "";
+    vm.newDeviceId = "";
 
-  vm.currentDeployment = {
-    "id": vm.deploymentData.currentDeployment.id,
-    "date": vm.deploymentData.currentDeployment.date,
-    "location": vm.deploymentData.currentDeployment.location,
-    "organizationId": vm.deploymentData.currentDeployment.organization.id,
-    "organizationLabel": vm.deploymentData.currentDeployment.organization.label,
-    "platformId": vm.deploymentData.currentDeployment.platform.id,
-    "platformLabel": vm.deploymentData.currentDeployment.platform.label,
-    "devices": vm.deploymentData.currentDeployment.platform.devices
-  };
+    vm.currentDeployment = {
+      "id": vm.deploymentData.currentDeployment.id,
+      "date": vm.deploymentData.currentDeployment.date,
+      "location": vm.deploymentData.currentDeployment.location,
+      "organizationId": vm.deploymentData.currentDeployment.organization.id,
+      "organizationLabel": vm.deploymentData.currentDeployment.organization.label,
+      "platformId": vm.deploymentData.currentDeployment.platform.id,
+      "platformLabel": vm.deploymentData.currentDeployment.platform.label,
+      "devices": vm.deploymentData.currentDeployment.platform.devices
+    };
 
     vm.currentDeployment.devices.forEach(
       function (device) {
@@ -42,12 +41,12 @@ app.controller('updateDeploymentCtrl', ['$location', 'deviceService', 'deviceSer
       }
     );
 
-  vm.closeCreateDeployment = function () {
-    $location.path('/main/deployment_manager');
-  };
+    vm.closeCreateDeployment = function () {
+      $location.path('/main/deployment_manager');
+    };
 
-  vm.updateDeployment = function () {
-    vm.deploymentService.updateDeployment(vm.currentDeployment.id, vm.currentDeployment.date, vm.currentDeployment.location, vm.currentDeployment.organizationId, vm.currentDeployment.organizationLabel, vm.currentDeployment.platformId, vm.currentDeployment.platformLabel, vm.currentDeployment.devices);
-  };
+    vm.updateDeployment = function () {
+      vm.deploymentService.updateDeployment(vm.currentDeployment.id, vm.currentDeployment.date, vm.currentDeployment.location, vm.currentDeployment.organizationId, vm.currentDeployment.organizationLabel, vm.currentDeployment.platformId, vm.currentDeployment.platformLabel, vm.currentDeployment.devices);
+    };
 
-}]);
+  }]);

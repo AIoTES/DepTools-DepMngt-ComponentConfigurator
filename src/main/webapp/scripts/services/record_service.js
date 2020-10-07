@@ -1,6 +1,6 @@
 app.service('recordService',
-  ['recordServiceApi', 'recordServiceData',
-    function (recordServiceApi, recordServiceData) {
+  ['recordServiceApi', 'recordServiceData', '$location',
+    function (recordServiceApi, recordServiceData, $location) {
 
       var service = {};
 
@@ -31,7 +31,6 @@ app.service('recordService',
       };
 
       service.setCurrentRecord = function (element) {
-        debugger;
         recordServiceData.currentRecord = element;
       };
 
@@ -47,6 +46,8 @@ app.service('recordService',
               recordServiceData.recordsByElementId[record.elementId].push(record);
 
               recordServiceData.createStatus = recordServiceData.operationStatus.SUCCESS;
+              $location.path("/main/maintenance_panel/maintenance_info")
+
             }
           )
           .catch(
@@ -84,6 +85,7 @@ app.service('recordService',
                 recordServiceData.recordsByElementId[recordUpdated.elementId][recordIndex] = recordUpdated;
 
               recordServiceData.updateStatus = recordServiceData.operationStatus.SUCCESS;
+              $location.path("/main/maintenance_panel/maintenance_info")
             }
           )
           .catch(

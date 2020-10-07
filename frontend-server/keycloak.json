@@ -1,0 +1,8 @@
+{
+  "realm": "SUBST_REALM",
+  "auth-server-url": "SUBST_KEYCLOAK_URL",
+  "ssl-required": "external",
+  "resource": "SUBST_CLIENT_ID",
+  "public-client": true,
+  "confidential-port": 0
+}

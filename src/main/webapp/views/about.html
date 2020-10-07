@@ -14,6 +14,11 @@
        ng-class="{ 'about-button-active' : ('main.about.maintenance_panel' | routeSegmentStartsWith)}">
     Maintenance Panel
   </div>
+  <div class="about-button"
+       ng-click="about.goToUpdateManager()"
+       ng-class="{ 'about-button-active' : ('main.about.update_manager' | routeSegmentStartsWith)}">
+    Update Manager
+  </div>
 </div>
 <div class="about-container" app-view-segment="2">
 

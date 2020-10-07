@@ -18,4 +18,8 @@ app.controller('aboutCtrl', ['$location', function ($location) {
     $location.path('/main/about/maintenance_panel');
   };
 
+  vm.goToUpdateManager = function () {
+    $location.path('/main/about/update_manager');
+  };
+
 }]);

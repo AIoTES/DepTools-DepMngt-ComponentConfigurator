@@ -2,11 +2,17 @@
  * Created by JaviHop on 09/04/2019.
  */
 
-app.controller('rootCtrl', ['$location', function ($location) {
+app.controller('rootCtrl', ['$location', 'Identity', function ($location, Identity) {
 
   var vm = this;
 
-  vm.webTitle = 'Interoperability Demo Application';
+  vm.identity = Identity;
+  if (Identity.loggedIn)
+    vm.username = Identity.authc.json.preferred_username;
+  else
+    vm.username = 'Anonymous';
+
+  vm.webTitle = 'AIOTES Deployment tool';
 
   vm.toggleMenu = function () {
     vm.openMenu = !vm.openMenu;
@@ -25,6 +31,11 @@ app.controller('rootCtrl', ['$location', function ($location) {
   vm.goToMaintenancePanel = function () {
     vm.webTitle = 'Maintenance Panel';
     $location.path('/main/maintenance_panel');
+  };
+
+  vm.goToUpdateManager = function () {
+    vm.webTitle = 'Update Manager';
+    $location.path('/main/update_manager');
   };
 
   vm.goToAbout = function () {

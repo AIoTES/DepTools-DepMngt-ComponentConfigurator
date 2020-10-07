@@ -1,0 +1,37 @@
+<div class="menu-container">
+
+  <div class="menu-bar" ng-click="updateManager.openMenu = !updateManager.openMenu">
+    <span>{{updateManager.registryData.currentImageId}}</span>
+    <div class="menu-square" ng-class="{'menu-square-active' : updateManager.openMenu}">
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    </div>
+  </div>
+
+
+  <div
+    ng-show="updateManager.registryData.retrieve_image_status === updateManager.registryData.operationStatus.IN_PROGRESS">
+    <div class="spinner-very-small-container">
+      <div class="spinner-very-small">
+      </div>
+    </div>
+  </div>
+
+  <div
+    ng-show="updateManager.registryData.retrieve_image_status === updateManager.registryData.operationStatus.FAILURE">
+    <div class="message-container-100 error">
+      <span>Cannot retrieve images</span>
+    </div>
+  </div>
+
+  <div ng-show="true" class="menu-option-container"
+       ng-class="{ 'menu-option-container-active' : updateManager.openMenu}">
+    <div
+      ng-repeat="image in updateManager.registryData.images"
+      ng-click="updateManager.selectImage(image)">
+      <div class="menu-option">
+        <span>{{image}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

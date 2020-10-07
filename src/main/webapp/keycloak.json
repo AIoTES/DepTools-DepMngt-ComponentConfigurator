@@ -1,0 +1,8 @@
+{
+  "realm": "demo",
+  "auth-server-url": "https://keycloak-activage.hopu.eu/auth",
+  "ssl-required": "external",
+  "resource": "deployment-tools-login",
+  "public-client": true,
+  "confidential-port": 0
+}

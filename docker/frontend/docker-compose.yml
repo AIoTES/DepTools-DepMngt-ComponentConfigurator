@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  deployment-tools-frontend:
+    image: activage-deployment-tools-frontend:develop
+    environment:
+      - SECURITY_ENABLED=true
+      - SECURITY_REALM=demo
+      - SECURITY_KEYCLOAK_URL=https://keycloak-activage.hopu.eu/auth
+      - SECURITY_CLIENT_ID=deployment-tools-login
+    ports:
+      - "9000:8080"

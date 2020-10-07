@@ -1,0 +1,78 @@
+<div class="option-container">
+
+  <div class="option-header">
+    <h3>Update Manager</h3>
+
+    <div class="option-header-right">
+      <div class="square-header-button"
+           title="Delete Description"
+           ng-click="updateInfo.deleteImage()">
+        <span class="glyphicon glyphicon-trash"></span>
+      </div>
+      <div class="square-header-button"
+           title="Add Platform"
+           ng-class="{ 'button-header-active' : ('main.update_manager.update_info.update_editor' | routeSegmentEqualsTo) }"
+           ng-show="updateInfo.showAddButton === false"
+           ng-click="updateInfo.editDescription()">
+        <span class="glyphicon glyphicon-edit"></span>
+      </div>
+      <div class="square-header-button"
+           title="Add Device"
+           ng-class="{ 'button-header-active' : ('main.update_manager.update_info.create_editor' | routeSegmentEqualsTo) }"
+           ng-show="updateInfo.showAddButton === true"
+           ng-click="updateInfo.createDescription()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="option-device-container">
+
+    <div
+      ng-show="updateInfo.registryData.retrieve_info_status[updateInfo.registryData.currentImageId] === updateInfo.registryData.operationStatus.IN_PROGRESS">
+      <div class="spinner-container">
+        <div class="spinner">
+        </div>
+      </div>
+    </div>
+    <div
+      ng-show="updateInfo.registryData.retrieve_info_status[updateInfo.registryData.currentImageId] === updateInfo.registryData.operationStatus.FAILURE">
+      <div class="message-container-100 error">
+        <span>Cannot retrieve image information</span>
+      </div>
+    </div>
+    <div ng-show="true" class="current-title">
+
+      <h3>{{updateInfo.registryData.currentImageId}}</h3>
+
+    </div>
+
+    <div class="tags-container">
+      <span class="glyphicon glyphicon-tags tag-icon"></span> <h4>Tags</h4>
+      <span class="label label-primary label-bg"
+            ng-repeat="tag in updateInfo.registryData.imagesData[updateInfo.registryData.currentImageId].tags">{{tag}}</span>
+    </div>
+
+
+    <div class="description-container">
+      <span class="glyphicon glyphicon-book description-icon"></span> <h4>Description</h4>
+      <div class="description-update-container">
+        <p ng-show="updateInfo.registryData.imagesData[updateInfo.registryData.currentImageId].info !== undefined"
+           markdown-to-html="updateInfo.registryData.imagesData[updateInfo.registryData.currentImageId].infoHTML"></p>
+        <p ng-show="updateInfo.registryData.imagesData[updateInfo.registryData.currentImageId].info === undefined">This
+          image does not provide description.</p>
+      </div>
+    </div>
+
+    <button ng-show="updateInfo.registryData.imagesData[updateInfo.registryData.currentImageId].info !== undefined"
+            type="submit" class="info-button" ng-click="updateInfo.editDescription()">
+      <span class="glyphicon glyphicon-edit edit-description-icon"></span> <span>Edit Description</span>
+    </button>
+    <button ng-show="updateInfo.registryData.imagesData[updateInfo.registryData.currentImageId].info === undefined"
+            type="submit" class="info-button" ng-click="updateInfo.editDescription()">
+      <span class="glyphicon glyphicon-edit edit-description-icon"></span> <span>Create Description</span>
+    </button>
+  </div>
+
+</div>

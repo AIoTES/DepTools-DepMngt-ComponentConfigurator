@@ -7,7 +7,7 @@ app.service('platformServiceApi',
       service_api.getPlatforms = function (clientId) {
         return $http({
           method: 'GET',
-          url: COMPONENT_CONFIGURATION_BACKEND_URL + '/api/v1/platforms',
+          url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/platforms',
           headers: {
             "Content-Type": "application/json",
             "Client-ID": clientId
@@ -18,7 +18,7 @@ app.service('platformServiceApi',
       service_api.createPlatform = function (platform, clientId) {
         return $http({
           method: 'POST',
-          url: COMPONENT_CONFIGURATION_BACKEND_URL + '/api/v1/platforms',
+          url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/platforms',
           headers: {
             "Content-Type": "application/json",
             "Client-ID": clientId
@@ -30,7 +30,7 @@ app.service('platformServiceApi',
       service_api.updatePlatform = function (platformId, platform, clientId) {
         return $http({
           method: 'PUT',
-          url: COMPONENT_CONFIGURATION_BACKEND_URL + '/api/v1/platforms?platformId=' + platformId,
+          url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/platforms?platformId=' + platformId,
           headers: {
             "Content-Type": "application/json",
             "Client-ID": clientId
@@ -42,7 +42,7 @@ app.service('platformServiceApi',
       service_api.deletePlatform = function (platformId, clientId) {
         return $http({
           method: 'DELETE',
-          url: COMPONENT_CONFIGURATION_BACKEND_URL + '/api/v1/platforms?platformId=' + platformId,
+          url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/platforms?platformId=' + platformId,
           headers: {
             "Client-ID": clientId
           }
@@ -52,7 +52,7 @@ app.service('platformServiceApi',
       service_api.consultTypes = function (clientId) {
         return $http({
           method: 'GET',
-          url: COMPONENT_CONFIGURATION_BACKEND_URL + '/api/v1/platforms/platform-types',
+          url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/platforms/platform-types',
           headers: {
             "Content-Type": "application/json",
             "Client-ID": clientId
@@ -63,7 +63,7 @@ app.service('platformServiceApi',
       service_api.loadPlatformTypes = function (clientId) {
         return $http({
           method: 'GET',
-          url: COMPONENT_CONFIGURATION_BACKEND_URL + '/api/v1/platforms/types',
+          url: COMPONENT_CONFIGURATION_BACKEND_URL + 'api/v1/platforms/types',
           headers: {
             "Content-Type": "application/json",
             "Client-ID": clientId
